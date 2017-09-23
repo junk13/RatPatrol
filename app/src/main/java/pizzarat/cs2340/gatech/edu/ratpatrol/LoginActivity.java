@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "admin@eviejb.com:foobar"
+            "test@test.com:foobar"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -224,6 +224,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+
+            // Switch to the selection screen activity
+            Intent switchToSelectionScreen = new Intent(LoginActivity.this, SelectionScreenActivity.class);
+            LoginActivity.this.startActivity(switchToSelectionScreen);
         }
     }
 

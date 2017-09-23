@@ -30,8 +30,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -91,6 +99,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button mRegisterButton = (Button) findViewById(R.id.register_button);
+        mRegisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent switchToRegisterScreen = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(switchToRegisterScreen);
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -137,6 +154,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }
     }
+
+    public Map<String, String> getCredentials() throws FileNotFoundException {
+        Map<String, String> creds = new HashMap<String, String>();
+
+        Scanner sc = new Scanner(new File("raw/credentials.txt"));
+        while (sc.hasNextLine()) {
+            String[] line = sc.nextLine().split(":");
+            creds.put(line[0],line[1]);
+        }
+        sc.close();
+        return creds;
+    }
+
+    public void addCredentials(String username, String password) throws IOException {
+        BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));
+        bf.write("/n" + username + ":" + password);
+        bf.close();
+    }
+
 
 
     /**

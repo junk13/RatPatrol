@@ -3,6 +3,7 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -39,7 +40,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Vector;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -99,6 +99,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button mRegisterButton = (Button) findViewById(R.id.register_button);
+        mRegisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent switchToRegisterScreen = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(switchToRegisterScreen);
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -148,17 +157,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public Map<String, String> getCredentials() throws FileNotFoundException {
         Map<String, String> creds = new HashMap<String, String>();
-        Scanner sc = new Scanner(new File("values/credentials.txt"));
+
+        Scanner sc = new Scanner(new File("raw/credentials.txt"));
         while (sc.hasNextLine()) {
             String[] line = sc.nextLine().split(":");
             creds.put(line[0],line[1]);
         }
-
+        sc.close();
         return creds;
     }
 
     public void addCredentials(String username, String password) throws IOException {
-        BufferedWriter bf = new BufferedWriter(new FileWriter("values/credentials.txt"));
+        BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));
         bf.write("/n" + username + ":" + password);
         bf.close();
     }

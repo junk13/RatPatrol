@@ -1,0 +1,2 @@
+# Rat Patrol
+This is an Android Application built by Team PizzaRat: Harrison Banh, Evie Brown, Luka Derado, and Andrew Young, as our group project for CS 2340 at GA Tech. Our goal is to built a rat siting and tracking application for New York City with functionality described by Professor Bob Waters.

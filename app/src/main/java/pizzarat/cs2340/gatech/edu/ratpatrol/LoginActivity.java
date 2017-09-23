@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Scanner sc = new Scanner(new File("raw/credentials.txt"));
         while (sc.hasNextLine()) {
             String[] line = sc.nextLine().split(":");
-            creds.put(line[0],line[1]);
+            creds.put(line[0], line[1]);
         }
         sc.close();
         return creds;
@@ -172,7 +172,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         bf.write("/n" + username + ":" + password);
         bf.close();
     }
-
 
 
     /**

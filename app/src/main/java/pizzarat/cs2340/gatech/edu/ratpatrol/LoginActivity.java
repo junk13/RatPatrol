@@ -224,9 +224,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
 
-            // Switch to the selection screen activity
-            Intent switchToSelectionScreen = new Intent(LoginActivity.this, SelectionScreenActivity.class);
-            LoginActivity.this.startActivity(switchToSelectionScreen);
         }
     }
 
@@ -373,7 +370,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                // Switch to the selection screen activity
+                Intent switchToSelectionScreen = new Intent(LoginActivity.this, SelectionScreenActivity.class);
+                LoginActivity.this.startActivity(switchToSelectionScreen);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

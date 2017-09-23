@@ -29,8 +29,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,15 +150,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Map<String, String> creds = new HashMap<String, String>();
         Scanner sc = new Scanner(new File("values/credentials.txt"));
         while (sc.hasNextLine()) {
-            String[] line = sc.nextLine().split("-");
+            String[] line = sc.nextLine().split(":");
             creds.put(line[0],line[1]);
         }
 
         return creds;
     }
 
-    public void addCredentials(String username, String password) {
-        //hi
+    public void addCredentials(String username, String password) throws IOException {
+        BufferedWriter bf = new BufferedWriter(new FileWriter("values/credentials.txt"));
+        bf.write("/n" + username + ":" + password);
+        bf.close();
     }
 
 

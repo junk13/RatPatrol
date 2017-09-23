@@ -2,8 +2,10 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class Register extends AppCompatActivity {
+
  //delete this
     @Override
     protected void onCreate(Bundle savedInstanceState) {

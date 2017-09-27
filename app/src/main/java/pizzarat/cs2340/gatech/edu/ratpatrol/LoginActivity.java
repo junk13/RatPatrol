@@ -3,8 +3,10 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +22,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,6 +42,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+
+import pizzarat.cs2340.gatech.edu.sqlite.CredentialDb;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -74,6 +78,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Initialize database
+        final CredentialDb creds = new CredentialDb(this.getApplicationContext());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -106,6 +113,76 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 Intent switchToRegisterScreen = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(switchToRegisterScreen);
+            }
+        });
+        //test button populate
+        Button mTestPop = (Button) findViewById(R.id.test_pop);
+        mTestPop.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gets the data repository in write mode
+
+                SQLiteDatabase db = creds.getWritableDatabase();
+                // Create a new map of values, where column names are the keys
+                ContentValues values = new ContentValues();
+                values.put(CredentialDb.getCredEmailCol(), "Evie.Brown.n7@gmail.com");
+                values.put(CredentialDb.getCredHashCol(), "pass");
+
+// Insert the new row, returning the primary key value of the new row
+                long newRowId = db.insert(CredentialDb.getTableName(), null, values);
+
+                SQLiteDatabase sr = creds.getReadableDatabase();
+
+// Define a projection that specifies which columns from the database
+// you will actually use after this query.
+                String[] projection = {
+                        CredentialDb.getID(),
+                        CredentialDb.getCredEmailCol(),
+                        CredentialDb.getCredHashCol()
+                };
+
+// Filter results WHERE "title" = 'My Title'
+                String selection = CredentialDb.getCredEmailCol() + " = ?";
+                String[] selectionArgs = { "title" };
+
+// How you want the results sorted in the resulting Cursor
+                String sortOrder =
+                        CredentialDb.getCredHashCol() + " DESC";
+
+                Cursor cursor = sr.query(
+                        CredentialDb.getTableName(),              // The table to query
+                        null,                               // The columns to return
+                        null,                                // The columns for the WHERE clause
+                        null,                            // The values for the WHERE clause
+                        null,                                     // don't group the rows
+                        null,                                     // don't filter by row groups
+                        sortOrder                                 // The sort order
+                );
+                List itemIds = new ArrayList<>();
+
+                while(cursor.moveToNext()) {
+                    //long itemId = cursor.getLong(
+                    //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+                    String str = cursor.getString(0);
+                    itemIds.add(str);
+                }
+                cursor.moveToPosition(-1);
+                while(cursor.moveToNext()) {
+                    //long itemId = cursor.getLong(
+                    //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+                    String str = cursor.getString(1);
+                    itemIds.add(str);
+                }
+                cursor.moveToPosition(-1);
+                while(cursor.moveToNext()) {
+                    //long itemId = cursor.getLong(
+                    //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+                    String str = cursor.getString(2);
+                    itemIds.add(str);
+                }
+                cursor.close();
+                TextView tv = (TextView) findViewById(R.id.textView);
+                tv.setText((String)itemIds.toString());
             }
         });
 

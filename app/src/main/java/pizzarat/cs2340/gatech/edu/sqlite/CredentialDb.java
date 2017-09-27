@@ -23,7 +23,7 @@ public class CredentialDb extends SQLiteOpenHelper {
         db.execSQL(CredentialDbContract.SQL_CREATE_ENTRIES);
     }
 
-    //clear the database and regen
+    //clear and regenerate the database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);

@@ -5,23 +5,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by evieb on 9/27/2017.
+ * Created by Evie Brown
  */
 
 public class CredentialDb extends SQLiteOpenHelper {
 
+    static final int DATABASE_VERSION = 1;
+    //name of database file
+    static final String DATABASE_NAME = "localCred.db";
 
     public CredentialDb(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(CredentialDbContract.SQL_CREATE_ENTRIES);
     }
 
+    //clear the database and regen
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
+        onCreate(db);
     }
 }

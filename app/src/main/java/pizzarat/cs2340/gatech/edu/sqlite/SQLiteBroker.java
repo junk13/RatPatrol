@@ -2,11 +2,14 @@ package pizzarat.cs2340.gatech.edu.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.Map;
+
+import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 
 import static java.security.spec.MGF1ParameterSpec.SHA1;
 
@@ -19,7 +22,7 @@ public class SQLiteBroker extends AppCompatActivity {
     private final CredentialDb cred = new CredentialDb(this.getApplicationContext());
 
     //takes in credentials from Db TODO: duplicate exception logging
-    public long writeToCreDb(String username, String password) {
+    public long writeToCreDb(String username, String password) throws DuplicateUserDbException {
         //TODO: make credential checker method to watch for duplicates
         //checkDuplicateUser(username);
 
@@ -40,7 +43,7 @@ public class SQLiteBroker extends AppCompatActivity {
      *
      * @param user : String for username
      * @param pass : String for password
-     * @return
+     * @return true if user and pass are in database in same ID
      */
     public boolean credMatch(String user, String pass) {
 

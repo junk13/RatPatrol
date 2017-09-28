@@ -35,6 +35,9 @@ class CredentialDb extends SQLiteOpenHelper {
     static String getCredHashCol() {
         return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_HASH;
     }
+    static String getPermCol() {
+        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_PERM;
+    }
     static String getTableName() {
         return CredentialDbContract.ContractEntry.TABLE_NAME;
     }

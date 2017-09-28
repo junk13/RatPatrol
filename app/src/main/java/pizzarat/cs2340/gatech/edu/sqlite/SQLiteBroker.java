@@ -22,7 +22,7 @@ public class SQLiteBroker extends AppCompatActivity {
     private final CredentialDb cred = new CredentialDb(this.getApplicationContext());
 
     //takes in credentials from Db TODO: duplicate exception logging
-    public long writeToCreDb(String username, String password) throws DuplicateUserDbException {
+    public long writeToCreDb(String username, String password, boolean isAdmin) throws DuplicateUserDbException {
         //TODO: make credential checker method to watch for duplicates
         //checkDuplicateUser(username);
 
@@ -33,11 +33,20 @@ public class SQLiteBroker extends AppCompatActivity {
         values.put(CredentialDb.getCredEmailCol(), username);
         //in password column, place password TODO: make password messageDigest hashed SHA256
         values.put(CredentialDb.getCredHashCol(), password);
+        //in permissions column, set user type
+        String perm = isAdmin ? "admin" : "user";
+        values.put(CredentialDb.getPermCol(), perm);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(CredentialDb.getTableName(), null, values);
         return newRowId;
     }
+    /**
+     * getter for SQLite cursor
+     * @param tableName
+     */
+
+
 
     /**
      *

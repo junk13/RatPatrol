@@ -8,13 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Evie Brown
  */
 
-public class CredentialDb extends SQLiteOpenHelper {
+class CredentialDb extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    static final int DATABASE_VERSION = 1;
     //name of database file
-    public static final String DATABASE_NAME = "localCred.db";
+    static final String DATABASE_NAME = "localCred.db";
 
-    public CredentialDb(Context context) {
+    CredentialDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -29,19 +29,19 @@ public class CredentialDb extends SQLiteOpenHelper {
         db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
         onCreate(db);
     }
-    public static String getCredEmailCol() {
+    static String getCredEmailCol() {
         return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_EMAIL;
     }
-    public static String getCredHashCol() {
+    static String getCredHashCol() {
         return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_HASH;
     }
-    public static String getTableName() {
+    static String getTableName() {
         return CredentialDbContract.ContractEntry.TABLE_NAME;
     }
-    public static String getID() {
+    static String getID() {
         return CredentialDbContract.ContractEntry._ID;
     }
-    public static void purgeCredDb(SQLiteDatabase db) {
+    static void purgeCredDb(SQLiteDatabase db) {
         db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
     }
 }

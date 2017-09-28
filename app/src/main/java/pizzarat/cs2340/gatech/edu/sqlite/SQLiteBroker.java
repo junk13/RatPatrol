@@ -22,7 +22,7 @@ public class SQLiteBroker extends AppCompatActivity {
     private final CredentialDb cred = new CredentialDb(this.getApplicationContext());
 
     //takes in credentials from Db TODO: duplicate exception logging
-    public long writeToCreDb(String username, String password, boolean isAdmin) throws DuplicateUserDbException {
+    public long writeToDb(String username, String password, boolean isAdmin) throws DuplicateUserDbException {
         //TODO: make credential checker method to watch for duplicates
         //checkDuplicateUser(username);
 
@@ -41,15 +41,34 @@ public class SQLiteBroker extends AppCompatActivity {
         long newRowId = db.insert(CredentialDb.getTableName(), null, values);
         return newRowId;
     }
+
     /**
      * getter for SQLite cursor
-     * @param tableName
+     * @return cursor for which to read database info from
      */
+    public Cursor getCursor() {
+        SQLiteDatabase sr = cred.getReadableDatabase();
 
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                CredentialDb.getCredHashCol() + " DESC";
+
+        Cursor cursor = sr.query(
+                CredentialDb.getTableName(),            // The table to query
+                null,                                   // The columns to return
+                null,                                   // The columns for the WHERE clause
+                null,                                   // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                sortOrder                               // The sort order
+        );
+
+        return cursor;
+    }
 
 
     /**
-     *
      * @param user : String for username
      * @param pass : String for password
      * @return true if user and pass are in database in same ID
@@ -64,9 +83,7 @@ public class SQLiteBroker extends AppCompatActivity {
     }
 
 
-
     /**
-     *
      * @param str : String to look for in the Cred database
      * @return true if duplicate user found, else false
      */

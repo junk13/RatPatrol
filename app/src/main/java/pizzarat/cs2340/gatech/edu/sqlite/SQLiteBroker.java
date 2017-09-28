@@ -46,12 +46,12 @@ public class SQLiteBroker extends AppCompatActivity {
      * @return true if user and pass are in database in same ID
      */
     public boolean credMatch(String user, String pass) {
-
+        return true;
     }
 
     //returns map of users(key) and credentials(value)
     private Map<String, String> credMap(Cursor cursor) {
-
+        return null;
     }
 
 

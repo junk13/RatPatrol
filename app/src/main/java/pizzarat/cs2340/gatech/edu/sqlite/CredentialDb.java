@@ -10,12 +10,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CredentialDb extends SQLiteOpenHelper {
 
-    static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 1;
     //name of database file
-    static final String DATABASE_NAME = "localCred.db";
+    public static final String DATABASE_NAME = "localCred.db";
 
-    public CredentialDb(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public CredentialDb(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -23,10 +23,25 @@ public class CredentialDb extends SQLiteOpenHelper {
         db.execSQL(CredentialDbContract.SQL_CREATE_ENTRIES);
     }
 
-    //clear the database and regen
+    //clear and regenerate the database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
         onCreate(db);
+    }
+    public static String getCredEmailCol() {
+        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_EMAIL;
+    }
+    public static String getCredHashCol() {
+        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_HASH;
+    }
+    public static String getTableName() {
+        return CredentialDbContract.ContractEntry.TABLE_NAME;
+    }
+    public static String getID() {
+        return CredentialDbContract.ContractEntry._ID;
+    }
+    public static void purgeCredDb(SQLiteDatabase db) {
+        db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
     }
 }

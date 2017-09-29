@@ -71,6 +71,14 @@ public class SQLiteBroker extends AppCompatActivity {
         return fetchCredentialStructureByUser(user).getPass() == pass;
     }
 
+    /**
+     * @param userStr
+     * @return true if user is admin, else false
+     */
+    public boolean isUserAdmin(String userStr) {
+        return fetchCredentialStructureByUser(userStr).getAdmin();
+    }
+
     //returns map of users(key) and credentials(value)
     private ArrayList<CredentialStructure> credArrayList(Cursor cursor) {
         //ArrayList to return

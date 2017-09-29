@@ -1,12 +1,11 @@
 package pizzarat.cs2340.gatech.edu.sqlite;
 
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
@@ -14,7 +13,7 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 import static java.security.spec.MGF1ParameterSpec.SHA1;
 
 /**
- * Created by evieb on 9/28/2017.
+ * Created by Evie Brown on 9/28/2017.
  */
 
 public class SQLiteBroker extends AppCompatActivity {
@@ -38,8 +37,7 @@ public class SQLiteBroker extends AppCompatActivity {
         values.put(CredentialDb.getPermCol(), perm);
 
         // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(CredentialDb.getTableName(), null, values);
-        return newRowId;
+        return db.insert(CredentialDb.getTableName(), null, values);
     }
 
     /**
@@ -54,7 +52,7 @@ public class SQLiteBroker extends AppCompatActivity {
         String sortOrder =
                 CredentialDb.getCredHashCol() + " DESC";
 
-        Cursor cursor = sr.query(
+        return sr.query(
                 CredentialDb.getTableName(),            // The table to query
                 null,                                   // The columns to return
                 null,                                   // The columns for the WHERE clause
@@ -64,7 +62,6 @@ public class SQLiteBroker extends AppCompatActivity {
                 sortOrder                               // The sort order
         );
 
-        return cursor;
     }
 
 
@@ -78,8 +75,21 @@ public class SQLiteBroker extends AppCompatActivity {
     }
 
     //returns map of users(key) and credentials(value)
-    private Map<String, String> credMap(Cursor cursor) {
-        return null;
+    private ArrayList<CredentialStructure> credArrayList(Cursor cursor) {
+        //ArrayList to return
+        ArrayList aList = new ArrayList<CredentialStructure>();
+        cursor.moveToPosition(-1);
+        //cycle through cursor and add columns to ArrayList
+        while(cursor.moveToNext()) {
+            boolean b = cursor.getString(3) == "admin";
+            aList.add(new CredentialStructure(
+                    cursor.getString(0),    //id
+                    cursor.getString(1),    //Username
+                    cursor.getString(2),    //Password
+                    b                       //isAdmin
+                    ));
+        }
+        return aList;
     }
 
 

@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Evie Brown
+ * Created by Evie Brown on 9/27/1017
  */
 
 class CredentialDb extends SQLiteOpenHelper {

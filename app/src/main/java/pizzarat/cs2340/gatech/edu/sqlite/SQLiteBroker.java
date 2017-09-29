@@ -1,6 +1,7 @@
 package pizzarat.cs2340.gatech.edu.sqlite;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,7 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 
 public class SQLiteBroker extends AppCompatActivity {
     //Initialize database
-    private final CredentialDb cred = new CredentialDb(this.getApplicationContext());
+    private final CredentialDb cred = new CredentialDb(getBaseContext());
 
     //takes in credentials from Db TODO: duplicate exception logging
     public long writeToDb(String username, String password, boolean isAdmin) throws DuplicateUserDbException {

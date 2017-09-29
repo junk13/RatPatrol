@@ -20,9 +20,9 @@ public class SQLiteBroker extends AppCompatActivity {
 
     //takes in credentials from Db TODO: duplicate exception logging
     public long writeToDb(String username, String password, boolean isAdmin) throws DuplicateUserDbException {
-        //TODO: make credential checker method to watch for duplicates
-        //checkDuplicateUser(username);
-
+        //throw DuplicateUserDbException if username is already used
+        if (containsDuplicateUser(username))
+            throw new DuplicateUserDbException();
         // Gets the data repository in write mode
         SQLiteDatabase db = cred.getWritableDatabase();
         ContentValues values = new ContentValues();

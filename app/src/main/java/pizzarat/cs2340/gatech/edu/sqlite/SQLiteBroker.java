@@ -6,14 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 
-import static java.security.spec.MGF1ParameterSpec.SHA1;
 
 /**
- * Created by Evie Brown on 9/28/2017.
+ * @author Evie Brown.
  */
 
 public class SQLiteBroker extends AppCompatActivity {
@@ -97,10 +95,12 @@ public class SQLiteBroker extends AppCompatActivity {
      * @param str : String to look for in the Cred database
      * @return true if duplicate user found, else false
      */
-    private boolean checkDuplicateUser(String str) {
-        //TODO: finish checkDuplicateUser
+    private boolean containsDuplicateUser(String str) {
+        ArrayList<CredentialStructure> aList = credArrayList(getCursor());
+        for (int i = 0; i < aList.size(); i++)
+            if (aList.get(i).sameUser(new CredentialStructure(str)))
+                return true;
         return false;
     }
-
 
 }

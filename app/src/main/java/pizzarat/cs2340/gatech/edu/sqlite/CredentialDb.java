@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Evie Brown
+ * @author Evie Brown.
  */
 
 class CredentialDb extends SQLiteOpenHelper {
@@ -34,6 +34,9 @@ class CredentialDb extends SQLiteOpenHelper {
     }
     static String getCredHashCol() {
         return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_HASH;
+    }
+    static String getPermCol() {
+        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_PERM;
     }
     static String getTableName() {
         return CredentialDbContract.ContractEntry.TABLE_NAME;

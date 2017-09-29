@@ -3,7 +3,7 @@ package pizzarat.cs2340.gatech.edu.sqlite;
 import android.provider.BaseColumns;
 
 /**
- * Created by Evie Brown
+ * @author Evie Brown.
  */
 
 final class CredentialDbContract {

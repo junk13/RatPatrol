@@ -62,14 +62,13 @@ public class SQLiteBroker extends AppCompatActivity {
 
     }
 
-
     /**
      * @param user : String for username
      * @param pass : String for password
      * @return true if user and pass are in database in same ID
      */
     public boolean credMatch(String user, String pass) {
-        return true;
+        return fetchCredentialStructureByUser(user).getPass() == pass;
     }
 
     //returns map of users(key) and credentials(value)
@@ -90,17 +89,25 @@ public class SQLiteBroker extends AppCompatActivity {
         return aList;
     }
 
+    /**
+     *  @return CredentialStructure containing a matching username
+     *  @param userStr : the username to look for
+     */
+
+    private CredentialStructure fetchCredentialStructureByUser(String userStr) {
+        ArrayList<CredentialStructure> aList = credArrayList(getCursor());
+        for (int i = 0; i < aList.size(); i++)
+            if (aList.get(i).sameUser(new CredentialStructure(userStr)))
+                return aList.get(i);
+        return null;
+    }
 
     /**
      * @param str : String to look for in the Cred database
      * @return true if duplicate user found, else false
      */
     private boolean containsDuplicateUser(String str) {
-        ArrayList<CredentialStructure> aList = credArrayList(getCursor());
-        for (int i = 0; i < aList.size(); i++)
-            if (aList.get(i).sameUser(new CredentialStructure(str)))
-                return true;
-        return false;
+        return fetchCredentialStructureByUser(str) != null;
     }
 
 }

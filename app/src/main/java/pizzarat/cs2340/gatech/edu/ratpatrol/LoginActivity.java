@@ -72,6 +72,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    /**
+     * Creates the login activity on startup.
+     * @param savedInstanceState information from the phone
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +125,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         getLoaderManager().initLoader(0, null, this);
     }
 
+    /**
+     * Requests contacts permission startup.
+     * @return TODO
+     */
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -156,6 +164,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Gets a Map structure of all the stored users.
+     * @return a Map of all the users in the database.
+     * @throws FileNotFoundException
+     */
     public Map<String, String> getCredentials() throws FileNotFoundException {
         Map<String, String> creds = new HashMap<String, String>();
 
@@ -168,6 +181,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return creds;
     }
 
+    /**
+     * Adds the specified user to the database.
+     * @param username the user's username
+     * @param password the user's password
+     * @throws IOException
+     */
     public void addCredentials(String username, String password) throws IOException {
         BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));
         bf.write("/n" + username + ":" + password);
@@ -229,11 +248,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Determines if the specified email address is valid
+     * @param email the specified email
+     * @return true if the username is valid
+     */
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
+    /**
+     * Determines if the specified password is valid
+     * @param password the specified password
+     * @return true if the password is valid
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return !(password.contains("\"") || password.contains(":"));

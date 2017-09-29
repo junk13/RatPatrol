@@ -18,6 +18,9 @@
             android:name=".LoginActivity"
             android:label="@string/app_name" />
         <activity
+            android:name=".RegisterActivity"
+            android:label="Rat Patrol" />
+        <activity
             android:name=".Welcome"
             android:label="@string/app_name">
             <intent-filter>
@@ -26,8 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectionScreenActivity"></activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".SelectionScreenActivity"/>
+
     </application>
 
 </manifest>

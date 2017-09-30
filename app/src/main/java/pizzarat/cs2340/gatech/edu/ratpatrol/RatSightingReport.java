@@ -63,54 +63,106 @@ public class RatSightingReport {
         return location;
     }
 
+    /**
+     * Sets the latitude and longitude of this rat sighting.
+     * @param location the latitude and longitude of the sighting
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * Returns the date of the rat sighting report.
+     * @return the date of the rat sighting
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Sets the date of this rat sighting report.
+     * @param date the specified date of the rat sighting
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     * Gets the time of this rat sighting report.
+     * @return the time of the rat report
+     */
     public int getTime() {
         return time;
     }
 
+    /**
+     * Sets the time of this rat report.
+     * @param time the specified time of the report
+     */
     public void setTime(int time) {
         this.time = time;
     }
 
+    /**
+     * Gets the address of this rat sighting report.
+     * @return the address of this rat report
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Sets the address of this rat report to the specified address.
+     * @param address the specified address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * Gets the zip code of this rat report.
+     * @return the zip code of the rat report
+     */
     public int getZipCode() {
         return zipCode;
     }
 
+    /**
+     * Sets the zip code of the rat report to the specified zip code.
+     * @param zipCode the specified zip code
+     */
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
 
+    /**
+     * Gets the city of the location of the rat report.
+     * @return the city of the rat report
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets the city of the rat report to the specified city
+     * @param city the specified city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Gets the borough of the rat report
+     * @return the borough of the rat report
+     */
     public Borough getBorough() {
         return borough;
     }
 
+    /**
+     * Sets the borough of the rat report to the specified borough
+     * @param borough the specified borough
+     */
     public void setBorough(Borough borough) {
         this.borough = borough;
     }

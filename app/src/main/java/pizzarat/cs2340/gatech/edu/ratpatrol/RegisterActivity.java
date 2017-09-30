@@ -65,6 +65,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
+     *      This method will check for invalid strings to make sure no
+     *      funny buisness is going down.
      *
      * @param userName: the userName input in the textField.
      * @param password: the password input in the textField.
@@ -74,12 +76,11 @@ public class RegisterActivity extends AppCompatActivity {
         //make sure SQL does not have the String,
         //make sure all characters are legal!
         boolean validChars;
-        if(userName.contains(":") || userName.contains("//") || userName.equals(null)){
+        if(userName.contains(":") || userName.contains("/") || userName.equals(null)){
             validChars = false;
         } else {
             validChars = true;
         }
-        return true;
-                //(validChars && broker.credMatch(userName,password));
+        return (validChars);//&& broker.credMatch(userName,password));
     }
 }

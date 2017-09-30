@@ -40,7 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         String user = userName.getText().toString();
         String pass = password.getText().toString();
         boolean adm = admin.isChecked();
-        if (isValid(user,pass)){
+        if (true//isValid(user,pass)
+        ){
             //If so, fill into the database, and go to Login
             try {
                 // Not much room to crash right now, but I don't really know how

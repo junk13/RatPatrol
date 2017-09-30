@@ -12,7 +12,7 @@ class CredentialDb extends SQLiteOpenHelper {
 
     static final int DATABASE_VERSION = 1;
     //name of database file
-    static final String DATABASE_NAME = "localCred.db";
+    static final String DATABASE_NAME = "lCred.db";
 
     CredentialDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

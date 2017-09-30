@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 
@@ -17,13 +18,13 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 
 public class SQLiteBroker extends AppCompatActivity {
     //Initialize database
-    private final CredentialDb cred = new CredentialDb(getBaseContext());
 
     //takes in credentials from Db TODO: duplicate exception logging
-    public long writeToDb(String username, String password, boolean isAdmin) throws DuplicateUserDbException {
+    public long writeToDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
+        final CredentialDb cred = new CredentialDb(context);
         //throw DuplicateUserDbException if username is already used
-        if (containsDuplicateUser(username))
-            throw new DuplicateUserDbException();
+//        if (containsDuplicateUser(username))
+//            throw new DuplicateUserDbException();
         // Gets the data repository in write mode
         SQLiteDatabase db = cred.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -43,7 +44,8 @@ public class SQLiteBroker extends AppCompatActivity {
      * getter for SQLite cursor
      * @return cursor for which to read database info from
      */
-    public Cursor getCursor() {
+    public Cursor getCursor(Context c) {
+        CredentialDb cred = new CredentialDb(c);
         SQLiteDatabase sr = cred.getReadableDatabase();
 
 
@@ -68,16 +70,16 @@ public class SQLiteBroker extends AppCompatActivity {
      * @param pass : String for password
      * @return true if user and pass are in database in same ID
      */
-    public boolean credMatch(String user, String pass) {
-        return fetchCredentialStructureByUser(user).getPass() == pass;
+    public boolean credMatch(String user, String pass, Context c) {
+        return fetchCredentialStructureByUser(user, c).getPass() == pass;
     }
 
     /**
      * @param userStr
      * @return true if user is admin, else false
      */
-    public boolean isUserAdmin(String userStr) {
-        return fetchCredentialStructureByUser(userStr).getAdmin();
+    public boolean isUserAdmin(String userStr, Context c) {
+        return fetchCredentialStructureByUser(userStr, c).getAdmin();
     }
 
     //returns map of users(key) and credentials(value)
@@ -97,14 +99,43 @@ public class SQLiteBroker extends AppCompatActivity {
         }
         return aList;
     }
+    //return database in string
+    public String getDbContent(Context c) throws  Exception {
+        writeToDb("user@user.com", "password", true, c);
+        List itemIds = new ArrayList<>();
+        Cursor cursor = getCursor(c);
+        while(cursor.moveToNext()) {
+            //long itemId = cursor.getLong(
+            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+            String str = cursor.getString(0);
+            itemIds.add(str);
+        }
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext()) {
+            //long itemId = cursor.getLong(
+            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+            String str = cursor.getString(1);
+            itemIds.add(str);
+        }
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext()) {
+            //long itemId = cursor.getLong(
+            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+            String str = cursor.getString(2);
+            itemIds.add(str);
+        }
+        cursor.close();
+        return (String)itemIds.toString();
+
+    }
 
     /**
      *  @return CredentialStructure containing a matching username
      *  @param userStr : the username to look for
      */
 
-    private CredentialStructure fetchCredentialStructureByUser(String userStr) {
-        ArrayList<CredentialStructure> aList = credArrayList(getCursor());
+    private CredentialStructure fetchCredentialStructureByUser(String userStr, Context c) {
+        ArrayList<CredentialStructure> aList = credArrayList(getCursor(c));
         for (int i = 0; i < aList.size(); i++)
             if (aList.get(i).sameUser(new CredentialStructure(userStr)))
                 return aList.get(i);
@@ -115,8 +146,8 @@ public class SQLiteBroker extends AppCompatActivity {
      * @param str : String to look for in the Cred database
      * @return true if duplicate user found, else false
      */
-    private boolean containsDuplicateUser(String str) {
-        return fetchCredentialStructureByUser(str) != null;
+    private boolean containsDuplicateUser(String str, Context c) {
+        return fetchCredentialStructureByUser(str, c) != null;
     }
 
 }

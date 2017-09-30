@@ -3,6 +3,7 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -42,6 +43,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteBroker;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -71,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private SQLiteBroker broker;
 
     /**
      * Creates the login activity on startup.
@@ -79,6 +83,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        broker = new SQLiteBroker();
+
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -115,6 +121,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        //        //test button populate
+        Button mTestPop = (Button) findViewById(R.id.test_pop);
+        mTestPop.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gets the data repository in write mode
+                TextView tv = (TextView) findViewById(R.id.textView);
+                try {
+                    Context c = getApplicationContext();
+                    tv.setText(broker.getDbContent(c));
+                }catch (Exception e) {
+                    tv.setText(e.getLocalizedMessage());
+                }
+            }
+        });
     }
 
     private void populateAutoComplete() {
@@ -243,7 +264,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
 
-            mAuthTask.onPostExecute(mAuthTask.checkCredentials());
+            mAuthTask.onPostExecute(broker.credMatch(email, password, this.getApplicationContext()));
 
         }
     }

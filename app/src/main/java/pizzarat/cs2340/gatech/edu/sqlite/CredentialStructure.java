@@ -48,4 +48,13 @@ class CredentialStructure {
         return (userTester.getId() == user);
     }
 
+    @Override
+    public String toString() {
+        return "CredentialStructure{" +
+                "id='" + id + '\'' +
+                ", user='" + user + '\'' +
+                ", pass='" + pass + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
+    }
 }

@@ -51,7 +51,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="82dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName"

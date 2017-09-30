@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 // Not much room to crash right now, but I don't really know how
                 // we would handle one anyway.
-                broker.writeToDb(user,pass, true);
+                broker.writeToDb(user,pass,adm);
             } catch (Exception e){
                 /**
                  *  Error Handling. If isValid does not catch the exception,
@@ -80,6 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             validChars = true;
         }
-        return (validChars && broker.credMatch(userName,password));
+        return (validChars);//&& broker.credMatch(userName,password));
     }
 }

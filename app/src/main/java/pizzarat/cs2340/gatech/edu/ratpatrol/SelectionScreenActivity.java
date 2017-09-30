@@ -56,7 +56,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
 
         // Rat Map Activity
         ratMapButton = findViewById(R.id.ratMapButton);
-        ratArchiveButton.setOnClickListener(new View.OnClickListener() {
+        ratMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToRatMapActivity();

@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (isValid(user,pass)){
             //If so, fill into the database, and go to Login
             try {
-                broker.writeToCreDb(user, pass);
+                broker.writeToDb(user, pass, false); // TODO: Must fix actual assess permission
             } catch (Exception DuplicateUserDbException){
                 /**
                  *  Error Handling. If isValid does not catch the exception,

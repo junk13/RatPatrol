@@ -15,4 +15,6 @@
     </string>
     <string name="Login"> </string>
     <string name="Register"> </string>
+    <string name="error_duplicate_user">Username taken</string>
+    <string name="error_invalid_username">Only alpha-numeric characters allowed</string>
 </resources>

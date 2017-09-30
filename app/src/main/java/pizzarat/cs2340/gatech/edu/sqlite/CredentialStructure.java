@@ -31,6 +31,9 @@ class CredentialStructure {
     }
 
     String getPass() {
+        if (pass == null)
+            return "";
+        System.out.println("777777777777777");
         return pass;
     }
 
@@ -48,4 +51,13 @@ class CredentialStructure {
         return (userTester.getId() == user);
     }
 
+    @Override
+    public String toString() {
+        return "CredentialStructure{" +
+                "id='" + id + '\'' +
+                ", user='" + user + '\'' +
+                ", pass='" + pass + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
+    }
 }

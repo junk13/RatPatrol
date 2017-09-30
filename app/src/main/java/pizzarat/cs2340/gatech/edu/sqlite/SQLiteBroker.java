@@ -23,8 +23,8 @@ public class SQLiteBroker extends AppCompatActivity {
     public long writeToDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
         //throw DuplicateUserDbException if username is already used
-//        if (containsDuplicateUser(username))
-//            throw new DuplicateUserDbException();
+        if (containsDuplicateUser(username, context))
+            throw new DuplicateUserDbException();
         // Gets the data repository in write mode
         SQLiteDatabase db = cred.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -71,7 +71,15 @@ public class SQLiteBroker extends AppCompatActivity {
      * @return true if user and pass are in database in same ID
      */
     public boolean credMatch(String user, String pass, Context c) {
-        return fetchCredentialStructureByUser(user, c).getPass() == pass;
+        CredentialStructure cs = fetchCredentialStructureByUser(user, c);
+        if (cs == null) {
+            System.out.println("444444444444");
+            return false;
+
+        }
+        System.out.println(cs.getPass());
+        System.out.println(pass);
+        return cs.getPass().equals(pass);
     }
 
     /**
@@ -101,7 +109,6 @@ public class SQLiteBroker extends AppCompatActivity {
     }
     //return database in string
     public String getDbContent(Context c) throws  Exception {
-        writeToDb("user@user.com", "password", true, c);
         List itemIds = new ArrayList<>();
         Cursor cursor = getCursor(c);
         while(cursor.moveToNext()) {
@@ -136,9 +143,14 @@ public class SQLiteBroker extends AppCompatActivity {
 
     private CredentialStructure fetchCredentialStructureByUser(String userStr, Context c) {
         ArrayList<CredentialStructure> aList = credArrayList(getCursor(c));
-        for (int i = 0; i < aList.size(); i++)
-            if (aList.get(i).sameUser(new CredentialStructure(userStr)))
+        for (int i = 0; i < aList.size(); i++) {
+            System.out.println(aList.get(i));
+            if (aList.get(i).getUser().equals(userStr)){
+                System.out.println("66666666666666666");
                 return aList.get(i);
+            }
+
+        }
         return null;
     }
 

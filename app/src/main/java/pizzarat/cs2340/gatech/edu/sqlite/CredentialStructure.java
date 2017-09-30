@@ -31,6 +31,9 @@ class CredentialStructure {
     }
 
     String getPass() {
+        if (pass == null)
+            return "";
+        System.out.println("777777777777777");
         return pass;
     }
 

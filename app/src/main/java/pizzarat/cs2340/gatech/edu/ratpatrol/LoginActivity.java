@@ -263,9 +263,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-
             mAuthTask.onPostExecute(broker.credMatch(email, password, this.getApplicationContext()));
-
         }
     }
 

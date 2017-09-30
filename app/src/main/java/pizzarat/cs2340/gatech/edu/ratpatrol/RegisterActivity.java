@@ -3,6 +3,7 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText userName;
     private EditText password;
+    private CheckBox admin;
     private SQLiteBroker broker;
 
     /**
@@ -29,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         EditText userName = (EditText) findViewById(R.id.userName);
         EditText password = (EditText) findViewById(R.id.password);
+        CheckBox admin = (CheckBox) findViewById(R.id.admin);
         SQLiteBroker broker = new SQLiteBroker();
     }
 
@@ -36,11 +39,14 @@ public class RegisterActivity extends AppCompatActivity {
 
         String user = userName.getText().toString();
         String pass = password.getText().toString();
+        boolean adm = admin.isChecked();
         if (isValid(user,pass)){
             //If so, fill into the database, and go to Login
             try {
-                broker.writeToCreDb(user, pass);
-            } catch (Exception DuplicateUserDbException){
+                // Not much room to crash right now, but I don't really know how
+                // we would handle one anyway.
+                broker.writeToDb(user, pass, adm);
+            } catch (Exception e){
                 /**
                  *  Error Handling. If isValid does not catch the exception,
                  *  the program will bail to the welcome screen.
@@ -67,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         //make sure SQL does not have the String,
         //make sure all characters are legal!
         boolean validChars;
-        if(userName.contains(":") || userName.contains("//")){
+        if(userName.contains(":") || userName.contains("//") || userName.equals(null)){
             validChars = false;
         } else {
             validChars = true;

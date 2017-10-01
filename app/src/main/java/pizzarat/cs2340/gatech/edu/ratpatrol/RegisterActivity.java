@@ -37,6 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
         broker = new SQLiteBroker();
     }
 
+    /**
+     * Attempts to register new user
+     * @param v view object
+     */
     public void register(View v){
 
         String user = ((EditText)userName).getText().toString();
@@ -49,19 +53,13 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 // Not much room to crash right now, but I don't really know how
                 // we would handle one anyway.
-                Log.d("hidden",""+user+" "+pass+" "+adm);
                 broker.writeToDb(user, pass, adm, getApplicationContext());
-                Log.d("hidden","1111");
 
                 Intent startNewActivity = new Intent(this, LoginActivity.class);
                 startActivity(startNewActivity);
             } catch (Exception e){
-                Log.d("hidden",e.getLocalizedMessage());
-                /**
-                 *  Error Handling. If isValid does not catch the exception,
-                 *  the program will bail to the welcome screen.
-                 */
-
+                 /*Error Handling. If isValid does not catch the exception,
+                 the program will bail to the welcome screen.*/
                 ((EditText) userName).setError(getString(R.string.error_duplicate_user));
             }
 
@@ -80,16 +78,12 @@ public class RegisterActivity extends AppCompatActivity {
      * @param userName: the userName input in the textField.
      * @param password: the password input in the textField.
      * @return returns whether or not the combination is valid and available.
+     * TODO: replace if/else with single statement 'return userName.contains...'
+     * TODO: replace null with empty string
      */
     private boolean isValid(String userName, String password){
         //make sure SQL does not have the String,
         //make sure all characters are legal!
-        boolean validChars;
-        if(userName.contains(":") || userName.contains("/")  || userName.equals(null)){
-            validChars = false;
-        } else {
-            validChars = true;
-        }
-        return (validChars);//&& broker.credMatch(userName,password));
+        return !(userName.contains(":") || userName.contains("/") || userName.length() == 0);
     }
 }

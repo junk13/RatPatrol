@@ -3,8 +3,9 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="admin_checkbox">AdminUser</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -13,8 +14,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="Login"> </string>
-    <string name="Register"> </string>
+    <string name="welcome_pic">rat drawing</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="logout">Logout</string>
     <string name="error_duplicate_user">Username taken</string>
     <string name="error_invalid_username">Only alpha-numeric characters allowed</string>
 </resources>

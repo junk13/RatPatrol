@@ -188,7 +188,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Gets a Map structure of all the stored users.
      * @return a Map of all the users in the database.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException if credentials.txt not found
+     * TODO: delete (not storing creds in text file)
      */
     public Map<String, String> getCredentials() throws FileNotFoundException {
         Map<String, String> creds = new HashMap<String, String>();
@@ -206,7 +207,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Adds the specified user to the database.
      * @param username the user's username
      * @param password the user's password
-     * @throws IOException
+     * @throws IOException if error writing to credentials.txt
+     * TODO: delete (not storing creds in text file)
      */
     public void addCredentials(String username, String password) throws IOException {
         BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));
@@ -295,7 +297,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) { //Innocuous enough -Andrew
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -381,7 +383,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    private class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;
@@ -414,6 +416,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return false;
         }
 
+        /**
+         * TODO: Delete (not using DUMMY_CREDENTIALS)
+         */
         protected boolean checkCredentials() {
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
@@ -425,6 +430,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return false;
         }
 
+        /**
+         * Moves to main page if successful login, else gives user an error message
+         * @param success if login successful
+         */
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;

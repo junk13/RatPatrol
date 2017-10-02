@@ -83,7 +83,8 @@ public class SQLiteBroker extends AppCompatActivity {
     }
 
     /**
-     * @param userStr
+     * @param userStr username to check
+     * @param c app context
      * @return true if user is admin, else false
      */
     public boolean isUserAdmin(String userStr, Context c) {
@@ -93,11 +94,11 @@ public class SQLiteBroker extends AppCompatActivity {
     //returns map of users(key) and credentials(value)
     private ArrayList<CredentialStructure> credArrayList(Cursor cursor) {
         //ArrayList to return
-        ArrayList aList = new ArrayList<CredentialStructure>();
+        ArrayList<CredentialStructure> aList = new ArrayList<CredentialStructure>();
         cursor.moveToPosition(-1);
         //cycle through cursor and add columns to ArrayList
         while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3) == "admin";
+            boolean b = cursor.getString(3) == "admin"; //TODO: .equals?
             aList.add(new CredentialStructure(
                     cursor.getString(0),    //id
                     cursor.getString(1),    //Username
@@ -109,7 +110,7 @@ public class SQLiteBroker extends AppCompatActivity {
     }
     //return database in string
     public String getDbContent(Context c) throws  Exception {
-        List itemIds = new ArrayList<>();
+        List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
         while(cursor.moveToNext()) {
             //long itemId = cursor.getLong(

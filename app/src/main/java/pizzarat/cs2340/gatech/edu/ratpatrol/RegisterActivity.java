@@ -3,8 +3,6 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.view.View;
@@ -37,6 +35,11 @@ public class RegisterActivity extends AppCompatActivity {
         broker = new SQLiteBroker();
     }
 
+    /**
+     * Attempts to register new user, if successful, add to the SQL database.
+     * If unsuccessful, clear fields and return some error to appear in a widget.
+     * @param v view object
+     */
     public void register(View v){
 
         String user = ((EditText)userName).getText().toString();
@@ -45,28 +48,16 @@ public class RegisterActivity extends AppCompatActivity {
         System.out.println();
         ((EditText) userName).setError(null);
         if (isValid(user,pass)){
-            //If so, fill into the database, and go to Login
             try {
-                // Not much room to crash right now, but I don't really know how
-                // we would handle one anyway.
-                Log.d("hidden",""+user+" "+pass+" "+adm);
                 broker.writeToDb(user, pass, adm, getApplicationContext());
-                Log.d("hidden","1111");
 
                 Intent startNewActivity = new Intent(this, LoginActivity.class);
                 startActivity(startNewActivity);
             } catch (Exception e){
-                Log.d("hidden",e.getLocalizedMessage());
-                /**
-                 *  Error Handling. If isValid does not catch the exception,
-                 *  the program will bail to the welcome screen.
-                 */
-
                 ((EditText) userName).setError(getString(R.string.error_duplicate_user));
             }
 
         } else {
-            //If not, clear fields
             ((EditText)userName).setText("", TextView.BufferType.EDITABLE);
             ((EditText)password).setText("", TextView.BufferType.EDITABLE);
             ((EditText) userName).setError(getString(R.string.error_invalid_username));
@@ -82,14 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @return returns whether or not the combination is valid and available.
      */
     private boolean isValid(String userName, String password){
-        //make sure SQL does not have the String,
-        //make sure all characters are legal!
-        boolean validChars;
-        if(userName.contains(":") || userName.contains("/")  || userName.equals(null)){
-            validChars = false;
-        } else {
-            validChars = true;
-        }
-        return (validChars);//&& broker.credMatch(userName,password));
+        //Make sure the String does not contain : or /, and that it isn't null.
+        return !(userName.contains(":") || userName.contains("/") || userName.length() == 0);
     }
 }

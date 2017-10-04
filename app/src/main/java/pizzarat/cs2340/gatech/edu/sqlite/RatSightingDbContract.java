@@ -36,9 +36,9 @@ class RatSightingDbContract {
                     ContractEntry.REPORT_TABLE_KEY + " INTEGER PRIMARY KEY," +
                     ContractEntry.REPORT_TABLE_LOCATION + " TEXT," +
                     ContractEntry.REPORT_TABLE_DATE + " TEXT," +
-                    ContractEntry.REPORT_TABLE_TIME + " TEXT," +
+                    ContractEntry.REPORT_TABLE_TIME + " INTEGER," +
                     ContractEntry.REPORT_TABLE_ADDRESS + " TEXT," +
-                    ContractEntry.REPORT_TABLE_ZIPCODE + " TEXT," +
+                    ContractEntry.REPORT_TABLE_ZIPCODE + " INTEGER," +
                     ContractEntry.REPORT_TABLE_CITY + " TEXT," +
                     ContractEntry.REPORT_TABLE_BOROUGH + " TEXT)";
 

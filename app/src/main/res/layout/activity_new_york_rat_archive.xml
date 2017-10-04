@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.NewYorkRatArchiveActivity">
 
+
+    <Button
+        android:id="@+id/reportDetailsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch to Details"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="99dp"/>
 </android.support.constraint.ConstraintLayout>

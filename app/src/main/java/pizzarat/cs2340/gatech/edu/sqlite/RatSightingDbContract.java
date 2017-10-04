@@ -15,7 +15,7 @@ class RatSightingDbContract {
      * package-private {@link ContractEntry} defines Strings for use in Credential management
      * implement android.provider.BaseColumns for _id compatibility (i.e. cursor)
      */
-    private static class ContractEntry {
+    static class ContractEntry {
         //fields for database info
         static final String TABLE_NAME = "Reports";
         static final String REPORT_TABLE_KEY = "key";

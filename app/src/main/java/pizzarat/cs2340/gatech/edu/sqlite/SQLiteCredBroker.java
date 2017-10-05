@@ -16,9 +16,7 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
  * @author Evie Brown.
  */
 
-public class SQLiteBroker extends AppCompatActivity {
-    //Initialize database
-
+public class SQLiteCredBroker extends AppCompatActivity {
     //takes in credentials from Db TODO: duplicate exception logging
     public long writeToDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
@@ -98,7 +96,7 @@ public class SQLiteBroker extends AppCompatActivity {
         cursor.moveToPosition(-1);
         //cycle through cursor and add columns to ArrayList
         while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3) == "admin"; //TODO: .equals?
+            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
             aList.add(new CredentialStructure(
                     cursor.getString(0),    //id
                     cursor.getString(1),    //Username
@@ -133,7 +131,7 @@ public class SQLiteBroker extends AppCompatActivity {
             itemIds.add(str);
         }
         cursor.close();
-        return (String)itemIds.toString();
+        return itemIds.toString();
 
     }
 

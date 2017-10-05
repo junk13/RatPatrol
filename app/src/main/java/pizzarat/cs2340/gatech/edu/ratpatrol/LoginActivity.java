@@ -21,7 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import pizzarat.cs2340.gatech.edu.sqlite.SQLiteBroker;
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private SQLiteBroker broker;
+    private SQLiteCredBroker broker;
 
     /**
      * Creates the login activity on startup.
@@ -83,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        broker = new SQLiteBroker();
+        broker = new SQLiteCredBroker();
 
         setContentView(R.layout.activity_login);
         // Set up the login form.

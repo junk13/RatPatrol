@@ -7,7 +7,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.TextView;
-import pizzarat.cs2340.gatech.edu.sqlite.SQLiteBroker;
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
 
 /**
  * This class represents the Registration Screen for the Rat Patrol app.
@@ -18,7 +18,7 @@ public class RegisterActivity extends AppCompatActivity {
     private View userName;
     private View password;
     private View admin;
-    private SQLiteBroker broker;
+    private SQLiteCredBroker broker;
 
     /**
      * Creates the RegistrationActivity on startup.
@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         userName =  findViewById(R.id.userName);
         password =  findViewById(R.id.password);
         admin = findViewById(R.id.admin);
-        broker = new SQLiteBroker();
+        broker = new SQLiteCredBroker();
     }
 
     /**
@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         ((EditText) userName).setError(null);
         if (isValid(user,pass)){
             try {
-                broker.writeToDb(user, pass, adm, getApplicationContext());
+                broker.writeToCredDb(user, pass, adm, getApplicationContext());
 
                 Intent startNewActivity = new Intent(this, LoginActivity.class);
                 startActivity(startNewActivity);

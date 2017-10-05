@@ -14,9 +14,10 @@ import java.util.List;
 import pizzarat.cs2340.gatech.edu.Model.RatSightingReport;
 
 /**
- * Created by harri on 10/4/2017.
+ * Created by Harrison Banh on 10/4/2017.
+ * Adapts the RecyclerView to hold a list of Rat Sightings and do something
+ * with its listener.
  */
-
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     //TODO change list to rat reports
@@ -41,13 +42,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         holder.reportDescription.setText(listData.get(position));
 
         holder.setItemClickListener(new ItemClickListener() {
+            // TODO change this to switch to the details screen
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
+                /*
                 if(isLongClick) {
                     Toast.makeText(context, "Long Click: " + listData.get(position), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, " " + listData.get(position), Toast.LENGTH_SHORT).show();
                 }
+                */
             }
         });
     }

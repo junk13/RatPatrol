@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         ((EditText) userName).setError(null);
         if (isValid(user,pass)){
             try {
-                broker.writeToDb(user, pass, adm, getApplicationContext());
+                broker.writeToCredDb(user, pass, adm, getApplicationContext());
 
                 Intent startNewActivity = new Intent(this, LoginActivity.class);
                 startActivity(startNewActivity);

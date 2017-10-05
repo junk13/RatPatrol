@@ -18,7 +18,7 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 
 public class SQLiteCredBroker extends AppCompatActivity {
     //takes in credentials from Db TODO: duplicate exception logging
-    public long writeToDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
+    public long writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
         //throw DuplicateUserDbException if username is already used
         if (containsDuplicateUser(username, context))

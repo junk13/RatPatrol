@@ -30,6 +30,42 @@ class RatSightingDb extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    static String getTableName() {
+        return RatSightingDbContract.ContractEntry.TABLE_NAME;
+    }
+
+    static String getReportTableKeyCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_KEY;
+    }
+
+    static String getReportTableLocationCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_LOCATION;
+    }
+
+    static String getReportTableDateCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_DATE;
+    }
+
+    static String getReportTableTimeCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_TIME;
+    }
+
+    static String getReportTableAddressCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_ADDRESS;
+    }
+
+    static String getReportTableZipcodeCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_ZIPCODE;
+    }
+
+    static String getReportTableCityCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_CITY;
+    }
+
+    static String getReportTableBoroughCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_BOROUGH;
+    }
+
     static void purgeCredDb(SQLiteDatabase db) {
         db.execSQL(RatSightingDbContract.SQL_DELETE_ENTRIES);
     }

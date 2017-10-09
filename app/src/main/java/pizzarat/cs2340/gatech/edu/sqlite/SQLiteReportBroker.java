@@ -49,10 +49,10 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                CredentialDb.getCredHashCol() + " DESC";
+                RatSightingDb.getReportTableKeyCol() + " DESC";
 
         return readableDb.query(
-                CredentialDb.getTableName(),            // The table to query
+                RatSightingDb.getTableName(),            // The table to query
                 null,                                   // The columns to return
                 null,                                   // The columns for the WHERE clause
                 null,                                   // The values for the WHERE clause

@@ -2,15 +2,14 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
     // TODO change list to Rat Sightings
     private RecyclerView.LayoutManager layoutManager;
     private List<String> listData = new ArrayList<>();
-    private SQLiteReportBroker reportBroker;
+    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();;
 
 
     @Override
@@ -40,14 +39,17 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerAdapter adapter = new RecyclerAdapter(listData, this);
         recyclerView.setAdapter(adapter);
-        reportBroker = new SQLiteReportBroker();
+
     }
 
     // TODO change to list of rat sighting objects
     private void setupList() {
-        ArrayList<ReportStructure> rsList = reportBroker.getListOfReports(this.getApplicationContext());
-
-        for(int i = 0; i < 10; i++) {
+        ArrayList<ReportStructure> rsList = reportBroker.reportArrayList(this.getApplicationContext());
+        for (int j = 0; j < 9; j++) {
+            ReportStructure rsTemp = rsList.get(j);
+            listData.add(rsTemp.getLocation());
+        }
+        for(int i = 0; i < 10 - rsList.size(); i++) {
             listData.add("Click me " +  i);
         }
     }

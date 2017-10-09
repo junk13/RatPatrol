@@ -20,7 +20,7 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate exception logging
     public long writeToReportDb(ReportStructure rReport, Context context) throws DuplicateReportDbException {
-        final CredentialDb ratDb = new CredentialDb(context);
+        RatSightingDb ratDb = new RatSightingDb(context);
         //throw DuplicateReportDbException if report already exists
 //        if (containsDuplicateReport(username, context))
 //            throw new DuplicateReportDbException();
@@ -40,13 +40,23 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
         values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
 
+
+//        try {
+//            writableDb.execSQL(RatSightingDbContract.SQL_CREATE_ENTRIES);
+//        } catch (Exception e) {
+//            Log.d("Cunt", e.getLocalizedMessage());
+//        }
         // Insert the new row, returning the primary key value of the new row
         long id = writableDb.insert(RatSightingDb.getTableName(), null, values);
         try{
-            getDbContent(context);
+//            Log.d("Cunt", ""+id);
+//            writableDb.execSQL("INSERT INTO " + RatSightingDb.getTableName() +
+//                    "\nVALUES (12, dsss, addd, daaf, dskaf, sjafds, fdjsa, fdsaj);");
+//            Log.d("Cunt", "this is a triumph");
         } catch (Exception e) {
             Log.d("Cunt", e.getLocalizedMessage());
         }
+        ratDb.close();
 
         return id;
     }
@@ -76,14 +86,15 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     }
 
     //returns arraylist of all rat reports
-    private ArrayList<ReportStructure> reportArrayList(Cursor cursor) {
+    public ArrayList<ReportStructure> reportArrayList(Context context) {
+        Cursor cursor = getCursor(context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
             boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
             aList.add(new ReportStructure(
-                    cursor.getInt(0),       //key
+                    cursor.getInt(0)+"",       //key
                     cursor.getString(1),    //location
                     cursor.getString(2),    //date
                     cursor.getString(3),       //time
@@ -108,13 +119,9 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         }
 
         cursor.close();
-        Log.d("fuck", itemIds.toString());
+        Log.d("Cunt", itemIds.toString());
         return itemIds.toString();
 
-    }
-
-    public ArrayList<ReportStructure> getListOfReports(Context c) {
-        return reportArrayList(getCursor(c));
     }
 
 

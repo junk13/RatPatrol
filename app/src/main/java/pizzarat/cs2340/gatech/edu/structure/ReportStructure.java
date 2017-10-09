@@ -6,7 +6,7 @@ package pizzarat.cs2340.gatech.edu.structure;
  * a rat sighting report.
  */
 public class ReportStructure {
-    private int key;                    // Unique key assigned to each report
+    private String key;                    // Unique key assigned to each report
     private String location;            // Latitude and longitude of the sighting
     private String date;                // May need to change later
     private String time;                   // May need to change later
@@ -26,7 +26,7 @@ public class ReportStructure {
      * @param city the city portion of the address of the sighting
      * @param borough the borough in New York where the sighting occurred
      */
-    public ReportStructure(int key, String location, String date, String time,
+    public ReportStructure(String key, String location, String date, String time,
                            String address, String zipCode, String city,
                            String borough) {
         this.key = key;
@@ -43,7 +43,7 @@ public class ReportStructure {
      * Returns unique key of the rat sighting.
      * @return the unique key of the sighting
      */
-    public int getKey() {
+    public String getKey() {
         return key;
     }
 
@@ -51,7 +51,7 @@ public class ReportStructure {
      * Sets the specified key for this rat sighting.
      * @param key
      */
-    public void setKey(int key) {
+    public void setKey(String key) {
         this.key = key;
     }
 

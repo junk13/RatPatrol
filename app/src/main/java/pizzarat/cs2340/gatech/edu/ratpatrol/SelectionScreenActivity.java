@@ -3,12 +3,10 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -84,8 +82,8 @@ public class SelectionScreenActivity extends AppCompatActivity {
 
 
 
-        //bdTask = new BackgroundDataTask();
-        //bdTask.execute();
+        bdTask = new BackgroundDataTask();
+        bdTask.execute();
 //        String dbContent;
 //        try {
 //            dbContent = reportBroker.getDbContent(this.getApplicationContext());
@@ -94,8 +92,8 @@ public class SelectionScreenActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-        addDummyToSQL();
-        Log.d("hidden",": " + reportBroker.isEmpty(this.getApplicationContext()));
+        //addDummyToSQL();
+        //Log.d("Cunt",": " + reportBroker.isEmpty(this.getApplicationContext()));
 
     }
 
@@ -151,7 +149,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
     private void addDummyToSQL() {
         ReportStructure rsrTest;
         try {
-            rsrTest = new ReportStructure(12345, "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
+            rsrTest = new ReportStructure("432", "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
             Log.d("hidden",rsrTest.getBorough());
             reportBroker.writeToReportDb(rsrTest, this.getBaseContext());
             Log.d("hidden",rsrTest.getDate());
@@ -173,7 +171,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
 
         ReportStructure rsrTest;
         try {
-            rsrTest = new ReportStructure(12345, "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
+            rsrTest = new ReportStructure("32", "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
             reportBroker.writeToReportDb(rsrTest, this.getApplicationContext());
             Log.d("hidden",rsrTest.getDate());
         } catch (DuplicateReportDbException e) {
@@ -189,7 +187,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
                 // use comma as separator
                 String[] ratSighting = line.split(cvsSplitBy);
 
-                int key = Integer.parseInt(ratSighting[0]);
+                String key = ratSighting[0];
                 String location = ratSighting[7];
                 String date = getDate(ratSighting[1]);
                 String time = getTime(ratSighting[1]);
@@ -238,6 +236,20 @@ public class SelectionScreenActivity extends AppCompatActivity {
             readRatData();
             return null;
         }
+
+//        @Override
+//        protected void onPostExecute(final Boolean success) {
+//            mAuthTask = null;
+//            showProgress(false);
+//
+//            if (success) {
+//                // Switch to the selection screen activity
+//                Intent switchToSelectionScreen = new Intent(LoginActivity.this, SelectionScreenActivity.class);
+//                LoginActivity.this.startActivity(switchToSelectionScreen);
+//            } else {
+//                Toast.makeText(getBaseContext(), "Invalid password", Toast.LENGTH_SHORT).show();
+//            }
+//        }
 
     }
 

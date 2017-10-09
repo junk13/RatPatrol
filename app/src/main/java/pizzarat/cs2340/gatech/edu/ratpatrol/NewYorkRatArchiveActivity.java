@@ -42,6 +42,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         RecyclerAdapter adapter = new RecyclerAdapter(listData, this);
         recyclerView.setAdapter(adapter);
         //reportBroker = new SQLiteReportBroker();
+
     }
 
     // TODO change to list of rat sighting objects

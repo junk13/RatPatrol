@@ -40,9 +40,15 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
         values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
 
-
         // Insert the new row, returning the primary key value of the new row
-        return writableDb.insert(RatSightingDb.getTableName(), null, values);
+        long id = writableDb.insert(RatSightingDb.getTableName(), null, values);
+        try{
+            getDbContent(context);
+        } catch (Exception e) {
+            Log.d("Cunt", e.getLocalizedMessage());
+        }
+
+        return id;
     }
     /**
      * getter for SQLite cursor Report database
@@ -88,7 +94,23 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
             ));
         }
+        cursor.close();
         return aList;
+    }
+    public String getDbContent(Context c) throws  Exception {
+        List<String> itemIds = new ArrayList<String>();
+        Cursor cursor = getCursor(c);
+        while(cursor.moveToNext()) {
+            //long itemId = cursor.getLong(
+            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+            String str = cursor.getString(0);
+            itemIds.add(str);
+        }
+
+        cursor.close();
+        Log.d("fuck", itemIds.toString());
+        return itemIds.toString();
+
     }
 
     public ArrayList<ReportStructure> getListOfReports(Context c) {

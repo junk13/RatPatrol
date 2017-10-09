@@ -1,6 +1,4 @@
-package pizzarat.cs2340.gatech.edu.Model;
-
-import pizzarat.cs2340.gatech.edu.Model.Borough;
+package pizzarat.cs2340.gatech.edu.structure;
 
 /**
  * @author Harrison Banh

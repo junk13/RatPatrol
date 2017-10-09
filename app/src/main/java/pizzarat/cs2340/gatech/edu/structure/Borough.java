@@ -1,4 +1,4 @@
-package pizzarat.cs2340.gatech.edu.Model;
+package pizzarat.cs2340.gatech.edu.structure;
 
 import java.io.Serializable;
 

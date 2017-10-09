@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
-import pizzarat.cs2340.gatech.edu.Model.ReportStructure;
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 
 /**

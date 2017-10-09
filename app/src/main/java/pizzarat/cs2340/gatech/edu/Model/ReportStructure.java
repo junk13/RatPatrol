@@ -7,7 +7,7 @@ import pizzarat.cs2340.gatech.edu.Model.Borough;
  * This class is a container or holder for all the information related to making
  * a rat sighting report.
  */
-public class RatSightingReport {
+public class ReportStructure {
     private int key;                    // Unique key assigned to each report
     private String location;            // Latitude and longitude of the sighting
     private String date;                // May need to change later
@@ -28,9 +28,9 @@ public class RatSightingReport {
      * @param city the city portion of the address of the sighting
      * @param borough the borough in New York where the sighting occurred
      */
-    public RatSightingReport(int key, String location, String date, int time,
-                             String address, int zipCode, String city,
-                             Borough borough) {
+    public ReportStructure(int key, String location, String date, int time,
+                           String address, int zipCode, String city,
+                           Borough borough) {
         this.key = key;
         this.location = location;
         this.date = date;

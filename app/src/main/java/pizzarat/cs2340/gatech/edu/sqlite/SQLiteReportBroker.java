@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
-import pizzarat.cs2340.gatech.edu.Model.RatSightingReport;
+import pizzarat.cs2340.gatech.edu.Model.ReportStructure;
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 
 
@@ -14,7 +14,7 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
  */
 
 public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate exception logging
-    public long writeToReportDb(RatSightingReport rReport, Context context) throws DuplicateReportDbException {
+    public long writeToReportDb(ReportStructure rReport, Context context) throws DuplicateReportDbException {
         final CredentialDb ratDb = new CredentialDb(context);
         //throw DuplicateReportDbException if report already exists
 //        if (containsDuplicateReport(username, context))

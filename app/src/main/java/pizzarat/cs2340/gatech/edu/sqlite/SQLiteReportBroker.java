@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
-import pizzarat.cs2340.gatech.edu.Model.RatSightingReport;
+import java.util.ArrayList;
+
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
@@ -16,7 +17,7 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  */
 
 public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate exception logging
-    public long writeToReportDb(RatSightingReport rReport, Context context) throws DuplicateReportDbException {
+    public long writeToReportDb(ReportStructure rReport, Context context) throws DuplicateReportDbException {
         final CredentialDb ratDb = new CredentialDb(context);
         //throw DuplicateReportDbException if report already exists
 //        if (containsDuplicateReport(username, context))
@@ -32,23 +33,26 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         values.put(RatSightingDb.getReportTableAddressCol(), rReport.getAddress());
         values.put(RatSightingDb.getReportTableZipcodeCol(), rReport.getZipCode());
         values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
-        values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough().getSectorName());
+        values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
 
         // Insert the new row, returning the primary key value of the new row
         return writableDb.insert(RatSightingDb.getTableName(), null, values);
     }
-
-    public Cursor getCursor(Context c) {
-        RatSightingDb ratSighting = new RatSightingDb(c);
-        SQLiteDatabase sr = ratSighting.getReadableDatabase();
+    /**
+     * getter for SQLite cursor Report database
+     * @return cursor for which to read database info from
+     */
+    private Cursor getCursor(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
 
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                RatSightingDb.getReportTableKeyCol() + " DESC";
+                CredentialDb.getCredHashCol() + " DESC";
 
-        return sr.query(
-                RatSightingDb.getTableName(),            // The table to query
+        return readableDb.query(
+                CredentialDb.getTableName(),            // The table to query
                 null,                                   // The columns to return
                 null,                                   // The columns for the WHERE clause
                 null,                                   // The values for the WHERE clause
@@ -58,20 +62,25 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         );
 
     }
-
-    //return database in string
-    public List<String> getReports(Context c) throws  Exception {
-        List<String> itemIds = new ArrayList<String>();
-        Cursor cursor = getCursor(c);
+    //returns arraylist of all rat reports
+    private ArrayList<ReportStructure> credArrayList(Cursor cursor) {
+        //ArrayList to return
+        ArrayList<ReportStructure> aList = new ArrayList<>();
+        cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(0);
-            itemIds.add(str);
+            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+            aList.add(new ReportStructure(
+                    cursor.getInt(0),       //key
+                    cursor.getString(1),    //location
+                    cursor.getString(2),    //date
+                    cursor.getInt(3),       //time
+                    cursor.getString(4),    //address
+                    cursor.getInt(5),       //zipcode
+                    cursor.getString(6),    //city
+                    cursor.getString(7)     //borough
+
+            ));
         }
-        cursor.close();
-        return itemIds;
-
+        return aList;
     }
-
 }

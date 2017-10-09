@@ -133,7 +133,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         ArrayList<ReportStructure> dummies = new ArrayList<>();
         for(int i = 0; i < 4; i++){
             ReportStructure next =(new ReportStructure(
-                    0,       //key
+                    ""+i,       //key
                     "Place"+i,    //location
                     "Today",    //date
                     "0",       //time
@@ -147,9 +147,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     }
 
     public ArrayList<ReportStructure> getListOfReports(Context c) {
-        return reportArrayList(getCursor(c));
+        return reportArrayList(c);
     }
-
-}
 
 }

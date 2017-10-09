@@ -52,7 +52,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         } catch (Exception e){
             for(int i = 1; i < 10; i++) {
                 posts.add(new ReportStructure(
-                        0,       //key
+                        ""+i,       //key
                         "Null Island",    //location
                         "Today",    //date
                         "0",       //time

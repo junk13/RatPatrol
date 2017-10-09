@@ -1,11 +1,16 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * @author Harrison Banh
  * This class is a container or holder for all the information related to making
  * a rat sighting report.
  */
-public class ReportStructure {
+public class ReportStructure implements Parcelable{
     private int key;                    // Unique key assigned to each report
     private String location;            // Latitude and longitude of the sighting
     private String date;                // May need to change later
@@ -39,6 +44,55 @@ public class ReportStructure {
         this.borough = borough;
     }
 
+    public ReportStructure(Parcel in){
+        key = in.readInt();
+        location = in.readString();
+        date = in.readString();
+        time = in.readString();
+        address = in.readString();
+        zipCode = in.readString();
+        city = in.readString();
+        borough = in.readString();
+    }
+
+    public void readFromParcel(Parcel in){
+        key = in.readInt();
+        location = in.readString();
+        date = in.readString();
+        time = in.readString();
+        address = in.readString();
+        zipCode = in.readString();
+        city = in.readString();
+        borough = in.readString();
+    }
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+    public void writeToParcel(Parcel dest, int flag){
+        dest.writeInt(key);
+        dest.writeString(location);
+        dest.writeString(date);
+        dest.writeString(time);
+        dest.writeString(address);
+        dest.writeString(zipCode);
+        dest.writeString(city);
+        dest.writeString(borough);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<ReportStructure> CREATOR = new Parcelable.Creator<ReportStructure>(){
+
+        @Override
+        public ReportStructure createFromParcel(Parcel in){
+            return new ReportStructure(in);
+        }
+
+        @Override
+        public ReportStructure[] newArray(int size){
+            return new ReportStructure[size];
+        }
+    };
     /**
      * Returns unique key of the rat sighting.
      * @return the unique key of the sighting

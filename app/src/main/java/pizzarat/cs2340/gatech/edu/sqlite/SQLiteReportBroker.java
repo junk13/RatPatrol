@@ -35,6 +35,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
         values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
 
+        //writableDb.close();
         // Insert the new row, returning the primary key value of the new row
         return writableDb.insert(RatSightingDb.getTableName(), null, values);
     }
@@ -84,7 +85,24 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         }
         return aList;
     }
-    
+
+    public ArrayList<ReportStructure> dummy(){
+        ArrayList<ReportStructure> dummies = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            ReportStructure next =(new ReportStructure(
+                    0,       //key
+                    "Place"+i,    //location
+                    "Today",    //date
+                    "0",       //time
+                    "Here",    //address
+                    "00000",       //zipcode
+                    "England",    //city
+                    "Mahatten"));   //borough)
+            dummies.add(next);
+        }
+        return dummies;
+    }
+
     public ArrayList<ReportStructure> getListOfReports(Context c) {
         return reportArrayList(getCursor(c));
     }

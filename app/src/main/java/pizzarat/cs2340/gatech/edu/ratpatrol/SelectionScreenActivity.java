@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import pizzarat.cs2340.gatech.edu.Model.RatSightingReport;
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 
 /**
@@ -155,9 +155,9 @@ public class SelectionScreenActivity extends AppCompatActivity {
         String cvsSplitBy = ",";
         Log.d("hidden","in function...");
 
-        RatSightingReport rsrTest;
+        ReportStructure rsrTest;
         try {
-            rsrTest = new RatSightingReport(12345, "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
+            rsrTest = new ReportStructure(12345, "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
             reportBroker.writeToReportDb(rsrTest, this.getApplicationContext());
             Log.d("hidden",rsrTest.getDate());
         } catch (DuplicateReportDbException e) {
@@ -181,7 +181,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
                 String zip = ratSighting[8];
                 String city = ratSighting[16];
                 String borough = ratSighting[23];
-                UserRatReportsActivity rsr = new UserRatReportsActivity(key,location,date,time,address,zip,city,borough);
+                ReportStructure rsr = new ReportStructure(key,location,date,time,address,zip,city,borough);
 
                 reportBroker.writeToReportDb(rsr,this.getApplicationContext());
             }

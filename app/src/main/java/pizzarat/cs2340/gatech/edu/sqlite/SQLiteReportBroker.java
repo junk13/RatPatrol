@@ -62,8 +62,9 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         );
 
     }
+
     //returns arraylist of all rat reports
-    private ArrayList<ReportStructure> credArrayList(Cursor cursor) {
+    private ArrayList<ReportStructure> reportArrayList(Cursor cursor) {
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
@@ -73,9 +74,9 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
                     cursor.getInt(0),       //key
                     cursor.getString(1),    //location
                     cursor.getString(2),    //date
-                    cursor.getInt(3),       //time
+                    cursor.getString(3),       //time
                     cursor.getString(4),    //address
-                    cursor.getInt(5),       //zipcode
+                    cursor.getString(5),       //zipcode
                     cursor.getString(6),    //city
                     cursor.getString(7)     //borough
 
@@ -83,4 +84,9 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         }
         return aList;
     }
+
+    public ArrayList<ReportStructure> getListOfReports(Context c) {
+        return reportArrayList(getCursor(c));
+    }
+
 }

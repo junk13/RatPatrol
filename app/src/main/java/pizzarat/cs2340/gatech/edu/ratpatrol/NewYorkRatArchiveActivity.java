@@ -15,6 +15,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+
 /**
  * Represents the screen that displays all the rat sightings in New York.
  */
@@ -22,6 +25,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
     // TODO change list to Rat Sightings
     private RecyclerView.LayoutManager layoutManager;
     private List<String> listData = new ArrayList<>();
+    private SQLiteReportBroker reportBroker;
 
 
     @Override
@@ -36,10 +40,13 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerAdapter adapter = new RecyclerAdapter(listData, this);
         recyclerView.setAdapter(adapter);
+        reportBroker = new SQLiteReportBroker();
     }
 
     // TODO change to list of rat sighting objects
     private void setupList() {
+        ArrayList<ReportStructure> rsList = reportBroker.getListOfReports(this.getApplicationContext());
+
         for(int i = 1; i < 10; i++) {
             listData.add("Click me " +  i);
         }

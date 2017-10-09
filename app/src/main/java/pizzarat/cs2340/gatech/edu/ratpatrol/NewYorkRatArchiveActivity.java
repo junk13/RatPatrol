@@ -2,19 +2,21 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 /**
@@ -24,8 +26,8 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
     // TODO change list to Rat Sightings
     private RecyclerView.LayoutManager layoutManager;
     private List<String> listData = new ArrayList<>();
-    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();;
-
+    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    ArrayList<ReportStructure> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,23 +41,41 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerAdapter adapter = new RecyclerAdapter(listData, this);
         recyclerView.setAdapter(adapter);
+        //reportBroker = new SQLiteReportBroker();
 
     }
 
     // TODO change to list of rat sighting objects
     private void setupList() {
-        ArrayList<ReportStructure> rsList = reportBroker.reportArrayList(this.getApplicationContext());
-        for (int j = 0; j < 9; j++) {
-            ReportStructure rsTemp = rsList.get(j);
-            listData.add(rsTemp.getLocation());
+        try {
+            posts = reportBroker.dummy();//getListOfReports(getApplicationContext());
+        } catch (Exception e){
+            for(int i = 1; i < 10; i++) {
+                posts.add(new ReportStructure(
+                        ""+i,       //key
+                        "Null Island",    //location
+                        "Today",    //date
+                        "0",       //time
+                        "Here",    //address
+                        "00000",       //zipcode
+                        "England",    //city
+                        "Mahatten"));   //borough)
+            }
         }
-        for(int i = 0; i < 10 - rsList.size(); i++) {
-            listData.add("Click me " +  i);
+        for(int i = 1; i < 10 && i < posts.size(); i++) {
+            String newElement = posts.get(i).getLocation();
+            listData.add(newElement);
         }
+//        for(int i = 0; i < listData.size(); i++) {
+//            listData.add(strings.remove(0));
+//        }
     }
 
-    public void switchToReportDetails() {
+    public void switchToReportDetails(int report) {
         Intent switchToDetailedReports = new Intent(this, DetailedRatReportViewActivity.class);
+        //switchToDetailedReports.putExtra("Report","Dummy");
+        ReportHolder.data = posts.get(report);
+        //switchToDetailedReports.putExtra("Report",posts.get(1));
         this.startActivity(switchToDetailedReports);
     }
 
@@ -96,7 +116,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
                     Toast.makeText(context, " " + listData.get(position), Toast.LENGTH_SHORT).show();
                 }
                 */
-                    switchToReportDetails();
+                    switchToReportDetails(position);
                 }
             });
         }

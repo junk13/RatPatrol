@@ -1,10 +1,10 @@
-package pizzarat.cs2340.gatech.edu.sqlite;
+package pizzarat.cs2340.gatech.edu.structure;
 
 /**
  * @author Evie Brown.
  */
 
-class CredentialStructure {
+public class CredentialStructure {
     private String id;
     private String user;
     private String pass;
@@ -14,7 +14,7 @@ class CredentialStructure {
         this(null, user, null, null);
     }
 
-    CredentialStructure(String id, String user, String pass, Boolean isAdmin) {
+    public CredentialStructure(String id, String user, String pass, Boolean isAdmin) {
         this.id = id;
         this.user = user;
         this.pass = pass;
@@ -22,33 +22,33 @@ class CredentialStructure {
     }
 
     //getters
-    String getId() {
+    public String getId() {
         return id;
     }
 
-    String getUser() {
+    public String getUser() {
         return user;
     }
 
-    String getPass() {
+    public String getPass() {
         if (pass == null)
             return "";
         System.out.println("777777777777777");
         return pass;
     }
 
-    Boolean getAdmin() {
+    public Boolean getAdmin() {
         return isAdmin;
     }
 
     //two sets of credentials are equal if they both have the same id
     @Override
     public boolean equals(Object obj) {
-        return ((CredentialStructure) obj).getId() == id;
+        return ((CredentialStructure) obj).getId().equals(id);
     }
 
     public boolean sameUser(CredentialStructure userTester) {
-        return (userTester.getId() == user);
+        return (userTester.getId().equals(user));
     }
 
     @Override

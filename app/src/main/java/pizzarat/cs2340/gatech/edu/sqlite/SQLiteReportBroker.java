@@ -118,19 +118,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     }
 
 
-    //return database in string
-    public String getDbContent(Context c) throws  Exception {
-        List<String> itemIds = new ArrayList<String>();
-        Cursor cursor = getCursor(c);
-        while(cursor.moveToNext()) {
-
-            String str = cursor.getString(0);
-            itemIds.add(str);
-        }
-        cursor.close();
-        return itemIds.toString();
-    }
-
     public boolean isEmpty(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();

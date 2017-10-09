@@ -34,7 +34,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
     private View userReportsButton;
     private View ratMapButton;
     private BackgroundDataTask bdTask = null;
-    private SQLiteReportBroker reportBroker;
+    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
 
     /**
      * Creates the SelectionScreenActivity
@@ -81,11 +81,11 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
-        reportBroker = new SQLiteReportBroker();
 
 
-        bdTask = new BackgroundDataTask();
-        bdTask.execute();
+
+        //bdTask = new BackgroundDataTask();
+        //bdTask.execute();
 //        String dbContent;
 //        try {
 //            dbContent = reportBroker.getDbContent(this.getApplicationContext());
@@ -93,6 +93,9 @@ public class SelectionScreenActivity extends AppCompatActivity {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+
+        addDummyToSQL();
+        Log.d("hidden",": " + reportBroker.isEmpty(this.getApplicationContext()));
 
     }
 
@@ -142,6 +145,19 @@ public class SelectionScreenActivity extends AppCompatActivity {
     // Make change later
     public void logout() {
        finish();
+    }
+
+
+    private void addDummyToSQL() {
+        ReportStructure rsrTest;
+        try {
+            rsrTest = new ReportStructure(12345, "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
+            Log.d("hidden",rsrTest.getBorough());
+            reportBroker.writeToReportDb(rsrTest, this.getBaseContext());
+            Log.d("hidden",rsrTest.getDate());
+        } catch (DuplicateReportDbException e) {
+            Log.d("hidden",e.getLocalizedMessage());
+        }
     }
 
     /**

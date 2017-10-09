@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
@@ -25,6 +27,9 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         // Gets the data repository in write mode
         SQLiteDatabase writableDb = ratDb.getWritableDatabase();
         ContentValues values = new ContentValues();
+
+        Log.d("hidden","" + rReport.getKey());
+
         //in X column, set X
         values.put(RatSightingDb.getReportTableKeyCol(), rReport.getKey());
         values.put(RatSightingDb.getReportTableLocationCol(), rReport.getLocation());
@@ -34,6 +39,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         values.put(RatSightingDb.getReportTableZipcodeCol(), rReport.getZipCode());
         values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
         values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
+
 
         // Insert the new row, returning the primary key value of the new row
         return writableDb.insert(RatSightingDb.getTableName(), null, values);
@@ -84,9 +90,33 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         }
         return aList;
     }
-    
+
     public ArrayList<ReportStructure> getListOfReports(Context c) {
         return reportArrayList(getCursor(c));
+    }
+
+
+    //return database in string
+    public String getDbContent(Context c) throws  Exception {
+        List<String> itemIds = new ArrayList<String>();
+        Cursor cursor = getCursor(c);
+        while(cursor.moveToNext()) {
+
+            String str = cursor.getString(0);
+            itemIds.add(str);
+        }
+        cursor.close();
+        return itemIds.toString();
+    }
+
+    public boolean isEmpty(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + rDb.getTableName();
+        Cursor mcursor = readableDb.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        return !(icount > 0);
     }
 
 }

@@ -7,6 +7,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
 
 /**
@@ -54,13 +56,13 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent startNewActivity = new Intent(this, LoginActivity.class);
                 startActivity(startNewActivity);
             } catch (Exception e){
-                ((EditText) userName).setError(getString(R.string.error_duplicate_user));
+                Toast.makeText(getBaseContext(), "Email is already taken", Toast.LENGTH_SHORT).show();
             }
 
         } else {
             ((EditText)userName).setText("", TextView.BufferType.EDITABLE);
             ((EditText)password).setText("", TextView.BufferType.EDITABLE);
-            ((EditText) userName).setError(getString(R.string.error_invalid_username));
+            Toast.makeText(getBaseContext(), "Invalid email and/or invalid password",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -74,6 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private boolean isValid(String userName, String password){
         //Make sure the String does not contain : or /, and that it isn't null.
-        return !(userName.contains(":") || userName.contains("/") || userName.length() == 0);
+        return !(userName.contains(":") || userName.contains("/") || userName.length() == 0)
+                && userName.contains("@")
+                && !password.isEmpty();
     }
 }

@@ -6,12 +6,12 @@ package pizzarat.cs2340.gatech.edu.structure;
  * a rat sighting report.
  */
 public class ReportStructure {
-    private int key;                    // Unique key assigned to each report
+    private String key;                    // Unique key assigned to each report
     private String location;            // Latitude and longitude of the sighting
     private String date;                // May need to change later
-    private int time;                   // May need to change later
+    private String time;                   // May need to change later
     private String address;             // The address of the sighting
-    private int zipCode;                // The zip code of the rat report
+    private String zipCode;                // The zip code of the rat report
     private String city;                // The city of rat report
     private String borough;            // The borough of the rat sighting;
 
@@ -26,8 +26,8 @@ public class ReportStructure {
      * @param city the city portion of the address of the sighting
      * @param borough the borough in New York where the sighting occurred
      */
-    public ReportStructure(int key, String location, String date, int time,
-                           String address, int zipCode, String city,
+    public ReportStructure(String key, String location, String date, String time,
+                           String address, String zipCode, String city,
                            String borough) {
         this.key = key;
         this.location = location;
@@ -43,7 +43,7 @@ public class ReportStructure {
      * Returns unique key of the rat sighting.
      * @return the unique key of the sighting
      */
-    public int getKey() {
+    public String getKey() {
         return key;
     }
 
@@ -51,7 +51,7 @@ public class ReportStructure {
      * Sets the specified key for this rat sighting.
      * @param key
      */
-    public void setKey(int key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
@@ -91,7 +91,7 @@ public class ReportStructure {
      * Gets the time of this rat sighting report.
      * @return the time of the rat report
      */
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -99,7 +99,7 @@ public class ReportStructure {
      * Sets the time of this rat report.
      * @param time the specified time of the report
      */
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -123,7 +123,7 @@ public class ReportStructure {
      * Gets the zip code of this rat report.
      * @return the zip code of the rat report
      */
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
@@ -131,7 +131,7 @@ public class ReportStructure {
      * Sets the zip code of the rat report to the specified zip code.
      * @param zipCode the specified zip code
      */
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

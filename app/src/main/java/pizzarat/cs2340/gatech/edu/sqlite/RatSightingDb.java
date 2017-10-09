@@ -12,7 +12,7 @@ class RatSightingDb extends SQLiteOpenHelper {
 
     static final int DATABASE_VERSION = 1;
     //name of database file
-    static final String DATABASE_NAME = "RatReport.db";
+    static final String DATABASE_NAME = "rat.db";
 
     RatSightingDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

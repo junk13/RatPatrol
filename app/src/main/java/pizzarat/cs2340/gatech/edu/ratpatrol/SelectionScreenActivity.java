@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -229,27 +230,25 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
 
-    public class BackgroundDataTask extends AsyncTask<Context, Void, Void> {
+    public class BackgroundDataTask extends AsyncTask<Context, Void, Boolean> {
 
         @Override
-        protected Void doInBackground(Context... contexts) {
+        protected Boolean doInBackground(Context... contexts) {
             readRatData();
-            return null;
+            return true;
         }
 
-//        @Override
-//        protected void onPostExecute(final Boolean success) {
-//            mAuthTask = null;
-//            showProgress(false);
-//
-//            if (success) {
-//                // Switch to the selection screen activity
-//                Intent switchToSelectionScreen = new Intent(LoginActivity.this, SelectionScreenActivity.class);
-//                LoginActivity.this.startActivity(switchToSelectionScreen);
-//            } else {
-//                Toast.makeText(getBaseContext(), "Invalid password", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+        protected void onPostExecute(final Boolean success) {
+            bdTask = null;
+            //showProgress(false);
+
+            if (success) {
+                Log.d("Cunt","hi");
+                Toast.makeText(getBaseContext(), "gud job", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getBaseContext(), "die", Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 

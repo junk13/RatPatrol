@@ -28,7 +28,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         SQLiteDatabase writableDb = ratDb.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        Log.d("hidden","" + rReport.getKey());
 
         //in X column, set X
         values.put(RatSightingDb.getReportTableKeyCol(), rReport.getKey());
@@ -113,7 +112,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         }
 
         cursor.close();
-        Log.d("Cunt", itemIds.toString());
         return itemIds.toString();
 
     }

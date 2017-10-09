@@ -2,15 +2,15 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,21 +48,11 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
     // TODO change to list of rat sighting objects
     private void setupList() {
         try {
-            posts = reportBroker.dummy();//getListOfReports(getApplicationContext());
+            posts = reportBroker.getListOfReports(this.getApplicationContext());//getListOfReports(getApplicationContext());
         } catch (Exception e){
-            for(int i = 1; i < 10; i++) {
-                posts.add(new ReportStructure(
-                        ""+i,       //key
-                        "Null Island",    //location
-                        "Today",    //date
-                        "0",       //time
-                        "Here",    //address
-                        "00000",       //zipcode
-                        "England",    //city
-                        "Mahatten"));   //borough)
-            }
+            Log.d("CUNT", "list of report problems");
         }
-        for(int i = 1; i < 10 && i < posts.size(); i++) {
+        for(int i = 0;  i < posts.size(); i++) {
             String newElement = posts.get(i).getLocation();
             listData.add(newElement);
         }
@@ -109,13 +99,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
                 // TODO change this to switch to the details screen
                 @Override
                 public void onClick(View view, int position, boolean isLongClick) {
-                /*
-                if(isLongClick) {
-                    Toast.makeText(context, "Long Click: " + listData.get(position), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, " " + listData.get(position), Toast.LENGTH_SHORT).show();
-                }
-                */
+
                     switchToReportDetails(position);
                 }
             });

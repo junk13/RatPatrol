@@ -45,9 +45,9 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
 
     // TODO change to list of rat sighting objects
     private void setupList() {
-        ArrayList<ReportStructure> rsList = reportBroker.getListOfReports(this.getApplicationContext());
+        //ArrayList<ReportStructure> rsList = reportBroker.getListOfReports(this.getApplicationContext());
 
-        for(int i = 1; i < 10; i++) {
+        for(int i = 0; i < 10; i++) {
             listData.add("Click me " +  i);
         }
     }

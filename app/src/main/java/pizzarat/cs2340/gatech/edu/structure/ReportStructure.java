@@ -13,7 +13,7 @@ public class ReportStructure {
     private String address;             // The address of the sighting
     private int zipCode;                // The zip code of the rat report
     private String city;                // The city of rat report
-    private Borough borough;            // The borough of the rat sighting;
+    private String borough;            // The borough of the rat sighting;
 
     /**
      * Creates the most specific rat sighting report by specifying all fields.
@@ -28,7 +28,7 @@ public class ReportStructure {
      */
     public ReportStructure(int key, String location, String date, int time,
                            String address, int zipCode, String city,
-                           Borough borough) {
+                           String borough) {
         this.key = key;
         this.location = location;
         this.date = date;
@@ -155,7 +155,7 @@ public class ReportStructure {
      * Gets the borough of the rat report
      * @return the borough of the rat report
      */
-    public Borough getBorough() {
+    public String getBorough() {
         return borough;
     }
 
@@ -163,7 +163,7 @@ public class ReportStructure {
      * Sets the borough of the rat report to the specified borough
      * @param borough the specified borough
      */
-    public void setBorough(Borough borough) {
+    public void setBorough(String borough) {
         this.borough = borough;
     }
 }

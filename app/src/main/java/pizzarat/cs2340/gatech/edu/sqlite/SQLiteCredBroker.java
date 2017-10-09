@@ -43,7 +43,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
      * getter for SQLite cursor
      * @return cursor for which to read database info from
      */
-    public Cursor getCursor(Context c) {
+     private Cursor getCursor(Context c) {
         CredentialDb cred = new CredentialDb(c);
         SQLiteDatabase sr = cred.getReadableDatabase();
 

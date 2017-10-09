@@ -84,7 +84,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         }
         return aList;
     }
-
+    
     public ArrayList<ReportStructure> getListOfReports(Context c) {
         return reportArrayList(getCursor(c));
     }

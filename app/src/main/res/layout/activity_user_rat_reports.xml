@@ -81,6 +81,46 @@
             android:hint="Zipcode; "
             android:inputType="text"
             android:text="ZipCode: "/>
+
+        <Button
+            android:id="@+id/cancelReportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:layout_marginStart="40dp"
+            android:text="Cancel"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/createZipcodeView"/>
+
+        <Button
+            android:id="@+id/createReportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="542dp"
+            android:layout_alignBaseline="@+id/cancelReportButton"
+            android:layout_alignBottom="@+id/cancelReportButton"
+            android:layout_alignStart="@+id/createZipcodeView"
+            android:layout_marginStart="34dp"/>
+
+        <Spinner
+            android:id="@+id/createBoroughSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/createZipcodeView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="82dp"/>
+
+        <EditText
+            android:id="@+id/createBoroughLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/createBoroughSpinner"
+            android:layout_alignEnd="@+id/createZipcodeView"
+            android:layout_marginBottom="22dp"
+            android:ems="10"
+            android:text="Borough:"/>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

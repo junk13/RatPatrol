@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 /**
- * Represents the screen of all the user's rat sighting reports.
+ * Represents the screen of to create a rat sighting report.
  */
 public class UserRatReportsActivity extends AppCompatActivity {
 

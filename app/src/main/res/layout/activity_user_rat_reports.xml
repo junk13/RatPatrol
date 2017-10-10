@@ -6,4 +6,81 @@
     android:layout_height="match_parent"
     tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.UserRatReportsActivity">
 
+    <RelativeLayout
+        android:layout_width="422dp"
+        android:layout_height="663dp"
+        tools:layout_editor_absoluteX="-6dp"
+        tools:layout_editor_absoluteY="-2dp">
+
+        <EditText
+            android:id="@+id/createTimeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/createDateView"
+            android:layout_marginStart="21dp"
+            android:ems="10"
+            android:hint="Time: "
+            android:inputType="time"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="76dp"/>
+
+        <EditText
+            android:id="@+id/createDateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/createTimeView"
+            android:layout_below="@+id/createKeyView"
+            android:ems="10"
+            android:hint="Date: "
+            android:inputType="date"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="127dp"/>
+
+        <EditText
+            android:id="@+id/createAddressView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/createTimeView"
+            android:layout_below="@+id/createDateView"
+            android:layout_marginTop="41dp"
+            android:ems="10"
+            android:hint="Address: "
+            android:inputType="textPostalAddress"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="177dp"/>
+
+        <EditText
+            android:id="@+id/createKeyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/createDateView"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="42dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="Unique Key: "/>
+
+        <EditText
+            android:id="@+id/createCityView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/createAddressView"
+            android:layout_below="@+id/createAddressView"
+            android:ems="10"
+            android:hint="City: "
+            android:inputType="textPostalAddress"/>
+
+        <EditText
+            android:id="@+id/createZipcodeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/createCityView"
+            android:layout_below="@+id/createCityView"
+            android:ems="10"
+            android:hint="Zipcode; "
+            android:inputType="text"
+            android:text="ZipCode: "/>
+    </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

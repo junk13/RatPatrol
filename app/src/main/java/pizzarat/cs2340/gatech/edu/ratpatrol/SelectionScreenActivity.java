@@ -63,7 +63,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // User Reports Activity
-        userReportsButton = findViewById(R.id.userReportsButton);
+        userReportsButton = findViewById(R.id.createReportButton);
         userReportsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

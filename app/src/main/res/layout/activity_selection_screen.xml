@@ -38,15 +38,15 @@
             android:layout_alignStart="@+id/ratArchiveButton" />
 
         <Button
-            android:id="@+id/userReportsButton"
+            android:id="@+id/createReportButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Reports"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="135dp"
-            android:layout_marginTop="28dp"
+            android:layout_alignStart="@+id/ratMapButton"
             android:layout_below="@+id/ratMapButton"
-            android:layout_alignStart="@+id/ratMapButton" />
+            android:layout_marginTop="28dp"
+            android:text="Create a Report"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="135dp"/>
 
         <Button
             android:id="@+id/logoutButton"
@@ -56,8 +56,8 @@
             android:text="Logout"
             tools:layout_editor_absoluteX="200dp"
             tools:layout_editor_absoluteY="200dp"
-            android:layout_below="@+id/userReportsButton"
-            android:layout_alignStart="@+id/userReportsButton" />
+            android:layout_below="@+id/createReportButton"
+            android:layout_alignStart="@+id/createReportButton" />
 
     </RelativeLayout>
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Represents the screen of to create a rat sighting report.
@@ -44,7 +45,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToSeletionScreenActivity();
+                switchToSelectionScreenActivity();
             }
         });
     }
@@ -54,7 +55,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
     /**
      * Switches back to the selection screen after submission/cancellation.
      */
-    public void switchToSeletionScreenActivity() {
+    public void switchToSelectionScreenActivity() {
         Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
         this.startActivity(switchToSelectionScreen);
     }

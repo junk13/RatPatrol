@@ -23,7 +23,7 @@
             android:layout_alignStart="@+id/addressTextView"
             android:layout_marginTop="31dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="none"
             android:text="Key: "/>
 
         <EditText
@@ -33,7 +33,7 @@
             android:layout_alignStart="@+id/keyTextView"
             android:layout_below="@+id/keyTextView"
             android:ems="10"
-            android:inputType="date"
+            android:inputType="none|date"
             android:text="Date:"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp"/>
@@ -45,7 +45,7 @@
             android:layout_alignStart="@+id/dateTextView"
             android:layout_below="@+id/dateTextView"
             android:ems="10"
-            android:inputType="time"
+            android:inputType="none|time"
             android:text="Time:"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="40dp"/>
@@ -58,7 +58,7 @@
             android:layout_below="@+id/timeTextView"
             android:layout_marginStart="39dp"
             android:ems="10"
-            android:inputType="textPostalAddress"
+            android:inputType="none|textPostalAddress"
             android:text="Address:"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="116dp"/>
@@ -70,7 +70,7 @@
             android:layout_alignStart="@+id/addressTextView"
             android:layout_below="@+id/addressTextView"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="none|textPersonName"
             android:text="City:"/>
 
         <EditText
@@ -80,7 +80,7 @@
             android:layout_alignStart="@+id/cityTextView"
             android:layout_below="@+id/cityTextView"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="none|textPersonName"
             android:text="Zipcode:"/>
 
         <EditText
@@ -90,7 +90,7 @@
             android:layout_alignStart="@+id/boroughTextView"
             android:layout_below="@+id/boroughTextView"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="none|textPersonName"
             android:text="Latitude and Longitude:"/>
 
         <EditText
@@ -100,7 +100,7 @@
             android:layout_alignStart="@+id/zipcodeTextView"
             android:layout_below="@+id/zipcodeTextView"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="none|textPersonName"
             android:text="Borough: "/>
 
     </RelativeLayout>

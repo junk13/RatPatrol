@@ -9,10 +9,12 @@
     tools:layout_editor_absoluteX="0dp">
 
     <RelativeLayout
-        android:layout_width="407dp"
-        android:layout_height="881dp"
-        tools:layout_editor_absoluteX="-22dp"
-        tools:layout_editor_absoluteY="-5dp">
+        android:layout_width="412dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="-1dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <Button
             android:id="@+id/ratArchiveButton"
@@ -38,15 +40,15 @@
             android:layout_alignStart="@+id/ratArchiveButton" />
 
         <Button
-            android:id="@+id/userReportsButton"
+            android:id="@+id/createReportButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Reports"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="135dp"
-            android:layout_marginTop="28dp"
+            android:layout_alignStart="@+id/ratMapButton"
             android:layout_below="@+id/ratMapButton"
-            android:layout_alignStart="@+id/ratMapButton" />
+            android:layout_marginTop="28dp"
+            android:text="Create a Report"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="135dp"/>
 
         <Button
             android:id="@+id/logoutButton"
@@ -56,8 +58,8 @@
             android:text="Logout"
             tools:layout_editor_absoluteX="200dp"
             tools:layout_editor_absoluteY="200dp"
-            android:layout_below="@+id/userReportsButton"
-            android:layout_alignStart="@+id/userReportsButton" />
+            android:layout_below="@+id/createReportButton"
+            android:layout_alignStart="@+id/createReportButton" />
 
     </RelativeLayout>
 

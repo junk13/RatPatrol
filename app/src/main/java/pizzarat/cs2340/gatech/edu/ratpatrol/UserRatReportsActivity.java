@@ -9,6 +9,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+
 /**
  * Represents the screen of to create a rat sighting report.
  */
@@ -23,7 +27,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
     private Spinner borough;
     private Button createButton;
     private Button cancelButton;
-
+    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,4 +63,30 @@ public class UserRatReportsActivity extends AppCompatActivity {
         Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
         this.startActivity(switchToSelectionScreen);
     }
+
+    /**
+     *      Attempt to add new data to the List and leave.
+     *
+     *      Failuire to add new data will result in no action
+     *      for the time being.
+     */
+    public void addReport(){
+        try {
+            // TODO check all fields are valid.
+            reportBroker.writeToReportDb(new ReportStructure(
+                    key.getText().toString(),
+                    location.getText().toString(),
+                    time.getText().toString(),
+                    date.getText().toString(),
+                    address.getText().toString(),
+                    zipcode.getText().toString(),
+                    city.getText().toString(),
+                    "Manhatten"), getApplicationContext()
+            );
+            switchToSelectionScreenActivity();
+        } catch(DuplicateReportDbException duplicate){
+            // TODO handle errors.
+        }
+    }
+
 }

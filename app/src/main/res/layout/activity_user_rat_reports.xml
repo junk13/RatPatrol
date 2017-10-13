@@ -101,6 +101,7 @@
             android:layout_alignStart="@+id/createZipcodeView"
             android:layout_marginStart="34dp"
             android:text="Create"
+            android:onClick="addReport"
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="542dp"/>
 
@@ -117,9 +118,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="Borough:"
-            android:layout_marginTop="66dp"
-            android:layout_below="@+id/createZipcodeView"
-            android:layout_alignStart="@+id/createLocationTextView"/>
+            android:layout_marginTop="23dp"
+            android:layout_below="@+id/createLocationTextView"
+            android:layout_alignStart="@+id/createLocationTextView" />
 
         <EditText
             android:id="@+id/createLocationTextView"

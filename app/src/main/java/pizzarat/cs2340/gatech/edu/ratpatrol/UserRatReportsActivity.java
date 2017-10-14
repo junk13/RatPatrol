@@ -74,7 +74,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
     public void addReport(View v){
         try {
             // TODO check all fields are valid.
-            ReportHolder.add(new ReportStructure(
+            ReportStructure newReport = new ReportStructure(
                     key.getText().toString(),
                     location.getText().toString(),
                     time.getText().toString(),
@@ -82,8 +82,8 @@ public class UserRatReportsActivity extends AppCompatActivity {
                     address.getText().toString(),
                     zipcode.getText().toString(),
                     city.getText().toString(),
-                    "Manhatten")
-            );
+                    "Manhatten");
+            ReportHolder.add(newReport);
             switchToSelectionScreenActivity();
         } catch(Exception e){
             key.setError("An unknown error occurred.");

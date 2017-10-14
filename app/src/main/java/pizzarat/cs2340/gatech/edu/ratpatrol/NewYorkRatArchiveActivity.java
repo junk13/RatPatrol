@@ -48,7 +48,8 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
     // TODO change to list of rat sighting objects
     private void setupList() {
         try {
-            posts = ReportHolder.getGlobalReports();
+            posts = new ArrayList<>();
+            posts.addAll(ReportHolder.getGlobalReports());
             posts.addAll( reportBroker.getListOfReports(this.getApplicationContext()));
             /** PREVIOUS CVS FILED CODE BELOW
             *   reportBroker.getListOfReports(this.getApplicationContext());
@@ -58,6 +59,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         }
         for(int i = 0;  i < posts.size(); i++) {
             String newElement = posts.get(i).getLocation();
+            Log.d("Element", newElement);
             listData.add(newElement);
         }
 //        for(int i = 0; i < listData.size(); i++) {

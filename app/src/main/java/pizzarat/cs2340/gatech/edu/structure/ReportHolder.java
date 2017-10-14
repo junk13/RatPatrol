@@ -1,5 +1,7 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
+import java.util.ArrayList;
+
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 
 /**
@@ -9,12 +11,22 @@ import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 public class ReportHolder {
     public static ReportStructure data;
     public static SQLiteReportBroker globalBroker = new SQLiteReportBroker();
+    public static ArrayList<ReportStructure> userReports = new ArrayList<>();
+
+    //TODO public void populate(){}
+
+    public static void add(ReportStructure report) {
+        userReports.add(report);
+    }
+
+    public static ArrayList<ReportStructure> getGlobalReports(){
+        return userReports;
+    }
+
+    //TODO public void remove(){}
+    //TODO public void clear(){}
 }
 
-//TODO public void populate(){}
-//TODO public void add(){}
-//TODO public void remove(){}
-//TODO public void clear(){}
 /**
  *      PLEASE READ ME
  *      ---------------

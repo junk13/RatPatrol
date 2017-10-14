@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 /**
@@ -70,10 +71,10 @@ public class UserRatReportsActivity extends AppCompatActivity {
      *      Failuire to add new data will result in no action
      *      for the time being.
      */
-    public void addReport(){
+    public void addReport(View v){
         try {
             // TODO check all fields are valid.
-            reportBroker.writeToReportDb(new ReportStructure(
+            ReportHolder.add(new ReportStructure(
                     key.getText().toString(),
                     location.getText().toString(),
                     time.getText().toString(),
@@ -81,11 +82,11 @@ public class UserRatReportsActivity extends AppCompatActivity {
                     address.getText().toString(),
                     zipcode.getText().toString(),
                     city.getText().toString(),
-                    "Manhatten"), getApplicationContext()
+                    "Manhatten")
             );
             switchToSelectionScreenActivity();
-        } catch(DuplicateReportDbException duplicate){
-            // TODO handle errors.
+        } catch(Exception e){
+            key.setError("An unknown error occurred.");
         }
     }
 

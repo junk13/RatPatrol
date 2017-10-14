@@ -49,6 +49,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
     private void setupList() {
         try {
             posts = ReportHolder.getGlobalReports();
+            posts.addAll( reportBroker.getListOfReports(this.getApplicationContext()));
             /** PREVIOUS CVS FILED CODE BELOW
             *   reportBroker.getListOfReports(this.getApplicationContext());
             */

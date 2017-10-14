@@ -9,6 +9,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
@@ -73,21 +76,39 @@ public class UserRatReportsActivity extends AppCompatActivity {
      */
     public void addReport(View v){
         try {
-            // TODO check all fields are valid.
-            ReportStructure newReport = new ReportStructure(
-                    key.getText().toString(),
-                    location.getText().toString(),
-                    time.getText().toString(),
-                    date.getText().toString(),
-                    address.getText().toString(),
-                    zipcode.getText().toString(),
-                    city.getText().toString(),
-                    "Manhatten");
-            ReportHolder.add(newReport);
-            switchToSelectionScreenActivity();
+            if (isValidZip(zipcode.getText().toString())) {
+                // TODO check all fields are valid.
+                ReportStructure newReport = new ReportStructure(
+                        key.getText().toString(),
+                        location.getText().toString(),
+                        time.getText().toString(),
+                        date.getText().toString(),
+                        address.getText().toString(),
+                        zipcode.getText().toString(),
+                        city.getText().toString(),
+                        "Manhatten");
+                ReportHolder.add(newReport);
+                switchToSelectionScreenActivity();
+            } else {
+                Toast.makeText(this.getApplicationContext(),"Invalid Date",Toast.LENGTH_SHORT);
+                throw new java.lang.Exception("REEEEEEEEEEEEEe");
+            }
         } catch(Exception e){
             key.setError("An unknown error occurred.");
         }
     }
 
+    private boolean isValidZip(String zip){
+        return zip.length() == 5;
+    }
+    private boolean isValidTime(String str){
+        String form = "\\b((1[0-2]|0?[1-9]):([0-5][0-9])([ap],[m]))";
+        //Pattern format = Pattern.compile("\\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp],[Mm]))");
+        if (str.matches(form)){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

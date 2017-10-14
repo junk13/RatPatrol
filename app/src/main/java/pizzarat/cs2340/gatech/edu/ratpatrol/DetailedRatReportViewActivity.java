@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
@@ -23,6 +24,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
     private TextView zipcode;
     private TextView borough;
     private TextView location;
+    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         location = (TextView) findViewById(R.id.locationTextView);
 
         ReportStructure report = ReportHolder.data;
-        key.setText("Key: " + report.getKey());
+        key.setText("Key: " + reportBroker.getMaxKey(getBaseContext()));
         date.setText("Date: " + report.getDate());
         time.setText("Time: " + report.getTime());
         address.setText(""+ report.getAddress());

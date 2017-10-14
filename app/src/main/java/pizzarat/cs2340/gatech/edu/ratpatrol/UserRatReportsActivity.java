@@ -35,6 +35,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_rat_reports);
 
         key = (TextView) findViewById(R.id.createKeyView);
+
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);
         address = (TextView) findViewById(R.id.createAddressView);

@@ -20,4 +20,5 @@
     <string name="logout">Logout</string>
     <string name="error_duplicate_user">Username taken</string>
     <string name="error_invalid_username">Only alpha-numeric characters allowed</string>
+    <string name="title_activity_rat_map">Map</string>
 </resources>

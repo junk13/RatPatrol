@@ -53,7 +53,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
     // TODO grab data, create report, save to DB, generate unique key
 
     /**
-     * Switches back to the selection screen after submission/cancellation.
+     *      Switches back to the selection screen after submission/cancellation.
      */
     public void switchToSelectionScreenActivity() {
         Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);

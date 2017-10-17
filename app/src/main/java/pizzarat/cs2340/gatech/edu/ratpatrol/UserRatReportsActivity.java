@@ -37,7 +37,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
         zipcode = (TextView) findViewById(R.id.createZipcodeView);
         location = (TextView) findViewById(R.id.createLocationTextView);
         // TODO populate spinner with proper borough strings
-        borough = (Spinner) findViewById(R.id.createBoroughSpinner);
+        //borough = (Spinner) findViewById(R.id.createBoroughSpinner);
 
         createButton = (Button) findViewById(R.id.createReportButton);
         cancelButton = (Button) findViewById(R.id.cancelReportButton);

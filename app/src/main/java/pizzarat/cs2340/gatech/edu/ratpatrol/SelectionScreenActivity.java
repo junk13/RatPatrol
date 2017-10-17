@@ -143,7 +143,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
      */
     // Make change later
     public void logout() {
-       finish();
+       switchBackToWelcomeActivity();
     }
 
 

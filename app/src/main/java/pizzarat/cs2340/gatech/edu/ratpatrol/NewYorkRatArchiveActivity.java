@@ -116,6 +116,9 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Custom class created for RecyclerView to show the all the rat reports.
+     */
     class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public TextView reportDescription;
 
@@ -130,6 +133,10 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
 
         }
 
+        /**
+         * Sets the listener for each data item in the Recycler View.
+         * @param itemClickListener
+         */
         public void setItemClickListener(ItemClickListener itemClickListener) {
             this.itemClickListener = itemClickListener;
         }

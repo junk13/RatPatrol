@@ -110,6 +110,8 @@ public class UserRatReportsActivity extends AppCompatActivity {
     private boolean isValidTime(String str){
         String form = "([0-2][0-9][:][0-5][0-9][ap][m])";
         return str.matches(form);
-
+        //TODO Not empty for feilds.
+        //TODO time format is 12 hour.
+        //TODO date format is xx/xx/xxxx
     }
 }

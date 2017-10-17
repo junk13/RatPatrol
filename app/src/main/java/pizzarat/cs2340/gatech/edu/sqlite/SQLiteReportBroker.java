@@ -78,6 +78,57 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     }
 
+
+    /**
+     * getter for SQLite cursor Report database
+     * @return cursor for which to read database info from
+     */
+    private Cursor getDateConstrainedCursor(String formattedBeforeDate, String formattedAfterDate, Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                RatSightingDb.getReportTableKeyCol() + " DESC";
+
+        return readableDb.query(
+                RatSightingDb.getTableName(),            // The table to query
+                null,                                   // The columns to return
+                "date > ? AND date < ?",                                   // The columns for the WHERE clause
+                new String[] {formattedBeforeDate, formattedAfterDate},                                   // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                sortOrder                               // The sort order
+        );
+
+    }
+
+    //returns arraylist of all rat reports
+    public ArrayList<ReportStructure> getDateConstrainedReports(String beforeDate, String afterDate, Context context) {
+        Cursor cursor = getDateConstrainedCursor(getDate(beforeDate),getDate(afterDate),context);
+        //ArrayList to return
+        ArrayList<ReportStructure> aList = new ArrayList<>();
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext()) {
+            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+            aList.add(new ReportStructure(
+                    cursor.getInt(0)+"",       //key
+                    cursor.getString(1),    //location
+                    cursor.getString(2),    //date
+                    cursor.getString(3),       //time
+                    cursor.getString(4),    //address
+                    cursor.getString(5),       //zipcode
+                    cursor.getString(6),    //city
+                    cursor.getString(7)     //borough
+
+            ));
+        }
+        cursor.close();
+        return aList;
+    }
+
+
     //returns arraylist of all rat reports
     public ArrayList<ReportStructure> reportArrayList(Context context) {
         Cursor cursor = getCursor(context);
@@ -101,6 +152,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         cursor.close();
         return aList;
     }
+
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
@@ -158,6 +210,21 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         Log.d("hidden",""+maxKey);
         Log.d("hidden","meow");
         return maxKey;
+    }
+
+
+    private String getDate(String s) {
+        String[] date = s.split("/");
+        return date[2] + "/" + date[1] + "/" + date[0];
+    }
+
+    private String getTime(String s) {
+        String[] time = s.split("[:/]+");
+        if (time[3].equals("PM"))
+        {
+            time[0] = ""+(Integer.parseInt(time[0])+12);
+        }
+        return time[1] + ":" + time[1];
     }
 
 }

@@ -222,11 +222,17 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     private String getDate(String dateAndTime) {
-        return dateAndTime.split(" ")[0];
+        String[] date = dateAndTime.split(" ")[0].split("/");
+        return date[2] + "/" + date[1] + "/" + date[0];
     }
 
     private String getTime(String dateAndTime) {
-        return dateAndTime.substring(dateAndTime.indexOf(" "));
+        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ")).split("[:/]+");
+        if (time[3].equals("PM"))
+        {
+            time[0] = ""+(Integer.parseInt(time[0])+12);
+        }
+        return time[1] + ":" + time[1];
     }
 
 

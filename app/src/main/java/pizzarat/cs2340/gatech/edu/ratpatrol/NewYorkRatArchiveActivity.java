@@ -61,6 +61,11 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
 //        }
     }
 
+    /**
+     * Switches from the list view of all the displayed rat reports to the
+     * detailed view of the single report when clicked on.
+     * @param report the specific report to display in detail.
+     */
     public void switchToReportDetails(int report) {
         Intent switchToDetailedReports = new Intent(this, DetailedRatReportViewActivity.class);
         //switchToDetailedReports.putExtra("Report","Dummy");

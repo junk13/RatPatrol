@@ -75,17 +75,17 @@ public class UserRatReportsActivity extends AppCompatActivity {
      *      Failuire to add new data will result in no action
      *      for the time being.
      */
-    public void addReport(View v){
+    public void addReport(View v) {
         try {
-//            if (!isValidZip(zipcode.getText().toString())) {
-//                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode", Toast.LENGTH_SHORT);
-//                toast.show();
+            if (!isValidZip(zipcode.getText().toString())) {
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode", Toast.LENGTH_SHORT);
+                toast.show();
                 //TODO fix the time validation code.
-//            } else if (!isValidTime(time.getText().toString())){
-//                Log.d("isvalid",time.getText().toString());
-//                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time", Toast.LENGTH_SHORT);
-//                toast.show();
-//            } else {
+            } else if (!isValidTime(time.getText().toString())) {
+                Log.d("isvalid", time.getText().toString());
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
                 // TODO check all fields are valid.
                 ReportStructure newReport = new ReportStructure(
                         key.getText().toString(),
@@ -98,17 +98,17 @@ public class UserRatReportsActivity extends AppCompatActivity {
                         "Manhatten");
                 ReportHolder.add(newReport);
                 switchToSelectionScreenActivity();
-            //}
-        } catch(Exception e){
+            }
+        } catch (Exception e){
             key.setError("An unknown error occurred.");
         }
-   }
+    }
 
     private boolean isValidZip(String zip){
         return zip.length() == 5;
     }
     private boolean isValidTime(String str){
-        String form = "((1[0-2]|0[1-9]):([0-5][0-9])([ap],[m]))";
+        String form = "([0-2][0-9][:][0-5][0-9][ap][m])";
         return str.matches(form);
 
     }

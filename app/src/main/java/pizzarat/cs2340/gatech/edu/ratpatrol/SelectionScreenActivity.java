@@ -34,6 +34,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
     private View ratMapButton;
     private BackgroundDataTask bdTask = null;
     private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    private boolean csvLoaded = false;
 
     /**
      * Creates the SelectionScreenActivity
@@ -58,7 +59,12 @@ public class SelectionScreenActivity extends AppCompatActivity {
         ratArchiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToNYRatArchiveActivity();
+                if (csvLoaded) {
+                    switchToNYRatArchiveActivity();
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Waiting for CSV data to load in!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -80,21 +86,16 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-        bdTask = new BackgroundDataTask();
-        bdTask.execute();
-//        String dbContent;
-//        try {
-//            dbContent = reportBroker.getDbContent(this.getApplicationContext());
-//            Log.d("hidden",dbContent);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        //addDummyToSQL();
-        //Log.d("Cunt",": " + reportBroker.isEmpty(this.getApplicationContext()));
+        Log.d("hidden",""+reportBroker.getMaxKey(getBaseContext()));
+        if (!reportBroker.isPopulated(this.getBaseContext())){
+            Log.d("hidden","it's not populated, boi");
+            bdTask = new BackgroundDataTask();
+            bdTask.execute();
+        }
+        else {
+            Log.d("hidden","it's populated, boi");
+            csvLoaded = true;
+        }
 
     }
 
@@ -169,16 +170,6 @@ public class SelectionScreenActivity extends AppCompatActivity {
         String line = "";
         String cvsSplitBy = ",";
         Log.d("hidden","in function...");
-
-        ReportStructure rsrTest;
-        try {
-            rsrTest = new ReportStructure("32", "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
-            reportBroker.writeToReportDb(rsrTest, this.getApplicationContext());
-            Log.d("hidden",rsrTest.getDate());
-        } catch (DuplicateReportDbException e) {
-            Log.d("hidden",e.getLocalizedMessage());
-        }
-
         try {
             Log.d("hidden","trying to read file...");
             inputStream = getResources().openRawResource(R.raw.ratsightings);
@@ -227,12 +218,12 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     private String getTime(String dateAndTime) {
-        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ")).split("[:/]+");
+        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ")+1).split(":| ");
         if (time[3].equals("PM"))
         {
             time[0] = ""+(Integer.parseInt(time[0])+12);
         }
-        return time[1] + ":" + time[1];
+        return time[0] + ":" + time[1] + ":" + time[2];
     }
 
 
@@ -249,10 +240,11 @@ public class SelectionScreenActivity extends AppCompatActivity {
             //showProgress(false);
 
             if (success) {
-                Log.d("Cunt","hi");
-                Toast.makeText(getBaseContext(), "gud job", Toast.LENGTH_SHORT).show();
+                Log.d("hidden","hi");
+                Toast.makeText(getBaseContext(), "You can now view and create rat reports", Toast.LENGTH_SHORT).show();
+                csvLoaded = true;
             } else {
-                Toast.makeText(getBaseContext(), "die", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "There was an error loading in the rat data!", Toast.LENGTH_SHORT).show();
             }
         }
 

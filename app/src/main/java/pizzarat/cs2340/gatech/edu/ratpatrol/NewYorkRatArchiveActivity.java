@@ -41,38 +41,29 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerAdapter adapter = new RecyclerAdapter(listData, this);
         recyclerView.setAdapter(adapter);
-        //reportBroker = new SQLiteReportBroker();
 
     }
 
     // TODO change to list of rat sighting objects
     private void setupList() {
+        Log.d("hidden","setupList()");
         try {
-            ArrayList<ReportStructure> posts = reportBroker.getDateConstrainedReports("10/22/2016","10/23/2016",getBaseContext());
-            //posts = new ArrayList<>();
-            //posts.addAll(ReportHolder.getGlobalReports());
-            //posts.addAll( reportBroker.getListOfReports(this.getApplicationContext()));
-            /** PREVIOUS CVS FILED CODE BELOW
-            *   reportBroker.getListOfReports(this.getApplicationContext());
-            */
+            //posts = reportBroker.getDateConstrainedReports("10/22/2016","10/23/2016",getBaseContext());
+            posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
+            //posts = reportBroker.reportArrayList(getBaseContext());
         } catch (Exception e){
-            Log.d("hidden", "list of report problems");
+            Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }
         for(int i = 0;  i < posts.size(); i++) {
             String newElement = posts.get(i).getLocation();
-            Log.d("Element", newElement);
+            Log.d("hidden", newElement);
             listData.add(newElement);
         }
-//        for(int i = 0; i < listData.size(); i++) {
-//            listData.add(strings.remove(0));
-//        }
     }
 
     public void switchToReportDetails(int report) {
         Intent switchToDetailedReports = new Intent(this, DetailedRatReportViewActivity.class);
-        //switchToDetailedReports.putExtra("Report","Dummy");
         ReportHolder.data = posts.get(report);
-        //switchToDetailedReports.putExtra("Report",posts.get(1));
         this.startActivity(switchToDetailedReports);
     }
 

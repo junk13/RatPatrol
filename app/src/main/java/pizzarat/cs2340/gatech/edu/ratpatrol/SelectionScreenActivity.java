@@ -141,7 +141,6 @@ public class SelectionScreenActivity extends AppCompatActivity {
     /**
      * Closes the SelectionScreenActivity thus "logging out" the user
      */
-    // Make change later
     public void logout() {
        switchBackToWelcomeActivity();
     }

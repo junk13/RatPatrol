@@ -9,6 +9,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+
 /**
  * Represents the screen of to create a rat sighting report.
  */
@@ -23,13 +28,14 @@ public class UserRatReportsActivity extends AppCompatActivity {
     private Spinner borough;
     private Button createButton;
     private Button cancelButton;
-
+    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_rat_reports);
 
         key = (TextView) findViewById(R.id.createKeyView);
+
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);
         address = (TextView) findViewById(R.id.createAddressView);
@@ -59,4 +65,30 @@ public class UserRatReportsActivity extends AppCompatActivity {
         Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
         this.startActivity(switchToSelectionScreen);
     }
+
+    /**
+     *      Attempt to add new data to the List and leave.
+     *
+     *      Failuire to add new data will result in no action
+     *      for the time being.
+     */
+    public void addReport(View v){
+        try {
+            // TODO check all fields are valid.
+            ReportStructure newReport = new ReportStructure(
+                    key.getText().toString(),
+                    location.getText().toString(),
+                    time.getText().toString(),
+                    date.getText().toString(),
+                    address.getText().toString(),
+                    zipcode.getText().toString(),
+                    city.getText().toString(),
+                    "Manhatten");
+            ReportHolder.add(newReport);
+            switchToSelectionScreenActivity();
+        } catch(Exception e){
+            key.setError("An unknown error occurred.");
+        }
+    }
+
 }

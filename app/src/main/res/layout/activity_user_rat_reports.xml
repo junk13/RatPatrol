@@ -58,8 +58,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="42dp"
             android:ems="10"
-            android:inputType="number"
-            android:text="Unique Key: "/>
+            android:hint="Key: "
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/createCityView"
@@ -78,9 +78,8 @@
             android:layout_alignStart="@+id/createCityView"
             android:layout_below="@+id/createCityView"
             android:ems="10"
-            android:hint="Zipcode; "
-            android:inputType="text"
-            android:text="ZipCode: "/>
+            android:hint="ZipCode: "
+            android:inputType="text" />
 
         <Button
             android:id="@+id/cancelReportButton"
@@ -101,25 +100,26 @@
             android:layout_alignStart="@+id/createZipcodeView"
             android:layout_marginStart="34dp"
             android:text="Create"
+            android:onClick="addReport"
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="542dp"/>
 
-        <Spinner
-            android:id="@+id/createBoroughSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/createBoroughLabel"/>
+        <!--<Spinner-->
+            <!--android:id="@+id/createBoroughSpinner"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_below="@+id/createBoroughLabel"/>-->
 
-        <EditText
-            android:id="@+id/createBoroughLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="Borough:"
-            android:layout_marginTop="66dp"
-            android:layout_below="@+id/createZipcodeView"
-            android:layout_alignStart="@+id/createLocationTextView"/>
+        <!--<EditText-->
+            <!--android:id="@+id/createBoroughLabel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@+id/createLocationTextView"-->
+            <!--android:layout_below="@+id/createLocationTextView"-->
+            <!--android:layout_marginTop="23dp"-->
+            <!--android:ems="10"-->
+            <!--android:hint="Borough:" />-->
 
         <EditText
             android:id="@+id/createLocationTextView"
@@ -128,8 +128,8 @@
             android:layout_alignStart="@+id/createZipcodeView"
             android:layout_below="@+id/createZipcodeView"
             android:ems="10"
-            android:inputType="textPostalAddress"
-            android:text="Location:"/>
+            android:hint="Location:"
+            android:inputType="textPostalAddress" />
 
     </RelativeLayout>
 

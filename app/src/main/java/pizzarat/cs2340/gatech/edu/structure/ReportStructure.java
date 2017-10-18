@@ -7,14 +7,15 @@ package pizzarat.cs2340.gatech.edu.structure;
  */
 public class ReportStructure {
     private String key;                    // Unique key assigned to each report
-    private String location;            // Latitude and longitude of the sighting
-    private String date;                // May need to change later
+    private String location;               // Building type of the sighting
+    private String date;                   // May need to change later
     private String time;                   // May need to change later
-    private String address;             // The address of the sighting
+    private String address;                // The address of the sighting
     private String zipCode;                // The zip code of the rat report
-    private String city;                // The city of rat report
-    private String borough;            // The borough of the rat sighting;
-
+    private String city;                   // The city of rat report
+    private String borough;                // The borough of the rat sighting;
+    private String latitude;               // The latitude of the sighting
+    private String longitude;              // The longitude of the sighting
     /**
      * Creates the most specific rat sighting report by specifying all fields.
      * @param key the unique key assigned to each report

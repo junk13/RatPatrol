@@ -29,7 +29,7 @@ public class ReportStructure {
      */
     public ReportStructure(String key, String location, String date, String time,
                            String address, String zipCode, String city,
-                           String borough) {
+                           String borough, String latitude, String longitude) {
         this.key = key;
         this.location = location;
         this.date = date;
@@ -38,6 +38,8 @@ public class ReportStructure {
         this.zipCode = zipCode;
         this.city = city;
         this.borough = borough;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
@@ -166,5 +168,37 @@ public class ReportStructure {
      */
     public void setBorough(String borough) {
         this.borough = borough;
+    }
+
+    /**
+     * Returns the latitude of this rat sighting
+     * @return the latitude of the sighting
+     */
+    public String getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * Sets the latitude of the rat report to the specified latitude
+     * @param latitude the specified latitude
+     */
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * Returns the longitude of this rat sighting
+     * @return the longitude of the sighting
+     */
+    public String getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * Sets the longitude of the rat report to the specified latitude
+     * @param longitude the specified latitude
+     */
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

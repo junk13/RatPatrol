@@ -15,8 +15,8 @@
         android:layout_marginStart="55dp"
         android:layout_marginTop="65dp"
         android:ems="10"
+        android:hint="Filter reports:"
         android:inputType="textPersonName"
-        android:text="Filter reports:"
         tools:layout_editor_absoluteX="64dp"
         tools:layout_editor_absoluteY="54dp"/>
 

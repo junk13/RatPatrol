@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
+import pizzarat.cs2340.gatech.edu.sqlite.FilterReportsActivity;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
@@ -136,6 +137,14 @@ public class SelectionScreenActivity extends AppCompatActivity {
     public void switchToRatMapActivity() {
         Intent switchToRatMapActivity = new Intent(this, RatMapActivity.class);
         this.startActivity(switchToRatMapActivity);
+    }
+
+    /**
+     * Switches to the FilterReportsActivity
+     */
+    public void switchToFilterReportsScreen() {
+        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+        this.startActivity(switchToFilterReportsActivity);
     }
 
     /**

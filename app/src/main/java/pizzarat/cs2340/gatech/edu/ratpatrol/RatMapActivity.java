@@ -1,8 +1,7 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,7 +44,7 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
 
         // TODO change this to display rat reports
         // Add a marker in Sydney and move the camera
-        LatLng newyork = new LatLng(41, 74);
+        LatLng newyork = new LatLng(41, -74);
         mMap.addMarker(new MarkerOptions().position(newyork).title("Temporary marker in New York"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(newyork));
     }

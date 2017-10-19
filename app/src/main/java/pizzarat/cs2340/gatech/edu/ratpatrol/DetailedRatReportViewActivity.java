@@ -57,7 +57,5 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         location.setText(""+report.getLocation());
         latitude.setText("Latitude: " + report.getLatitude());
         longitude.setText("Longitude: " + report.getLongitude());
-
-        // TODO: Set the text of the widgets to the selected Rat Report in NY Archive
     }
 }

@@ -45,8 +45,8 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
 
         // TODO change this to display rat reports
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng newyork = new LatLng(41, 74);
+        mMap.addMarker(new MarkerOptions().position(newyork).title("Temporary marker in New York"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(newyork));
     }
 }

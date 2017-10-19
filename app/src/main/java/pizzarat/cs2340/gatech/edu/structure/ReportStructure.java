@@ -201,4 +201,13 @@ public class ReportStructure {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
+    /**
+     * Returns a mini description of the rat report to be used to display
+     * information when the marker of this report is clicked in the Google Map.
+     * @return a mini description of this report
+     */
+    public String mapToString() {
+
+    }
 }

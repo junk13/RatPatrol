@@ -22,8 +22,12 @@
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/addressTextView"
             android:layout_marginTop="31dp"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none"
+            android:linksClickable="false"
             android:text="Key: "/>
 
         <EditText
@@ -32,8 +36,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/keyTextView"
             android:layout_below="@+id/keyTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none|date"
+            android:linksClickable="false"
             android:text="Date:"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp"/>
@@ -44,8 +52,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/dateTextView"
             android:layout_below="@+id/dateTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none|time"
+            android:linksClickable="false"
             android:text="Time:"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="40dp"/>
@@ -57,8 +69,12 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/timeTextView"
             android:layout_marginStart="39dp"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none|textPostalAddress"
+            android:linksClickable="false"
             android:text="Address:"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="116dp"/>
@@ -69,8 +85,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/addressTextView"
             android:layout_below="@+id/addressTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none|textPersonName"
+            android:linksClickable="false"
             android:text="City:"/>
 
         <EditText
@@ -79,8 +99,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/cityTextView"
             android:layout_below="@+id/cityTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none|textPersonName"
+            android:linksClickable="false"
             android:text="Zipcode:"/>
 
         <EditText
@@ -89,8 +113,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/boroughTextView"
             android:layout_below="@+id/boroughTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none|textPersonName"
+            android:linksClickable="false"
             android:text="Location:"/>
 
         <EditText
@@ -99,8 +127,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/zipcodeTextView"
             android:layout_below="@+id/zipcodeTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="none"
+            android:linksClickable="false"
             android:text="Borough: "/>
 
         <EditText
@@ -109,8 +141,12 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/locationTextView"
             android:layout_below="@+id/locationTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="text"
+            android:linksClickable="false"
             android:text="Latitude: "/>
 
         <EditText
@@ -119,8 +155,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/latitudeTextView"
             android:layout_below="@+id/latitudeTextView"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="text"
+            android:linksClickable="false"
             android:text="Longitude: "/>
 
     </RelativeLayout>

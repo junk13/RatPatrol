@@ -1,8 +1,8 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
@@ -55,7 +55,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         zipcode.setText("Zip: "+report.getZipCode());
         borough.setText(""+report.getBorough());
         location.setText(""+report.getLocation());
-        latitude.setText("Latitude: " + report.getLatitude());
-        longitude.setText("Longitude: " + report.getLongitude());
+        // latitude.setText("Latitude: " + report.getLatitude());
+        // longitude.setText("Longitude: " + report.getLongitude());
     }
 }

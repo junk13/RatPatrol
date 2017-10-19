@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.UserRatReportsActivity">
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.UserRatReportsActivity">
 
     <RelativeLayout
         android:layout_width="422dp"
@@ -57,9 +56,13 @@
             android:layout_alignEnd="@+id/createDateView"
             android:layout_alignParentTop="true"
             android:layout_marginTop="42dp"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:hint="Key: "
-            android:inputType="number" />
+            android:inputType="number"
+            android:linksClickable="false"/>
 
         <EditText
             android:id="@+id/createCityView"
@@ -79,7 +82,7 @@
             android:layout_below="@+id/createCityView"
             android:ems="10"
             android:hint="ZipCode: "
-            android:inputType="text" />
+            android:inputType="number"/>
 
         <Button
             android:id="@+id/cancelReportButton"
@@ -99,8 +102,8 @@
             android:layout_alignBottom="@+id/cancelReportButton"
             android:layout_alignStart="@+id/createZipcodeView"
             android:layout_marginStart="34dp"
-            android:text="Create"
             android:onClick="addReport"
+            android:text="Create"
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="542dp"/>
 

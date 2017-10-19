@@ -1,43 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.SelectionScreenActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
-
-    <RelativeLayout
-        android:layout_width="412dp"
-        android:layout_height="600dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="-1dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
 
         <Button
             android:id="@+id/ratArchiveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="21dp"
             android:text="Rat Report Archive"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="53dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="21dp" />
+            tools:layout_editor_absoluteY="53dp"/>
 
         <Button
             android:id="@+id/ratMapButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/ratArchiveButton"
+            android:layout_below="@+id/ratArchiveButton"
+            android:layout_marginTop="28dp"
             android:text="Rat Sighting Map"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="219dp"
-            android:layout_marginTop="28dp"
-            android:layout_below="@+id/ratArchiveButton"
-            android:layout_alignStart="@+id/ratArchiveButton" />
+            tools:layout_editor_absoluteY="219dp"/>
 
         <Button
             android:id="@+id/createReportButton"
@@ -54,13 +46,22 @@
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:layout_alignStart="@+id/createReportButton"
+            android:layout_below="@+id/createReportButton"
             android:layout_marginTop="226dp"
             android:text="Logout"
             tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="200dp"
-            android:layout_below="@+id/createReportButton"
-            android:layout_alignStart="@+id/createReportButton" />
+            tools:layout_editor_absoluteY="200dp"/>
 
-    </RelativeLayout>
+    <Button
+        android:id="@+id/filterScreenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/createReportButton"
+        android:layout_below="@+id/createReportButton"
+        android:layout_marginTop="26dp"
+        android:text="Filter Reports"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="243dp"/>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

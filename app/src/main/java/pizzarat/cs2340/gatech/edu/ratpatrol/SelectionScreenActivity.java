@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -29,10 +30,11 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  * @author Harrison Banh
  */
 public class SelectionScreenActivity extends AppCompatActivity {
-    private View logoutButton;
-    private View ratArchiveButton;
-    private View userReportsButton;
-    private View ratMapButton;
+    private Button logoutButton;
+    private Button ratArchiveButton;
+    private Button userReportsButton;
+    private Button ratMapButton;
+    private Button filterScreenButton;
     private BackgroundDataTask bdTask = null;
     private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
 
@@ -46,7 +48,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selection_screen);
 
         // Logout Function
-        logoutButton = findViewById(R.id.logoutButton);
+        logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +57,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // New York Rat Archive
-        ratArchiveButton = findViewById(R.id.ratArchiveButton);
+        ratArchiveButton = (Button) findViewById(R.id.ratArchiveButton);
         ratArchiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +66,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // User Reports Activity
-        userReportsButton = findViewById(R.id.createReportButton);
+        userReportsButton = (Button) findViewById(R.id.createReportButton);
         userReportsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +75,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // Rat Map Activity
-        ratMapButton = findViewById(R.id.ratMapButton);
+        ratMapButton = (Button) findViewById(R.id.ratMapButton);
         ratMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +83,14 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
-
+        // Filter Reports Activity
+        filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
+        filterScreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToFilterReportsScreen();
+            }
+        });
 
 
         bdTask = new BackgroundDataTask();

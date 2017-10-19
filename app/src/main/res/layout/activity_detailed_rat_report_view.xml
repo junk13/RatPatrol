@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.DetailedRatReportViewActivity">
-
-    <RelativeLayout
-        android:layout_width="412dp"
-        android:layout_height="600dp"
-        android:layout_marginLeft="-1dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/keyTextView"
@@ -21,14 +12,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/addressTextView"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="32dp"
             android:clickable="false"
             android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:inputType="none"
             android:linksClickable="false"
-            android:text="Key: "/>
+            android:text="@string/key_prompt"/>
 
         <EditText
             android:id="@+id/dateTextView"
@@ -42,7 +33,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none|date"
             android:linksClickable="false"
-            android:text="Date:"
+            android:text="@string/date_prompt"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp"/>
 
@@ -58,7 +49,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none|time"
             android:linksClickable="false"
-            android:text="Time:"
+            android:text="@string/time_prompt"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="40dp"/>
 
@@ -75,7 +66,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none|textPostalAddress"
             android:linksClickable="false"
-            android:text="Address:"
+            android:text="@string/address_prompt"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="116dp"/>
 
@@ -91,7 +82,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none|textPersonName"
             android:linksClickable="false"
-            android:text="City:"/>
+            android:text="@string/city_prompt"/>
 
         <EditText
             android:id="@+id/zipcodeTextView"
@@ -105,7 +96,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none|textPersonName"
             android:linksClickable="false"
-            android:text="Zipcode:"/>
+            android:text="@string/zipcode_prompt"/>
 
         <EditText
             android:id="@+id/locationTextView"
@@ -119,7 +110,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none|textPersonName"
             android:linksClickable="false"
-            android:text="Location:"/>
+            android:text="@string/location_prompt"/>
 
         <EditText
             android:id="@+id/boroughTextView"
@@ -133,7 +124,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none"
             android:linksClickable="false"
-            android:text="Borough: "/>
+            android:text="@string/borough_prompt"/>
 
         <EditText
             android:id="@+id/latitudeTextView"
@@ -147,7 +138,7 @@
             android:focusableInTouchMode="false"
             android:inputType="text"
             android:linksClickable="false"
-            android:text="Latitude: "/>
+            android:text="@string/latitude_prompt"/>
 
         <EditText
             android:id="@+id/longitudeTextView"
@@ -161,8 +152,7 @@
             android:focusableInTouchMode="false"
             android:inputType="text"
             android:linksClickable="false"
-            android:text="Longitude: "/>
+            android:text="@string/longitude_prompt"/>
 
-    </RelativeLayout>
+</RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>

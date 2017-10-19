@@ -21,7 +21,7 @@
     <string name="error_duplicate_user">Username taken</string>
     <string name="error_invalid_username">Only alpha-numeric characters allowed</string>
     <string name="title_activity_rat_map">Map</string>
-    <string name="key_prompt">Location: </string>
+    <string name="key_prompt">Key: </string>
     <string name="date_prompt">Date: </string>
     <string name="time_prompt">Time: </string>
     <string name="address_prompt">Address: </string>

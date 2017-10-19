@@ -21,4 +21,16 @@
     <string name="error_duplicate_user">Username taken</string>
     <string name="error_invalid_username">Only alpha-numeric characters allowed</string>
     <string name="title_activity_rat_map">Map</string>
+    <string name="key_prompt">Location: </string>
+    <string name="date_prompt">Date: </string>
+    <string name="time_prompt">Time: </string>
+    <string name="address_prompt">Address: </string>
+    <string name="city_prompt">City: </string>
+    <string name="zipcode_prompt">Zipcode: </string>
+    <string name="location_prompt">Location: </string>
+    <string name="borough_prompt">Borough: </string>
+    <string name="latitude_prompt">Latitude: </string>
+    <string name="longitude_prompt">Longitude: </string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
 </resources>

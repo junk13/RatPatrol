@@ -208,6 +208,9 @@ public class ReportStructure {
      * @return a mini description of this report
      */
     public String mapToString() {
-
+        return "Date: " + getDate() + "\n"
+                + "Time: " + getTime() + "\n"
+                + "Address: " + getAddress() + "\n"
+                + "Location: " + getLocation();
     }
 }

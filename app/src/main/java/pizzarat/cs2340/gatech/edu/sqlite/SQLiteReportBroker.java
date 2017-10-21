@@ -78,6 +78,142 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     }
 
+
+    /**
+     * getter for SQLite cursor Report database
+     * @return cursor for which to read database info from
+     */
+    private Cursor getDateConstrainedCursor(String formattedBeforeDate, String formattedAfterDate, Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                RatSightingDb.getReportTableKeyCol() + " DESC";
+
+        return readableDb.query(
+                RatSightingDb.getTableName(),            // The table to query
+                null,                                   // The columns to return
+                "date BETWEEN ? AND ?",                                   // The columns for the WHERE clause
+                new String[] {formattedBeforeDate, formattedAfterDate},                                   // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                sortOrder                               // The sort order
+        );
+
+    }
+
+
+    /**
+     * getter for SQLite cursor Report database
+     * @return cursor for which to read database info from
+     */
+    private Cursor getSubstringReportsCursor(String keystring, Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                RatSightingDb.getReportTableKeyCol() + " DESC";
+
+        return readableDb.query(
+                RatSightingDb.getTableName(),            // The table to query
+                null,                                   // The columns to return
+                RatSightingDb.getReportTableLocationCol() + " LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
+                null,                                   // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                sortOrder                               // The sort order
+        );
+
+    }
+
+    //returns arraylist of all rat reports
+    public ArrayList<ReportStructure> getDateConstrainedReports(String beforeDate, String afterDate, Context context) {
+        Cursor cursor = getDateConstrainedCursor(getDate(beforeDate),getDate(afterDate),context);
+        //ArrayList to return
+        ArrayList<ReportStructure> aList = new ArrayList<>();
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext()) {
+            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+            aList.add(new ReportStructure(
+                    cursor.getInt(0)+"",       //key
+                    cursor.getString(1),    //location
+                    cursor.getString(2),    //date
+                    cursor.getString(3),       //time
+                    cursor.getString(4),    //address
+                    cursor.getString(5),       //zipcode
+                    cursor.getString(6),    //city
+                    cursor.getString(7)     //borough
+
+            ));
+        }
+        cursor.close();
+        return aList;
+    }
+
+    //returns arraylist of all rat reports
+    public ArrayList<ReportStructure> getReportsWithSubstring(String keystring, Context context) {
+        Cursor cursor = getSubstringReportsCursor(keystring, context);
+        //ArrayList to return
+        ArrayList<ReportStructure> aList = new ArrayList<>();
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext()) {
+            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+            aList.add(new ReportStructure(
+                    cursor.getInt(0)+"",       //key
+                    cursor.getString(1),    //location
+                    cursor.getString(2),    //date
+                    cursor.getString(3),       //time
+                    cursor.getString(4),    //address
+                    cursor.getString(5),       //zipcode
+                    cursor.getString(6),    //city
+                    cursor.getString(7)     //borough
+
+            ));
+        }
+        cursor.close();
+        Log.d("hidden",aList.toString());
+        Log.d("hidden","aList.size() = " + aList.size());
+        return aList;
+    }
+
+    //TODO
+    //returns arraylist of all rat reports
+    public ArrayList<ReportStructure> getReportsWithSubstringSpecified(String keystring, Context context) {
+        String[] sl = keystring.split(":"); //{column to search, substring}
+        //if sl[0] not a valid column, do location search on sl[1] (or search whole thing, get 0 results)
+        //else, search in that specific column
+
+
+        //TODO: combine methods
+        //Cursor cursor = getSubstringReportsCursor(sl[0],sl[1], context);
+        Cursor cursor = getSubstringReportsCursor(keystring, context);
+        //ArrayList to return
+        ArrayList<ReportStructure> aList = new ArrayList<>();
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext()) {
+            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+            aList.add(new ReportStructure(
+                    cursor.getInt(0)+"",       //key
+                    cursor.getString(1),    //location
+                    cursor.getString(2),    //date
+                    cursor.getString(3),       //time
+                    cursor.getString(4),    //address
+                    cursor.getString(5),       //zipcode
+                    cursor.getString(6),    //city
+                    cursor.getString(7)     //borough
+
+            ));
+        }
+        cursor.close();
+        Log.d("hidden",aList.toString());
+        Log.d("hidden","aList.size() = " + aList.size());
+        return aList;
+    }
+
     //returns arraylist of all rat reports
     public ArrayList<ReportStructure> reportArrayList(Context context) {
         Cursor cursor = getCursor(context);
@@ -99,8 +235,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
             ));
         }
         cursor.close();
+        Log.d("hidden",aList.toString());
+        Log.d("hidden","aList.size() = " + aList.size());
         return aList;
     }
+
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
@@ -144,10 +283,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return dummies;
     }
 
-    public ArrayList<ReportStructure> getListOfReports(Context c) {
-        return reportArrayList(c);
-    }
-
     public int getMaxKey(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
@@ -159,5 +294,22 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         Log.d("hidden","meow");
         return maxKey;
     }
+
+    public boolean isPopulated(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + rDb.getTableName();
+        Cursor mcursor = readableDb.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        return (icount >= 12219);
+    }
+
+    //TODO: Move to utility class
+    private String getDate(String s) {
+        String[] date = s.split("/");
+        return date[2] + "/" + date[1] + "/" + date[0];
+    }
+
 
 }

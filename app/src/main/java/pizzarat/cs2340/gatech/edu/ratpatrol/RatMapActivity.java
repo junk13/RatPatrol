@@ -48,4 +48,5 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
         mMap.addMarker(new MarkerOptions().position(newyork).title("Temporary marker in New York"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(newyork));
     }
+
 }

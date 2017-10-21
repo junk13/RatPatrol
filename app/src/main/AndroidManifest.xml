@@ -57,7 +57,7 @@
             android:name=".RatMapActivity"
             android:label="@string/title_activity_rat_map">
         </activity>
-        <activity android:name="pizzarat.cs2340.gatech.edu.sqlite.FilterReportsActivity">
+        <activity android:name=".FilterReportsActivity">
         </activity>
     </application>
 

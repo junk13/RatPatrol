@@ -1,16 +1,14 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
-import android.app.LoaderManager;
-import android.content.Intent; //added
-import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View; //added
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 /**
- * A class representing the Welcome screen in the Rat Patrol app.
+ * A class representing the WelcomeActivity screen in the Rat Patrol app.
  */
-public class Welcome extends AppCompatActivity{
+public class WelcomeActivity extends AppCompatActivity {
 
     /**
      * Creates the welcome activity on startup

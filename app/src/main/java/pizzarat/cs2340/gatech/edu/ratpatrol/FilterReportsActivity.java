@@ -1,11 +1,26 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import pizzarat.cs2340.gatech.edu.structure.DateRangeStruct;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * @author Harrison Banh
@@ -13,16 +28,26 @@ import android.widget.TextView;
  *         in the rat archive and rat map by specifying a String parameter.
  */
 public class FilterReportsActivity extends AppCompatActivity {
-    private TextView filterTextView;
+    private TextView beforeDateTextView;
+    private TextView afterDateTextView;
     private Button filterButton;
     private Button cancelFilterButton;
+    private View calendar;
+    private DatePicker datePicker;
+    private TextView dateView;
+    private int year, month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_reports);
 
-        filterTextView = (TextView) findViewById(R.id.filterTextView);
+        year = 2017;
+        month = 10;
+        day = 10;
+
+        beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
+        afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
         filterButton = (Button) findViewById(R.id.filterReportsButton);
         cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
 
@@ -30,7 +55,14 @@ public class FilterReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO grab text from TextView and filter reports
-                String filter = (String) filterTextView.getText();
+                try {
+                    String beforeDate = (beforeDateTextView.getText().toString());
+                    String afterDate = (afterDateTextView.getText().toString());
+                    Log.d("hidden",beforeDate + " | " + afterDate);
+                    StaticHolder.dateRange = new DateRangeStruct(beforeDate, afterDate);
+                } catch (Exception e) {
+                    Log.d("hidden",e.getLocalizedMessage());
+                }
                 switchBackToSelectionScreen();
             }
         });
@@ -39,10 +71,18 @@ public class FilterReportsActivity extends AppCompatActivity {
         cancelFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterTextView.setText("");
+                beforeDateTextView.setText("");
+                afterDateTextView.setText("");
                 switchBackToSelectionScreen();
             }
         });
+}
+
+
+
+    private String getDate(String dateAndTime) {
+        String[] date = dateAndTime.split(" ")[0].split("/");
+        return date[2] + "/" + date[1] + "/" + date[0];
     }
 
     /**

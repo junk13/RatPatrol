@@ -20,14 +20,14 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
- * Represents the screen that displays all the rat sightings in New York.
+ * Represents the screen that displays all the rat sightings in the database.
  */
-public class NewYorkRatArchiveActivity extends AppCompatActivity {
+public class RatArchiveActivity extends AppCompatActivity {
+    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    ArrayList<ReportStructure> posts = new ArrayList<>();
     // TODO change list to Rat Sightings
     private RecyclerView.LayoutManager layoutManager;
     private List<String> listData = new ArrayList<>();
-    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
-    ArrayList<ReportStructure> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +49,13 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         Log.d("hidden","setupList()");
         try {
             //posts = reportBroker.getDateConstrainedReports("10/22/2016","10/23/2016",getBaseContext());
-            posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
-            //posts = reportBroker.reportArrayList(getBaseContext());
+            //posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
+            posts = reportBroker.reportArrayList(getBaseContext());
         } catch (Exception e){
             Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }
         for(int i = 0;  i < posts.size(); i++) {
-            String newElement = posts.get(i).getLocation();
+            String newElement = posts.get(i).getBuildingType();
             listData.add(newElement);
         }
     }

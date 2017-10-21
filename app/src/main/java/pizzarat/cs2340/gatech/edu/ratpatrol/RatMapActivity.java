@@ -2,6 +2,7 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -9,6 +10,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 /**
  * Represents the screen where the user can pick different fields about a rat
@@ -41,12 +47,36 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        SQLiteReportBroker report = new SQLiteReportBroker();
+        //create array list from reports within the static date range in StaticHelper.
+        ArrayList<ReportStructure> reportArray = report.getDateConstrainedReports(getBaseContext());
+        populateFromFilter(reportArray);
 
-        // TODO change this to display rat reports
-        // Add a marker in Sydney and move the camera
-        LatLng newyork = new LatLng(41, -74);
-        mMap.addMarker(new MarkerOptions().position(newyork).title("Temporary marker in New York"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(newyork));
+    }
+
+    /**
+     * private helper to populate the map
+     *
+     * @param reports : a list of all reports to add to the map
+     */
+    //TODO: use appropiate values latlong.
+    private void populateFromFilter(ArrayList<ReportStructure> reports) {
+        for (ReportStructure report : reports) {
+            Double latitude = 0.;
+            Double longitude = 0.;
+            try {
+                latitude = Double.parseDouble(report.getLatitude());
+                longitude = Double.parseDouble(report.getLongitude());
+            } catch (Exception e)
+            {
+                Log.d("hidden",e.getLocalizedMessage());
+            }
+            LatLng coords = new LatLng(latitude, longitude);
+            mMap.addMarker(new MarkerOptions().position(coords)
+                    .title("Key: " + report.getKey()).snippet(report.mapToString()));
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(41, -74)));
     }
 
 }

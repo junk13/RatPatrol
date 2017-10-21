@@ -2,6 +2,8 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
@@ -29,11 +32,6 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  * @author Harrison Banh
  */
 public class SelectionScreenActivity extends AppCompatActivity {
-    private Button logoutButton;
-    private Button ratArchiveButton;
-    private Button userReportsButton;
-    private Button ratMapButton;
-    private Button filterScreenButton;
     private BackgroundDataTask bdTask = null;
     private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private boolean csvLoaded = false;
@@ -47,8 +45,8 @@ public class SelectionScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_screen);
 
-        // Logout Function
-        logoutButton = (Button) findViewById(R.id.logoutButton);
+        // Set logout button function
+        Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +54,8 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
-        // New York Rat Archive
-        ratArchiveButton = (Button) findViewById(R.id.ratArchiveButton);
+        // Set Rat Archive button function
+        Button ratArchiveButton = (Button) findViewById(R.id.ratArchiveButton);
         ratArchiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,21 +68,31 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
-        // User Reports Activity
-        userReportsButton = (Button) findViewById(R.id.createReportButton);
-        userReportsButton.setOnClickListener(new View.OnClickListener() {
+        // Sets create a report button function
+        Button createReport = (Button) findViewById(R.id.createReportButton);
+        createReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToUserRatReportsActivity();
             }
         });
 
-        // Rat Map Activity
-        ratMapButton = (Button) findViewById(R.id.ratMapButton);
+        // Sets the Rat Map button function
+        Button ratMapButton = (Button) findViewById(R.id.ratMapButton);
         ratMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToRatMapActivity();
+            }
+        });
+
+        // Sets the Filter reports button function
+        Button filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
+        filterScreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //switch to Filter Reports Activity
+                switchToFilterReportsScreen();
             }
         });
 
@@ -99,47 +107,29 @@ public class SelectionScreenActivity extends AppCompatActivity {
             Log.d("hidden","it's populated, boi");
             csvLoaded = true;
         }
-        //Filter reports button
-        filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
-        filterScreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //switch to Filter Reports Activity
-                switchToFilterReportsScreen();
-            }
-        });
-
-    }
-
-    /**
-     * Switches to the LoginActivity from the SelectionScreenActivity.
-     */
-    public void switchBackToLoginActivity() {
-        Intent startSelectionScreenActivity = new Intent(SelectionScreenActivity.this, LoginActivity.class);
-        SelectionScreenActivity.this.startActivity(startSelectionScreenActivity);
     }
 
     /**
      * Switches to the WelcomeActivity from the SelectionScreenActivity.
      */
     public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(SelectionScreenActivity.this, Welcome.class);
+        Intent switchToWelcomeActivity = new Intent(SelectionScreenActivity.this, WelcomeActivity.class);
         SelectionScreenActivity.this.startActivity(switchToWelcomeActivity);
     }
 
     /**
-     * Switches to the NewYorkRatArchiveActivity from the SelectionScreenActivity.
+     * Switches to the RatArchiveActivity from the SelectionScreenActivity.
      */
     public void switchToNYRatArchiveActivity() {
-        Intent switchToNYRatArchiveActivity = new Intent(this, NewYorkRatArchiveActivity.class);
+        Intent switchToNYRatArchiveActivity = new Intent(this, RatArchiveActivity.class);
         this.startActivity(switchToNYRatArchiveActivity);
     }
 
     /**
-     * Switches to the UserRatReportsActivity.
+     * Switches to the CreateRatReportActivity.
      */
     public void switchToUserRatReportsActivity() {
-        Intent switchToUserRatReportsActivity = new Intent(this, UserRatReportsActivity.class);
+        Intent switchToUserRatReportsActivity = new Intent(this, CreateRatReportActivity.class);
         this.startActivity(switchToUserRatReportsActivity);
     }
 
@@ -166,19 +156,6 @@ public class SelectionScreenActivity extends AppCompatActivity {
        switchBackToWelcomeActivity();
     }
 
-
-    private void addDummyToSQL() {
-        ReportStructure rsrTest;
-        try {
-            rsrTest = new ReportStructure("432", "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
-            Log.d("hidden",rsrTest.getBorough());
-            reportBroker.writeToReportDb(rsrTest, this.getBaseContext());
-            Log.d("hidden",rsrTest.getDate());
-        } catch (DuplicateReportDbException e) {
-            Log.d("hidden",e.getLocalizedMessage());
-        }
-    }
-
     /**
      * Read in offline rat data from csv
      */
@@ -194,19 +171,41 @@ public class SelectionScreenActivity extends AppCompatActivity {
             inputStream = getResources().openRawResource(R.raw.ratsightings);
             br = new BufferedReader(new InputStreamReader(inputStream));
             line = br.readLine();
+            Geocoder geocoder = new Geocoder(getBaseContext());
+            List<Address> addresses = null;
             while ((line = br.readLine()) != null) {
+
                 // use comma as separator
                 String[] ratSighting = line.split(cvsSplitBy);
 
                 String key = ratSighting[0];
-                String location = ratSighting[7];
+                String buildingType = ratSighting[7];
                 String date = getDate(ratSighting[1]);
                 String time = getTime(ratSighting[1]);
                 String address = ratSighting[9];
                 String zip = ratSighting[8];
                 String city = ratSighting[16];
                 String borough = ratSighting[23];
-                ReportStructure rsr = new ReportStructure(key,location,date,time,address,zip,city,borough);
+                String latitude = "";
+                String longitude = "";
+                try {
+                    latitude = ratSighting[49];
+                    longitude = ratSighting[50];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Log.d("Cunt", "caught array index out of bounds");
+                }
+                if (latitude.isEmpty() || longitude.isEmpty()) {
+                    try {
+                        addresses = geocoder.getFromLocationName(address + " " + zip + " " + city + " " + borough, 1);
+                        latitude = Double.toString(addresses.get(0).getLatitude());
+                        longitude = Double.toString(addresses.get(0).getLongitude());
+                    } catch (Exception e) {
+                        Log.d("Cunt", "caught location error");
+                    }
+
+                }
+                ReportStructure rsr = new ReportStructure(key, buildingType, date,
+                        time, address, zip, city, borough, latitude, longitude);
 
                 reportBroker.writeToReportDb(rsr,this.getApplicationContext());
             }

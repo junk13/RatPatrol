@@ -8,6 +8,22 @@ package pizzarat.cs2340.gatech.edu.sqlite;
 class RatSightingDbContract {
 
 
+    //helpful php
+    static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + ContractEntry.TABLE_NAME + " (" +
+                    ContractEntry.REPORT_TABLE_KEY + " INTEGER PRIMARY KEY," +
+                    ContractEntry.REPORT_TABLE_LOCATION + " TEXT," +
+                    ContractEntry.REPORT_TABLE_DATE + " TEXT," +
+                    ContractEntry.REPORT_TABLE_TIME + " TEXT," +
+                    ContractEntry.REPORT_TABLE_ADDRESS + " TEXT," +
+                    ContractEntry.REPORT_TABLE_ZIPCODE + " TEXT," +
+                    ContractEntry.REPORT_TABLE_CITY + " TEXT," +
+                    ContractEntry.REPORT_TABLE_BOROUGH + " TEXT," +
+                    ContractEntry.REPORT_TABLE_LAT + " TEXT," +
+                    ContractEntry.REPORT_TABLE_LON + " TEXT)";
+    static final String SQL_DELETE_ENTRIES =
+            "DROP TABLE IF EXISTS " + ContractEntry.TABLE_NAME;
+
     private RatSightingDbContract() {
     }
 
@@ -26,24 +42,11 @@ class RatSightingDbContract {
         static final String REPORT_TABLE_ZIPCODE = "zipcode";
         static final String REPORT_TABLE_CITY = "city";
         static final String REPORT_TABLE_BOROUGH = "borough";
+        static final String REPORT_TABLE_LAT = "latitude";
+        static final String REPORT_TABLE_LON = "longitude";
 
 
     }
-
-    //helpful php
-    static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + ContractEntry.TABLE_NAME + " (" +
-                    ContractEntry.REPORT_TABLE_KEY + " INTEGER PRIMARY KEY," +
-                    ContractEntry.REPORT_TABLE_LOCATION + " TEXT," +
-                    ContractEntry.REPORT_TABLE_DATE + " TEXT," +
-                    ContractEntry.REPORT_TABLE_TIME + " TEXT," +
-                    ContractEntry.REPORT_TABLE_ADDRESS + " TEXT," +
-                    ContractEntry.REPORT_TABLE_ZIPCODE + " TEXT," +
-                    ContractEntry.REPORT_TABLE_CITY + " TEXT," +
-                    ContractEntry.REPORT_TABLE_BOROUGH + " TEXT)";
-
-    static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + ContractEntry.TABLE_NAME;
 
 }
 

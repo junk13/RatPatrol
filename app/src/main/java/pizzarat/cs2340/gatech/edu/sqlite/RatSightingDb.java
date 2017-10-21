@@ -18,18 +18,6 @@ class RatSightingDb extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(RatSightingDbContract.SQL_CREATE_ENTRIES);
-    }
-
-    //clear and regenerate the database
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(RatSightingDbContract.SQL_DELETE_ENTRIES);
-        onCreate(db);
-    }
-
     static String getTableName() {
         return RatSightingDbContract.ContractEntry.TABLE_NAME;
     }
@@ -66,7 +54,29 @@ class RatSightingDb extends SQLiteOpenHelper {
         return RatSightingDbContract.ContractEntry.REPORT_TABLE_BOROUGH;
     }
 
+    static String getReportTableLatitudeCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_LAT;
+    }
+
+    static String getReportTableLongitudeCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_LON;
+    }
+
     static void purgeCredDb(SQLiteDatabase db) {
         db.execSQL(RatSightingDbContract.SQL_DELETE_ENTRIES);
     }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(RatSightingDbContract.SQL_CREATE_ENTRIES);
+    }
+
+    //clear and regenerate the database
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(RatSightingDbContract.SQL_DELETE_ENTRIES);
+        onCreate(db);
+    }
+
+
 }

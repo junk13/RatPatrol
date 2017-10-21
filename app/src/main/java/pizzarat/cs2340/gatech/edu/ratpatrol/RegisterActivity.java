@@ -1,11 +1,11 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +15,6 @@ import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
  * This class represents the Registration Screen for the Rat Patrol app.
  */
 public class RegisterActivity extends AppCompatActivity {
-
 
     private View userName;
     private View password;
@@ -43,12 +42,11 @@ public class RegisterActivity extends AppCompatActivity {
      * @param v view object
      */
     public void register(View v){
-
         String user = ((EditText)userName).getText().toString();
         String pass = ((EditText)password).getText().toString();
         boolean adm = ((CheckBox)admin).isChecked();
-        System.out.println();
         ((EditText) userName).setError(null);
+
         if (isValid(user,pass)){
             try {
                 broker.writeToCredDb(user, pass, adm, getApplicationContext());
@@ -67,8 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     *      This method will check for invalid strings to make sure no
-     *      funny buisness is going down.
+     * Determines if the user's specified username and email are valid
      *
      * @param userName: the userName input in the textField.
      * @param password: the password input in the textField.

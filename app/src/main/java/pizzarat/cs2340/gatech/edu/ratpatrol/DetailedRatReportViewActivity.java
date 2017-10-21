@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
@@ -25,7 +24,6 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
     private TextView location;
     private TextView latitude;
     private TextView longitude;
-    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +44,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         latitude = (TextView) findViewById(R.id.latitudeTextView);
         longitude = (TextView) findViewById(R.id.longitudeTextView);
 
+        // Grabbing the specified report and filling the widgets with its information
         ReportStructure report = StaticHolder.data;
         key.setText("Key: " + report.getKey());
         date.setText("Date: " + report.getDate());

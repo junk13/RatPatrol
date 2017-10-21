@@ -12,6 +12,7 @@ import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 
 /**
@@ -126,8 +127,10 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     }
 
     //returns arraylist of all rat reports
-    public ArrayList<ReportStructure> getDateConstrainedReports(String beforeDate, String afterDate, Context context) {
-        Cursor cursor = getDateConstrainedCursor(getDate(beforeDate),getDate(afterDate),context);
+    public ArrayList<ReportStructure> getDateConstrainedReports(Context context) {
+        String from = StaticHolder.dateRange.getFrom();
+        String to = StaticHolder.dateRange.getTo();
+        Cursor cursor = getDateConstrainedCursor(getDate(from), getDate(to), context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
         populateList(cursor, aList);

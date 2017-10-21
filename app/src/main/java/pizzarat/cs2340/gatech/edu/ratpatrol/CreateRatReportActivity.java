@@ -31,12 +31,15 @@ public class CreateRatReportActivity extends AppCompatActivity {
     private Button createButton;
     private Button cancelButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_rat_reports);
 
         key = (TextView) findViewById(R.id.createKeyView);
+        // Generate and set the unique key
+        key.setText(Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1));
 
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);

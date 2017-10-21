@@ -19,6 +19,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pizzarat.cs2340.gatech.edu.structure.DateRangeStruct;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
+
 /**
  * @author Harrison Banh
  *         This class is a simple acitivity to allow the user to filter the rat reports
@@ -50,7 +53,8 @@ public class FilterReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO grab text from TextView and filter reports
-                String filter = (String) filterTextView.getText();
+                String[] dates = ((String) filterTextView.getText()).split(" ");
+                StaticHolder.dateRange = new DateRangeStruct(dates[0],dates[1]);
                 switchBackToSelectionScreen();
             }
         });
@@ -63,23 +67,6 @@ public class FilterReportsActivity extends AppCompatActivity {
                 switchBackToSelectionScreen();
             }
         });
-
-
-//        calendar = (CalendarView) findViewById(R.id.calendarView);
-//        int[] dates = {0,0}; //{beforedate,afterdate}
-//        calendar = (CalendarView) findViewById(R.id.calendarView); // get the reference of CalendarView
-//        public void onSelectedDayChange(CalendarView calendar, int arg1, int arg2, int arg3) {
-//            int d = arg1 + arg2 + arg3;
-//            if (d > dates[0]) {
-//                dates[1] = d;
-//            }
-//            else {
-//                int temp = dates[0];
-//                dates[0] = d;
-//                dates[1] = temp;
-//            }
-//        }
-
 }
 
 

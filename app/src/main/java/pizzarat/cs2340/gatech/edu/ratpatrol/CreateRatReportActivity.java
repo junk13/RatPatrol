@@ -140,7 +140,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
         return str.matches(form);
     }
     private boolean isValidDate(String str){
-        String form = "((([0][\\d])|[1][0-2])[/](([0-2][\\d])|[3][0-1])[/][2][0][\\d][\\d])";
+        String form = "((([0-2][\\d])|[3][0-1])[/](([0][\\d])|[1][0-2])[/][2][0][\\d][\\d])";
         return str.matches(form);
         //TODO date format accepts 0-31 for all months. Could be modified for each month.
     }

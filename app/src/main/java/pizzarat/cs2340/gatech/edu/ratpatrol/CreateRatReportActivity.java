@@ -97,12 +97,15 @@ public class CreateRatReportActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Date", Toast.LENGTH_SHORT);
                 toast.show();
             } else if(!isValidGeneric(address.getText().toString())){ //ADDRESS
+                Log.d("isvalid", address.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have Address", Toast.LENGTH_SHORT);
                 toast.show();
             } else if(!isValidGeneric(buildingType.getText().toString())){ //LOCATION
+                Log.d("isvalid", buildingType.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have location", Toast.LENGTH_SHORT);
                 toast.show();
             } else if(!isValidGeneric(city.getText().toString())){ //CITY
+                Log.d("isvalid", city.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have City", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
@@ -132,14 +135,13 @@ public class CreateRatReportActivity extends AppCompatActivity {
         return zip.length() == 5;
     }
     private boolean isValidTime(String str){
-        String form = "([0-2][0-9][:][0-5][0-9][ap][m])";
+        String form = "((([0][0-9])|([1][0-2]))[:][0-5][0-9][ap][m])";
         return str.matches(form);
-        //TODO time format accepts valid months. Right now accepts anything with a valid FORM.
-        //TODO date format accepts valid months. Right now accepts anything with a valid FORM.
     }
     private boolean isValidDate(String str){
-        String form = "([\\d][\\d][/][\\d][\\d][/][\\d][\\d][\\d][\\d])";
+        String form = "((([0][\\d])|[1][0-2])[/](([0-2][\\d])|[3][0-1])[/][2][0][\\d][\\d])";
         return str.matches(form);
+        //TODO date format accepts 0-31 for all months. Could be modified for each month.
     }
     private boolean isValidGeneric(String str){
         return !str.equals("");

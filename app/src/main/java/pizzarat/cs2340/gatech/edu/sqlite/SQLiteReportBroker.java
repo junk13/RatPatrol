@@ -232,7 +232,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     /**
      * Populates the specified list with rat sighting reports with data from
-     * the cursor
+     * the cursor.
      *
      * @param cursor the cursor to grab the data from
      * @param list   the list to be populated

@@ -7,7 +7,7 @@ package pizzarat.cs2340.gatech.edu.structure;
  */
 public class ReportStructure {
     private String key;                    // Unique key assigned to each report
-    private String location;               // Building type of the sighting
+    private String buildingType;               // Building type of the sighting
     private String date;                   // May need to change later
     private String time;                   // May need to change later
     private String address;                // The address of the sighting
@@ -19,7 +19,7 @@ public class ReportStructure {
     /**
      * Creates the most specific rat sighting report by specifying all fields.
      * @param key the unique key assigned to each report
-     * @param location the latitude and longitude of the sighting
+     * @param buildingType the latitude and longitude of the sighting
      * @param date the date of the sighting
      * @param time the time of the sighting
      * @param address the address of the sighting
@@ -29,11 +29,11 @@ public class ReportStructure {
      */
 
     // TODO fix constructor for lat and long
-    public ReportStructure(String key, String location, String date, String time,
+    public ReportStructure(String key, String buildingType, String date, String time,
                            String address, String zipCode, String city,
-                           String borough) {
+                           String borough, String latitude, String longitude) {
         this.key = key;
-        this.location = location;
+        this.buildingType = buildingType;
         this.date = date;
         this.time = time;
         this.address = address;
@@ -64,16 +64,16 @@ public class ReportStructure {
      * Returns the latitude and longitude of the rat sighting.
      * @return the latitude and longitude of the rat sighting
      */
-    public String getLocation() {
-        return location;
+    public String getBuildingType() {
+        return buildingType;
     }
 
     /**
      * Sets the latitude and longitude of this rat sighting.
-     * @param location the latitude and longitude of the sighting
+     * @param buildingType the latitude and longitude of the sighting
      */
-    public void setLocation(String location) {
-        this.location = location;
+    public void setBuildingType(String buildingType) {
+        this.buildingType = buildingType;
     }
 
     /**
@@ -141,7 +141,7 @@ public class ReportStructure {
     }
 
     /**
-     * Gets the city of the location of the rat report.
+     * Gets the city of the buildingType of the rat report.
      * @return the city of the rat report
      */
     public String getCity() {
@@ -224,7 +224,7 @@ public class ReportStructure {
         return "Date: " + getDate() + "\n"
                 + "Time: " + getTime() + "\n"
                 + "Address: " + getAddress() + "\n"
-                + "Location: " + getLocation();
+                + "Location: " + getBuildingType();
     }
 
 }

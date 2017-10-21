@@ -23,11 +23,11 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * Represents the screen that displays all the rat sightings in New York.
  */
 public class NewYorkRatArchiveActivity extends AppCompatActivity {
+    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    ArrayList<ReportStructure> posts = new ArrayList<>();
     // TODO change list to Rat Sightings
     private RecyclerView.LayoutManager layoutManager;
     private List<String> listData = new ArrayList<>();
-    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
-    ArrayList<ReportStructure> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
             Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }
         for(int i = 0;  i < posts.size(); i++) {
-            String newElement = posts.get(i).getLocation();
+            String newElement = posts.get(i).getBuildingType();
             listData.add(newElement);
         }
     }

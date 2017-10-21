@@ -136,10 +136,10 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the UserRatReportsActivity.
+     * Switches to the CreateRatReportActivity.
      */
     public void switchToUserRatReportsActivity() {
-        Intent switchToUserRatReportsActivity = new Intent(this, UserRatReportsActivity.class);
+        Intent switchToUserRatReportsActivity = new Intent(this, CreateRatReportActivity.class);
         this.startActivity(switchToUserRatReportsActivity);
     }
 
@@ -164,19 +164,6 @@ public class SelectionScreenActivity extends AppCompatActivity {
      */
     public void logout() {
        switchBackToWelcomeActivity();
-    }
-
-
-    private void addDummyToSQL() {
-        ReportStructure rsrTest;
-        try {
-            rsrTest = new ReportStructure("432", "my house", "10/10/2000", "12:00:00 AM", "101 Cool Dude Rd", "30309", "New York", "little one");
-            Log.d("hidden",rsrTest.getBorough());
-            reportBroker.writeToReportDb(rsrTest, this.getBaseContext());
-            Log.d("hidden",rsrTest.getDate());
-        } catch (DuplicateReportDbException e) {
-            Log.d("hidden",e.getLocalizedMessage());
-        }
     }
 
     /**
@@ -206,7 +193,10 @@ public class SelectionScreenActivity extends AppCompatActivity {
                 String zip = ratSighting[8];
                 String city = ratSighting[16];
                 String borough = ratSighting[23];
-                ReportStructure rsr = new ReportStructure(key,location,date,time,address,zip,city,borough);
+                String latitude = ratSighting[50];
+                String longitude = ratSighting[51];
+                ReportStructure rsr = new ReportStructure(key, location, date,
+                        time, address, zip, city, borough, latitude, longitude);
 
                 reportBroker.writeToReportDb(rsr,this.getApplicationContext());
             }

@@ -110,7 +110,7 @@
             android:focusableInTouchMode="false"
             android:inputType="none|textPersonName"
             android:linksClickable="false"
-            android:text="@string/location_prompt"/>
+            android:text="@string/building_type_prompt"/>
 
         <EditText
             android:id="@+id/boroughTextView"

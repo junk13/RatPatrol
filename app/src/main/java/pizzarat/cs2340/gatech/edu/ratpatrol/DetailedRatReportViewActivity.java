@@ -54,7 +54,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         city.setText("City: "+ report.getCity());
         zipcode.setText("Zip: "+report.getZipCode());
         borough.setText(""+report.getBorough());
-        location.setText(""+report.getLocation());
+        location.setText("" + report.getBuildingType());
         // latitude.setText("Latitude: " + report.getLatitude());
         // longitude.setText("Longitude: " + report.getLongitude());
     }

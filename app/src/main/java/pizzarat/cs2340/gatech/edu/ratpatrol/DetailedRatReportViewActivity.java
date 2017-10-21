@@ -14,16 +14,6 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * City.
  */
 public class DetailedRatReportViewActivity extends AppCompatActivity {
-    private TextView key;
-    private TextView date;
-    private TextView time;
-    private TextView address;
-    private TextView city;
-    private TextView zipcode;
-    private TextView borough;
-    private TextView location;
-    private TextView latitude;
-    private TextView longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +23,16 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         Intent data = this.getIntent();
 
         // Initializing widgets
-        key = (TextView) findViewById(R.id.keyTextView);
-        date = (TextView) findViewById(R.id.dateTextView);
-        time = (TextView) findViewById(R.id.timeTextView);
-        address = (TextView) findViewById(R.id.addressTextView);
-        city = (TextView) findViewById(R.id.cityTextView);
-        zipcode = (TextView) findViewById(R.id.zipcodeTextView);
-        borough = (TextView) findViewById(R.id.boroughTextView);
-        location = (TextView) findViewById(R.id.locationTextView);
-        latitude = (TextView) findViewById(R.id.latitudeTextView);
-        longitude = (TextView) findViewById(R.id.longitudeTextView);
+        TextView key = (TextView) findViewById(R.id.keyTextView);
+        TextView date = (TextView) findViewById(R.id.dateTextView);
+        TextView time = (TextView) findViewById(R.id.timeTextView);
+        TextView address = (TextView) findViewById(R.id.addressTextView);
+        TextView city = (TextView) findViewById(R.id.cityTextView);
+        TextView zipcode = (TextView) findViewById(R.id.zipcodeTextView);
+        TextView borough = (TextView) findViewById(R.id.boroughTextView);
+        TextView location = (TextView) findViewById(R.id.locationTextView);
+        TextView latitude = (TextView) findViewById(R.id.latitudeTextView);
+        TextView longitude = (TextView) findViewById(R.id.longitudeTextView);
 
         // Grabbing the specified report and filling the widgets with its information
         ReportStructure report = StaticHolder.data;
@@ -50,9 +40,9 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         date.setText("Date: " + report.getDate());
         time.setText("Time: " + report.getTime());
         address.setText(""+ report.getAddress());
-        city.setText("City: "+ report.getCity());
-        zipcode.setText("Zip: "+report.getZipCode());
-        borough.setText(""+report.getBorough());
+        city.setText("City: " + report.getCity());
+        zipcode.setText("Zip: " + report.getZipCode());
+        borough.setText("" + report.getBorough());
         location.setText("" + report.getBuildingType());
         latitude.setText("Latitude: " + report.getLatitude());
         longitude.setText("Longitude: " + report.getLongitude());

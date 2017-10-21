@@ -49,8 +49,8 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         Log.d("hidden","setupList()");
         try {
             //posts = reportBroker.getDateConstrainedReports("10/22/2016","10/23/2016",getBaseContext());
-            posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
-            //posts = reportBroker.reportArrayList(getBaseContext());
+            //posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
+            posts = reportBroker.reportArrayList(getBaseContext());
         } catch (Exception e){
             Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }

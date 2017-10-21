@@ -2,6 +2,8 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
@@ -181,22 +184,40 @@ public class SelectionScreenActivity extends AppCompatActivity {
             inputStream = getResources().openRawResource(R.raw.ratsightings);
             br = new BufferedReader(new InputStreamReader(inputStream));
             line = br.readLine();
+            Geocoder geocoder = new Geocoder(getBaseContext());
+            List<Address> addresses = null;
             while ((line = br.readLine()) != null) {
+
                 // use comma as separator
                 String[] ratSighting = line.split(cvsSplitBy);
 
                 String key = ratSighting[0];
-                String location = ratSighting[7];
+                String buildingType = ratSighting[7];
                 String date = getDate(ratSighting[1]);
                 String time = getTime(ratSighting[1]);
                 String address = ratSighting[9];
                 String zip = ratSighting[8];
                 String city = ratSighting[16];
                 String borough = ratSighting[23];
-                Log.d("hidden", ratSighting[49]);
-                String latitude = ratSighting[49];
-                String longitude = ratSighting[50];
-                ReportStructure rsr = new ReportStructure(key, location, date,
+                String latitude = "";
+                String longitude = "";
+                try {
+                    latitude = ratSighting[49];
+                    longitude = ratSighting[50];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Log.d("Cunt", "caught array index out of bounds");
+                }
+                if (latitude.isEmpty() || longitude.isEmpty()) {
+                    try {
+                        addresses = geocoder.getFromLocationName(address + " " + zip + " " + city + " " + borough, 1);
+                        latitude = Double.toString(addresses.get(0).getLatitude());
+                        longitude = Double.toString(addresses.get(0).getLongitude());
+                    } catch (Exception e) {
+                        Log.d("Cunt", "caught location error");
+                    }
+
+                }
+                ReportStructure rsr = new ReportStructure(key, buildingType, date,
                         time, address, zip, city, borough, latitude, longitude);
 
                 reportBroker.writeToReportDb(rsr,this.getApplicationContext());

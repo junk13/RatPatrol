@@ -136,10 +136,10 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the UserRatReportsActivity.
+     * Switches to the CreateRatReportActivity.
      */
     public void switchToUserRatReportsActivity() {
-        Intent switchToUserRatReportsActivity = new Intent(this, UserRatReportsActivity.class);
+        Intent switchToUserRatReportsActivity = new Intent(this, CreateRatReportActivity.class);
         this.startActivity(switchToUserRatReportsActivity);
     }
 

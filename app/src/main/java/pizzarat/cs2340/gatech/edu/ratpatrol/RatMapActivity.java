@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * Represents the screen where the user can pick different fields about a rat
@@ -43,7 +44,7 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        populateFromFilter(StaticHolder);
 
     }
 
@@ -55,7 +56,9 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
     //TODO: use appropiate values latlong.
     private void populateFromFilter(ReportStructure[] reports) {
         for (ReportStructure report : reports) {
-            LatLng coords = new LatLng(41, -74);
+            Double latitude = Double.parseDouble(report.getLatitude());
+            Double longitude = Double.parseDouble(report.getLongitude());
+            LatLng coords = new LatLng(latitude, longitude);
             mMap.addMarker(new MarkerOptions().position(coords).title("Temporary marker in New York"));
         }
 

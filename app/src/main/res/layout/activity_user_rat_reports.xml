@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.UserRatReportsActivity">
+    tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.CreateRatReportActivity">
 
         <EditText
             android:id="@+id/createTimeView"

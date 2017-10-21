@@ -38,7 +38,7 @@
         </activity>
         <activity android:name=".SelectionScreenActivity"/>
         <activity android:name=".NewYorkRatArchiveActivity"/>
-        <activity android:name=".UserRatReportsActivity"/>
+        <activity android:name=".CreateRatReportActivity" />
         <activity android:name=".DetailedRatReportViewActivity">
         </activity>
         <!--

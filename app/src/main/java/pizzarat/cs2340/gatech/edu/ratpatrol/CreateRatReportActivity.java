@@ -61,7 +61,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
     // TODO grab data, create report, save to DB, generate unique key
 
     /**
-     *      Switches back to the selection screen after submission/cancellation.
+     * Switches back to the selection screen after submission/cancellation.
      */
     public void switchToSelectionScreenActivity() {
         Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
@@ -69,30 +69,34 @@ public class CreateRatReportActivity extends AppCompatActivity {
     }
 
     /**
-     *      Attempt to add new data to the List and leave.
-     *
-     *      Failuire to add new data will result in no action
-     *      for the time being.
+     * Attempt to add new data to the List and leave.
+     * <p>
+     * Failuire to add new data will result in no action
+     * for the time being.
      */
-    public void addReport(View v){
+    public void addReport(View v) {
         Geocoder geocoder = new Geocoder(getBaseContext());
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocationName(buildingType.getText().toString(), 1);
-            reportBroker.writeToReportDb(new ReportStructure(
-                    key.getText().toString(),
-                    buildingType.getText().toString(),
-                    time.getText().toString(),
-                    date.getText().toString(),
-                    address.getText().toString(),
-                    zipcode.getText().toString(),
-                    city.getText().toString(),
-
-                    "Manhatten"))
+            reportBroker.writeToReportDb(
+                    new ReportStructure(
+                            key.getText().toString(),
+                            buildingType.getText().toString(),
+                            time.getText().toString(),
+                            date.getText().toString(),
+                            address.getText().toString(),
+                            zipcode.getText().toString(),
+                            city.getText().toString(),
+                            "Manhatten",
+                            Double.toString(addresses.get(0).getLatitude()),
+                            Double.toString(addresses.get(0).getLatitude())
+                    ),
+                    getBaseContext()
+            );
             switchToSelectionScreenActivity();
-        } catch(Exception e){
+        } catch (Exception e) {
             key.setError("An unknown error occurred.");
         }
     }
 
-}

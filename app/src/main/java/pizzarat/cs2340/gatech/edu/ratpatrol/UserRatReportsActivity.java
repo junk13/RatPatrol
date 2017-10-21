@@ -81,13 +81,24 @@ public class UserRatReportsActivity extends AppCompatActivity {
             if (!isValidZip(zipcode.getText().toString())) {
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode", Toast.LENGTH_SHORT);
                 toast.show();
-                //TODO fix the time validation code.
             } else if (!isValidTime(time.getText().toString())) {
                 Log.d("isvalid", time.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time", Toast.LENGTH_SHORT);
                 toast.show();
+            } else if (!isValidDate(date.getText().toString())){
+                Log.d("isvalid", date.getText().toString());
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Date", Toast.LENGTH_SHORT);
+                toast.show();
+            } else if(!isValidGeneric(address.getText().toString())){ //ADDRESS
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Must have Address", Toast.LENGTH_SHORT);
+                toast.show();
+            } else if(!isValidGeneric(location.getText().toString())){ //LOCATION
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Must have location", Toast.LENGTH_SHORT);
+                toast.show();
+            } else if(!isValidGeneric(city.getText().toString())){ //CITY
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Must have City", Toast.LENGTH_SHORT);
+                toast.show();
             } else {
-                // TODO check all fields are valid.
                 ReportStructure newReport = new ReportStructure(
                         key.getText().toString(),
                         location.getText().toString(),
@@ -111,8 +122,14 @@ public class UserRatReportsActivity extends AppCompatActivity {
     private boolean isValidTime(String str){
         String form = "([0-2][0-9][:][0-5][0-9][ap][m])";
         return str.matches(form);
-        //TODO Not empty for feilds.
-        //TODO time format is 12 hour.
-        //TODO date format is xx/xx/xxxx
+        //TODO time format accepts valid months. Right now accepts anything with a valid FORM.
+        //TODO date format accepts valid months. Right now accepts anything with a valid FORM.
+    }
+    private boolean isValidDate(String str){
+        String form = "([\\d][\\d][/][\\d][\\d][/][\\d][\\d][\\d][\\d])";
+        return str.matches(form);
+    }
+    private boolean isValidGeneric(String str){
+        return !str.equals("");
     }
 }

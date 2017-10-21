@@ -136,21 +136,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         Cursor cursor = getDateConstrainedCursor(getDate(beforeDate),getDate(afterDate),context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            aList.add(new ReportStructure(
-                    cursor.getInt(0)+"",       //key
-                    cursor.getString(1),    //location
-                    cursor.getString(2),    //date
-                    cursor.getString(3),       //time
-                    cursor.getString(4),    //address
-                    cursor.getString(5),       //zipcode
-                    cursor.getString(6),    //city
-                    cursor.getString(7)     //borough
-
-            ));
-        }
-        cursor.close();
+        populateList(cursor, aList);
         return aList;
     }
 
@@ -159,23 +145,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         Cursor cursor = getSubstringReportsCursor(keystring, context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            aList.add(new ReportStructure(
-                    cursor.getInt(0)+"",       //key
-                    cursor.getString(1),    //location
-                    cursor.getString(2),    //date
-                    cursor.getString(3),       //time
-                    cursor.getString(4),    //address
-                    cursor.getString(5),       //zipcode
-                    cursor.getString(6),    //city
-                    cursor.getString(7)     //borough
-
-            ));
-        }
-        cursor.close();
-        Log.d("hidden",aList.toString());
-        Log.d("hidden","aList.size() = " + aList.size());
+        populateList(cursor, aList);
         return aList;
     }
 
@@ -192,23 +162,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         Cursor cursor = getSubstringReportsCursor(keystring, context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            aList.add(new ReportStructure(
-                    cursor.getInt(0)+"",       //key
-                    cursor.getString(1),    //location
-                    cursor.getString(2),    //date
-                    cursor.getString(3),       //time
-                    cursor.getString(4),    //address
-                    cursor.getString(5),       //zipcode
-                    cursor.getString(6),    //city
-                    cursor.getString(7)     //borough
-
-            ));
-        }
-        cursor.close();
-        Log.d("hidden",aList.toString());
-        Log.d("hidden","aList.size() = " + aList.size());
+        populateList(cursor, aList);
         return aList;
     }
 
@@ -217,23 +171,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         Cursor cursor = getCursor(context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            aList.add(new ReportStructure(
-                    cursor.getInt(0)+"",       //key
-                    cursor.getString(1),    //location
-                    cursor.getString(2),    //date
-                    cursor.getString(3),       //time
-                    cursor.getString(4),    //address
-                    cursor.getString(5),       //zipcode
-                    cursor.getString(6),    //city
-                    cursor.getString(7)     //borough
-
-            ));
-        }
-        cursor.close();
-        Log.d("hidden",aList.toString());
-        Log.d("hidden","aList.size() = " + aList.size());
+        populateList(cursor, aList);
         return aList;
     }
 
@@ -263,23 +201,13 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return !(icount > 0);
     }
 
-    public ArrayList<ReportStructure> dummy(){
-        ArrayList<ReportStructure> dummies = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
-            ReportStructure next =(new ReportStructure(
-                    ""+i,       //key
-                    "Place"+i,    //location
-                    "Today",    //date
-                    "0",       //time
-                    "Here",    //address
-                    "00000",       //zipcode
-                    "England",    //city
-                    "Mahatten"));   //borough)
-            dummies.add(next);
-        }
-        return dummies;
-    }
-
+    /**
+     * Finds the highest unique key for a rat sighting report. Used to generate
+     * the unique key when the user decides to create a new report
+     *
+     * @param c the specified context
+     * @return the current maximum key throughout all rat sighting reports
+     */
     public int getMaxKey(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
@@ -319,7 +247,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             list.add(new ReportStructure(
-                    cursor.getInt(0) + "",    //key
+                    cursor.getInt(0) + "",  //key
                     cursor.getString(1),    //location
                     cursor.getString(2),    //date
                     cursor.getString(3),    //time

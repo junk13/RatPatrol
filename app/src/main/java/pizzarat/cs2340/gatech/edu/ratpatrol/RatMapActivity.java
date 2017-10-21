@@ -64,7 +64,8 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
             Double latitude = Double.parseDouble(report.getLatitude());
             Double longitude = Double.parseDouble(report.getLongitude());
             LatLng coords = new LatLng(latitude, longitude);
-            mMap.addMarker(new MarkerOptions().position(coords).title(report.mapToString()));
+            mMap.addMarker(new MarkerOptions().position(coords)
+                    .title("Key: " + report.getKey()).snippet(report.mapToString()));
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(41, -74)));

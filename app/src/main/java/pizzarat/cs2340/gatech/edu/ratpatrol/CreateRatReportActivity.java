@@ -90,7 +90,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
             } else if (!isValidDate(date.getText().toString())){
                 Log.d("isvalid", date.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Date" + "\n"
-                        + "Required Format: ", Toast.LENGTH_SHORT);
+                        + "Required Format: mm/dd/year", Toast.LENGTH_SHORT);
                 toast.show();
             } else if(!isValidGeneric(address.getText().toString())){ //ADDRESS
                 Log.d("isvalid", address.getText().toString());

@@ -39,7 +39,8 @@ public class CreateRatReportActivity extends AppCompatActivity {
 
         key = (TextView) findViewById(R.id.createKeyView);
         // Generate and set the unique key
-        key.setText(Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1));
+        key.setText("Key: " +
+                Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1));
 
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);

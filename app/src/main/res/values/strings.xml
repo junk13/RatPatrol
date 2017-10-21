@@ -27,7 +27,7 @@
     <string name="address_prompt">Address: </string>
     <string name="city_prompt">City: </string>
     <string name="zipcode_prompt">Zipcode: </string>
-    <string name="location_prompt">Location: </string>
+    <string name="location_prompt">Building Type: </string>
     <string name="borough_prompt">Borough: </string>
     <string name="latitude_prompt">Latitude: </string>
     <string name="longitude_prompt">Longitude: </string>

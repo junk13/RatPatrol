@@ -209,12 +209,13 @@ public class SelectionScreenActivity extends AppCompatActivity {
                 }
                 if (latitude.isEmpty() || longitude.isEmpty()) {
                     try {
-                        addresses = geocoder.getFromLocationName(address + " " + zip + " " + city, 1);
+                        addresses = geocoder.getFromLocationName(address + " " + zip + " " + city + " " + borough, 1);
+                        latitude = Double.toString(addresses.get(0).getLatitude());
+                        longitude = Double.toString(addresses.get(0).getLongitude());
                     } catch (Exception e) {
                         Log.d("Cunt", "caught location error");
                     }
-                    latitude = Double.toString(addresses.get(0).getLatitude());
-                    longitude = Double.toString(addresses.get(0).getLongitude());
+
                 }
                 ReportStructure rsr = new ReportStructure(key, buildingType, date,
                         time, address, zip, city, borough, latitude, longitude);

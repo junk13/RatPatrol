@@ -49,7 +49,7 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
         SQLiteReportBroker report = new SQLiteReportBroker();
         //create array list from reports within the static date range in StaticHelper.
         ArrayList<ReportStructure> reportArray = report.getDateConstrainedReports(getBaseContext());
-//        populateFromFilter(reportArray);
+        populateFromFilter(reportArray);
 
     }
 
@@ -59,7 +59,7 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
      * @param reports : a list of all reports to add to the map
      */
     //TODO: use appropiate values latlong.
-    private void populateFromFilter(ReportStructure[] reports) {
+    private void populateFromFilter(ArrayList<ReportStructure> reports) {
         for (ReportStructure report : reports) {
             Double latitude = Double.parseDouble(report.getLatitude());
             Double longitude = Double.parseDouble(report.getLongitude());

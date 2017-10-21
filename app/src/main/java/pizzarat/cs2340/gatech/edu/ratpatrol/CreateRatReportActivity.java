@@ -12,10 +12,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
@@ -139,7 +135,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
         return zip.length() == 5;
     }
     private boolean isValidTime(String str){
-        String form = "((([0][0-9])|([1][0-2]))[:][0-5][0-9][ap][m])";
+        String form = "((([0][0-9])|([1][0-2]))[:][0-5][0-9])";
         return str.matches(form);
     }
     private boolean isValidDate(String str){

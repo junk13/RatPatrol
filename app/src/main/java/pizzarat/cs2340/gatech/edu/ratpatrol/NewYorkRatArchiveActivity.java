@@ -56,7 +56,6 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         }
         for(int i = 0;  i < posts.size(); i++) {
             String newElement = posts.get(i).getLocation();
-            Log.d("hidden", newElement);
             listData.add(newElement);
         }
     }

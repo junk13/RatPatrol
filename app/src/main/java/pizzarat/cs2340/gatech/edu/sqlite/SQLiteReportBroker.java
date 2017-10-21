@@ -121,7 +121,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return readableDb.query(
                 RatSightingDb.getTableName(),            // The table to query
                 null,                                   // The columns to return
-                "location LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
+                RatSightingDb.getReportTableLocationCol() + " LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
                 null,                                   // The values for the WHERE clause
                 null,                                   // don't group the rows
                 null,                                   // don't filter by row groups
@@ -156,6 +156,40 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     //returns arraylist of all rat reports
     public ArrayList<ReportStructure> getReportsWithSubstring(String keystring, Context context) {
+        Cursor cursor = getSubstringReportsCursor(keystring, context);
+        //ArrayList to return
+        ArrayList<ReportStructure> aList = new ArrayList<>();
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext()) {
+            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+            aList.add(new ReportStructure(
+                    cursor.getInt(0)+"",       //key
+                    cursor.getString(1),    //location
+                    cursor.getString(2),    //date
+                    cursor.getString(3),       //time
+                    cursor.getString(4),    //address
+                    cursor.getString(5),       //zipcode
+                    cursor.getString(6),    //city
+                    cursor.getString(7)     //borough
+
+            ));
+        }
+        cursor.close();
+        Log.d("hidden",aList.toString());
+        Log.d("hidden","aList.size() = " + aList.size());
+        return aList;
+    }
+
+    //TODO
+    //returns arraylist of all rat reports
+    public ArrayList<ReportStructure> getReportsWithSubstringSpecified(String keystring, Context context) {
+        String[] sl = keystring.split(":"); //{column to search, substring}
+        //if sl[0] not a valid column, do location search on sl[1] (or search whole thing, get 0 results)
+        //else, search in that specific column
+
+
+        //TODO: combine methods
+        //Cursor cursor = getSubstringReportsCursor(sl[0],sl[1], context);
         Cursor cursor = getSubstringReportsCursor(keystring, context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();

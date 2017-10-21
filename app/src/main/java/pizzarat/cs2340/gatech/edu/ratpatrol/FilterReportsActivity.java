@@ -28,7 +28,8 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  *         in the rat archive and rat map by specifying a String parameter.
  */
 public class FilterReportsActivity extends AppCompatActivity {
-    private TextView filterTextView;
+    private TextView beforeDateTextView;
+    private TextView afterDateTextView;
     private Button filterButton;
     private Button cancelFilterButton;
     private View calendar;
@@ -45,7 +46,8 @@ public class FilterReportsActivity extends AppCompatActivity {
         month = 10;
         day = 10;
 
-        filterTextView = (TextView) findViewById(R.id.filterTextView);
+        beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
+        afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
         filterButton = (Button) findViewById(R.id.filterReportsButton);
         cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
 
@@ -53,8 +55,11 @@ public class FilterReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO grab text from TextView and filter reports
-                String[] dates = ((String) filterTextView.getText()).split(" ");
-                StaticHolder.dateRange = new DateRangeStruct(dates[0],dates[1]);
+                String beforeDate = ((String) beforeDateTextView.getText());
+                String afterDate = ((String) afterDateTextView.getText());
+                beforeDate = getDate(beforeDate);
+                afterDate = getDate(afterDate);
+                StaticHolder.dateRange = new DateRangeStruct(beforeDate, afterDate);
                 switchBackToSelectionScreen();
             }
         });
@@ -63,12 +68,19 @@ public class FilterReportsActivity extends AppCompatActivity {
         cancelFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterTextView.setText("");
+                beforeDateTextView.setText("");
+                afterDateTextView.setText("");
                 switchBackToSelectionScreen();
             }
         });
 }
 
+
+
+    private String getDate(String dateAndTime) {
+        String[] date = dateAndTime.split(" ")[0].split("/");
+        return date[2] + "/" + date[1] + "/" + date[0];
+    }
 
     /**
      * Switches to the selection screen after the filter or cancel button has

@@ -138,7 +138,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         ArrayList<ReportStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
             aList.add(new ReportStructure(
                     cursor.getInt(0)+"",       //key
                     cursor.getString(1),    //location
@@ -162,7 +161,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         ArrayList<ReportStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
             aList.add(new ReportStructure(
                     cursor.getInt(0)+"",       //key
                     cursor.getString(1),    //location
@@ -196,7 +194,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         ArrayList<ReportStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
             aList.add(new ReportStructure(
                     cursor.getInt(0)+"",       //key
                     cursor.getString(1),    //location
@@ -222,7 +219,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         ArrayList<ReportStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
             aList.add(new ReportStructure(
                     cursor.getInt(0)+"",       //key
                     cursor.getString(1),    //location
@@ -312,5 +308,31 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return date[2] + "/" + date[1] + "/" + date[0];
     }
 
+    /**
+     * Populates the specified list with rat sighting reports with data from
+     * the cursor
+     *
+     * @param cursor the cursor to grab the data from
+     * @param list   the list to be populated
+     */
+    private void populateList(Cursor cursor, List<ReportStructure> list) {
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()) {
+            list.add(new ReportStructure(
+                    cursor.getInt(0) + "",    //key
+                    cursor.getString(1),    //location
+                    cursor.getString(2),    //date
+                    cursor.getString(3),    //time
+                    cursor.getString(4),    //address
+                    cursor.getString(5),    //zipcode
+                    cursor.getString(6),    //city
+                    cursor.getString(7)     //borough
+
+            ));
+        }
+        cursor.close();
+        Log.d("hidden", list.toString());
+        Log.d("hidden", "aList.size() = " + list.size());
+    }
 
 }

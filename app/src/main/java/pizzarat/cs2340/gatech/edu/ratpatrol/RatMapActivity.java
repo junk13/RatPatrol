@@ -11,7 +11,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
-import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * Represents the screen where the user can pick different fields about a rat
@@ -44,7 +43,7 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        populateFromFilter(StaticHolder);
+        populateFromFilter();
 
     }
 

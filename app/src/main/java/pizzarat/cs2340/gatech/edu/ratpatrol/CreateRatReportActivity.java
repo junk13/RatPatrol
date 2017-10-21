@@ -26,7 +26,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
     private TextView address;
     private TextView city;
     private TextView zipcode;
-    private TextView location;
+    private TextView buildingType;
     private Spinner borough;
     private Button createButton;
     private Button cancelButton;
@@ -43,7 +43,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
         address = (TextView) findViewById(R.id.createAddressView);
         city = (TextView) findViewById(R.id.createCityView);
         zipcode = (TextView) findViewById(R.id.createZipcodeView);
-        location = (TextView) findViewById(R.id.createLocationTextView);
+        buildingType = (TextView) findViewById(R.id.createLocationTextView);
         // TODO populate spinner with proper borough strings
         //borough = (Spinner) findViewById(R.id.createBoroughSpinner);
 
@@ -78,16 +78,16 @@ public class CreateRatReportActivity extends AppCompatActivity {
         Geocoder geocoder = new Geocoder(getBaseContext());
         List<Address> addresses = null;
         try {
-            addresses = geocoder.getFromLocationName(location.getText().toString(), 20);
+            addresses = geocoder.getFromLocationName(buildingType.getText().toString(), 1);
             reportBroker.writeToReportDb(new ReportStructure(
                     key.getText().toString(),
-                    location.getText().toString(),
+                    buildingType.getText().toString(),
                     time.getText().toString(),
                     date.getText().toString(),
                     address.getText().toString(),
                     zipcode.getText().toString(),
                     city.getText().toString(),
-                    addresses.
+
                     "Manhatten"))
             switchToSelectionScreenActivity();
         } catch(Exception e){

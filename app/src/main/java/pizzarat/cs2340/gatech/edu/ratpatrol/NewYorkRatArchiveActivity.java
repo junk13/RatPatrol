@@ -67,6 +67,11 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
 //        }
     }
 
+    /**
+     * Switches from the list view of all the displayed rat reports to the
+     * detailed view of the single report when clicked on.
+     * @param report the specific report to display in detail.
+     */
     public void switchToReportDetails(int report) {
         Intent switchToDetailedReports = new Intent(this, DetailedRatReportViewActivity.class);
         //switchToDetailedReports.putExtra("Report","Dummy");
@@ -117,6 +122,9 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Custom class created for RecyclerView to show the all the rat reports.
+     */
     class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public TextView reportDescription;
 
@@ -131,6 +139,10 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
 
         }
 
+        /**
+         * Sets the listener for each data item in the Recycler View.
+         * @param itemClickListener
+         */
         public void setItemClickListener(ItemClickListener itemClickListener) {
             this.itemClickListener = itemClickListener;
         }

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.UserRatReportsActivity">
-
-    <RelativeLayout
-        android:layout_width="422dp"
-        android:layout_height="663dp"
-        tools:layout_editor_absoluteX="-7dp"
-        tools:layout_editor_absoluteY="-2dp">
 
         <EditText
             android:id="@+id/createTimeView"
@@ -20,7 +14,7 @@
             android:layout_below="@+id/createDateView"
             android:layout_marginStart="21dp"
             android:ems="10"
-            android:hint="Time: "
+            android:hint="@string/time_prompt"
             android:inputType="time"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="76dp"/>
@@ -32,7 +26,7 @@
             android:layout_alignStart="@+id/createTimeView"
             android:layout_below="@+id/createKeyView"
             android:ems="10"
-            android:hint="Date: "
+            android:hint="@string/date_prompt"
             android:inputType="date"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="127dp"/>
@@ -45,7 +39,7 @@
             android:layout_below="@+id/createDateView"
             android:layout_marginTop="41dp"
             android:ems="10"
-            android:hint="Address: "
+            android:hint="@string/address_prompt"
             android:inputType="textPostalAddress"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="177dp"/>
@@ -57,9 +51,13 @@
             android:layout_alignEnd="@+id/createDateView"
             android:layout_alignParentTop="true"
             android:layout_marginTop="42dp"
+            android:clickable="false"
             android:ems="10"
-            android:hint="Key: "
-            android:inputType="number" />
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="@string/key_prompt"
+            android:inputType="number"
+            android:linksClickable="false"/>
 
         <EditText
             android:id="@+id/createCityView"
@@ -68,7 +66,7 @@
             android:layout_alignEnd="@+id/createAddressView"
             android:layout_below="@+id/createAddressView"
             android:ems="10"
-            android:hint="City: "
+            android:hint="@string/city_prompt"
             android:inputType="textPostalAddress"/>
 
         <EditText
@@ -78,8 +76,8 @@
             android:layout_alignStart="@+id/createCityView"
             android:layout_below="@+id/createCityView"
             android:ems="10"
-            android:hint="ZipCode: "
-            android:inputType="text" />
+            android:hint="@string/zipcode_prompt"
+            android:inputType="number"/>
 
         <Button
             android:id="@+id/cancelReportButton"
@@ -89,7 +87,7 @@
             android:layout_marginBottom="70dp"
             android:layout_marginStart="40dp"
             android:layout_toEndOf="@+id/createZipcodeView"
-            android:text="Cancel"/>
+            android:text="@string/cancel"/>
 
         <Button
             android:id="@+id/createReportButton"
@@ -99,8 +97,8 @@
             android:layout_alignBottom="@+id/cancelReportButton"
             android:layout_alignStart="@+id/createZipcodeView"
             android:layout_marginStart="34dp"
-            android:text="Create"
             android:onClick="addReport"
+            android:text="@string/create"
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="542dp"/>
 
@@ -128,9 +126,9 @@
             android:layout_alignStart="@+id/createZipcodeView"
             android:layout_below="@+id/createZipcodeView"
             android:ems="10"
-            android:hint="Location:"
+            android:hint="@string/location_prompt"
             android:inputType="textPostalAddress" />
 
-    </RelativeLayout>
+</RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+

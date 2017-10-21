@@ -148,4 +148,16 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return reportArrayList(c);
     }
 
+    public int getMaxKey(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableKeyCol() + ") FROM " + rDb.getTableName();
+        Cursor mcursor = readableDb.rawQuery(query, null);
+        mcursor.moveToFirst();
+        int maxKey = mcursor.getInt(0);
+        Log.d("hidden",""+maxKey);
+        Log.d("hidden","meow");
+        return maxKey;
+    }
+
 }

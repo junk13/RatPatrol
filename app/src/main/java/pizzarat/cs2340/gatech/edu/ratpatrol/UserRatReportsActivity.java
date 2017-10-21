@@ -39,6 +39,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_rat_reports);
 
         key = (TextView) findViewById(R.id.createKeyView);
+
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);
         address = (TextView) findViewById(R.id.createAddressView);
@@ -62,7 +63,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
     // TODO grab data, create report, save to DB, generate unique key
 
     /**
-     * Switches back to the selection screen after submission/cancellation.
+     *      Switches back to the selection screen after submission/cancellation.
      */
     public void switchToSelectionScreenActivity() {
         Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);

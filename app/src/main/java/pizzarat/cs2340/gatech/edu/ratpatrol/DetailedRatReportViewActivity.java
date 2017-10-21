@@ -1,11 +1,11 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Intent;
-import android.os.Parcel;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
@@ -23,6 +23,9 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
     private TextView zipcode;
     private TextView borough;
     private TextView location;
+    private TextView latitude;
+    private TextView longitude;
+    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +33,8 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed_rat_report_view);
 
         Intent data = this.getIntent();
+
         // Initializing widgets
-        //ReportStructure report = (ReportStructure) data.getParcelableExtra("Report");
         key = (TextView) findViewById(R.id.keyTextView);
         date = (TextView) findViewById(R.id.dateTextView);
         time = (TextView) findViewById(R.id.timeTextView);
@@ -40,9 +43,11 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         zipcode = (TextView) findViewById(R.id.zipcodeTextView);
         borough = (TextView) findViewById(R.id.boroughTextView);
         location = (TextView) findViewById(R.id.locationTextView);
+        latitude = (TextView) findViewById(R.id.latitudeTextView);
+        longitude = (TextView) findViewById(R.id.longitudeTextView);
 
         ReportStructure report = ReportHolder.data;
-        key.setText("Key: " + report.getKey());
+        key.setText("Key: " + reportBroker.getMaxKey(getBaseContext()));
         date.setText("Date: " + report.getDate());
         time.setText("Time: " + report.getTime());
         address.setText(""+ report.getAddress());
@@ -50,7 +55,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         zipcode.setText("Zip: "+report.getZipCode());
         borough.setText(""+report.getBorough());
         location.setText(""+report.getLocation());
-
-        // TODO: Set the text of the widgets to the selected Rat Report in NY Archive
+        // latitude.setText("Latitude: " + report.getLatitude());
+        // longitude.setText("Longitude: " + report.getLongitude());
     }
 }

@@ -10,15 +10,14 @@
         android:id="@+id/filterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/filterReportsButton"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="65dp"
         android:ems="10"
         android:hint="Filter reports:"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="54dp"/>
+        tools:layout_editor_absoluteY="54dp"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/calendarView"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/filterReportsButton"
@@ -43,6 +42,14 @@
         android:text="Cancel"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="245dp"/>
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
 

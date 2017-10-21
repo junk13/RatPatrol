@@ -244,16 +244,16 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             list.add(new ReportStructure(
-                    cursor.getInt(0) + "",  //key
-                    cursor.getString(1),    //building type
-                    cursor.getString(2),    //date
-                    cursor.getString(3),    //time
-                    cursor.getString(4),    //address
-                    cursor.getString(5),    //zipcode
-                    cursor.getString(6),    //city
-                    cursor.getString(7),    //borough
-                    cursor.getString(8),    //latitude
-                    cursor.getString(9)     //longitude
+                    cursor.getInt(0) + "",  // key
+                    cursor.getString(1),    // building type
+                    cursor.getString(2),    // date
+                    cursor.getString(3),    // time
+                    cursor.getString(4),    // address
+                    cursor.getString(5),    // zipcode
+                    cursor.getString(6),    // city
+                    cursor.getString(7),    // borough
+                    cursor.getString(8),    // latitude
+                    cursor.getString(9)     // longitude
 
             ));
         }

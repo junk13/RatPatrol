@@ -6,8 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * @author Evie Brown.
+ *
+ * Represents the SQLiteDatabase of all our users.
  */
-
 class CredentialDb extends SQLiteOpenHelper {
 
     static final int DATABASE_VERSION = 1;
@@ -16,6 +17,30 @@ class CredentialDb extends SQLiteOpenHelper {
 
     CredentialDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    static String getCredEmailCol() {
+        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_EMAIL;
+    }
+
+    static String getCredHashCol() {
+        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_HASH;
+    }
+
+    static String getPermCol() {
+        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_PERM;
+    }
+
+    static String getTableName() {
+        return CredentialDbContract.ContractEntry.TABLE_NAME;
+    }
+
+    static String getID() {
+        return CredentialDbContract.ContractEntry._ID;
+    }
+
+    static void purgeCredDb(SQLiteDatabase db) {
+        db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
     }
 
     @Override
@@ -28,23 +53,5 @@ class CredentialDb extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
         onCreate(db);
-    }
-    static String getCredEmailCol() {
-        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_EMAIL;
-    }
-    static String getCredHashCol() {
-        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_HASH;
-    }
-    static String getPermCol() {
-        return CredentialDbContract.ContractEntry.CREDENTIAL_TABLE_PERM;
-    }
-    static String getTableName() {
-        return CredentialDbContract.ContractEntry.TABLE_NAME;
-    }
-    static String getID() {
-        return CredentialDbContract.ContractEntry._ID;
-    }
-    static void purgeCredDb(SQLiteDatabase db) {
-        db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
     }
 }

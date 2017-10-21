@@ -7,16 +7,28 @@
     tools:context=".FilterReportsActivity">
 
     <EditText
-        android:id="@+id/filterTextView"
+        android:id="@+id/afterDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Before:"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="54dp"
+        android:layout_below="@+id/beforeDateTextView"
+        android:layout_alignStart="@+id/beforeDateTextView" />
+
+    <EditText
+        android:id="@+id/beforeDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Filter reports:"
+        android:hint="After:"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="64dp"
         tools:layout_editor_absoluteY="54dp"
         android:layout_marginTop="22dp"
-        android:layout_below="@+id/calendarView"
         android:layout_centerHorizontal="true" />
 
     <Button

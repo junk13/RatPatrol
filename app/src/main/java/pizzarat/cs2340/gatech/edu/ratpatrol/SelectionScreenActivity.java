@@ -193,8 +193,8 @@ public class SelectionScreenActivity extends AppCompatActivity {
                 String zip = ratSighting[8];
                 String city = ratSighting[16];
                 String borough = ratSighting[23];
-                String latitude = ratSighting[50];
-                String longitude = ratSighting[51];
+                String latitude = ratSighting[49];
+                String longitude = ratSighting[50];
                 ReportStructure rsr = new ReportStructure(key, location, date,
                         time, address, zip, city, borough, latitude, longitude);
 

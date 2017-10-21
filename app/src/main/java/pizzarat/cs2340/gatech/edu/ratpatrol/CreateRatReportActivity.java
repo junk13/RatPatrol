@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +28,6 @@ public class CreateRatReportActivity extends AppCompatActivity {
     private TextView city;
     private TextView zipcode;
     private TextView buildingType;
-    private Spinner borough;
     private Button createButton;
     private Button cancelButton;
 
@@ -40,6 +38,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_rat_reports);
         String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
         key = (TextView) findViewById(R.id.createKeyView);
+
         // Generate and set the unique key
         key.setText("Key: " + maxKey);
 
@@ -49,8 +48,6 @@ public class CreateRatReportActivity extends AppCompatActivity {
         city = (TextView) findViewById(R.id.createCityView);
         zipcode = (TextView) findViewById(R.id.createZipcodeView);
         buildingType = (TextView) findViewById(R.id.createLocationTextView);
-        // TODO populate spinner with proper borough strings
-        //borough = (Spinner) findViewById(R.id.createBoroughSpinner);
 
         createButton = (Button) findViewById(R.id.createReportButton);
         cancelButton = (Button) findViewById(R.id.cancelReportButton);
@@ -74,10 +71,9 @@ public class CreateRatReportActivity extends AppCompatActivity {
     }
 
     /**
-     *      Attempt to add new data to the List and leave.
-     *
-     *      Failuire to add new data will result in no action
-     *      for the time being.
+     * Creates and adds the user's new report created from the filled out views
+     * into the Database.
+     * @param v the widget that triggers creation.
      */
     public void addReport(View v) {
         Geocoder geocoder = new Geocoder(getBaseContext());

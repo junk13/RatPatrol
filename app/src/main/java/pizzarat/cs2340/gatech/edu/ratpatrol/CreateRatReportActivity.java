@@ -87,12 +87,15 @@ public class CreateRatReportActivity extends AppCompatActivity {
                     address.getText().toString(),
                     zipcode.getText().toString(),
                     city.getText().toString(),
-
-                    "Manhatten"))
+                            "Manhatten",
+                            Double.toString(addresses.get(0).getLatitude()),
+                            Double.toString(addresses.get(0).getLatitude())
+                    ),
+                    getBaseContext()
+            );
             switchToSelectionScreenActivity();
         } catch(Exception e){
             key.setError("An unknown error occurred.");
         }
     }
 
-}

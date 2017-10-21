@@ -93,7 +93,8 @@ public class CreateRatReportActivity extends AppCompatActivity {
                 toast.show();
             } else if (!isValidDate(date.getText().toString())){
                 Log.d("isvalid", date.getText().toString());
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Date", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Date" + "\n"
+                        + "Required Format: ", Toast.LENGTH_SHORT);
                 toast.show();
             } else if(!isValidGeneric(address.getText().toString())){ //ADDRESS
                 Log.d("isvalid", address.getText().toString());
@@ -132,18 +133,44 @@ public class CreateRatReportActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Determines if the the user's specified zipcode is legitimate
+     *
+     * @param zip the user's zipcode
+     * @return true if the zipcode is of valid length
+     */
     private boolean isValidZip(String zip){
         return zip.length() == 5;
     }
+
+    /**
+     * Determines if the user's specified type is legitimate using 24 hour
+     * formatted time.
+     * @param str the user's specified time
+     * @return true if the time is valid
+     */
     private boolean isValidTime(String str){
         String form = "((([0][0-9])|([1][0-2]))[:][0-5][0-9])";
         return str.matches(form);
     }
+
+    /**
+     * Determines if the user's specified date is legitimate using the
+     * following format mm/dd/year
+     * @param str the user's date
+     * @return true if the date is valid
+     */
     private boolean isValidDate(String str){
         String form = "((([0-2][\\d])|[3][0-1])[/](([0][\\d])|[1][0-2])[/][2][0][\\d][\\d])";
         return str.matches(form);
         //TODO date format accepts 0-31 for all months. Could be modified for each month.
     }
+
+    /**
+     * Generic validation method for all other String based fields.
+     * @param str the user's specified input
+     * @return true if not empty
+     */
     private boolean isValidGeneric(String str){
         return !str.equals("");
     }

@@ -19,17 +19,17 @@
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="76dp"/>
 
-        <EditText
-            android:id="@+id/createDateView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/createTimeView"
-            android:layout_below="@+id/createKeyView"
-            android:ems="10"
-            android:hint="@string/date_prompt"
-            android:inputType="date"
-            tools:layout_editor_absoluteX="26dp"
-            tools:layout_editor_absoluteY="127dp"/>
+    <EditText
+        android:id="@+id/createDateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/createTimeView"
+        android:layout_below="@+id/createKeyView"
+        android:ems="10"
+        android:hint="@string/date_prompt"
+        android:inputType="date"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="127dp"/>
 
         <EditText
             android:id="@+id/createAddressView"

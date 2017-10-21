@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
@@ -30,6 +33,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
     private TextView buildingType;
     private Button createButton;
     private Button cancelButton;
+    final static String DATE_FORMAT = "MM/dd/yyyy";
 
 
     @Override
@@ -156,10 +160,16 @@ public class CreateRatReportActivity extends AppCompatActivity {
      * @param str the user's date
      * @return true if the date is valid
      */
-    private boolean isValidDate(String str){
-        String form = "((([0-2][\\d])|[3][0-1])[/](([0][\\d])|[1][0-2])[/][2][0][\\d][\\d])";
-        return str.matches(form);
-        //TODO date format accepts 0-31 for all months. Could be modified for each month.
+    public static boolean isValidDate(String str)
+    {
+        try {
+            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+            df.setLenient(false);
+            df.parse(str);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     /**

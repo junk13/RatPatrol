@@ -102,23 +102,6 @@
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="542dp"/>
 
-        <!--<Spinner-->
-            <!--android:id="@+id/createBoroughSpinner"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_below="@+id/createBoroughLabel"/>-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/createBoroughLabel"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignStart="@+id/createLocationTextView"-->
-            <!--android:layout_below="@+id/createLocationTextView"-->
-            <!--android:layout_marginTop="23dp"-->
-            <!--android:ems="10"-->
-            <!--android:hint="Borough:" />-->
-
         <EditText
             android:id="@+id/createLocationTextView"
             android:layout_width="wrap_content"

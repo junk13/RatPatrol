@@ -7,7 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
@@ -128,8 +131,23 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     //returns arraylist of all rat reports
     public ArrayList<ReportStructure> getDateConstrainedReports(Context context) {
+        if (StaticHolder.dateRange == null)
+        {
+            return reportArrayList(context);
+        }
         String from = StaticHolder.dateRange.getFrom();
         String to = StaticHolder.dateRange.getTo();
+        if (from == null || from.isEmpty())
+        {
+            from = "2014/00/00";
+        }
+        if (to == null || to.isEmpty())
+        {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            to = dateFormat.format(date);
+        }
+
         Cursor cursor = getDateConstrainedCursor(getDate(from), getDate(to), context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();

@@ -55,11 +55,14 @@ public class FilterReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO grab text from TextView and filter reports
-                String beforeDate = ((String) beforeDateTextView.getText());
-                String afterDate = ((String) afterDateTextView.getText());
-                beforeDate = getDate(beforeDate);
-                afterDate = getDate(afterDate);
-                StaticHolder.dateRange = new DateRangeStruct(beforeDate, afterDate);
+                try {
+                    String beforeDate = (beforeDateTextView.getText().toString());
+                    String afterDate = (afterDateTextView.getText().toString());
+                    Log.d("hidden",beforeDate + " | " + afterDate);
+                    StaticHolder.dateRange = new DateRangeStruct(beforeDate, afterDate);
+                } catch (Exception e) {
+                    Log.d("hidden",e.getLocalizedMessage());
+                }
                 switchBackToSelectionScreen();
             }
         });

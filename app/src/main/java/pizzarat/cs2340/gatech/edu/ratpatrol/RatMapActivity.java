@@ -2,6 +2,7 @@ package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -61,8 +62,15 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
     //TODO: use appropiate values latlong.
     private void populateFromFilter(ArrayList<ReportStructure> reports) {
         for (ReportStructure report : reports) {
-            Double latitude = Double.parseDouble(report.getLatitude());
-            Double longitude = Double.parseDouble(report.getLongitude());
+            Double latitude = 0.;
+            Double longitude = 0.;
+            try {
+                latitude = Double.parseDouble(report.getLatitude());
+                longitude = Double.parseDouble(report.getLongitude());
+            } catch (Exception e)
+            {
+                Log.d("hidden",e.getLocalizedMessage());
+            }
             LatLng coords = new LatLng(latitude, longitude);
             mMap.addMarker(new MarkerOptions().position(coords)
                     .title("Key: " + report.getKey()).snippet(report.mapToString()));

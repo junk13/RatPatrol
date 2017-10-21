@@ -1,9 +1,13 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,11 +29,18 @@ public class FilterReportsActivity extends AppCompatActivity {
     private Button filterButton;
     private Button cancelFilterButton;
     private View calendar;
+    private DatePicker datePicker;
+    private TextView dateView;
+    private int year, month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_reports);
+
+        year = 2017;
+        month = 10;
+        day = 10;
 
         filterTextView = (TextView) findViewById(R.id.filterTextView);
         filterButton = (Button) findViewById(R.id.filterReportsButton);
@@ -53,64 +64,24 @@ public class FilterReportsActivity extends AppCompatActivity {
             }
         });
 
-        DatePicker dp = new DatePicker(getBaseContext());
-        dp.init(2017, 10, 10, DatePicker.OnDateChangedListener);
-    }
 
+//        calendar = (CalendarView) findViewById(R.id.calendarView);
+//        int[] dates = {0,0}; //{beforedate,afterdate}
+//        calendar = (CalendarView) findViewById(R.id.calendarView); // get the reference of CalendarView
+//        public void onSelectedDayChange(CalendarView calendar, int arg1, int arg2, int arg3) {
+//            int d = arg1 + arg2 + arg3;
+//            if (d > dates[0]) {
+//                dates[1] = d;
+//            }
+//            else {
+//                int temp = dates[0];
+//                dates[0] = d;
+//                dates[1] = temp;
+//            }
+//        }
 
-//    public void popupwindow() {
-//        try {
-//            // We need to get the instance of the LayoutInflater
-//
-//            LayoutInflater inflater = (LayoutInflater) FilterReportsActivity.this
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//            View layout = inflater.inflate(R.layout.popupcalendar,
-//                    (ViewGroup) findViewById(R.id.popcal));
-//
-//            pwindo = new PopupWindow(layout, 1200, 1500, true);
-//            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-//
-//            calendar = (CalendarView) layout.findViewById(R.id.calendar);
-//
-//            // sets whether to show the week number.
-//            calendar.setShowWeekNumber(false);
-//
-//            // sets the first day of week according to Calendar.
-//            // here we set Monday as the first day of the Calendar
-//            calendar.setFirstDayOfWeek(2);
-//
-//            //The background color for the selected week.
-//            calendar.setSelectedWeekBackgroundColor(getResources().getColor(R.color.green));
-//
-//            //sets the color for the dates of an unfocused month.
-//            calendar.setUnfocusedMonthDateColor(getResources().getColor(R.color.transparent));
-//
-//            //sets the color for the separator line between weeks.
-//            calendar.setWeekSeparatorLineColor(getResources().getColor(R.color.transparent));
-//
-//            //sets the color for the vertical bar shown at the beginning and at the end of the selected date.
-//            calendar.setSelectedDateVerticalBar(R.color.darkgreen);
-//
-//            //sets the listener to be notified upon selected date change.
-//            calendar.setOnDateChangeListener(new OnDateChangeListener() {
-//                //show the selected date as a toast
-//                @Override
-//                public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-//                    Toast.makeText(getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-//                }
-//            });
-//
-//            btnSubmit = (Button) layout.findViewById(R.id.button2);
-//            //btnSubmit.setOnClickListener(submit_button_click_listener);
-//
-//            btnClosePopup = (Button) layout.findViewById(R.id.button1);
-//            btnClosePopup.setOnClickListener(cancel_button_click_listener);}
-//
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    }
-//}
+}
+
 
     /**
      * Switches to the selection screen after the filter or cancel button has

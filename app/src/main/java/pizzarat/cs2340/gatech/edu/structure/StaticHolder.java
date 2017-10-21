@@ -17,7 +17,8 @@ public class StaticHolder {
     public static SQLiteReportBroker globalBroker = new SQLiteReportBroker();
     public static ArrayList<ReportStructure> userReports = new ArrayList<>();
 
-    //TODO public void populate(){}
+    //stores the date range set by the filter. used in map for filtering markers.
+    public static DateRangeStruct dateRange;
 
     public static void add(ReportStructure report) {
         userReports.add(report);
@@ -27,8 +28,6 @@ public class StaticHolder {
         return userReports;
     }
 
-    //TODO public void remove(){}
-    //TODO public void clear(){}
 }
 
 /**

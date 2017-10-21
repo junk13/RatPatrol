@@ -38,11 +38,10 @@ public class CreateRatReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_rat_reports);
-
+        String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
         key = (TextView) findViewById(R.id.createKeyView);
         // Generate and set the unique key
-        key.setText("Key: " +
-                Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1));
+        key.setText("Key: " + maxKey);
 
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);
@@ -109,9 +108,10 @@ public class CreateRatReportActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have City", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
+                String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
                 reportBroker.writeToReportDb(
                         new ReportStructure(
-                                key.getText().toString(),
+                                maxKey,
                                 buildingType.getText().toString(),
                                 time.getText().toString(),
                                 date.getText().toString(),
@@ -127,6 +127,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
                 switchToSelectionScreenActivity();
             }
         } catch (Exception e) {
+            Log.d("Cunt", "kill me now");
             key.setError("An unknown error occurred.");
         }
     }

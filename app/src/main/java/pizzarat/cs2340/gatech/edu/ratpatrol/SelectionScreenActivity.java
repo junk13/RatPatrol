@@ -126,7 +126,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
      * Switches to the WelcomeActivity from the SelectionScreenActivity.
      */
     public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(SelectionScreenActivity.this, Welcome.class);
+        Intent switchToWelcomeActivity = new Intent(SelectionScreenActivity.this, WelcomeActivity.class);
         SelectionScreenActivity.this.startActivity(switchToWelcomeActivity);
     }
 

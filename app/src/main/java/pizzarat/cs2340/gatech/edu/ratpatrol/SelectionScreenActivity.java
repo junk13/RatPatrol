@@ -131,10 +131,10 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the NewYorkRatArchiveActivity from the SelectionScreenActivity.
+     * Switches to the RatArchiveActivity from the SelectionScreenActivity.
      */
     public void switchToNYRatArchiveActivity() {
-        Intent switchToNYRatArchiveActivity = new Intent(this, NewYorkRatArchiveActivity.class);
+        Intent switchToNYRatArchiveActivity = new Intent(this, RatArchiveActivity.class);
         this.startActivity(switchToNYRatArchiveActivity);
     }
 

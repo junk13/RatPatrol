@@ -20,9 +20,9 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
- * Represents the screen that displays all the rat sightings in New York.
+ * Represents the screen that displays all the rat sightings in the database.
  */
-public class NewYorkRatArchiveActivity extends AppCompatActivity {
+public class RatArchiveActivity extends AppCompatActivity {
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     ArrayList<ReportStructure> posts = new ArrayList<>();
     // TODO change list to Rat Sightings

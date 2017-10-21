@@ -15,7 +15,7 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 
 /**
- * Created by evieb on 10/4/2017.
+ * Created by Evie Brown
  */
 
 public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate exception logging
@@ -38,18 +38,12 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         values.put(RatSightingDb.getReportTableZipcodeCol(), rReport.getZipCode());
         values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
         values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
-
+        values.put(RatSightingDb.getReportTableLatitudeCol(), rReport.getLatitude());
+        values.put(RatSightingDb.getReportTableLongitudeCol(), rReport.getLongitude());
 
         // Insert the new row, returning the primary key value of the new row
         long id = writableDb.insert(RatSightingDb.getTableName(), null, values);
-        try{
-//            Log.d("Cunt", ""+id);
-//            writableDb.execSQL("INSERT INTO " + RatSightingDb.getTableName() +
-//                    "\nVALUES (12, dsss, addd, daaf, dskaf, sjafds, fdjsa, fdsaj);");
-//            Log.d("Cunt", "this is a triumph");
-        } catch (Exception e) {
-            Log.d("Cunt", e.getLocalizedMessage());
-        }
+
         ratDb.close();
 
         return id;

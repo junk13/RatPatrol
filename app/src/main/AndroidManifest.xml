@@ -10,7 +10,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         buildingType permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
@@ -38,7 +38,7 @@
         </activity>
         <activity android:name=".SelectionScreenActivity"/>
         <activity android:name=".NewYorkRatArchiveActivity"/>
-        <activity android:name=".UserRatReportsActivity"/>
+        <activity android:name=".CreateRatReportActivity" />
         <activity android:name=".DetailedRatReportViewActivity">
         </activity>
         <!--
@@ -57,7 +57,7 @@
             android:name=".RatMapActivity"
             android:label="@string/title_activity_rat_map">
         </activity>
-        <activity android:name="pizzarat.cs2340.gatech.edu.sqlite.FilterReportsActivity">
+        <activity android:name=".FilterReportsActivity">
         </activity>
     </application>
 

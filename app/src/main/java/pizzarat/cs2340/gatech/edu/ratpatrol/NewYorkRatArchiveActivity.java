@@ -16,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
-import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * Represents the screen that displays all the rat sightings in New York.
  */
 public class NewYorkRatArchiveActivity extends AppCompatActivity {
+    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    ArrayList<ReportStructure> posts = new ArrayList<>();
     // TODO change list to Rat Sightings
     private RecyclerView.LayoutManager layoutManager;
     private List<String> listData = new ArrayList<>();
-    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
-    ArrayList<ReportStructure> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,30 +41,23 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerAdapter adapter = new RecyclerAdapter(listData, this);
         recyclerView.setAdapter(adapter);
-        //reportBroker = new SQLiteReportBroker();
 
     }
 
     // TODO change to list of rat sighting objects
     private void setupList() {
+        Log.d("hidden","setupList()");
         try {
-            posts = new ArrayList<>();
-            posts.addAll(ReportHolder.getGlobalReports());
-            posts.addAll( reportBroker.getListOfReports(this.getApplicationContext()));
-            /** PREVIOUS CVS FILED CODE BELOW
-            *   reportBroker.getListOfReports(this.getApplicationContext());
-            */
+            //posts = reportBroker.getDateConstrainedReports("10/22/2016","10/23/2016",getBaseContext());
+            posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
+            //posts = reportBroker.reportArrayList(getBaseContext());
         } catch (Exception e){
-            Log.d("CUNT", "list of report problems");
+            Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }
         for(int i = 0;  i < posts.size(); i++) {
-            String newElement = posts.get(i).getLocation();
-            Log.d("Element", newElement);
+            String newElement = posts.get(i).getBuildingType();
             listData.add(newElement);
         }
-//        for(int i = 0; i < listData.size(); i++) {
-//            listData.add(strings.remove(0));
-//        }
     }
 
     /**
@@ -74,9 +67,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
      */
     public void switchToReportDetails(int report) {
         Intent switchToDetailedReports = new Intent(this, DetailedRatReportViewActivity.class);
-        //switchToDetailedReports.putExtra("Report","Dummy");
-        ReportHolder.data = posts.get(report);
-        //switchToDetailedReports.putExtra("Report",posts.get(1));
+        StaticHolder.data = posts.get(report);
         this.startActivity(switchToDetailedReports);
     }
 

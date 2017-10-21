@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.UserRatReportsActivity">
+    tools:context="pizzarat.cs2340.gatech.edu.ratpatrol.CreateRatReportActivity">
 
         <EditText
             android:id="@+id/createTimeView"
@@ -126,7 +126,7 @@
             android:layout_alignStart="@+id/createZipcodeView"
             android:layout_below="@+id/createZipcodeView"
             android:ems="10"
-            android:hint="@string/location_prompt"
+            android:hint="@string/building_type_prompt"
             android:inputType="textPostalAddress" />
 
 </RelativeLayout>

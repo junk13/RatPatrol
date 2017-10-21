@@ -14,8 +14,8 @@ public class ReportStructure {
     private String zipCode;                // The zip code of the rat report
     private String city;                   // The city of rat report
     private String borough;                // The borough of the rat sighting;
-//    private String latitude;               // The latitude of the sighting
-//    private String longitude;              // The longitude of the sighting
+    private String latitude;               // The latitude of the sighting
+    private String longitude;              // The longitude of the sighting
     /**
      * Creates the most specific rat sighting report by specifying all fields.
      * @param key the unique key assigned to each report
@@ -40,8 +40,8 @@ public class ReportStructure {
         this.zipCode = zipCode;
         this.city = city;
         this.borough = borough;
-//        this.latitude = latitude;
-//        this.longitude = longitude;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
@@ -178,42 +178,42 @@ public class ReportStructure {
      * @return the latitude of the sighting
      */
 
-    /*
+
     public String getLatitude() {
         return latitude;
     }
-    */
+
 
     /**
      * Sets the latitude of the rat report to the specified latitude
      * @param latitude the specified latitude
      */
-    /*
+
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
-    */
+
 
     /**
      * Returns the longitude of this rat sighting
      * @return the longitude of the sighting
      */
-    /*
+
     public String getLongitude() {
         return longitude;
     }
-    */
+
 
     /**
      * Sets the longitude of the rat report to the specified latitude
      * @param longitude the specified latitude
      */
 
-    /*
+
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-    */
+
 
     /**
      * Returns a mini description of the rat report to be used to display

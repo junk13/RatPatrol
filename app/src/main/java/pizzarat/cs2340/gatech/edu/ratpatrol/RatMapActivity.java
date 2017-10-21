@@ -10,6 +10,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+
 /**
  * Represents the screen where the user can pick different fields about a rat
  * sighting report to generate a Google Maps of those reports that fix their
@@ -42,11 +44,22 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // TODO change this to display rat reports
-        // Add a marker in Sydney and move the camera
-        LatLng newyork = new LatLng(41, -74);
-        mMap.addMarker(new MarkerOptions().position(newyork).title("Temporary marker in New York"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(newyork));
+
+    }
+
+    /**
+     * private helper to populate the map
+     *
+     * @param reports : a list of all reports to add to the map
+     */
+    //TODO: use appropiate values latlong.
+    private void populateFromFilter(ReportStructure[] reports) {
+        for (ReportStructure report : reports) {
+            LatLng coords = new LatLng(41, -74);
+            mMap.addMarker(new MarkerOptions().position(coords).title("Temporary marker in New York"));
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(41, -74)));
     }
 
 }

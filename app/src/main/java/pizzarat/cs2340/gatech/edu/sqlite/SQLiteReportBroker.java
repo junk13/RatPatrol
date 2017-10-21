@@ -39,6 +39,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
         values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
 
+
         // Insert the new row, returning the primary key value of the new row
         long id = writableDb.insert(RatSightingDb.getTableName(), null, values);
         try{
@@ -259,7 +260,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     public boolean isEmpty(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String count = "SELECT count(*) FROM " + rDb.getTableName();
+        String count = "SELECT count(*) FROM " + RatSightingDb.getTableName();
         Cursor mcursor = readableDb.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
@@ -286,7 +287,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     public int getMaxKey(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String query = "SELECT MAX(" + RatSightingDb.getReportTableKeyCol() + ") FROM " + rDb.getTableName();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableKeyCol() + ") FROM " + RatSightingDb.getTableName();
         Cursor mcursor = readableDb.rawQuery(query, null);
         mcursor.moveToFirst();
         int maxKey = mcursor.getInt(0);
@@ -298,7 +299,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     public boolean isPopulated(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String count = "SELECT count(*) FROM " + rDb.getTableName();
+        String count = "SELECT count(*) FROM " + RatSightingDb.getTableName();
         Cursor mcursor = readableDb.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);

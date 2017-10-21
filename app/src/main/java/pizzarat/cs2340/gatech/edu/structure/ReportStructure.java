@@ -31,7 +31,7 @@ public class ReportStructure {
     // TODO fix constructor for lat and long
     public ReportStructure(String key, String location, String date, String time,
                            String address, String zipCode, String city,
-                           String borough) {
+                           String borough, String latitude, String longitude) {
         this.key = key;
         this.location = location;
         this.date = date;

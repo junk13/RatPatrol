@@ -248,7 +248,9 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
                     cursor.getString(4),    //address
                     cursor.getString(5),    //zipcode
                     cursor.getString(6),    //city
-                    cursor.getString(7)     //borough
+                    cursor.getString(7),    //borough
+                    cursor.getString(8),    //latitude
+                    cursor.getString(9)     //longitude
 
             ));
         }

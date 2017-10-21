@@ -112,7 +112,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                RatSightingDb.getReportTableKeyCol() + " ASC";
+                RatSightingDb.getReportTableKeyCol() + " DESC";
 
         return readableDb.query(
                 RatSightingDb.getTableName(),            // The table to query

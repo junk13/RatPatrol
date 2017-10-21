@@ -47,7 +47,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         longitude = (TextView) findViewById(R.id.longitudeTextView);
 
         ReportStructure report = StaticHolder.data;
-        key.setText("Key: " + reportBroker.getMaxKey(getBaseContext()));
+        key.setText("Key: " + report.getKey());
         date.setText("Date: " + report.getDate());
         time.setText("Time: " + report.getTime());
         address.setText(""+ report.getAddress());
@@ -55,7 +55,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         zipcode.setText("Zip: "+report.getZipCode());
         borough.setText(""+report.getBorough());
         location.setText("" + report.getBuildingType());
-        // latitude.setText("Latitude: " + report.getLatitude());
-        // longitude.setText("Longitude: " + report.getLongitude());
+        latitude.setText("Latitude: " + report.getLatitude());
+        longitude.setText("Longitude: " + report.getLongitude());
     }
 }

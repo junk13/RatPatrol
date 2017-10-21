@@ -31,7 +31,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
         //in X column, set X
         values.put(RatSightingDb.getReportTableKeyCol(), rReport.getKey());
-        values.put(RatSightingDb.getReportTableLocationCol(), rReport.getLocation());
+        values.put(RatSightingDb.getReportTableLocationCol(), rReport.getBuildingType());
         values.put(RatSightingDb.getReportTableDateCol(), rReport.getDate());
         values.put(RatSightingDb.getReportTableTimeCol(), rReport.getTime());
         values.put(RatSightingDb.getReportTableAddressCol(), rReport.getAddress());

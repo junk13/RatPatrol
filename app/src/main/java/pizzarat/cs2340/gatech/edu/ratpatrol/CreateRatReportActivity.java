@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -113,7 +114,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
                         address.getText().toString(),
                         zipcode.getText().toString(),
                         city.getText().toString(),
-                        "Manhatten"));
+                        "Manhatten","0","0"),getApplicationContext());
                 switchToSelectionScreenActivity();
             }
         } catch (Exception e){

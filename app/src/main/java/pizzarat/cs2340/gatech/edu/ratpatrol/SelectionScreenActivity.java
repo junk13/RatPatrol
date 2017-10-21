@@ -32,11 +32,6 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  * @author Harrison Banh
  */
 public class SelectionScreenActivity extends AppCompatActivity {
-    private Button logoutButton;
-    private Button ratArchiveButton;
-    private Button createReport;
-    private Button ratMapButton;
-    private Button filterScreenButton;
     private BackgroundDataTask bdTask = null;
     private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private boolean csvLoaded = false;
@@ -51,7 +46,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selection_screen);
 
         // Set logout button function
-        logoutButton = (Button) findViewById(R.id.logoutButton);
+        Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +55,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // Set Rat Archive button function
-        ratArchiveButton = (Button) findViewById(R.id.ratArchiveButton);
+        Button ratArchiveButton = (Button) findViewById(R.id.ratArchiveButton);
         ratArchiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +69,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // Sets create a report button function
-        createReport = (Button) findViewById(R.id.createReportButton);
+        Button createReport = (Button) findViewById(R.id.createReportButton);
         createReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +78,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // Sets the Rat Map button function
-        ratMapButton = (Button) findViewById(R.id.ratMapButton);
+        Button ratMapButton = (Button) findViewById(R.id.ratMapButton);
         ratMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +87,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         });
 
         // Sets the Filter reports button function
-        filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
+        Button filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
         filterScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,14 +107,6 @@ public class SelectionScreenActivity extends AppCompatActivity {
             Log.d("hidden","it's populated, boi");
             csvLoaded = true;
         }
-    }
-
-    /**
-     * Switches to the LoginActivity from the SelectionScreenActivity.
-     */
-    public void switchBackToLoginActivity() {
-        Intent startSelectionScreenActivity = new Intent(SelectionScreenActivity.this, LoginActivity.class);
-        SelectionScreenActivity.this.startActivity(startSelectionScreenActivity);
     }
 
     /**

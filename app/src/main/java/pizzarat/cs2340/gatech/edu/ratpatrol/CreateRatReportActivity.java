@@ -92,7 +92,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
                             address.getText().toString(),
                             zipcode.getText().toString(),
                             city.getText().toString(),
-                            "Manhatten",
+                            "Not specified",
                             Double.toString(addresses.get(0).getLatitude()),
                             Double.toString(addresses.get(0).getLatitude())
                     ),

@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
-import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * @author Harrison Banh
@@ -46,7 +46,7 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         latitude = (TextView) findViewById(R.id.latitudeTextView);
         longitude = (TextView) findViewById(R.id.longitudeTextView);
 
-        ReportStructure report = ReportHolder.data;
+        ReportStructure report = StaticHolder.data;
         key.setText("Key: " + reportBroker.getMaxKey(getBaseContext()));
         date.setText("Date: " + report.getDate());
         time.setText("Time: " + report.getTime());

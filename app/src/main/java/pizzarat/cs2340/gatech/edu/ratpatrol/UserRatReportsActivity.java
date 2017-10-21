@@ -1,18 +1,16 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
-import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * Represents the screen of to create a rat sighting report.
@@ -84,7 +82,7 @@ public class UserRatReportsActivity extends AppCompatActivity {
                     zipcode.getText().toString(),
                     city.getText().toString(),
                     "Manhatten");
-            ReportHolder.add(newReport);
+            StaticHolder.add(newReport);
             switchToSelectionScreenActivity();
         } catch(Exception e){
             key.setError("An unknown error occurred.");

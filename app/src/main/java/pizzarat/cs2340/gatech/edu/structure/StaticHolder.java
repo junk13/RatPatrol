@@ -12,7 +12,7 @@ import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
  *      This method holds local custom reports.
  *      This prevents persistence, which we do not want for now.
  */
-public class ReportHolder {
+public class StaticHolder {
     public static ReportStructure data;
     public static SQLiteReportBroker globalBroker = new SQLiteReportBroker();
     public static ArrayList<ReportStructure> userReports = new ArrayList<>();

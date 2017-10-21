@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
-import pizzarat.cs2340.gatech.edu.structure.ReportHolder;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * Represents the screen that displays all the rat sightings in New York.
@@ -67,7 +67,7 @@ public class NewYorkRatArchiveActivity extends AppCompatActivity {
      */
     public void switchToReportDetails(int report) {
         Intent switchToDetailedReports = new Intent(this, DetailedRatReportViewActivity.class);
-        ReportHolder.data = posts.get(report);
+        StaticHolder.data = posts.get(report);
         this.startActivity(switchToDetailedReports);
     }
 

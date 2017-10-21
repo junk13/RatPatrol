@@ -34,7 +34,7 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 public class SelectionScreenActivity extends AppCompatActivity {
     private Button logoutButton;
     private Button ratArchiveButton;
-    private Button userReportsButton;
+    private Button createReport;
     private Button ratMapButton;
     private Button filterScreenButton;
     private BackgroundDataTask bdTask = null;
@@ -50,7 +50,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_screen);
 
-        // Logout Function
+        // Set logout button function
         logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +59,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
-        // New York Rat Archive
+        // Set Rat Archive button function
         ratArchiveButton = (Button) findViewById(R.id.ratArchiveButton);
         ratArchiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,21 +73,31 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
-        // User Reports Activity
-        userReportsButton = (Button) findViewById(R.id.createReportButton);
-        userReportsButton.setOnClickListener(new View.OnClickListener() {
+        // Sets create a report button function
+        createReport = (Button) findViewById(R.id.createReportButton);
+        createReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToUserRatReportsActivity();
             }
         });
 
-        // Rat Map Activity
+        // Sets the Rat Map button function
         ratMapButton = (Button) findViewById(R.id.ratMapButton);
         ratMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToRatMapActivity();
+            }
+        });
+
+        // Sets the Filter reports button function
+        filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
+        filterScreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //switch to Filter Reports Activity
+                switchToFilterReportsScreen();
             }
         });
 
@@ -102,16 +112,6 @@ public class SelectionScreenActivity extends AppCompatActivity {
             Log.d("hidden","it's populated, boi");
             csvLoaded = true;
         }
-        //Filter reports button
-        filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
-        filterScreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //switch to Filter Reports Activity
-                switchToFilterReportsScreen();
-            }
-        });
-
     }
 
     /**

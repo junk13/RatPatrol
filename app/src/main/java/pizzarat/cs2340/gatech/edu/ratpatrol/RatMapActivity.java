@@ -10,6 +10,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 /**
@@ -43,7 +46,10 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        populateFromFilter();
+        SQLiteReportBroker report = new SQLiteReportBroker();
+        //create array list from reports within the static date range in StaticHelper.
+        ArrayList<ReportStructure> reportArray = report.getDateConstrainedReports(getBaseContext());
+//        populateFromFilter(reportArray);
 
     }
 

@@ -80,7 +80,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
      *      Failuire to add new data will result in no action
      *      for the time being.
      */
-    public void addReport(View v){
+    public void addReport(View v) {
         Geocoder geocoder = new Geocoder(getBaseContext());
         List<Address> addresses = null;
         try {
@@ -106,18 +106,24 @@ public class CreateRatReportActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have City", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
-                reportBroker.writeToReportDb(new ReportStructure(
-                        key.getText().toString(),
-                        buildingType.getText().toString(),
-                        time.getText().toString(),
-                        date.getText().toString(),
-                        address.getText().toString(),
-                        zipcode.getText().toString(),
-                        city.getText().toString(),
-                        "Manhatten","0","0"),getApplicationContext());
+                reportBroker.writeToReportDb(
+                        new ReportStructure(
+                                key.getText().toString(),
+                                buildingType.getText().toString(),
+                                time.getText().toString(),
+                                date.getText().toString(),
+                                address.getText().toString(),
+                                zipcode.getText().toString(),
+                                city.getText().toString(),
+                                "Manhatten",
+                                Double.toString(addresses.get(0).getLatitude()),
+                                Double.toString(addresses.get(0).getLatitude())
+                        ),
+                        getBaseContext()
+                );
                 switchToSelectionScreenActivity();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             key.setError("An unknown error occurred.");
         }
     }

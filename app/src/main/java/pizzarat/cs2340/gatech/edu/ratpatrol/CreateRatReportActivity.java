@@ -20,9 +20,10 @@ import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
 /**
- * Represents the screen of to create a rat sighting report.
+ * Represents the screen to create a rat sighting report.
  */
 public class CreateRatReportActivity extends AppCompatActivity {
+    final static String DATE_FORMAT = "MM/dd/yyyy";
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private TextView key;
     private TextView date;
@@ -31,10 +32,26 @@ public class CreateRatReportActivity extends AppCompatActivity {
     private TextView city;
     private TextView zipcode;
     private TextView buildingType;
-    private Button createButton;
-    private Button cancelButton;
-    final static String DATE_FORMAT = "MM/dd/yyyy";
 
+    /**
+     * Determines if the user's specified date is legitimate using the
+     * following format mm/dd/year
+     *
+     * @param str the user's date
+     * @return true if the date is valid
+     */
+    public static boolean isValidDate(String str) {
+        try {
+            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+            df.setLenient(false);
+            df.parse(str);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    // TODO grab data, create report, save to DB, generate unique key
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +70,8 @@ public class CreateRatReportActivity extends AppCompatActivity {
         zipcode = (TextView) findViewById(R.id.createZipcodeView);
         buildingType = (TextView) findViewById(R.id.createLocationTextView);
 
-        createButton = (Button) findViewById(R.id.createReportButton);
-        cancelButton = (Button) findViewById(R.id.cancelReportButton);
+        Button createButton = (Button) findViewById(R.id.createReportButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelReportButton);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +81,8 @@ public class CreateRatReportActivity extends AppCompatActivity {
         });
     }
 
-    // TODO grab data, create report, save to DB, generate unique key
-
     /**
-     *      Switches back to the selection screen after submission/cancellation.
+     * Switches back to the selection screen after submission/cancellation.
      */
     public void switchToSelectionScreenActivity() {
         Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
@@ -152,24 +167,6 @@ public class CreateRatReportActivity extends AppCompatActivity {
     private boolean isValidTime(String str){
         String form = "((([0][0-9])|([1][0-2]))[:][0-5][0-9])";
         return str.matches(form);
-    }
-
-    /**
-     * Determines if the user's specified date is legitimate using the
-     * following format mm/dd/year
-     * @param str the user's date
-     * @return true if the date is valid
-     */
-    public static boolean isValidDate(String str)
-    {
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            df.setLenient(false);
-            df.parse(str);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
     }
 
     /**

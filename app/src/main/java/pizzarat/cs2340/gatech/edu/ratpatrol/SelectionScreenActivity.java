@@ -96,6 +96,16 @@ public class SelectionScreenActivity extends AppCompatActivity {
             }
         });
 
+        // Sets the View Graph button function
+        Button graphButton = (Button) findViewById(R.id.graphButton);
+        graphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToReportGraphScreen();
+            }
+        });
+
+
         Log.d("hidden",""+reportBroker.getMaxKey(getBaseContext()));
         if (!reportBroker.isPopulated(this.getBaseContext())){
             Log.d("hidden","it's not populated, boi");
@@ -142,7 +152,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the FilterReportsActivity
+     * Switches to the FilterReportsActivity.
      */
     public void switchToFilterReportsScreen() {
         Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
@@ -154,6 +164,14 @@ public class SelectionScreenActivity extends AppCompatActivity {
      */
     public void logout() {
        switchBackToWelcomeActivity();
+    }
+
+    /**
+     * Switches to the ReportGraphActivity.
+     */
+    public void switchToReportGraphScreen() {
+        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+        startActivity(switchToReportGraphScreenActivity);
     }
 
     /**

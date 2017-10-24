@@ -10,4 +10,6 @@ public class ReportGraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_graph);
     }
+
+
 }

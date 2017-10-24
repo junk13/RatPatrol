@@ -172,6 +172,8 @@ public class SelectionScreenActivity extends AppCompatActivity {
     public void switchToReportGraphScreen() {
         Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
+                + "button on the Selection Screen.", Toast.LENGTH_LONG).show();
     }
 
     /**

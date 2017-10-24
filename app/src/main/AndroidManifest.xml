@@ -38,8 +38,8 @@
         </activity>
         <activity android:name=".SelectionScreenActivity"/>
         <activity android:name=".RatArchiveActivity"/>
-        <activity android:name=".CreateRatReportActivity" />
-        <activity android:name=".DetailedRatReportViewActivity">
+        <activity android:name=".CreateReportActivity"/>
+        <activity android:name=".DetailedReportViewActivity">
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -58,6 +58,8 @@
             android:label="@string/title_activity_rat_map">
         </activity>
         <activity android:name=".FilterReportsActivity">
+        </activity>
+        <activity android:name=".ReportGraphActivity">
         </activity>
     </application>
 

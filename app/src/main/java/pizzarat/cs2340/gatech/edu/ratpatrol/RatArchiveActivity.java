@@ -31,7 +31,7 @@ public class RatArchiveActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_york_rat_archive);
+        setContentView(R.layout.activity_rat_archive);
 
         setupList();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -65,7 +65,7 @@ public class RatArchiveActivity extends AppCompatActivity {
      * @param report the specific report to display in detail.
      */
     public void switchToReportDetails(int report) {
-        Intent switchToDetailedReports = new Intent(this, DetailedRatReportViewActivity.class);
+        Intent switchToDetailedReports = new Intent(this, DetailedReportViewActivity.class);
         StaticHolder.data = posts.get(report);
         this.startActivity(switchToDetailedReports);
     }

@@ -73,7 +73,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         createReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToUserRatReportsActivity();
+                switchToCreateReportActivity();
             }
         });
 
@@ -126,11 +126,11 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the CreateRatReportActivity.
+     * Switches to the CreateReportActivity.
      */
-    public void switchToUserRatReportsActivity() {
-        Intent switchToUserRatReportsActivity = new Intent(this, CreateRatReportActivity.class);
-        this.startActivity(switchToUserRatReportsActivity);
+    public void switchToCreateReportActivity() {
+        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+        this.startActivity(switchToCreateReportActivity);
     }
 
     /**

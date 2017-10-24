@@ -13,12 +13,12 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * Represents the detailed view of one of the archived rat reports in New York
  * City.
  */
-public class DetailedRatReportViewActivity extends AppCompatActivity {
+public class DetailedReportViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_rat_report_view);
+        setContentView(R.layout.activity_detailed_report_view);
 
         Intent data = this.getIntent();
 

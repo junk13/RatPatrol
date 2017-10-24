@@ -22,7 +22,7 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 /**
  * Represents the screen to create a rat sighting report.
  */
-public class CreateRatReportActivity extends AppCompatActivity {
+public class CreateReportActivity extends AppCompatActivity {
     final static String DATE_FORMAT = "MM/dd/yyyy";
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private TextView key;
@@ -56,7 +56,7 @@ public class CreateRatReportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_rat_reports);
+        setContentView(R.layout.activity_create_report);
         String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
         key = (TextView) findViewById(R.id.createKeyView);
 

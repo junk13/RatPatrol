@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SelectionScreenActivity"/>
-        <activity android:name=".RatArchiveActivity"/>
+        <activity android:name=".ArchiveActivity"/>
         <activity android:name=".CreateReportActivity"/>
         <activity android:name=".DetailedReportViewActivity">
         </activity>
@@ -54,7 +54,7 @@
             android:value="@string/google_maps_key"/>
 
         <activity
-            android:name=".RatMapActivity"
+            android:name=".MapActivity"
             android:label="@string/title_activity_rat_map">
         </activity>
         <activity android:name=".FilterReportsActivity">

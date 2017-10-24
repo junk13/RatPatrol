@@ -22,7 +22,7 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 /**
  * Represents the screen that displays all the rat sightings in the database.
  */
-public class RatArchiveActivity extends AppCompatActivity {
+public class ArchiveActivity extends AppCompatActivity {
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     ArrayList<ReportStructure> posts = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
@@ -31,7 +31,7 @@ public class RatArchiveActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rat_archive);
+        setContentView(R.layout.activity_archive);
 
         setupList();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

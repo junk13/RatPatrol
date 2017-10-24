@@ -118,10 +118,10 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the RatArchiveActivity from the SelectionScreenActivity.
+     * Switches to the ArchiveActivity from the SelectionScreenActivity.
      */
     public void switchToNYRatArchiveActivity() {
-        Intent switchToNYRatArchiveActivity = new Intent(this, RatArchiveActivity.class);
+        Intent switchToNYRatArchiveActivity = new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToNYRatArchiveActivity);
     }
 
@@ -134,10 +134,10 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the RatMapActivity.
+     * Switches to the MapActivity.
      */
     public void switchToRatMapActivity() {
-        Intent switchToRatMapActivity = new Intent(this, RatMapActivity.class);
+        Intent switchToRatMapActivity = new Intent(this, MapActivity.class);
         this.startActivity(switchToRatMapActivity);
     }
 

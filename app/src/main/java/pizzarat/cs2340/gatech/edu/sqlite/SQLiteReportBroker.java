@@ -105,7 +105,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
 
     /**
-     * getter for SQLite cursor Report database
+     * getter for SQLite substring search cursor Report database
      * @return cursor for which to read database info from
      */
     private Cursor getSubstringReportsCursor(String keystring, Context c) {
@@ -129,7 +129,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     }
 
-    //returns arraylist of all rat reports
+    /**
+     * Gets rat reports created between dates
+     * @param context context from which function is called
+     * @return rat reports that fit the constraints
+     */
     public ArrayList<ReportStructure> getDateConstrainedReports(Context context) {
         if (StaticHolder.dateRange == null)
         {
@@ -155,7 +159,12 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return aList;
     }
 
-    //returns arraylist of all rat reports
+    /**
+     * Gets rat reports that contain a substring
+     * @param keystring desired substring
+     * @param context context from which function is called
+     * @return rat reports that fit the constraints
+     */
     public ArrayList<ReportStructure> getReportsWithSubstring(String keystring, Context context) {
         Cursor cursor = getSubstringReportsCursor(keystring, context);
         //ArrayList to return
@@ -164,8 +173,12 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return aList;
     }
 
-    //TODO
-    //returns arraylist of all rat reports
+    /**
+     * Gets rat reports with substring in specified column
+     * @param keystring desired column and substring, connected by a colon
+     * @param context context from which function is called
+     * @return rat reports that fit the constraints
+     */
     public ArrayList<ReportStructure> getReportsWithSubstringSpecified(String keystring, Context context) {
         String[] sl = keystring.split(":"); //{column to search, substring}
         //if sl[0] not a valid column, do location search on sl[1] (or search whole thing, get 0 results)
@@ -181,7 +194,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return aList;
     }
 
-    //returns arraylist of all rat reports
+    /**
+     * Gets all rat reports
+     * @param context context from which function is called
+     * @return all rat reports
+     */
     public ArrayList<ReportStructure> reportArrayList(Context context) {
         Cursor cursor = getCursor(context);
         //ArrayList to return
@@ -190,6 +207,12 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return aList;
     }
 
+
+    /**
+     * Gets stringified database contents
+     * @param c context from which function is called
+     * @return string of database contents
+     */
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
@@ -205,7 +228,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     }
 
-
+    /**
+     * Checks if database is empty
+     * @param c context from which function is called
+     * @return true if empty
+     */
     public boolean isEmpty(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
@@ -235,6 +262,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return maxKey;
     }
 
+    /**
+     * Checks if CSV data completely imported
+     * @param c context from which function is called
+     * @return true if data imported
+     */
     public boolean isPopulated(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
@@ -246,6 +278,12 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     }
 
     //TODO: Move to utility class
+
+    /**
+     * Converts dd/MM/yyyy to yyyy/MM/dd
+     * @param s date in dd/MM/yyyy format
+     * @return reformatted date
+     */
     private String getDate(String s) {
         String[] date = s.split("/");
         return date[2] + "/" + date[1] + "/" + date[0];

@@ -60,7 +60,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (csvLoaded) {
-                    switchToNYRatArchiveActivity();
+                    switchToArchiveActivity();
                 }
                 else {
                     Toast.makeText(getBaseContext(), "Waiting for CSV data to load in!", Toast.LENGTH_SHORT).show();
@@ -82,7 +82,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         ratMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRatMapActivity();
+                switchToMapActivity();
             }
         });
 
@@ -120,9 +120,9 @@ public class SelectionScreenActivity extends AppCompatActivity {
     /**
      * Switches to the ArchiveActivity from the SelectionScreenActivity.
      */
-    public void switchToNYRatArchiveActivity() {
-        Intent switchToNYRatArchiveActivity = new Intent(this, ArchiveActivity.class);
-        this.startActivity(switchToNYRatArchiveActivity);
+    public void switchToArchiveActivity() {
+        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+        this.startActivity(switchToArchiveActivity);
     }
 
     /**
@@ -136,9 +136,9 @@ public class SelectionScreenActivity extends AppCompatActivity {
     /**
      * Switches to the MapActivity.
      */
-    public void switchToRatMapActivity() {
-        Intent switchToRatMapActivity = new Intent(this, MapActivity.class);
-        this.startActivity(switchToRatMapActivity);
+    public void switchToMapActivity() {
+        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+        this.startActivity(switchToMapActivity);
     }
 
     /**

@@ -107,6 +107,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
         }
         return aList;
     }
+
     //return database in string
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();

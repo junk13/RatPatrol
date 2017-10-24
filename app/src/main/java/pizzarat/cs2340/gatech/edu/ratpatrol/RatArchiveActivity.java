@@ -25,7 +25,6 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 public class RatArchiveActivity extends AppCompatActivity {
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     ArrayList<ReportStructure> posts = new ArrayList<>();
-    // TODO change list to Rat Sightings
     private RecyclerView.LayoutManager layoutManager;
     private List<String> listData = new ArrayList<>();
 
@@ -139,11 +138,21 @@ public class RatArchiveActivity extends AppCompatActivity {
         }
 
 
+        /**
+         * Sets the on click functionality of the specified widget.
+         *
+         * @param v the specified widget
+         */
         @Override
         public void onClick(View v) {
             itemClickListener.onClick(v, getAdapterPosition(), false);
         }
 
+        /**
+         * Sets the long click functionality fo the specified widget.
+         * @param v the specified widget
+         * @return true when the widget has been long clicked
+         */
         @Override
         public boolean onLongClick(View v) {
             itemClickListener.onClick(v, getAdapterPosition(), true);

@@ -23,6 +23,12 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  */
 
 public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate exception logging
+    /**
+     * Writes rat reports to the database
+     * @param rReport report to be saved
+     * @param context context from which function is called
+     * @return primary key value of new row
+     */
     public long writeToReportDb(ReportStructure rReport, Context context) throws DuplicateReportDbException {
         RatSightingDb ratDb = new RatSightingDb(context);
         //throw DuplicateReportDbException if report already exists

@@ -53,7 +53,7 @@ public class FilterReportsActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.d("hidden",e.getLocalizedMessage());
                 }
-                switchBackToNavigationScreen();
+                switchBackToNavigationScreenActivity();
             }
         });
 

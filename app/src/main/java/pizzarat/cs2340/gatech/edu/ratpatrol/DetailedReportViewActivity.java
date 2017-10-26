@@ -35,7 +35,7 @@ public class DetailedReportViewActivity extends AppCompatActivity {
         TextView longitude = (TextView) findViewById(R.id.longitudeTextView);
 
         // Grabbing the specified report and filling the widgets with its information
-        ReportStructure report = StaticHolder.data;
+        ReportStructure report = StaticHolder.report;
 
         // Set key
         String keyText = getString(R.string.key_prompt) + report.getKey();

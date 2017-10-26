@@ -63,7 +63,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
                     switchToArchiveActivity();
                 }
                 else {
-                    Toast.makeText(getBaseContext(), "Waiting for CSV data to load in!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Waiting for CSV report to load in!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -109,7 +109,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
         Log.d("hidden",""+reportBroker.getMaxKey(getBaseContext()));
         if (!reportBroker.isPopulated(this.getBaseContext())){
             Log.d("hidden","it's not populated, boi");
-            //Get csv data
+            //Get csv report
             bdTask = new BackgroundDataTask();
             bdTask.execute();
         }
@@ -177,7 +177,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Read in offline rat data from csv
+     * Read in offline rat report from csv
      */
     private void readRatData()  {
         String csvFile = "raw/ratsightings.csv";
@@ -282,7 +282,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "You can now view and create rat reports", Toast.LENGTH_SHORT).show();
                 csvLoaded = true;
             } else {
-                Toast.makeText(getBaseContext(), "There was an error loading in the rat data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "There was an error loading in the rat report!", Toast.LENGTH_SHORT).show();
             }
         }
 

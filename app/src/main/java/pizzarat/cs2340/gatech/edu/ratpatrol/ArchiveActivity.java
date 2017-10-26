@@ -66,7 +66,7 @@ public class ArchiveActivity extends AppCompatActivity {
      */
     public void switchToReportDetails(int report) {
         Intent switchToDetailedReports = new Intent(this, DetailedReportViewActivity.class);
-        StaticHolder.data = posts.get(report);
+        StaticHolder.report = posts.get(report);
         this.startActivity(switchToDetailedReports);
     }
 
@@ -130,7 +130,7 @@ public class ArchiveActivity extends AppCompatActivity {
         }
 
         /**
-         * Sets the listener for each data item in the Recycler View.
+         * Sets the listener for each report item in the Recycler View.
          * @param itemClickListener
          */
         public void setItemClickListener(ItemClickListener itemClickListener) {

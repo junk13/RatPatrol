@@ -8,28 +8,28 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
-        <Button
-            android:id="@+id/ratArchiveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="21dp"
-            android:text="Rat Report Archive"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="53dp"/>
+    <Button
+        android:id="@+id/ratArchiveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="21dp"
+        android:text="Report Archive"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="53dp"/>
 
-        <Button
-            android:id="@+id/ratMapButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/ratArchiveButton"
-            android:layout_below="@+id/ratArchiveButton"
-            android:layout_marginTop="28dp"
-            android:text="Rat Sighting Map"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="219dp"/>
+    <Button
+        android:id="@+id/ratMapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ratArchiveButton"
+        android:layout_below="@+id/ratArchiveButton"
+        android:layout_marginTop="27dp"
+        android:text="Sightings Map"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="219dp"/>
 
         <Button
             android:id="@+id/createReportButton"

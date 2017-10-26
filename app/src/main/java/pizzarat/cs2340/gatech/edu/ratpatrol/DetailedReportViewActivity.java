@@ -38,42 +38,42 @@ public class DetailedReportViewActivity extends AppCompatActivity {
         ReportStructure report = StaticHolder.report;
 
         // Set key
-        String keyText = getString(R.string.key_prompt) + report.getKey();
+        String keyText = getString(R.string.key_prompt) + " " + report.getKey();
         key.setText(keyText);
 
         // Set date
-        String dateText = getString(R.string.date_prompt) + report.getDate();
+        String dateText = getString(R.string.date_prompt) + " " + report.getDate();
         date.setText(dateText);
 
         // Set time
-        String timeText = getString(R.string.time_prompt) + report.getTime();
+        String timeText = getString(R.string.time_prompt) + " " + report.getTime();
         time.setText(timeText);
 
         // Set address
         address.setText(report.getAddress());
 
         // Set city
-        String cityText = getString(R.string.city_prompt) + report.getCity();
+        String cityText = getString(R.string.city_prompt) + " " + report.getCity();
         city.setText(cityText);
 
         // Set zipcode
-        String zipcodeText = getString(R.string.zipcode_prompt) + report.getZipCode();
+        String zipcodeText = getString(R.string.zipcode_prompt) + " " + report.getZipCode();
         zipcode.setText(zipcodeText);
 
         // Set borough
-        String boroughText = getString(R.string.borough_prompt) + report.getBorough();
+        String boroughText = getString(R.string.borough_prompt) + " " + report.getBorough();
         borough.setText(boroughText);
 
         // Set building type
-        String buildingTypeText = getString(R.string.building_type_prompt) + report.getBuildingType();
+        String buildingTypeText = getString(R.string.building_type_prompt) + " " + report.getBuildingType();
         buildingType.setText(buildingTypeText);
 
         // Set latitude
-        String latitudeText = getString(R.string.latitude_prompt) + report.getLatitude();
+        String latitudeText = getString(R.string.latitude_prompt) + " " + report.getLatitude();
         latitude.setText(latitudeText);
 
         // Set longitude
-        String longitudeText = getString(R.string.longitude_prompt) + report.getLongitude();
+        String longitudeText = getString(R.string.longitude_prompt) + " " + report.getLongitude();
         longitude.setText(longitudeText);
     }
 }

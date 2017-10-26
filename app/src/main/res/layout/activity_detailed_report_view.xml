@@ -68,6 +68,7 @@
         android:linksClickable="false"
         android:singleLine="false"
         android:text="@string/address_prompt"
+        android:textAlignment="viewStart"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="116dp"/>
 

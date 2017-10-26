@@ -53,7 +53,7 @@ public class FilterReportsActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.d("hidden",e.getLocalizedMessage());
                 }
-                switchBackToSelectionScreen();
+                switchBackToNavigationScreen();
             }
         });
 
@@ -63,7 +63,7 @@ public class FilterReportsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 beforeDateTextView.setText("");
                 afterDateTextView.setText("");
-                switchBackToSelectionScreen();
+                switchBackToNavigationScreen();
             }
         });
 }
@@ -79,9 +79,9 @@ public class FilterReportsActivity extends AppCompatActivity {
      * Switches to the selection screen after the filter or cancel button has
      * benn pushed.
      */
-    private void switchBackToSelectionScreen() {
-        Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
-        this.startActivity(switchToSelectionScreen);
+    private void switchBackToNavigationScreen() {
+        Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);
+        this.startActivity(switchToNavigationScreen);
     }
 
 }

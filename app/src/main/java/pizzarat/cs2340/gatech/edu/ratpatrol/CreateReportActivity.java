@@ -11,9 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
@@ -58,7 +55,7 @@ public class CreateReportActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToSelectionScreenActivity();
+                switchToNavigationScreenActivity();
             }
         });
     }
@@ -66,9 +63,9 @@ public class CreateReportActivity extends AppCompatActivity {
     /**
      * Switches back to the selection screen after submission/cancellation.
      */
-    public void switchToSelectionScreenActivity() {
-        Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
-        this.startActivity(switchToSelectionScreen);
+    public void switchToNavigationScreenActivity() {
+        Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);
+        this.startActivity(switchToNavigationScreen);
     }
 
     /**
@@ -125,7 +122,7 @@ public class CreateReportActivity extends AppCompatActivity {
                         ),
                         getBaseContext()
                 );
-                switchToSelectionScreenActivity();
+                switchToNavigationScreenActivity();
             }
         } catch (Exception e) {
             Log.d("Cunt", "kill me now");

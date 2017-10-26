@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/addressTextView"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="35dp"
         android:clickable="false"
         android:ems="10"
         android:focusable="false"
@@ -47,7 +47,7 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:inputType="none|time"
+        android:inputType="none"
         android:linksClickable="false"
         android:text="@string/time_prompt"
         tools:layout_editor_absoluteX="29dp"
@@ -59,13 +59,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/timeTextView"
-        android:layout_marginStart="39dp"
+        android:layout_marginStart="37dp"
         android:clickable="false"
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:inputType="none|textPostalAddress"
+        android:inputType="none"
         android:linksClickable="false"
+        android:singleLine="false"
         android:text="@string/address_prompt"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="116dp"/>
@@ -80,7 +81,7 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:inputType="none|textPersonName"
+        android:inputType="none"
         android:linksClickable="false"
         android:text="@string/city_prompt"/>
 
@@ -94,12 +95,12 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:inputType="none|textPersonName"
+        android:inputType="none"
         android:linksClickable="false"
         android:text="@string/zipcode_prompt"/>
 
     <EditText
-        android:id="@+id/locationTextView"
+        android:id="@+id/buildingTypeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/boroughTextView"
@@ -108,8 +109,9 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:inputType="none|textPersonName"
+        android:inputType="none"
         android:linksClickable="false"
+        android:singleLine="false"
         android:text="@string/building_type_prompt"/>
 
     <EditText
@@ -130,13 +132,13 @@
         android:id="@+id/latitudeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/locationTextView"
-        android:layout_below="@+id/locationTextView"
+        android:layout_alignStart="@+id/buildingTypeTextView"
+        android:layout_below="@+id/buildingTypeTextView"
         android:clickable="false"
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:inputType="text"
+        android:inputType="none"
         android:linksClickable="false"
         android:maxLength="20"
         android:text="@string/latitude_prompt"/>
@@ -151,7 +153,7 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:inputType="text"
+        android:inputType="none"
         android:linksClickable="false"
         android:maxLength="20"
         android:text="@string/longitude_prompt"/>

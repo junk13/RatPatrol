@@ -30,7 +30,7 @@ public class DetailedReportViewActivity extends AppCompatActivity {
         TextView city = (TextView) findViewById(R.id.cityTextView);
         TextView zipcode = (TextView) findViewById(R.id.zipcodeTextView);
         TextView borough = (TextView) findViewById(R.id.boroughTextView);
-        TextView buildingType = (TextView) findViewById(R.id.locationTextView);
+        TextView buildingType = (TextView) findViewById(R.id.buildingTypeTextView);
         TextView latitude = (TextView) findViewById(R.id.latitudeTextView);
         TextView longitude = (TextView) findViewById(R.id.longitudeTextView);
 
@@ -50,7 +50,8 @@ public class DetailedReportViewActivity extends AppCompatActivity {
         time.setText(timeText);
 
         // Set address
-        address.setText(report.getAddress());
+        String addressText = getString(R.string.address_prompt) + " " + report.getAddress();
+        address.setText(addressText);
 
         // Set city
         String cityText = getString(R.string.city_prompt) + " " + report.getCity();

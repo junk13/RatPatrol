@@ -61,7 +61,7 @@ public class CreateReportActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches back to the selection screen after submission/cancellation.
+     * Switches back to the navigation screen after submission/cancellation.
      */
     public void switchToNavigationScreenActivity() {
         Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);

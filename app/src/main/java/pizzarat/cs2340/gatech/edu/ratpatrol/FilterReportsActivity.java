@@ -63,7 +63,7 @@ public class FilterReportsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 beforeDateTextView.setText("");
                 afterDateTextView.setText("");
-                switchBackToNavigationScreen();
+                switchBackToNavigationScreenActivity();
             }
         });
 }
@@ -76,10 +76,10 @@ public class FilterReportsActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the selection screen after the filter or cancel button has
+     * Switches to the navigation screen after the filter or cancel button has
      * benn pushed.
      */
-    private void switchBackToNavigationScreen() {
+    private void switchBackToNavigationScreenActivity() {
         Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);
         this.startActivity(switchToNavigationScreen);
     }

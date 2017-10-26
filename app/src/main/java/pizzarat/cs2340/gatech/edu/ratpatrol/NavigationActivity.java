@@ -28,9 +28,15 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
+/**
+ * This is our navigation screen to move between all the other activities within
+ * the Rat Patrol application.
+ *
+ * @author Harrison Banh
+ */
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private SelectionScreenActivity.BackgroundDataTask bdTask = null;
+    private BackgroundDataTask bdTask = null;
     private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private boolean csvLoaded = false;
 
@@ -83,7 +89,6 @@ public class NavigationActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.

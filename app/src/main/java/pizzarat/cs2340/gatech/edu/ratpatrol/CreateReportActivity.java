@@ -18,12 +18,12 @@ import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.Verification;
 
 /**
  * Represents the screen to create a rat sighting report.
  */
 public class CreateReportActivity extends AppCompatActivity {
-    final static String DATE_FORMAT = "MM/dd/yyyy";
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private TextView key;
     private TextView date;
@@ -32,24 +32,6 @@ public class CreateReportActivity extends AppCompatActivity {
     private TextView city;
     private TextView zipcode;
     private TextView buildingType;
-
-    /**
-     * Determines if the user's specified date is legitimate using the
-     * following format mm/dd/year
-     *
-     * @param str the user's date
-     * @return true if the date is valid
-     */
-    public static boolean isValidDate(String str) {
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            df.setLenient(false);
-            df.parse(str);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
 
     // TODO grab data, create report, save to DB, generate unique key
 
@@ -92,6 +74,7 @@ public class CreateReportActivity extends AppCompatActivity {
     /**
      * Creates and adds the user's new report created from the filled out views
      * into the Database.
+     *
      * @param v the widget that triggers creation.
      */
     public void addReport(View v) {
@@ -99,27 +82,29 @@ public class CreateReportActivity extends AppCompatActivity {
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocationName(buildingType.getText().toString(), 1);
-            if (!isValidZip(zipcode.getText().toString())) {
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode", Toast.LENGTH_SHORT);
+            if (!Verification.isValidZip(zipcode.getText().toString())) {
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode" +"\n"
+                        + "Required Format: xxxxx", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if (!isValidTime(time.getText().toString())) {
+            } else if (!Verification.isValidTime(time.getText().toString())) {
                 Log.d("isvalid", time.getText().toString());
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time" +"\n"
+                        + "Required Format: hh:mm", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if (!isValidDate(date.getText().toString())){
+            } else if (!Verification.isValidDate(date.getText().toString())) {
                 Log.d("isvalid", date.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Date" + "\n"
                         + "Required Format: mm/dd/year", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if(!isValidGeneric(address.getText().toString())){ //ADDRESS
+            } else if (!Verification.isValidGeneric(address.getText().toString())) { //ADDRESS
                 Log.d("isvalid", address.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have Address", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if(!isValidGeneric(buildingType.getText().toString())){ //LOCATION
+            } else if (!Verification.isValidGeneric(buildingType.getText().toString())) { //LOCATION
                 Log.d("isvalid", buildingType.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have location", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if(!isValidGeneric(city.getText().toString())){ //CITY
+            } else if (!Verification.isValidGeneric(city.getText().toString())) { //CITY
                 Log.d("isvalid", city.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have City", Toast.LENGTH_SHORT);
                 toast.show();
@@ -146,35 +131,5 @@ public class CreateReportActivity extends AppCompatActivity {
             Log.d("Cunt", "kill me now");
             key.setError("An unknown error occurred.");
         }
-    }
-
-    /**
-     * Determines if the the user's specified zipcode is legitimate
-     *
-     * @param zip the user's zipcode
-     * @return true if the zipcode is of valid length
-     */
-    private boolean isValidZip(String zip){
-        return zip.length() == 5;
-    }
-
-    /**
-     * Determines if the user's specified type is legitimate using 24 hour
-     * formatted time.
-     * @param str the user's specified time
-     * @return true if the time is valid
-     */
-    private boolean isValidTime(String str){
-        String form = "((([0][0-9])|([1][0-2]))[:][0-5][0-9])";
-        return str.matches(form);
-    }
-
-    /**
-     * Generic validation method for all other String based fields.
-     * @param str the user's specified input
-     * @return true if not empty
-     */
-    private boolean isValidGeneric(String str){
-        return !str.equals("");
     }
 }

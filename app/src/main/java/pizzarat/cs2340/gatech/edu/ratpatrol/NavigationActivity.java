@@ -114,7 +114,7 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     /**
-     * Switches to the WelcomeActivity from the SelectionScreenActivity.
+     * Switches to the WelcomeActivity from the Navigation Screen.
      */
     public void switchBackToWelcomeActivity() {
         Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
@@ -122,7 +122,7 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     /**
-     * Switches to the ArchiveActivity from the SelectionScreenActivity.
+     * Switches to the ArchiveActivity from the Navigation Screen.
      */
     public void switchToArchiveActivity() {
         Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
@@ -154,7 +154,7 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     /**
-     * Closes the SelectionScreenActivity thus "logging out" the user
+     * Closes the Navigation Screen thus "logging out" the user
      */
     public void logout() {
         switchBackToWelcomeActivity();
@@ -167,7 +167,7 @@ public class NavigationActivity extends AppCompatActivity
         Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
         Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Selection Screen.", Toast.LENGTH_LONG).show();
+                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
     }
 
     /**

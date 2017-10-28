@@ -105,7 +105,11 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_report_graphs) {
             switchToReportGraphScreen();
         } else if (id == R.id.nav_logout) {
-            switchBackToWelcomeActivity();
+            logout();
+        } else if (id == R.id.nav_share || id == R.id.nav_send) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Need to add "
+                    + "functionality later", Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

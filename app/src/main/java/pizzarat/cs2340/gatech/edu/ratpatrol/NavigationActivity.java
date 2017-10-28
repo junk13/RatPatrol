@@ -178,7 +178,7 @@ public class NavigationActivity extends AppCompatActivity
      * Opens a bunch of apps at the bottom of the screen allowing the user to
      * share something about the Rat Patrol app using different apps.
      *
-     * @param widget
+     * @param widget the name of widget clicked
      */
     public void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);

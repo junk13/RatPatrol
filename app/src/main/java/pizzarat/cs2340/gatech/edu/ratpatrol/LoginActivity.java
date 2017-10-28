@@ -399,8 +399,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 // Switch to the selection screen activity
-                Intent switchToSelectionScreen = new Intent(LoginActivity.this, SelectionScreenActivity.class);
-                LoginActivity.this.startActivity(switchToSelectionScreen);
+                Intent switchToNavigationScreen = new Intent(LoginActivity.this, NavigationActivity.class);
+                LoginActivity.this.startActivity(switchToNavigationScreen);
             } else {
                 Toast.makeText(getBaseContext(), "Invalid password", Toast.LENGTH_SHORT).show();
             }

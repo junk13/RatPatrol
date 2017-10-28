@@ -106,10 +106,10 @@ public class NavigationActivity extends AppCompatActivity
             switchToReportGraphScreen();
         } else if (id == R.id.nav_logout) {
             logout();
-        } else if (id == R.id.nav_share || id == R.id.nav_send) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Need to add "
-                    + "functionality later", Toast.LENGTH_SHORT);
-            toast.show();
+        } else if (id == R.id.nav_share) {
+            shareOrSendReport("Share");
+        } else if (id == R.id.nav_send) {
+            shareOrSendReport("Send");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -172,6 +172,23 @@ public class NavigationActivity extends AppCompatActivity
         startActivity(switchToReportGraphScreenActivity);
         Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
                 + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Opens a bunch of apps at the bottom of the screen allowing the user to
+     * share something about the Rat Patrol app using different apps.
+     *
+     * @param widget
+     */
+    public void shareOrSendReport(String widget) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        String shareBody = "Your body here";
+        String shareSub = "Your subject here";
+        share.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+        share.putExtra(Intent.EXTRA_TEXT, shareSub);
+        startActivity(Intent.createChooser(share, widget + " using"));
+
     }
 
     /**

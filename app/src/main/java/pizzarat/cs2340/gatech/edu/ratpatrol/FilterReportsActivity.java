@@ -49,7 +49,7 @@ public class FilterReportsActivity extends AppCompatActivity {
                     String beforeDate = (beforeDateTextView.getText().toString());
                     String afterDate = (afterDateTextView.getText().toString());
                     Log.d("hidden",beforeDate + " | " + afterDate);
-                    StaticHolder.dateRange = new DateRangeStruct(beforeDate, afterDate);
+                    StaticHolder.dateRange = new DateRangeStruct(getDate(beforeDate), getDate(afterDate));
                 } catch (Exception e) {
                     Log.d("hidden",e.getLocalizedMessage());
                 }
@@ -72,7 +72,7 @@ public class FilterReportsActivity extends AppCompatActivity {
 
     private String getDate(String dateAndTime) {
         String[] date = dateAndTime.split(" ")[0].split("/");
-        return date[2] + "/" + date[1] + "/" + date[0];
+        return date[2] + "/" + date[0] + "/" + date[1];
     }
 
     /**

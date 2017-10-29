@@ -56,6 +56,18 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Log.d("hidden",""+reportBroker.getMaxKey(getBaseContext()));
+        if (!reportBroker.isPopulated(this.getBaseContext())){
+            Log.d("hidden","it's not populated, boi");
+            //Get csv data
+            bdTask = new BackgroundDataTask();
+            bdTask.execute();
+        }
+        else {
+            Log.d("hidden","it's populated, boi");
+            csvLoaded = true;
+        }
     }
 
     @Override
@@ -98,7 +110,12 @@ public class NavigationActivity extends AppCompatActivity
         if (id == R.id.nav_create_report) {
             switchToCreateReportActivity();
         } else if (id == R.id.nav_rat_archive) {
-            switchToArchiveActivity();
+            if (csvLoaded) {
+                switchToArchiveActivity();
+            }
+            else {
+                Toast.makeText(getBaseContext(), "Waiting for CSV data to load in!", Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_filter) {
             switchToFilterReportsScreen();
         } else if (id == R.id.nav_sightings_map) {
@@ -228,7 +245,7 @@ public class NavigationActivity extends AppCompatActivity
                     latitude = ratSighting[49];
                     longitude = ratSighting[50];
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    Log.d("Cunt", "caught array index out of bounds");
+                    Log.d("hidden", "caught array index out of bounds");
                 }
                 if (latitude.isEmpty() || longitude.isEmpty()) {
                     try {
@@ -236,7 +253,7 @@ public class NavigationActivity extends AppCompatActivity
                         latitude = Double.toString(addresses.get(0).getLatitude());
                         longitude = Double.toString(addresses.get(0).getLongitude());
                     } catch (Exception e) {
-                        Log.d("Cunt", "caught location error");
+                        Log.d("hidden", "caught location error");
                     }
 
                 }
@@ -268,7 +285,7 @@ public class NavigationActivity extends AppCompatActivity
 
     private String getDate(String dateAndTime) {
         String[] date = dateAndTime.split(" ")[0].split("/");
-        return date[2] + "/" + date[1] + "/" + date[0];
+        return date[2] + "/" + date[0] + "/" + date[1];
     }
 
     private String getTime(String dateAndTime) {

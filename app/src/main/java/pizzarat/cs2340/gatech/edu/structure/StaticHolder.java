@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 
 /**
- *      This method holds local custom reports.
- *      This prevents persistence, which we do not want for now.
+ * Utility class to hold the current report for use in the
+ * DetailedReportActivity and an array of all the reports in the database.
  */
 public class StaticHolder {
     public static ReportStructure report;
@@ -22,19 +22,3 @@ public class StaticHolder {
     }
 
 }
-
-/**
- *      PLEASE READ ME
- *      ---------------
- *
- *      Added globalBroker to handle dataBase.
- *      I assume here that the report is not persistant between app
- *      iterations. If not, changes need to be made.
- *
- *      To be added:
- *      populate table.
- *      add elements.
- *      remove elements.
- *      clear elements.
- *
- * */

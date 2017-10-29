@@ -275,6 +275,7 @@ public class ReportGraphActivity extends AppCompatActivity
 
         float start = 1f;
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+    }
 
     private int getSpan()
     {

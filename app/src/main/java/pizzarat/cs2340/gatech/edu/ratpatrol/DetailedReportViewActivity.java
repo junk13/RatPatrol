@@ -18,8 +18,8 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * @author Harrison Banh
- * Represents the detailed view of one of the archived rat reports in New York
- * City.
+ *         Represents the detailed view of one of the archived rat reports in New York
+ *         City.
  */
 public class DetailedReportViewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

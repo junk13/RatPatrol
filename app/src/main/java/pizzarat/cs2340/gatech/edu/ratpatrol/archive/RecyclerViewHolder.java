@@ -1,8 +1,11 @@
-package pizzarat.cs2340.gatech.edu.ratpatrol;
+package pizzarat.cs2340.gatech.edu.ratpatrol.archive;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import pizzarat.cs2340.gatech.edu.ratpatrol.ItemClickListener;
+import pizzarat.cs2340.gatech.edu.ratpatrol.R;
 
 /**
  * Created by Evie Brown, Harrison B.

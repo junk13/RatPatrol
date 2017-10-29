@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
+import pizzarat.cs2340.gatech.edu.ratpatrol.archive.ArchiveActivity;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 

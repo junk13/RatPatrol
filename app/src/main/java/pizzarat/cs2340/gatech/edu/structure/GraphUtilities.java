@@ -35,6 +35,12 @@ public class GraphUtilities {
         return months;
     }
 
+    /**
+     *      Organizes a list of Rat Reports values by Years
+     * @param c         Context
+     * @param reports   Reports to organize
+     * @return          an array of reports per year.
+     */
     static public int[] organizeByYear(Context c, List<ReportStructure> reports){
         SQLiteReportBroker reportBroker = new SQLiteReportBroker();
         //int[] extremeDates = reportBroker.findExtremeDates(c); //{earliestYear, latestYear}
@@ -52,6 +58,15 @@ public class GraphUtilities {
         return years;
     }
 
+    /**
+     *      Organize Reports by Days within a month.
+     *      Month must be given so that proper array length
+     *      is returned.
+     *
+     * @param reports   Reports to organize.
+     * @param month     Month to organize within.
+     * @return          array of rat reports per day.
+     */
     static public int[] organizeByDay(List<ReportStructure> reports,int month) {
         String form;
         int[] days;

@@ -94,7 +94,7 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
     private void setData(int count, float range) {
 
         float start = 1f;
-        reports = reportBroker.reportArrayList(getBaseContext());
+        reports = reportBroker.getDateConstrainedReports(getBaseContext());
         int[] months = GraphUtilities.organizeByMonth(reports);
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();

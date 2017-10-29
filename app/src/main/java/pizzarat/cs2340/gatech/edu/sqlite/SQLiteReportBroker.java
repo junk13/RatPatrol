@@ -158,7 +158,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
             to = dateFormat.format(date);
         }
 
-        Cursor cursor = getDateConstrainedCursor(getDate(from), getDate(to), context);
+        Cursor cursor = getDateConstrainedCursor(from, to, context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
         populateList(cursor, aList);

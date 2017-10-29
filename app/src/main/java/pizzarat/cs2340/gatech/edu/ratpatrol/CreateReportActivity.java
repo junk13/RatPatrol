@@ -124,7 +124,7 @@ public class CreateReportActivity extends AppCompatActivity {
                                 maxKey,
                                 buildingType.getText().toString(),
                                 time.getText().toString(),
-                                date.getText().toString(),
+                                getDate(date.getText().toString()),
                                 address.getText().toString(),
                                 zipcode.getText().toString(),
                                 city.getText().toString(),
@@ -140,5 +140,10 @@ public class CreateReportActivity extends AppCompatActivity {
             Log.d("Cunt", "kill me now");
             key.setError("An unknown error occurred.");
         }
+    }
+
+    private String getDate(String dateAndTime) {
+        String[] date = dateAndTime.split(" ")[0].split("/");
+        return date[2] + "/" + date[0] + "/" + date[1];
     }
 }

@@ -17,12 +17,12 @@ public class GraphUtilities {
      * @return          An array of size 12, where each value represents
      *                  the number of reports within the repective month.
      */
-    public int[] organizeByMonth(List<ReportStructure> reports){
+    static public int[] organizeByMonth(List<ReportStructure> reports){
         int[] months = new int[12];
         for (ReportStructure report: reports) {
             String date = report.getDate();
-            if (Verification.isValidDate(date)) {
-                months[Integer.parseInt(date.substring(0, 2)) - 1]++;
+            if (Verification.isValidSQLDate(date)) { //date is yyyy/MM/dd from SQL
+                months[Integer.parseInt(date.substring(5, 7)) - 1]++;
             } else {
                 Log.e("GRAPH","RatReport "+report.getKey()+ " has invalid date: " + date);
             }

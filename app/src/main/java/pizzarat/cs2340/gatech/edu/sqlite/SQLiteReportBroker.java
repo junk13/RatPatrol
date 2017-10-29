@@ -153,7 +153,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         }
         if (to == null || to.isEmpty())
         {
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
             to = dateFormat.format(date);
         }
@@ -292,7 +292,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
      */
     private String getDate(String s) {
         String[] date = s.split("/");
-        return date[2] + "/" + date[1] + "/" + date[0];
+        return date[2] + "/" + date[0] + "/" + date[1];
     }
 
     /**

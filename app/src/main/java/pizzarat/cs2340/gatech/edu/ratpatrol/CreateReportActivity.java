@@ -47,6 +47,7 @@ public class CreateReportActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_report);
 
+        // Navigation drawer creation
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Report Creation");
         setSupportActionBar(toolbar);
@@ -60,6 +61,7 @@ public class CreateReportActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Actual report creation code
         String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
         key = (TextView) findViewById(R.id.createKeyView);
 
@@ -129,7 +131,9 @@ public class CreateReportActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_create_report) {
-            switchToCreateReportActivity();
+            Toast message = Toast.makeText(getApplicationContext(),
+                    "You are already on this screen", Toast.LENGTH_LONG);
+            message.show();
         } else if (id == R.id.nav_rat_archive) {
             switchToArchiveActivity();
         } else if (id == R.id.nav_filter) {
@@ -174,14 +178,6 @@ public class CreateReportActivity extends AppCompatActivity
     public void switchToArchiveActivity() {
         Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
-    }
-
-    /**
-     * Switches to the CreateReportActivity.
-     */
-    public void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
-        this.startActivity(switchToCreateReportActivity);
     }
 
     /**

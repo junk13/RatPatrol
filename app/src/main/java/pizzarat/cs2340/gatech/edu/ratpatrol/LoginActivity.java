@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mTestPop.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Gets the data repository in write mode
+                // Gets the report repository in write mode
                 TextView tv = (TextView) findViewById(R.id.textView);
                 try {
                     Context c = getApplicationContext();
@@ -316,7 +316,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
-                // Retrieve data rows for the device user's 'profile' contact.
+                // Retrieve report rows for the device user's 'profile' contact.
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
 
@@ -399,8 +399,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 // Switch to the selection screen activity
-                Intent switchToSelectionScreen = new Intent(LoginActivity.this, SelectionScreenActivity.class);
-                LoginActivity.this.startActivity(switchToSelectionScreen);
+                Intent switchToNavigationScreen = new Intent(LoginActivity.this, NavigationActivity.class);
+                LoginActivity.this.startActivity(switchToNavigationScreen);
             } else {
                 Toast.makeText(getBaseContext(), "Invalid password", Toast.LENGTH_SHORT).show();
             }

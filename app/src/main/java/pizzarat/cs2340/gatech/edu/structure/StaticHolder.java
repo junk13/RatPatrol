@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *      This prevents persistence, which we do not want for now.
  */
 public class StaticHolder {
-    public static ReportStructure data;
+    public static ReportStructure report;
     public static ArrayList<ReportStructure> userReports = new ArrayList<>();
 
     //stores the date range set by the filter. used in map for filtering markers.
@@ -28,7 +28,7 @@ public class StaticHolder {
  *      ---------------
  *
  *      Added globalBroker to handle dataBase.
- *      I assume here that the data is not persistant between app
+ *      I assume here that the report is not persistant between app
  *      iterations. If not, changes need to be made.
  *
  *      To be added:

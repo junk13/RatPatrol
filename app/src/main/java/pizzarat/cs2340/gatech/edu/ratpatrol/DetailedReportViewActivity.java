@@ -13,12 +13,12 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * Represents the detailed view of one of the archived rat reports in New York
  * City.
  */
-public class DetailedRatReportViewActivity extends AppCompatActivity {
+public class DetailedReportViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_rat_report_view);
+        setContentView(R.layout.activity_detailed_report_view);
 
         Intent data = this.getIntent();
 
@@ -30,50 +30,51 @@ public class DetailedRatReportViewActivity extends AppCompatActivity {
         TextView city = (TextView) findViewById(R.id.cityTextView);
         TextView zipcode = (TextView) findViewById(R.id.zipcodeTextView);
         TextView borough = (TextView) findViewById(R.id.boroughTextView);
-        TextView buildingType = (TextView) findViewById(R.id.locationTextView);
+        TextView buildingType = (TextView) findViewById(R.id.buildingTypeTextView);
         TextView latitude = (TextView) findViewById(R.id.latitudeTextView);
         TextView longitude = (TextView) findViewById(R.id.longitudeTextView);
 
         // Grabbing the specified report and filling the widgets with its information
-        ReportStructure report = StaticHolder.data;
+        ReportStructure report = StaticHolder.report;
 
         // Set key
-        String keyText = getString(R.string.key_prompt) + report.getKey();
+        String keyText = getString(R.string.key_prompt) + " " + report.getKey();
         key.setText(keyText);
 
         // Set date
-        String dateText = getString(R.string.date_prompt) + report.getDate();
+        String dateText = getString(R.string.date_prompt) + " " + report.getDate();
         date.setText(dateText);
 
         // Set time
-        String timeText = getString(R.string.time_prompt) + report.getTime();
+        String timeText = getString(R.string.time_prompt) + " " + report.getTime();
         time.setText(timeText);
 
         // Set address
-        address.setText(report.getAddress());
+        String addressText = getString(R.string.address_prompt) + " " + report.getAddress();
+        address.setText(addressText);
 
         // Set city
-        String cityText = getString(R.string.city_prompt) + report.getCity();
+        String cityText = getString(R.string.city_prompt) + " " + report.getCity();
         city.setText(cityText);
 
         // Set zipcode
-        String zipcodeText = getString(R.string.zipcode_prompt) + report.getZipCode();
+        String zipcodeText = getString(R.string.zipcode_prompt) + " " + report.getZipCode();
         zipcode.setText(zipcodeText);
 
         // Set borough
-        String boroughText = getString(R.string.borough_prompt) + report.getBorough();
+        String boroughText = getString(R.string.borough_prompt) + " " + report.getBorough();
         borough.setText(boroughText);
 
         // Set building type
-        String buildingTypeText = getString(R.string.building_type_prompt) + report.getBuildingType();
+        String buildingTypeText = getString(R.string.building_type_prompt) + " " + report.getBuildingType();
         buildingType.setText(buildingTypeText);
 
         // Set latitude
-        String latitudeText = getString(R.string.latitude_prompt) + report.getLatitude();
+        String latitudeText = getString(R.string.latitude_prompt) + " " + report.getLatitude();
         latitude.setText(latitudeText);
 
         // Set longitude
-        String longitudeText = getString(R.string.longitude_prompt) + report.getLongitude();
+        String longitudeText = getString(R.string.longitude_prompt) + " " + report.getLongitude();
         longitude.setText(longitudeText);
     }
 }

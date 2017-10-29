@@ -126,7 +126,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return readableDb.query(
                 RatSightingDb.getTableName(),            // The table to query
                 null,                                   // The columns to return
-                RatSightingDb.getReportTableLocationCol() + " LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
+                RatSightingDb.getReportTableAddressCol() + " LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
                 null,                                   // The values for the WHERE clause
                 null,                                   // don't group the rows
                 null,                                   // don't filter by row groups
@@ -172,6 +172,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
      * @return rat reports that fit the constraints
      */
     public ArrayList<ReportStructure> getReportsWithSubstring(String keystring, Context context) {
+
         Cursor cursor = getSubstringReportsCursor(keystring, context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
@@ -179,26 +180,6 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return aList;
     }
 
-    /**
-     * Gets rat reports with substring in specified column
-     * @param keystring desired column and substring, connected by a colon
-     * @param context context from which function is called
-     * @return rat reports that fit the constraints
-     */
-    public ArrayList<ReportStructure> getReportsWithSubstringSpecified(String keystring, Context context) {
-        String[] sl = keystring.split(":"); //{column to search, substring}
-        //if sl[0] not a valid column, do location search on sl[1] (or search whole thing, get 0 results)
-        //else, search in that specific column
-
-
-        //TODO: combine methods
-        //Cursor cursor = getSubstringReportsCursor(sl[0],sl[1], context);
-        Cursor cursor = getSubstringReportsCursor(keystring, context);
-        //ArrayList to return
-        ArrayList<ReportStructure> aList = new ArrayList<>();
-        populateList(cursor, aList);
-        return aList;
-    }
 
     /**
      * Gets all rat reports

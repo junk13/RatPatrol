@@ -53,11 +53,11 @@ public class GraphUtilities {
     }
 
     static public int[] organizeByDay(List<ReportStructure> reports){
-        int[] months = new int[12];
+        int[] months = new int[31];
         for (ReportStructure report: reports) {
             String date = report.getDate();
             if (Verification.isValidSQLDate(date)) { //date is yyyy/MM/dd from SQL
-                months[Integer.parseInt(date.substring(5, 7)) - 1]++;
+                months[Integer.parseInt(date.substring(8, 10)) - 1]++;
             } else {
                 Log.e("GRAPH","RatReport "+report.getKey()+ " has invalid date: " + date);
             }

@@ -42,7 +42,6 @@ public class Verification {
         String form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0-1])))";
         if (str.matches(form)){
             String strMonth = str.substring(5,7);
-            String checkDay = str.substring(8,10);
             //31 days   1,3,5,7,8,10,12
             if (    strMonth.equals("01") ||
                     strMonth.equals("03") ||
@@ -51,7 +50,7 @@ public class Verification {
                     strMonth.equals("08") ||
                     strMonth.equals("10") ||
                     strMonth.equals("12")){
-                return checkDay.matches(form);
+                return str.matches(form);
             }
             //30 days   4,6,9,11
              else if (  strMonth.equals("04") ||
@@ -59,12 +58,12 @@ public class Verification {
                         strMonth.equals("09") ||
                         strMonth.equals("11") ){
                 form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0])))";
-                return checkDay.matches(form);
+                return str.matches(form);
             }
             //29 days   2
             else {
                 form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/]([0-2][0-9]))";
-                return checkDay.matches(form);
+                return str.matches(form);
             }
 
         } else {

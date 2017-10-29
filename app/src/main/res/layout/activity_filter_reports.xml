@@ -10,26 +10,26 @@
         android:id="@+id/afterDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/beforeDateTextView"
+        android:layout_below="@+id/beforeDateTextView"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="After:"
+        android:hint="End Date:"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="54dp"
-        android:layout_below="@+id/beforeDateTextView"
-        android:layout_alignStart="@+id/beforeDateTextView" />
+        tools:layout_editor_absoluteY="54dp"/>
 
     <EditText
         android:id="@+id/beforeDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
         android:ems="10"
-        android:hint="Before:"
+        android:hint="Start Date:"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="54dp"
-        android:layout_marginTop="22dp"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="54dp"/>
 
     <Button
         android:id="@+id/filterReportsButton"

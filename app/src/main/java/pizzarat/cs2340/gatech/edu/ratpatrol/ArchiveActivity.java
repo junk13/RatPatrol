@@ -43,7 +43,10 @@ public class ArchiveActivity extends AppCompatActivity {
 
     }
 
-    // TODO change to list of rat sighting objects
+    /**
+     * Populates the Recycler View to display the building types of all the
+     * rat reports contained in the archive.
+     */
     private void setupList() {
         Log.d("hidden","setupList()");
         try {

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
@@ -47,6 +48,14 @@ public class CreateReportActivity extends AppCompatActivity {
 
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);
+
+        Date curDate = new Date();
+        SimpleDateFormat militaryTimeFormat = new SimpleDateFormat("kk:mm");
+
+        //Todo: UtilityClass.militaryTimeFormat.format(curDate)
+        String currentDateTimeString = militaryTimeFormat.format(curDate);
+        time.setText(currentDateTimeString); //set current time as default text
+
         address = (TextView) findViewById(R.id.createAddressView);
         city = (TextView) findViewById(R.id.createCityView);
         zipcode = (TextView) findViewById(R.id.createZipcodeView);

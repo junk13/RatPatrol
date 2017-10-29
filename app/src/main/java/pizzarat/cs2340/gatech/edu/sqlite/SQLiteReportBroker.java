@@ -22,7 +22,7 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * Created by Evie Brown
  */
 
-public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate exception logging
+public class SQLiteReportBroker extends AppCompatActivity {
     /**
      * Writes rat reports to the database
      * @param rReport report to be saved

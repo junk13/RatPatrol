@@ -1,5 +1,7 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
+import android.util.Log;
+
 import java.util.List;
 
 /**
@@ -19,8 +21,13 @@ public class GraphUtilities {
         int[] months = new int[12];
         for (ReportStructure report: reports) {
             String date = report.getDate();
-            months[Integer.parseInt(date.substring(0,2))-1]++;
+            if (Verification.isValidDate(date)) {
+                months[Integer.parseInt(date.substring(0, 2)) - 1]++;
+            } else {
+                Log.e("GRAPH","RatReport "+report.getKey()+ " has invalid date: " + date);
+            }
         }
         return months;
     }
+
 }

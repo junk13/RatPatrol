@@ -35,6 +35,7 @@ public class ArchiveActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        posts = reportBroker.reportArrayList(getBaseContext());
         initRecycler();
         searchView = (SearchView) findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -47,9 +48,16 @@ public class ArchiveActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                posts = reportBroker.getReportsWithSubstring(newText, getBaseContext());
-                initRecycler();
-                return false;
+                if (newText.length() <= 2)
+                    return true;
+                ArrayList<ReportStructure> temp = reportBroker.getReportsWithSubstring(newText, getBaseContext());
+                if (newText.length() > 2 && posts == null)
+                    return false;
+                if (newText.length() > 2) {
+                    posts = temp;
+                    initRecycler();
+                }
+                return true;
             }
         });
 
@@ -70,15 +78,15 @@ public class ArchiveActivity extends AppCompatActivity {
     }
 
     private void setupList() {
-        Log.d("hidden","setupList()");
+        Log.d("hidden", "setupList()");
         try {
             //posts = reportBroker.getDateConstrainedReports("10/22/2016","10/23/2016",getBaseContext());
             //posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
+            if (posts == null)
+                posts = reportBroker.reportArrayList(getBaseContext());
 
-            posts = reportBroker.reportArrayList(getBaseContext());
 
-
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }
 
@@ -87,6 +95,7 @@ public class ArchiveActivity extends AppCompatActivity {
     /**
      * Switches from the list view of all the displayed rat reports to the
      * detailed view of the single report when clicked on.
+     *
      * @param report the specific report to display in detail.
      */
     public void switchToReportDetails(int report) {

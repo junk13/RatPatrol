@@ -1,6 +1,6 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol.archive;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,21 +12,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.ratpatrol.CreateReportActivity;
 import pizzarat.cs2340.gatech.edu.ratpatrol.DetailedReportViewActivity;
 import pizzarat.cs2340.gatech.edu.ratpatrol.FilterReportsActivity;
-import pizzarat.cs2340.gatech.edu.ratpatrol.ItemClickListener;
 import pizzarat.cs2340.gatech.edu.ratpatrol.MapActivity;
 import pizzarat.cs2340.gatech.edu.ratpatrol.R;
 import pizzarat.cs2340.gatech.edu.ratpatrol.ReportGraphActivity;
@@ -43,12 +38,17 @@ public class ArchiveActivity extends AppCompatActivity
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     ArrayList<ReportStructure> posts = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
-    private List<String> listData = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         // Navigation drawer creation
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -65,15 +65,40 @@ public class ArchiveActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // Archive recycler view creation
-        setupList();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        RecyclerAdapter adapter = new RecyclerAdapter(listData, this);
-        recyclerView.setAdapter(adapter);
+        posts = reportBroker.reportArrayList(getBaseContext());
+        initRecycler();
+        searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                posts = reportBroker.getReportsWithSubstring(query, getBaseContext());
+                initRecycler();
+                return false;
+            }
+
+            /**
+             * is invoked when test is typed in the searcher
+             *
+             * @param newText
+             * @return
+             */
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() <= 2)
+                    return true;
+                ArrayList<ReportStructure> temp = reportBroker.getReportsWithSubstring(newText, getBaseContext());
+                if (newText.length() > 2 && posts == null)
+                    return false;
+                if (newText.length() > 2) {
+                    posts = temp;
+                    initRecycler();
+                }
+                return true;
+            }
+        });
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -204,27 +229,35 @@ public class ArchiveActivity extends AppCompatActivity
     }
 
     /**
-     * Populates the Recycler View to display the building types of all the
-     * rat reports contained in the archive.
+     * initializes the list of rat reports in the rat archive
      */
+    private void initRecycler() {
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        setupList();
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerAdapter adapter = new RecyclerAdapter(this, posts, this);
+        recyclerView.setAdapter(adapter);
+    }
+
+    //populate posts
     private void setupList() {
-        Log.d("hidden","setupList()");
+        Log.d("hidden", "setupList()");
         try {
-            //posts = reportBroker.getDateConstrainedReports("10/22/2016","10/23/2016",getBaseContext());
-            //posts = reportBroker.getReportsWithSubstring("Vacant",getBaseContext());
-            posts = reportBroker.reportArrayList(getBaseContext());
-        } catch (Exception e){
+            if (posts == null)
+                posts = reportBroker.reportArrayList(getBaseContext());
+        } catch (Exception e) {
             Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }
-        for(int i = 0;  i < posts.size(); i++) {
-            String newElement = posts.get(i).getBuildingType();
-            listData.add(newElement);
-        }
+
     }
 
     /**
      * Switches from the list view of all the displayed rat reports to the
      * detailed view of the single report when clicked on.
+     *
      * @param report the specific report to display in detail.
      */
     public void switchToReportDetails(int report) {
@@ -232,97 +265,6 @@ public class ArchiveActivity extends AppCompatActivity
         StaticHolder.report = posts.get(report);
         this.startActivity(switchToDetailedReports);
     }
-
-    /**
-     * Private inner class used to set the behind the scenes functionality
-     * in the Recycler View. This is necessary to switch to the details view.
-     */
-    class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-        //TODO change list to rat reports
-        private List<String> listData = new ArrayList<>();
-        private Context context;
-
-        public RecyclerAdapter(List<String> listData, Context context) {
-            this.listData = listData;
-            this.context = context;
-        }
-
-        @Override
-        public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            View itemView = inflater.inflate(R.layout.rat_report_item, parent, false);
-
-            return new RecyclerViewHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-            holder.reportDescription.setText(listData.get(position));
-
-            holder.setItemClickListener(new ItemClickListener() {
-                // TODO change this to switch to the details screen
-                @Override
-                public void onClick(View view, int position, boolean isLongClick) {
-
-                    switchToReportDetails(position);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return listData.size();
-        }
-    }
-
-    /**
-     * Custom class created for RecyclerView to show the all the rat reports.
-     */
-    class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        public TextView reportDescription;
-
-        private ItemClickListener itemClickListener;
-
-        public RecyclerViewHolder(View itemView) {
-            super(itemView);
-            reportDescription = (TextView) itemView.findViewById(R.id.reportDescription);
-
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
-
-        }
-
-        /**
-         * Sets the listener for each report item in the Recycler View.
-         * @param itemClickListener
-         */
-        public void setItemClickListener(ItemClickListener itemClickListener) {
-            this.itemClickListener = itemClickListener;
-        }
-
-
-        /**
-         * Sets the on click functionality of the specified widget.
-         *
-         * @param v the specified widget
-         */
-        @Override
-        public void onClick(View v) {
-            itemClickListener.onClick(v, getAdapterPosition(), false);
-        }
-
-        /**
-         * Sets the long click functionality fo the specified widget.
-         * @param v the specified widget
-         * @return true when the widget has been long clicked
-         */
-        @Override
-        public boolean onLongClick(View v) {
-            itemClickListener.onClick(v, getAdapterPosition(), true);
-            return true;
-        }
-    }
-
 }
 
 

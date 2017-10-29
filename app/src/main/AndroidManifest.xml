@@ -36,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".archive.ArchiveActivity" />
         <activity android:name=".CreateReportActivity"/>
         <activity android:name=".DetailedReportViewActivity">
         </activity>
@@ -66,7 +65,8 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".WelcomeActivity">
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme">
+        </activity>
         <activity android:name=".archive.ArchiveActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

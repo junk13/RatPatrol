@@ -1,4 +1,4 @@
-package pizzarat.cs2340.gatech.edu.ratpatrol;
+package pizzarat.cs2340.gatech.edu.ratpatrol.archive;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +23,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import pizzarat.cs2340.gatech.edu.ratpatrol.CreateReportActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.DetailedReportViewActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.FilterReportsActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.ItemClickListener;
+import pizzarat.cs2340.gatech.edu.ratpatrol.MapActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.R;
+import pizzarat.cs2340.gatech.edu.ratpatrol.ReportGraphActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.WelcomeActivity;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;

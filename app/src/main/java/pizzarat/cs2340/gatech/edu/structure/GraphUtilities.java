@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import pizzarat.cs2340.gatech.edu.ratpatrol.ArchiveActivity;
-import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 
 /**

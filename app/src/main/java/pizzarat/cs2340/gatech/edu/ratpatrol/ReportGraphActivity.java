@@ -15,24 +15,21 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
+import pizzarat.cs2340.gatech.edu.ratpatrol.archive.ArchiveActivity;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
-import pizzarat.cs2340.gatech.edu.structure.DateRangeStruct;
 import pizzarat.cs2340.gatech.edu.structure.GraphUtilities;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;

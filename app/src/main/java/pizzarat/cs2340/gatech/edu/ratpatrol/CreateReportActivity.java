@@ -76,7 +76,7 @@ public class CreateReportActivity extends AppCompatActivity {
      * Switches back to the selection screen after submission/cancellation.
      */
     public void switchToSelectionScreenActivity() {
-        Intent switchToSelectionScreen = new Intent(this, SelectionScreenActivity.class);
+        Intent switchToSelectionScreen = new Intent(this, NavigationActivity.class);
         this.startActivity(switchToSelectionScreen);
     }
 

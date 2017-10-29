@@ -87,7 +87,7 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
 
-        for (int i = (int) start; i < 50 && i < reports.size(); i++) {
+        for (int i = (int) start; i < 12 && i < reports.size(); i++) {
             float mult = (range + 1);
             float val = (float) (Math.random() * mult);
             ReportStructure rs = reports.get(i);

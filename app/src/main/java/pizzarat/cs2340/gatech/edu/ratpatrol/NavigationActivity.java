@@ -107,27 +107,27 @@ public class NavigationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_create_report) {
-            switchToCreateReportActivity();
-        } else if (id == R.id.nav_rat_archive) {
-            if (csvLoaded) {
+        if (csvLoaded) {
+            if (id == R.id.nav_create_report) {
+                switchToCreateReportActivity();
+            } else if (id == R.id.nav_rat_archive) {
                 switchToArchiveActivity();
+            } else if (id == R.id.nav_filter) {
+                switchToFilterReportsScreen();
+            } else if (id == R.id.nav_sightings_map) {
+                switchToMapActivity();
+            } else if (id == R.id.nav_report_graphs) {
+                switchToReportGraphScreen();
+            } else if (id == R.id.nav_logout) {
+                logout();
+            } else if (id == R.id.nav_share) {
+                shareOrSendReport("Share");
+            } else if (id == R.id.nav_send) {
+                shareOrSendReport("Send");
             }
-            else {
-                Toast.makeText(getBaseContext(), "Waiting for CSV data to load in!", Toast.LENGTH_SHORT).show();
-            }
-        } else if (id == R.id.nav_filter) {
-            switchToFilterReportsScreen();
-        } else if (id == R.id.nav_sightings_map) {
-            switchToMapActivity();
-        } else if (id == R.id.nav_report_graphs) {
-            switchToReportGraphScreen();
-        } else if (id == R.id.nav_logout) {
-            logout();
-        } else if (id == R.id.nav_share) {
-            shareOrSendReport("Share");
-        } else if (id == R.id.nav_send) {
-            shareOrSendReport("Send");
+        }
+        else {
+            Toast.makeText(getBaseContext(), "Waiting for CSV data to load in!", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

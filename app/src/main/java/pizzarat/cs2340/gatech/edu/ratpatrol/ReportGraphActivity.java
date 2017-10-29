@@ -1,11 +1,13 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.SeekBar;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -22,8 +24,10 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.DateRangeStruct;
 import pizzarat.cs2340.gatech.edu.structure.GraphUtilities;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * Represents the screen the graphically depicts all the rat reports based on
@@ -99,31 +103,38 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
     private void setData(int count, float range) {
 
         float start = 1f;
-        reports = reportBroker.getDateConstrainedReports(getBaseContext());
-        int[] months = GraphUtilities.organizeByMonth(reports);
-
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
 
 
+        reports = reportBroker.getDateConstrainedReports(getBaseContext());
+        int span = 31536000;
+        if (StaticHolder.dateRange != null)
+            span = StaticHolder.dateRange.getDateSpan();
 
-//        for (int i = (int) start; i < 100 && i < reports.size(); i++) {
-//            float mult = (range + 1);
-//            float val = (float) (Math.random() * mult);
-//            ReportStructure rs = reports.get(i);
-//            String[] reportDate = rs.getDate().split("/");
-//            String year = reportDate[0];
-//            String month = reportDate[1];
-//            String day = reportDate[2];
-//            Log.d("hidden",i+"");
-//            Log.d("hidden",year + "/" + month + "/" + day);
-//            months[Integer.parseInt(month)-1]++;
-//        }
-
-        for (int j = 0; j < 12; j++)
+        Log.d("hidden","span = " + span);
+        if (span >= 31536000) //bigger than year
         {
-            //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
-            yVals1.add(new BarEntry(j, months[j], getResources().getDrawable(R.drawable.graphmarker)));
+            getYearData(yVals1);
         }
+        else if (span >= 2678400) //bigger than month
+        {
+
+        }
+        else
+        {
+            //graph by day
+            int[] days = GraphUtilities.organizeByMonth(reports);
+            for (int j = 0; j < days.length; j++)
+            {
+                //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
+                yVals1.add(new BarEntry(j, days[j], getResources().getDrawable(R.drawable.graphmarker)));
+            }
+
+        }
+
+
+
+
 
         BarDataSet set1;
 
@@ -149,6 +160,34 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
 
             mChart.setData(data);
         }
+    }
+
+    public void getYearData(ArrayList<BarEntry> yVals)
+    {
+        Log.d("hidden","graphing by year");
+        //graph by year
+        int[] years = GraphUtilities.organizeByYear(getBaseContext(), reports);
+        for (int j = 0; j < years.length; j++)
+        {
+            //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
+            yVals.add(new BarEntry(j, years[j], getResources().getDrawable(R.drawable.graphmarker)));
+        }
+    }
+
+    public void getMonthData(ArrayList<BarEntry> yVals)
+    {
+        //graph by month
+        int[] months = GraphUtilities.organizeByMonth(reports);
+        for (int j = 0; j < months.length; j++)
+        {
+            //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
+            yVals.add(new BarEntry(j, months[j], getResources().getDrawable(R.drawable.graphmarker)));
+        }
+    }
+
+    public void getDayData()
+    {
+
     }
 
     @Override

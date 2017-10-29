@@ -40,7 +40,7 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
     ArrayList<ReportStructure> reports;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_graph);
 
@@ -67,19 +67,31 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f); // only intervals of 1 day
         xAxis.setLabelCount(12);
-        final ArrayList xLabel = new ArrayList<String>();
-        xLabel.add("Jan");
-        xLabel.add("Feb");
-        xLabel.add("Mar");
-        xLabel.add("Apr");
-        xLabel.add("May");
-        xLabel.add("Jun");
-        xLabel.add("Jul");
-        xLabel.add("Aug");
-        xLabel.add("Sep");
-        xLabel.add("Oct");
-        xLabel.add("Nov");
-        xLabel.add("Dec");
+
+        //int span = getSpan();
+        reports = reportBroker.getDateConstrainedReports(getBaseContext());
+        final ArrayList<String> xLabel;
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+
+
+        getYearData(yVals1);
+        xLabel = getYearLabels();
+
+
+//        if (span >= 31536000) //bigger than year
+//        {
+//            getYearData(yVals1);
+//            xLabel = getYearLabels();
+//
+//        } else if (span >= 2678400) //bigger than month
+//        {
+//            getMonthData(yVals1);
+//            xLabel = getMonthLabels();
+//        } else {
+//            getDayData(yVals1);
+//            xLabel = getDayLabels();
+//        }
+
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xLabel));
 
         YAxis leftAxis = mChart.getAxisLeft();
@@ -94,47 +106,27 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
         rightAxis.setSpaceTop(15f);
         rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
-        setData(12, 50);
+        setData(yVals1);
 
     }
 
-
-
-    private void setData(int count, float range) {
-
-        float start = 1f;
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-
+    private int getSpan()
+    {
 
         reports = reportBroker.getDateConstrainedReports(getBaseContext());
         int span = 31536000;
         if (StaticHolder.dateRange != null)
             span = StaticHolder.dateRange.getDateSpan();
+        return span;
+    }
 
-        Log.d("hidden","span = " + span);
-        if (span >= 31536000) //bigger than year
-        {
-            getYearData(yVals1);
-        }
-        else if (span >= 2678400) //bigger than month
-        {
+    private void setData(ArrayList<BarEntry> yVals1) {
 
-        }
-        else
-        {
-            //graph by day
-            int[] days = GraphUtilities.organizeByMonth(reports);
-            for (int j = 0; j < days.length; j++)
-            {
-                //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
-                yVals1.add(new BarEntry(j, days[j], getResources().getDrawable(R.drawable.graphmarker)));
-            }
-
-        }
+        float start = 1f;
 
 
 
-
+        reports = reportBroker.getDateConstrainedReports(getBaseContext());
 
         BarDataSet set1;
 
@@ -162,32 +154,76 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
         }
     }
 
-    public void getYearData(ArrayList<BarEntry> yVals)
-    {
-        Log.d("hidden","graphing by year");
+    public void getYearData(ArrayList<BarEntry> yVals) {
+        Log.d("hidden", "graphing by year");
         //graph by year
         int[] years = GraphUtilities.organizeByYear(getBaseContext(), reports);
-        for (int j = 0; j < years.length; j++)
-        {
+        for (int j = 0; j < years.length; j++) {
+            Log.d("hidden","years["+j+"] = " + years[j]);
             //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
             yVals.add(new BarEntry(j, years[j], getResources().getDrawable(R.drawable.graphmarker)));
         }
     }
 
-    public void getMonthData(ArrayList<BarEntry> yVals)
-    {
+    public void getMonthData(ArrayList<BarEntry> yVals) {
         //graph by month
         int[] months = GraphUtilities.organizeByMonth(reports);
-        for (int j = 0; j < months.length; j++)
-        {
+        for (int j = 0; j < months.length; j++) {
             //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
             yVals.add(new BarEntry(j, months[j], getResources().getDrawable(R.drawable.graphmarker)));
         }
     }
 
-    public void getDayData()
-    {
+    public void getDayData(ArrayList<BarEntry> yVals) {
+        //graph by day
+        int[] days = GraphUtilities.organizeByMonth(reports);
+        for (int j = 0; j < days.length; j++) {
+            //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
+            yVals.add(new BarEntry(j, days[j], getResources().getDrawable(R.drawable.graphmarker)));
+        }
+    }
 
+    public ArrayList<String> getYearLabels() {
+        final ArrayList xLabel = new ArrayList<String>();
+        String startDate = "2010/01/01";
+        String endDate = "2017/01/01";
+        if (StaticHolder.dateRange != null)
+        {
+            startDate = StaticHolder.dateRange.getFrom();
+            endDate = StaticHolder.dateRange.getTo();
+        }
+        for (int i = Integer.parseInt(startDate.substring(0,4)); i < Integer.parseInt(endDate.substring(0,4)); i++)
+        {
+            xLabel.add(""+i);
+        }
+        return xLabel;
+    }
+
+    public ArrayList<String> getMonthLabels() {
+        final ArrayList xLabel = new ArrayList<String>();
+        xLabel.add("Jan");
+        xLabel.add("Feb");
+        xLabel.add("Mar");
+        xLabel.add("Apr");
+        xLabel.add("May");
+        xLabel.add("Jun");
+        xLabel.add("Jul");
+        xLabel.add("Aug");
+        xLabel.add("Sep");
+        xLabel.add("Oct");
+        xLabel.add("Nov");
+        xLabel.add("Dec");
+        return xLabel;
+    }
+
+    public ArrayList<String> getDayLabels() {
+        final ArrayList xLabel = new ArrayList<String>();
+        int numOfDays = 31;
+        for (int i = 0; i < numOfDays; i++)
+        {
+            xLabel.add(i);
+        }
+        return xLabel;
     }
 
     @Override

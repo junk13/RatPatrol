@@ -33,8 +33,9 @@ public class DateRangeStruct {
 
     public int getDateSpan()
     {
-        String fromString = new SimpleDateFormat("yyyy/MM/dd").format(from);
-        String toString = new SimpleDateFormat("yyyy/MM/dd").format(this);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String fromString = sdf.format(from);
+        String toString = sdf.format(to);
         int fromInSeconds = Integer.parseInt(fromString);
         int toInSeconds = Integer.parseInt(toString);
         return toInSeconds - fromInSeconds;

@@ -3,6 +3,9 @@ package pizzarat.cs2340.gatech.edu.structure;
 import android.content.Context;
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.ratpatrol.ArchiveActivity;
@@ -45,12 +48,21 @@ public class GraphUtilities {
         SQLiteReportBroker reportBroker = new SQLiteReportBroker();
         //int[] extremeDates = reportBroker.findExtremeDates(c); //{earliestYear, latestYear}
         //int yearSpan = extremeDates[1] - extremeDates[0];
-        int yearSpan = 8;
+        int startYear = 2010;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        int endYear = Integer.parseInt((dateFormat.format(new Date())));
+        Log.d("hidden","startYear = " + startYear + " | endYear = " + endYear);
+        if (StaticHolder.dateRange != null)
+        {
+            startYear = Integer.parseInt(StaticHolder.dateRange.getFrom());
+            endYear = Integer.parseInt(StaticHolder.dateRange.getTo());
+        }
+        int yearSpan = endYear - startYear + 1;
         int[] years = new int[yearSpan];
         for (ReportStructure report: reports) {
             String date = report.getDate();
             if (Verification.isValidSQLDate(date)) { //date is yyyy/MM/dd from SQL
-                years[Integer.parseInt(date.substring(0, 4)) - 2010]++;
+                years[Integer.parseInt(date.substring(0, 4)) - startYear]++;
             } else {
                 Log.e("GRAPH","RatReport "+report.getKey()+ " has invalid date: " + date);
             }

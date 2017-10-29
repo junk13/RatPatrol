@@ -36,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SelectionScreenActivity"/>
         <activity android:name=".ArchiveActivity"/>
         <activity android:name=".CreateReportActivity"/>
         <activity android:name=".DetailedReportViewActivity">
@@ -60,6 +59,11 @@
         <activity android:name=".FilterReportsActivity">
         </activity>
         <activity android:name=".ReportGraphActivity">
+        </activity>
+        <activity
+            android:name=".NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

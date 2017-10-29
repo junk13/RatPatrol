@@ -6,10 +6,15 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -23,112 +28,106 @@ import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 
-
 /**
- * This is the selection screen after logging in which allow the
- * user to switch to different screens with different functions
- * using the displayed buttons.
+ * This is our navigation screen to move between all the other activities within
+ * the Rat Patrol application.
  *
  * @author Harrison Banh
  */
-public class SelectionScreenActivity extends AppCompatActivity {
+public class NavigationActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     private BackgroundDataTask bdTask = null;
     private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private boolean csvLoaded = false;
 
-    /**
-     * Creates the SelectionScreenActivity
-     * @param savedInstanceState the bundle from the last activity
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selection_screen);
+        setContentView(R.layout.activity_navigation);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Main Menu");
+        setSupportActionBar(toolbar);
 
-        // Set logout button function
-        Button logoutButton = (Button) findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               logout();
-            }
-        });
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-        // Set Rat Archive button function
-        Button ratArchiveButton = (Button) findViewById(R.id.ratArchiveButton);
-        ratArchiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (csvLoaded) {
-                    switchToArchiveActivity();
-                }
-                else {
-                    Toast.makeText(getBaseContext(), "Waiting for CSV report to load in!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
 
-        // Sets create a report button function
-        Button createReport = (Button) findViewById(R.id.createReportButton);
-        createReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToCreateReportActivity();
-            }
-        });
-
-        // Sets the Rat Map button function
-        Button ratMapButton = (Button) findViewById(R.id.ratMapButton);
-        ratMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToMapActivity();
-            }
-        });
-
-        // Sets the Filter reports button function
-        Button filterScreenButton = (Button) findViewById(R.id.filterScreenButton);
-        filterScreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //switch to Filter Reports Activity
-                switchToFilterReportsScreen();
-            }
-        });
-
-        // Sets the View Graph button function
-        Button graphButton = (Button) findViewById(R.id.graphButton);
-        graphButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToReportGraphScreen();
-            }
-        });
-
-
-        Log.d("hidden",""+reportBroker.getMaxKey(getBaseContext()));
-        if (!reportBroker.isPopulated(this.getBaseContext())){
-            Log.d("hidden","it's not populated, boi");
-            //Get csv report
-            bdTask = new BackgroundDataTask();
-            bdTask.execute();
-        }
-        else {
-            Log.d("hidden","it's populated, boi");
-            csvLoaded = true;
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.navigation, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_create_report) {
+            switchToCreateReportActivity();
+        } else if (id == R.id.nav_rat_archive) {
+            switchToArchiveActivity();
+        } else if (id == R.id.nav_filter) {
+            switchToFilterReportsScreen();
+        } else if (id == R.id.nav_sightings_map) {
+            switchToMapActivity();
+        } else if (id == R.id.nav_report_graphs) {
+            switchToReportGraphScreen();
+        } else if (id == R.id.nav_logout) {
+            logout();
+        } else if (id == R.id.nav_share) {
+            shareOrSendReport("Share");
+        } else if (id == R.id.nav_send) {
+            shareOrSendReport("Send");
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     /**
-     * Switches to the WelcomeActivity from the SelectionScreenActivity.
+     * Switches to the WelcomeActivity from the Navigation Screen.
      */
     public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(SelectionScreenActivity.this, WelcomeActivity.class);
-        SelectionScreenActivity.this.startActivity(switchToWelcomeActivity);
+        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+        this.startActivity(switchToWelcomeActivity);
     }
 
     /**
-     * Switches to the ArchiveActivity from the SelectionScreenActivity.
+     * Switches to the ArchiveActivity from the Navigation Screen.
      */
     public void switchToArchiveActivity() {
         Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
@@ -160,10 +159,10 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Closes the SelectionScreenActivity thus "logging out" the user
+     * Closes the Navigation Screen thus "logging out" the user
      */
     public void logout() {
-       switchBackToWelcomeActivity();
+        switchBackToWelcomeActivity();
     }
 
     /**
@@ -173,21 +172,38 @@ public class SelectionScreenActivity extends AppCompatActivity {
         Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
         Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Selection Screen.", Toast.LENGTH_LONG).show();
+                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Opens a bunch of apps at the bottom of the screen allowing the user to
+     * share something about the Rat Patrol app using different apps.
+     *
+     * @param widget the name of widget clicked
+     */
+    public void shareOrSendReport(String widget) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        String shareBody = "Your body here";
+        String shareSub = "Your subject here";
+        share.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+        share.putExtra(Intent.EXTRA_TEXT, shareSub);
+        startActivity(Intent.createChooser(share, widget + " using"));
+
     }
 
     /**
      * Read in offline rat report from csv
      */
-    private void readRatData()  {
+    private void readRatData() {
         String csvFile = "raw/ratsightings.csv";
         InputStream inputStream;
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
-        Log.d("hidden","in function...");
+        Log.d("hidden", "in function...");
         try {
-            Log.d("hidden","trying to read file...");
+            Log.d("hidden", "trying to read file...");
             inputStream = getResources().openRawResource(R.raw.ratsightings);
             br = new BufferedReader(new InputStreamReader(inputStream));
             line = br.readLine();
@@ -227,16 +243,16 @@ public class SelectionScreenActivity extends AppCompatActivity {
                 ReportStructure rsr = new ReportStructure(key, buildingType, date,
                         time, address, zip, city, borough, latitude, longitude);
 
-                reportBroker.writeToReportDb(rsr,this.getApplicationContext());
+                reportBroker.writeToReportDb(rsr, this.getApplicationContext());
             }
 
         } catch (FileNotFoundException e) {
-            Log.d("hidden","FILE NOT FOUND");
+            Log.d("hidden", "FILE NOT FOUND");
             e.printStackTrace();
         } catch (DuplicateReportDbException e) {
-            Log.d("hidden",e.getLocalizedMessage());
+            Log.d("hidden", e.getLocalizedMessage());
         } catch (IOException e) {
-            Log.d("hidden","IOEXCEPTION");
+            Log.d("hidden", "IOEXCEPTION");
             e.printStackTrace();
         } finally {
             if (br != null) {
@@ -256,10 +272,9 @@ public class SelectionScreenActivity extends AppCompatActivity {
     }
 
     private String getTime(String dateAndTime) {
-        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ")+1).split(":| ");
-        if (time[3].equals("PM"))
-        {
-            time[0] = ""+(Integer.parseInt(time[0])+12);
+        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ") + 1).split(":| ");
+        if (time[3].equals("PM")) {
+            time[0] = "" + (Integer.parseInt(time[0]) + 12);
         }
         return time[0] + ":" + time[1] + ":" + time[2];
     }
@@ -278,7 +293,7 @@ public class SelectionScreenActivity extends AppCompatActivity {
             //showProgress(false);
 
             if (success) {
-                Log.d("hidden","hi");
+                Log.d("hidden", "hi");
                 Toast.makeText(getBaseContext(), "You can now view and create rat reports", Toast.LENGTH_SHORT).show();
                 csvLoaded = true;
             } else {
@@ -287,5 +302,4 @@ public class SelectionScreenActivity extends AppCompatActivity {
         }
 
     }
-
 }

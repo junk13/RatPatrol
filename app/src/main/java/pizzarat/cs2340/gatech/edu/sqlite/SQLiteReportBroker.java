@@ -324,4 +324,24 @@ public class SQLiteReportBroker extends AppCompatActivity {
         Log.d("hidden", "aList.size() = " + list.size());
     }
 
+
+
+    /**
+     * Finds the max and min dates
+     *
+     * @param c the specified context
+     * @return the max and min dates
+     */
+    public int[] findExtremeDates(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + "), MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM " + RatSightingDb.getTableName();
+        Cursor mcursor = readableDb.rawQuery(query, null);
+        mcursor.moveToFirst();
+        int maxDate = mcursor.getInt(0);
+        int minDate = mcursor.getInt(1);
+        Log.d("hidden",""+minDate + " | " + maxDate);
+        Log.d("hidden","meow");
+        return new int[] {minDate, maxDate};
+    }
 }

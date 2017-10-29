@@ -1,5 +1,7 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by Evie Brown.
  */
@@ -27,5 +29,14 @@ public class DateRangeStruct {
 
     public void setTo(String to) {
         this.to = to;
+    }
+
+    public int getDateSpan()
+    {
+        String fromString = new SimpleDateFormat("yyyy/MM/dd").format(from);
+        String toString = new SimpleDateFormat("yyyy/MM/dd").format(this);
+        int fromInSeconds = Integer.parseInt(fromString);
+        int toInSeconds = Integer.parseInt(toString);
+        return toInSeconds - fromInSeconds;
     }
 }

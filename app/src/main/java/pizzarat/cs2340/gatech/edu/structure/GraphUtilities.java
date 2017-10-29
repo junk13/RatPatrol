@@ -1,8 +1,13 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.List;
+
+import pizzarat.cs2340.gatech.edu.ratpatrol.ArchiveActivity;
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 
 /**
  * Created by Luka on 10/29/2017.
@@ -28,6 +33,60 @@ public class GraphUtilities {
             }
         }
         return months;
+    }
+
+    static public int[] organizeByYear(Context c, List<ReportStructure> reports){
+        SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+        //int[] extremeDates = reportBroker.findExtremeDates(c); //{earliestYear, latestYear}
+        //int yearSpan = extremeDates[1] - extremeDates[0];
+        int yearSpan = 8;
+        int[] years = new int[yearSpan];
+        for (ReportStructure report: reports) {
+            String date = report.getDate();
+            if (Verification.isValidSQLDate(date)) { //date is yyyy/MM/dd from SQL
+                years[Integer.parseInt(date.substring(0, 4)) - 2010]++;
+            } else {
+                Log.e("GRAPH","RatReport "+report.getKey()+ " has invalid date: " + date);
+            }
+        }
+        return years;
+    }
+
+    static public int[] organizeByDay(List<ReportStructure> reports,int month) {
+        String form;
+        int[] days;
+        //31 days   1,3,5,7,8,10,12
+        if (month == 1 ||
+                month == 3 ||
+                month == 5 ||
+                month == 7 ||
+                month == 8 ||
+                month == 10 ||
+                month == 12) {
+            days = new int[31];
+        }
+        //30 days   4,6,9,11
+        else if (month == 4 ||
+                month == 6 ||
+                month == 9 ||
+                month == 11) {
+            form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0])))";
+            days = new int[30];
+        }
+        //29 days   2
+        else {
+            days = new int[29];
+        }
+
+        for (ReportStructure report : reports) {
+            String date = report.getDate();
+            if (Verification.isValidSQLDate(date)) { //date is yyyy/MM/dd from SQL
+                days[Integer.parseInt(date.substring(8, 10)) - 1]++;
+            } else {
+                Log.e("GRAPH", "RatReport " + report.getKey() + " has invalid date: " + date);
+            }
+        }
+        return days;
     }
 
 }

@@ -1,10 +1,12 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -60,6 +62,14 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f); // only intervals of 1 day
         xAxis.setLabelCount(7);
+//        LimitLine ll = new LimitLine(140f, "Critical Blood Pressure");
+//        ll.setLineColor(Color.RED);
+//        ll.setLineWidth(4f);
+//        ll.setTextColor(Color.BLACK);
+//        ll.setTextSize(12f);
+//// .. and more styling options
+//
+//        xAxis.addLimitLine(ll);
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setLabelCount(8, false);

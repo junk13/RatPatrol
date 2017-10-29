@@ -19,7 +19,7 @@ public class GraphUtilities {
         int[] months = new int[12];
         for (ReportStructure report: reports) {
             String date = report.getDate();
-            months[Integer.parseInt(date.substring(0,2))]++;
+            months[Integer.parseInt(date.substring(0,2))-1]++;
         }
         return months;
     }

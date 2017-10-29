@@ -1,13 +1,11 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.SeekBar;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -15,6 +13,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -63,15 +62,21 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f); // only intervals of 1 day
-        xAxis.setLabelCount(7);
-//        LimitLine ll = new LimitLine(140f, "Critical Blood Pressure");
-//        ll.setLineColor(Color.RED);
-//        ll.setLineWidth(4f);
-//        ll.setTextColor(Color.BLACK);
-//        ll.setTextSize(12f);
-//// .. and more styling options
-//
-//        xAxis.addLimitLine(ll);
+        xAxis.setLabelCount(12);
+        final ArrayList xLabel = new ArrayList<String>();
+        xLabel.add("Jan");
+        xLabel.add("Feb");
+        xLabel.add("Mar");
+        xLabel.add("Apr");
+        xLabel.add("May");
+        xLabel.add("Jun");
+        xLabel.add("Jul");
+        xLabel.add("Aug");
+        xLabel.add("Sep");
+        xLabel.add("Oct");
+        xLabel.add("Nov");
+        xLabel.add("Dec");
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(xLabel));
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setLabelCount(8, false);
@@ -129,12 +134,12 @@ public class ReportGraphActivity extends AppCompatActivity implements SeekBar.On
             mChart.getData().notifyDataChanged();
             mChart.notifyDataSetChanged();
         } else {
-            set1 = new BarDataSet(yVals1, "The year 2017");
-
-            set1.setDrawIcons(false);
-
-            set1.setColors(ColorTemplate.MATERIAL_COLORS);
-
+            set1 = new BarDataSet(yVals1, "Rat Reports");
+//
+//            set1.setDrawIcons(false);
+//
+//            set1.setColors(ColorTemplate.MATERIAL_COLORS);
+//
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
             dataSets.add(set1);
 

@@ -65,6 +65,8 @@
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme">
         </activity>
+        <activity android:name=".WelcomeSplashActivity">
+        </activity>
     </application>
 
 </manifest>

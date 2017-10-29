@@ -46,6 +46,12 @@ public class ArchiveActivity extends AppCompatActivity {
                 return false;
             }
 
+            /**
+             * is invoked when test is typed in the searcher
+             *
+             * @param newText
+             * @return
+             */
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.length() <= 2)

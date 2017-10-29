@@ -98,10 +98,10 @@ public class ReportGraphActivity extends AppCompatActivity
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
 
 
-        getYearData(yVals1);
-        xLabel = getYearLabels();
+        getMonthData(yVals1);
+        xLabel = getMonthLabels();
 
-
+//TODO: not delete this
 //        if (span >= 31536000) //bigger than year
 //        {
 //            getYearData(yVals1);

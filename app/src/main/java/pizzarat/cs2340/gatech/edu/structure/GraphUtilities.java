@@ -54,8 +54,10 @@ public class GraphUtilities {
         Log.d("hidden","startYear = " + startYear + " | endYear = " + endYear);
         if (StaticHolder.dateRange != null)
         {
-            startYear = Integer.parseInt(StaticHolder.dateRange.getFrom());
-            endYear = Integer.parseInt(StaticHolder.dateRange.getTo());
+            String startDate = StaticHolder.dateRange.getFrom();
+            String endDate = StaticHolder.dateRange.getTo();
+            startYear = Integer.parseInt(startDate.substring(0, 4));
+            endYear = Integer.parseInt(endDate.substring(0, 4));
         }
         int yearSpan = endYear - startYear + 1;
         int[] years = new int[yearSpan];

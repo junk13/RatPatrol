@@ -39,7 +39,7 @@ public class Verification {
      * @return      true if the date is valid.
      */
     public static boolean isValidSQLDate(String str) {
-        String form = "([1-2][0-9][0-9][0-9][/](([0-2][0-9])|([3][0-1]))[/](([0][0-9])|([1][0-2])))";
+        String form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0-1])))";
         return str.matches(form);
     }
     /**

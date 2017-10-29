@@ -52,17 +52,41 @@ public class GraphUtilities {
         return years;
     }
 
-    static public int[] organizeByDay(List<ReportStructure> reports){
-        int[] months = new int[31];
-        for (ReportStructure report: reports) {
+    static public int[] organizeByDay(List<ReportStructure> reports,int month) {
+        String form;
+        int[] days;
+        //31 days   1,3,5,7,8,10,12
+        if (month == 1 ||
+                month == 3 ||
+                month == 5 ||
+                month == 7 ||
+                month == 8 ||
+                month == 10 ||
+                month == 12) {
+            days = new int[31];
+        }
+        //30 days   4,6,9,11
+        else if (month == 4 ||
+                month == 6 ||
+                month == 9 ||
+                month == 11) {
+            form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0])))";
+            days = new int[30];
+        }
+        //29 days   2
+        else {
+            days = new int[29];
+        }
+
+        for (ReportStructure report : reports) {
             String date = report.getDate();
             if (Verification.isValidSQLDate(date)) { //date is yyyy/MM/dd from SQL
-                months[Integer.parseInt(date.substring(8, 10)) - 1]++;
+                days[Integer.parseInt(date.substring(8, 10)) - 1]++;
             } else {
-                Log.e("GRAPH","RatReport "+report.getKey()+ " has invalid date: " + date);
+                Log.e("GRAPH", "RatReport " + report.getKey() + " has invalid date: " + date);
             }
         }
-        return months;
+        return days;
     }
 
 }

@@ -4,15 +4,20 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +29,8 @@ import pizzarat.cs2340.gatech.edu.structure.Verification;
 /**
  * Represents the screen to create a rat sighting report.
  */
-public class CreateReportActivity extends AppCompatActivity {
+public class CreateReportActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private TextView key;
     private TextView date;
@@ -40,6 +46,22 @@ public class CreateReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_report);
+
+        // Navigation drawer creation
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Report Creation");
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Actual report creation code
         String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
         key = (TextView) findViewById(R.id.createKeyView);
 
@@ -61,23 +83,159 @@ public class CreateReportActivity extends AppCompatActivity {
         zipcode = (TextView) findViewById(R.id.createZipcodeView);
         buildingType = (TextView) findViewById(R.id.createLocationTextView);
 
-        Button createButton = (Button) findViewById(R.id.createReportButton);
         Button cancelButton = (Button) findViewById(R.id.cancelReportButton);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToSelectionScreenActivity();
+                switchToNavigationScreenActivity();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.navigation, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_create_report) {
+            Toast message = Toast.makeText(getApplicationContext(),
+                    "You are already on this screen", Toast.LENGTH_LONG);
+            message.show();
+        } else if (id == R.id.nav_rat_archive) {
+            switchToArchiveActivity();
+        } else if (id == R.id.nav_filter) {
+            switchToFilterReportsScreen();
+        } else if (id == R.id.nav_sightings_map) {
+            switchToMapActivity();
+        } else if (id == R.id.nav_report_graphs) {
+            switchToReportGraphScreen();
+        } else if (id == R.id.nav_logout) {
+            logout();
+        } else if (id == R.id.nav_share) {
+            shareOrSendReport("Share");
+        } else if (id == R.id.nav_send) {
+            shareOrSendReport("Send");
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     /**
      * Switches back to the selection screen after submission/cancellation.
      */
-    public void switchToSelectionScreenActivity() {
-        Intent switchToSelectionScreen = new Intent(this, NavigationActivity.class);
-        this.startActivity(switchToSelectionScreen);
+    public void switchToNavigationScreenActivity() {
+        Intent navScreen = new Intent(this, NavigationActivity.class);
+        this.startActivity(navScreen);
+    }
+
+
+    /**
+     * Switches to the WelcomeActivity from the Navigation Screen.
+     */
+    public void switchBackToWelcomeActivity() {
+        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+        this.startActivity(switchToWelcomeActivity);
+    }
+
+    /**
+     * Switches to the ArchiveActivity from the Navigation Screen.
+     */
+    public void switchToArchiveActivity() {
+        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+        this.startActivity(switchToArchiveActivity);
+    }
+
+    /**
+     * Switches to the CreateReportActivity.
+     */
+    public void switchToCreateReportActivity() {
+        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+        this.startActivity(switchToCreateReportActivity);
+    }
+
+    /**
+     * Switches to the MapActivity.
+     */
+    public void switchToMapActivity() {
+        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+        this.startActivity(switchToMapActivity);
+    }
+
+    /**
+     * Switches to the FilterReportsActivity.
+     */
+    public void switchToFilterReportsScreen() {
+        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+        this.startActivity(switchToFilterReportsActivity);
+    }
+
+    /**
+     * Closes the Navigation Screen thus "logging out" the user
+     */
+    public void logout() {
+        switchBackToWelcomeActivity();
+    }
+
+    /**
+     * Switches to the ReportGraphActivity.
+     */
+    public void switchToReportGraphScreen() {
+        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+        startActivity(switchToReportGraphScreenActivity);
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
+                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Opens a bunch of apps at the bottom of the screen allowing the user to
+     * share something about the Rat Patrol app using different apps.
+     *
+     * @param widget the name of widget clicked
+     */
+    public void shareOrSendReport(String widget) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        String shareBody = "Your body here";
+        String shareSub = "Your subject here";
+        share.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+        share.putExtra(Intent.EXTRA_TEXT, shareSub);
+        startActivity(Intent.createChooser(share, widget + " using"));
+
     }
 
     /**
@@ -92,12 +250,12 @@ public class CreateReportActivity extends AppCompatActivity {
         try {
             addresses = geocoder.getFromLocationName(buildingType.getText().toString(), 1);
             if (!Verification.isValidZip(zipcode.getText().toString())) {
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode" +"\n"
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode" + "\n"
                         + "Required Format: xxxxx", Toast.LENGTH_SHORT);
                 toast.show();
             } else if (!Verification.isValidTime(time.getText().toString())) {
                 Log.d("isvalid", time.getText().toString());
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time" +"\n"
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time" + "\n"
                         + "Required Format: hh:mm", Toast.LENGTH_SHORT);
                 toast.show();
             } else if (!Verification.isValidDate(date.getText().toString())) {
@@ -134,7 +292,7 @@ public class CreateReportActivity extends AppCompatActivity {
                         ),
                         getBaseContext()
                 );
-                switchToSelectionScreenActivity();
+                switchToNavigationScreenActivity();
             }
         } catch (Exception e) {
             Log.d("Cunt", "kill me now");

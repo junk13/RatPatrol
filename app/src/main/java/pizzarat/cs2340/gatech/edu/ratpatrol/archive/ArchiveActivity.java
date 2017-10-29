@@ -47,8 +47,10 @@ public class ArchiveActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                posts = reportBroker.getReportsWithSubstring(newText, getBaseContext());
-                initRecycler();
+                if (newText.length() > 2) {
+                    posts = reportBroker.getReportsWithSubstring(newText, getBaseContext());
+                    initRecycler();
+                }
                 return false;
             }
         });

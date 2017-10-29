@@ -33,6 +33,16 @@ public class Verification {
     }
 
     /**
+     *      SQL stores dates in the format: YYYY/MM/DD,
+     *      So, we need to verify it slightly differently.
+     * @param str   the user's date
+     * @return      true if the date is valid.
+     */
+    public static boolean isValidSQLDate(String str) {
+        String form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0-1])))";
+        return str.matches(form);
+    }
+    /**
      * Determines if the the user's specified zipcode is legitimate
      *
      * @param zip the user's zipcode

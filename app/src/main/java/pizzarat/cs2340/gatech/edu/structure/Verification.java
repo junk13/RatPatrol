@@ -40,7 +40,36 @@ public class Verification {
      */
     public static boolean isValidSQLDate(String str) {
         String form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0-1])))";
-        return str.matches(form);
+        if (str.matches(form)){
+            String strMonth = str.substring(5,7);
+            String checkDay = str.substring(8,10);
+            //31 days   1,3,5,7,8,10,12
+            if (    strMonth.equals("01") ||
+                    strMonth.equals("03") ||
+                    strMonth.equals("05") ||
+                    strMonth.equals("07") ||
+                    strMonth.equals("08") ||
+                    strMonth.equals("10") ||
+                    strMonth.equals("12")){
+                return checkDay.matches(form);
+            }
+            //30 days   4,6,9,11
+             else if (  strMonth.equals("04") ||
+                        strMonth.equals("06") ||
+                        strMonth.equals("09") ||
+                        strMonth.equals("11") ){
+                form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0])))";
+                return checkDay.matches(form);
+            }
+            //29 days   2
+            else {
+                form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/]([0-2][0-9]))";
+                return checkDay.matches(form);
+            }
+
+        } else {
+            return false;
+        }
     }
     /**
      * Determines if the the user's specified zipcode is legitimate

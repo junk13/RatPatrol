@@ -31,7 +31,7 @@ public class DetailedReportViewActivity extends AppCompatActivity
 
         // Navigation drawer creation
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Report Creation");
+        toolbar.setTitle("Report Details");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

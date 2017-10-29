@@ -181,6 +181,14 @@ public class CreateReportActivity extends AppCompatActivity
     }
 
     /**
+     * Switches to the CreateReportActivity.
+     */
+    public void switchToCreateReportActivity() {
+        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+        this.startActivity(switchToCreateReportActivity);
+    }
+
+    /**
      * Switches to the MapActivity.
      */
     public void switchToMapActivity() {

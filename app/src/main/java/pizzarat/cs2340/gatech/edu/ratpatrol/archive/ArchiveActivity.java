@@ -1,4 +1,5 @@
-package pizzarat.cs2340.gatech.edu.ratpatrol;
+package pizzarat.cs2340.gatech.edu.ratpatrol.archive;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,45 +8,51 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.TextView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
-import pizzarat.cs2340.gatech.edu.ratpatrol.archive.ArchiveActivity;
-import pizzarat.cs2340.gatech.edu.structure.DateRangeStruct;
+import java.util.ArrayList;
+
+import pizzarat.cs2340.gatech.edu.ratpatrol.CreateReportActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.DetailedReportViewActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.FilterReportsActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.MapActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.R;
+import pizzarat.cs2340.gatech.edu.ratpatrol.ReportGraphActivity;
+import pizzarat.cs2340.gatech.edu.ratpatrol.WelcomeActivity;
+import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
- * This class is a simple activity to allow the user to filter the rat reports
- * in the rat archive and rat map by specifying a String parameter.
- *
- * @author Harrison Banh
+ * Represents the screen that displays all the rat sightings in the database.
  */
-public class FilterReportsActivity extends AppCompatActivity
+public class ArchiveActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private TextView beforeDateTextView;
-    private TextView afterDateTextView;
-    private Button filterButton;
-    private Button cancelFilterButton;
-    private View calendar;
-    private DatePicker datePicker;
-    private TextView dateView;
-    private int year, month, day;
+    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    ArrayList<ReportStructure> posts = new ArrayList<>();
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerView;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter_reports);
+        setContentView(R.layout.activity_archive);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         // Navigation drawer creation
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Report Filter");
+        toolbar.setTitle("Rat Archive");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -57,41 +64,41 @@ public class FilterReportsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        year = 2017;
-        month = 10;
-        day = 10;
-
-        beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
-        afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
-        filterButton = (Button) findViewById(R.id.filterReportsButton);
-        cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
-
-        filterButton.setOnClickListener(new View.OnClickListener() {
+        // Archive recycler view creation
+        posts = reportBroker.reportArrayList(getBaseContext());
+        initRecycler();
+        searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                // TODO grab text from TextView and filter reports
-                try {
-                    String beforeDate = (beforeDateTextView.getText().toString());
-                    String afterDate = (afterDateTextView.getText().toString());
-                    Log.d("hidden", beforeDate + " | " + afterDate);
-                    StaticHolder.dateRange = new DateRangeStruct(getDate(beforeDate), getDate(afterDate));
-                } catch (Exception e) {
-                    Log.d("hidden", e.getLocalizedMessage());
+            public boolean onQueryTextSubmit(String query) {
+                posts = reportBroker.getReportsWithSubstring(query, getBaseContext());
+                initRecycler();
+                return false;
+            }
+
+            /**
+             * is invoked when test is typed in the searcher
+             *
+             * @param newText
+             * @return
+             */
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() <= 2)
+                    return true;
+                ArrayList<ReportStructure> temp = reportBroker.getReportsWithSubstring(newText, getBaseContext());
+                if (newText.length() > 2 && posts == null)
+                    return false;
+                if (newText.length() > 2) {
+                    posts = temp;
+                    initRecycler();
                 }
-                switchBackToNavigationScreenActivity();
+                return true;
             }
         });
 
-        // Filter parameter is discarded and screen switches to the Selection Screen
-        cancelFilterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                beforeDateTextView.setText("");
-                afterDateTextView.setText("");
-                switchBackToNavigationScreenActivity();
-            }
-        });
     }
+
 
     @Override
     public void onBackPressed() {
@@ -133,11 +140,11 @@ public class FilterReportsActivity extends AppCompatActivity
         if (id == R.id.nav_create_report) {
             switchToCreateReportActivity();
         } else if (id == R.id.nav_rat_archive) {
-            switchToArchiveActivity();
-        } else if (id == R.id.nav_filter) {
             Toast message = Toast.makeText(getApplicationContext(),
                     "You are already on this screen", Toast.LENGTH_LONG);
             message.show();
+        } else if (id == R.id.nav_filter) {
+            switchToFilterReportsScreen();
         } else if (id == R.id.nav_sightings_map) {
             switchToMapActivity();
         } else if (id == R.id.nav_report_graphs) {
@@ -161,14 +168,6 @@ public class FilterReportsActivity extends AppCompatActivity
     public void switchBackToWelcomeActivity() {
         Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
-    }
-
-    /**
-     * Switches to the ArchiveActivity from the Navigation Screen.
-     */
-    public void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
-        this.startActivity(switchToArchiveActivity);
     }
 
     /**
@@ -229,18 +228,43 @@ public class FilterReportsActivity extends AppCompatActivity
 
     }
 
-    private String getDate(String dateAndTime) {
-        String[] date = dateAndTime.split(" ")[0].split("/");
-        return date[2] + "/" + date[0] + "/" + date[1];
+    /**
+     * initializes the list of rat reports in the rat archive
+     */
+    private void initRecycler() {
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        setupList();
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerAdapter adapter = new RecyclerAdapter(this, posts, this);
+        recyclerView.setAdapter(adapter);
+    }
+
+    //populate posts
+    private void setupList() {
+        Log.d("hidden", "setupList()");
+        try {
+            if (posts == null)
+                posts = reportBroker.reportArrayList(getBaseContext());
+        } catch (Exception e) {
+            Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
+        }
+
     }
 
     /**
-     * Switches to the navigation screen after the filter or cancel button has
-     * benn pushed.
+     * Switches from the list view of all the displayed rat reports to the
+     * detailed view of the single report when clicked on.
+     *
+     * @param report the specific report to display in detail.
      */
-    private void switchBackToNavigationScreenActivity() {
-        Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);
-        this.startActivity(switchToNavigationScreen);
+    public void switchToReportDetails(int report) {
+        Intent switchToDetailedReports = new Intent(this, DetailedReportViewActivity.class);
+        StaticHolder.report = posts.get(report);
+        this.startActivity(switchToDetailedReports);
     }
-
 }
+
+

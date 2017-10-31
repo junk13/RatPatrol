@@ -24,7 +24,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
         //throw DuplicateUserDbException if username is already used
         if (containsDuplicateUser(username, context))
             throw new DuplicateUserDbException();
-        // Gets the data repository in write mode
+        // Gets the report repository in write mode
         SQLiteDatabase db = cred.getWritableDatabase();
         ContentValues values = new ContentValues();
         //in email column, place email
@@ -107,6 +107,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
         }
         return aList;
     }
+
     //return database in string
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();

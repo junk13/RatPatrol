@@ -1,5 +1,6 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -9,26 +10,28 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
+import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * Represents the screen where the user can pick different fields about a rat
  * sighting report to generate a Google Maps of those reports that fix their
  * specified fields.
  */
-public class RatMapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rat_map);
+        setContentView(R.layout.activity_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -59,9 +62,9 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
      *
      * @param reports : a list of all reports to add to the map
      */
-    //TODO: use appropiate values latlong.
+    //TODO: use appropriate values latlong.
     private void populateFromFilter(ArrayList<ReportStructure> reports) {
-        for (ReportStructure report : reports) {
+        for (final ReportStructure report : reports) {
             Double latitude = 0.;
             Double longitude = 0.;
             try {
@@ -72,8 +75,22 @@ public class RatMapActivity extends FragmentActivity implements OnMapReadyCallba
                 Log.d("hidden",e.getLocalizedMessage());
             }
             LatLng coords = new LatLng(latitude, longitude);
-            mMap.addMarker(new MarkerOptions().position(coords)
+            Marker marker = mMap.addMarker(new MarkerOptions().position(coords)
                     .title("Key: " + report.getKey()).snippet(report.mapToString()));
+
+            // Sets the listener of each rat report to display its details when clicked
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    StaticHolder.report = report;
+                    Intent switchToDetailedReport = new Intent(MapActivity.this,
+                            DetailedReportViewActivity.class);
+                    MapActivity.this.startActivity(switchToDetailedReport);
+                    return true;
+                }
+            });
+
+
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(41, -74)));

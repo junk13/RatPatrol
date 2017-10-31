@@ -8,44 +8,31 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import pizzarat.cs2340.gatech.edu.ratpatrol.archive.ArchiveActivity;
-import pizzarat.cs2340.gatech.edu.structure.DateRangeStruct;
+import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
- * This class is a simple activity to allow the user to filter the rat reports
- * in the rat archive and rat map by specifying a String parameter.
- *
  * @author Harrison Banh
+ *         Represents the detailed view of one of the archived rat reports in New York
+ *         City.
  */
-public class FilterReportsActivity extends AppCompatActivity
+public class DetailedReportViewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private TextView beforeDateTextView;
-    private TextView afterDateTextView;
-    private Button filterButton;
-    private Button cancelFilterButton;
-    private View calendar;
-    private DatePicker datePicker;
-    private TextView dateView;
-    private int year, month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter_reports);
+        setContentView(R.layout.activity_detailed_report_view);
 
         // Navigation drawer creation
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Report Filter");
+        toolbar.setTitle("Report Details");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -57,40 +44,62 @@ public class FilterReportsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        year = 2017;
-        month = 10;
-        day = 10;
+        Intent data = this.getIntent();
 
-        beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
-        afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
-        filterButton = (Button) findViewById(R.id.filterReportsButton);
-        cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
+        // Initializing widgets
+        TextView key = (TextView) findViewById(R.id.keyTextView);
+        TextView date = (TextView) findViewById(R.id.dateTextView);
+        TextView time = (TextView) findViewById(R.id.timeTextView);
+        TextView address = (TextView) findViewById(R.id.addressTextView);
+        TextView city = (TextView) findViewById(R.id.cityTextView);
+        TextView zipcode = (TextView) findViewById(R.id.zipcodeTextView);
+        TextView borough = (TextView) findViewById(R.id.boroughTextView);
+        TextView buildingType = (TextView) findViewById(R.id.buildingTypeTextView);
+        TextView latitude = (TextView) findViewById(R.id.latitudeTextView);
+        TextView longitude = (TextView) findViewById(R.id.longitudeTextView);
 
-        filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO grab text from TextView and filter reports
-                try {
-                    String beforeDate = (beforeDateTextView.getText().toString());
-                    String afterDate = (afterDateTextView.getText().toString());
-                    Log.d("hidden", beforeDate + " | " + afterDate);
-                    StaticHolder.dateRange = new DateRangeStruct(getDate(beforeDate), getDate(afterDate));
-                } catch (Exception e) {
-                    Log.d("hidden", e.getLocalizedMessage());
-                }
-                switchBackToNavigationScreenActivity();
-            }
-        });
+        // Grabbing the specified report and filling the widgets with its information
+        ReportStructure report = StaticHolder.report;
 
-        // Filter parameter is discarded and screen switches to the Selection Screen
-        cancelFilterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                beforeDateTextView.setText("");
-                afterDateTextView.setText("");
-                switchBackToNavigationScreenActivity();
-            }
-        });
+        // Set key
+        String keyText = getString(R.string.key_prompt) + " " + report.getKey();
+        key.setText(keyText);
+
+        // Set date
+        String dateText = getString(R.string.date_prompt) + " " + report.getDate();
+        date.setText(dateText);
+
+        // Set time
+        String timeText = getString(R.string.time_prompt) + " " + report.getTime();
+        time.setText(timeText);
+
+        // Set address
+        String addressText = getString(R.string.address_prompt) + " " + report.getAddress();
+        address.setText(addressText);
+
+        // Set city
+        String cityText = getString(R.string.city_prompt) + " " + report.getCity();
+        city.setText(cityText);
+
+        // Set zipcode
+        String zipcodeText = getString(R.string.zipcode_prompt) + " " + report.getZipCode();
+        zipcode.setText(zipcodeText);
+
+        // Set borough
+        String boroughText = getString(R.string.borough_prompt) + " " + report.getBorough();
+        borough.setText(boroughText);
+
+        // Set building type
+        String buildingTypeText = getString(R.string.building_type_prompt) + " " + report.getBuildingType();
+        buildingType.setText(buildingTypeText);
+
+        // Set latitude
+        String latitudeText = getString(R.string.latitude_prompt) + " " + report.getLatitude();
+        latitude.setText(latitudeText);
+
+        // Set longitude
+        String longitudeText = getString(R.string.longitude_prompt) + " " + report.getLongitude();
+        longitude.setText(longitudeText);
     }
 
     @Override
@@ -135,9 +144,7 @@ public class FilterReportsActivity extends AppCompatActivity
         } else if (id == R.id.nav_rat_archive) {
             switchToArchiveActivity();
         } else if (id == R.id.nav_filter) {
-            Toast message = Toast.makeText(getApplicationContext(),
-                    "You are already on this screen", Toast.LENGTH_LONG);
-            message.show();
+            switchToFilterReportsScreen();
         } else if (id == R.id.nav_sightings_map) {
             switchToMapActivity();
         } else if (id == R.id.nav_report_graphs) {
@@ -149,6 +156,7 @@ public class FilterReportsActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             shareOrSendReport("Send");
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -228,19 +236,4 @@ public class FilterReportsActivity extends AppCompatActivity
         startActivity(Intent.createChooser(share, widget + " using"));
 
     }
-
-    private String getDate(String dateAndTime) {
-        String[] date = dateAndTime.split(" ")[0].split("/");
-        return date[2] + "/" + date[0] + "/" + date[1];
-    }
-
-    /**
-     * Switches to the navigation screen after the filter or cancel button has
-     * benn pushed.
-     */
-    private void switchBackToNavigationScreenActivity() {
-        Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);
-        this.startActivity(switchToNavigationScreen);
-    }
-
 }

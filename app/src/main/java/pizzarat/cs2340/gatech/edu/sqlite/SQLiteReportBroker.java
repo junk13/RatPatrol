@@ -22,7 +22,13 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * Created by Evie Brown
  */
 
-public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate exception logging
+public class SQLiteReportBroker extends AppCompatActivity {
+    /**
+     * Writes rat reports to the database
+     * @param rReport report to be saved
+     * @param context context from which function is called
+     * @return primary key value of new row
+     */
     public long writeToReportDb(ReportStructure rReport, Context context) throws DuplicateReportDbException {
         RatSightingDb ratDb = new RatSightingDb(context);
         //throw DuplicateReportDbException if report already exists
@@ -105,7 +111,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
 
     /**
-     * getter for SQLite cursor Report database
+     * getter for SQLite substring search cursor Report database
      * @return cursor for which to read database info from
      */
     private Cursor getSubstringReportsCursor(String keystring, Context c) {
@@ -120,7 +126,7 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return readableDb.query(
                 RatSightingDb.getTableName(),            // The table to query
                 null,                                   // The columns to return
-                RatSightingDb.getReportTableLocationCol() + " LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
+                RatSightingDb.getReportTableAddressCol() + " LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
                 null,                                   // The values for the WHERE clause
                 null,                                   // don't group the rows
                 null,                                   // don't filter by row groups
@@ -129,7 +135,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     }
 
-    //returns arraylist of all rat reports
+    /**
+     * Gets rat reports created between dates
+     * @param context context from which function is called
+     * @return rat reports that fit the constraints
+     */
     public ArrayList<ReportStructure> getDateConstrainedReports(Context context) {
         if (StaticHolder.dateRange == null)
         {
@@ -143,20 +153,26 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         }
         if (to == null || to.isEmpty())
         {
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
             to = dateFormat.format(date);
         }
 
-        Cursor cursor = getDateConstrainedCursor(getDate(from), getDate(to), context);
+        Cursor cursor = getDateConstrainedCursor(from, to, context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
         populateList(cursor, aList);
         return aList;
     }
 
-    //returns arraylist of all rat reports
+    /**
+     * Gets rat reports that contain a substring
+     * @param keystring desired substring
+     * @param context context from which function is called
+     * @return rat reports that fit the constraints
+     */
     public ArrayList<ReportStructure> getReportsWithSubstring(String keystring, Context context) {
+
         Cursor cursor = getSubstringReportsCursor(keystring, context);
         //ArrayList to return
         ArrayList<ReportStructure> aList = new ArrayList<>();
@@ -164,24 +180,12 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return aList;
     }
 
-    //TODO
-    //returns arraylist of all rat reports
-    public ArrayList<ReportStructure> getReportsWithSubstringSpecified(String keystring, Context context) {
-        String[] sl = keystring.split(":"); //{column to search, substring}
-        //if sl[0] not a valid column, do location search on sl[1] (or search whole thing, get 0 results)
-        //else, search in that specific column
 
-
-        //TODO: combine methods
-        //Cursor cursor = getSubstringReportsCursor(sl[0],sl[1], context);
-        Cursor cursor = getSubstringReportsCursor(keystring, context);
-        //ArrayList to return
-        ArrayList<ReportStructure> aList = new ArrayList<>();
-        populateList(cursor, aList);
-        return aList;
-    }
-
-    //returns arraylist of all rat reports
+    /**
+     * Gets all rat reports
+     * @param context context from which function is called
+     * @return all rat reports
+     */
     public ArrayList<ReportStructure> reportArrayList(Context context) {
         Cursor cursor = getCursor(context);
         //ArrayList to return
@@ -190,6 +194,12 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return aList;
     }
 
+
+    /**
+     * Gets stringified database contents
+     * @param c context from which function is called
+     * @return string of database contents
+     */
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
@@ -205,7 +215,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
 
     }
 
-
+    /**
+     * Checks if database is empty
+     * @param c context from which function is called
+     * @return true if empty
+     */
     public boolean isEmpty(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
@@ -235,6 +249,11 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         return maxKey;
     }
 
+    /**
+     * Checks if CSV data completely imported
+     * @param c context from which function is called
+     * @return true if data imported
+     */
     public boolean isPopulated(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
@@ -246,9 +265,15 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
     }
 
     //TODO: Move to utility class
+
+    /**
+     * Converts dd/MM/yyyy to yyyy/MM/dd
+     * @param s date in dd/MM/yyyy format
+     * @return reformatted date
+     */
     private String getDate(String s) {
         String[] date = s.split("/");
-        return date[2] + "/" + date[1] + "/" + date[0];
+        return date[2] + "/" + date[0] + "/" + date[1];
     }
 
     /**
@@ -280,4 +305,24 @@ public class SQLiteReportBroker extends AppCompatActivity { //TODO: duplicate ex
         Log.d("hidden", "aList.size() = " + list.size());
     }
 
+
+
+    /**
+     * Finds the max and min dates
+     *
+     * @param c the specified context
+     * @return the max and min dates
+     */
+    public int[] findExtremeDates(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + "), MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM " + RatSightingDb.getTableName();
+        Cursor mcursor = readableDb.rawQuery(query, null);
+        mcursor.moveToFirst();
+        int maxDate = mcursor.getInt(0);
+        int minDate = mcursor.getInt(1);
+        Log.d("hidden",""+minDate + " | " + maxDate);
+        Log.d("hidden","meow");
+        return new int[] {minDate, maxDate};
+    }
 }

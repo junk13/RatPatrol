@@ -35,6 +35,26 @@
     <string name="cancel">Cancel</string>
     <string name="title_activity_navigation">NavigationActivity</string>
 
+    <string name="create_report">Create a report</string>
+    <string name="view_archive">View Archive</string>
+    <string name="view_sightings_map">View Sightings Map</string>
+    <string name="filter_graph_archive">Filter Graph and Archive</string>
+    <string name="view_sightings_graph">View Sightings Graph</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+
+    <string name="beware_of_rats">Beware of Rats</string>
+
+    <string name="end_date">End Date:</string>
+    <string name="start_date">Start Date:</string>
+
+    <string name="filter">Filter</string>
+
+    <string name="sample_email">rat.patrol@pizzarat.com</string>
+
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

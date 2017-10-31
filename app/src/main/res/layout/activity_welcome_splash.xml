@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:gravity="top|center_vertical"
-        android:text="Beware of Rats"
+        android:text="@string/beware_of_rats"
         android:textAlignment="center"
         android:textColor="#f50606"
         android:textSize="60sp"
@@ -27,7 +27,7 @@
         android:id="@+id/rat_apocalypse"
         android:layout_width="400dp"
         android:layout_height="800dp"
-        android:contentDescription="TODO"
+        android:contentDescription="Splash screen image"
         android:foregroundGravity="bottom|center_vertical"
         android:src="@drawable/ratapocalypse"/>
 

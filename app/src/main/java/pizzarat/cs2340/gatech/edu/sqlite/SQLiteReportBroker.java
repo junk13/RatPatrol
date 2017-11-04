@@ -31,10 +31,6 @@ public class SQLiteReportBroker extends AppCompatActivity {
      */
     public long writeToReportDb(ReportStructure rReport, Context context) throws DuplicateReportDbException {
         RatSightingDb ratDb = new RatSightingDb(context);
-        //throw DuplicateReportDbException if report already exists
-//        if (containsDuplicateReport(username, context))
-//            throw new DuplicateReportDbException();
-        // Gets the data repository in write mode
         SQLiteDatabase writableDb = ratDb.getWritableDatabase();
         ContentValues values = new ContentValues();
 

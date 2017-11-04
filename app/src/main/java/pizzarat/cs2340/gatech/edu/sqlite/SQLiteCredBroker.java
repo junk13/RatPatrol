@@ -36,7 +36,9 @@ public class SQLiteCredBroker extends AppCompatActivity {
         values.put(CredentialDb.getPermCol(), perm);
 
         // Insert the new row, returning the primary key value of the new row
-        return db.insert(CredentialDb.getTableName(), null, values);
+        long value = db.insert(CredentialDb.getTableName(), null, values);
+        db.close();
+        return value;
     }
 
     /**

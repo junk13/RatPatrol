@@ -267,13 +267,10 @@ public class ReportGraphActivity extends AppCompatActivity
 
     }
 
-
-    private void setData(int count, float range) {
-
-        float start = 1f;
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-    }
-
+    /**
+     * Gets span of time between filter dates
+     * @return span of time
+     */
     private int getSpan()
     {
 
@@ -284,7 +281,11 @@ public class ReportGraphActivity extends AppCompatActivity
         return span;
     }
 
-    private void setData(ArrayList<BarEntry> yVals1) {
+    /**
+     * Sets bar chart data
+     * @param yVals y values of bar chart
+     */
+    private void setData(ArrayList<BarEntry> yVals) {
 
         float start = 1f;
 
@@ -297,11 +298,11 @@ public class ReportGraphActivity extends AppCompatActivity
         if (mChart.getData() != null &&
                 mChart.getData().getDataSetCount() > 0) {
             set1 = (BarDataSet) mChart.getData().getDataSetByIndex(0);
-            set1.setValues(yVals1);
+            set1.setValues(yVals);
             mChart.getData().notifyDataChanged();
             mChart.notifyDataSetChanged();
         } else {
-            set1 = new BarDataSet(yVals1, "Rat Reports");
+            set1 = new BarDataSet(yVals, "Rat Reports");
 //
 //            set1.setDrawIcons(false);
 //
@@ -318,6 +319,10 @@ public class ReportGraphActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Sets y values to number of reports in year
+     * @param yVals y values of bar chart
+     */
     public void getYearData(ArrayList<BarEntry> yVals) {
         Log.d("hidden", "graphing by year");
         //graph by year
@@ -329,6 +334,10 @@ public class ReportGraphActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Sets y values to number of reports in month
+     * @param yVals y values of bar chart
+     */
     public void getMonthData(ArrayList<BarEntry> yVals) {
         //graph by month
         int[] months = GraphUtilities.organizeByMonth(reports);
@@ -338,6 +347,10 @@ public class ReportGraphActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Sets y values to number of reports in day
+     * @param yVals y values of bar chart
+     */
     public void getDayData(ArrayList<BarEntry> yVals) {
         //graph by day
         int[] days = GraphUtilities.organizeByMonth(reports);
@@ -347,6 +360,9 @@ public class ReportGraphActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Gets year labels
+     */
     public ArrayList<String> getYearLabels() {
         final ArrayList xLabel = new ArrayList<String>();
         String startDate = "2010/01/01";
@@ -363,6 +379,9 @@ public class ReportGraphActivity extends AppCompatActivity
         return xLabel;
     }
 
+    /**
+     * Gets month labels
+     */
     public ArrayList<String> getMonthLabels() {
         final ArrayList xLabel = new ArrayList<String>();
         xLabel.add("Jan");
@@ -380,6 +399,9 @@ public class ReportGraphActivity extends AppCompatActivity
         return xLabel;
     }
 
+    /**
+     * Gets day labels
+     */
     public ArrayList<String> getDayLabels() {
         final ArrayList xLabel = new ArrayList<String>();
         int numOfDays = 31;

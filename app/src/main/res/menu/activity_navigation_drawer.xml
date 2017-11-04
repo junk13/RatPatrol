@@ -7,40 +7,40 @@
         <item
             android:id="@+id/nav_create_report"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Create a report"/>
+            android:title="@string/create_report"/>
         <item
             android:id="@+id/nav_rat_archive"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="View Archive"/>
+            android:title="@string/view_archive"/>
         <item
             android:id="@+id/nav_sightings_map"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="View Sightings Map"/>
+            android:title="@string/view_sightings_map"/>
         <item
             android:id="@+id/nav_filter"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Filter Graph and Archive"/>
+            android:title="@string/filter_graph_archive"/>
         <item
             android:id="@+id/nav_report_graphs"
             android:icon="@drawable/googleg_standard_color_18"
-            android:title="View Sighting Graphs"/>
+            android:title="@string/view_sightings_graph"/>
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/googleg_standard_color_18"
-            android:title="Logout"
+            android:title="@string/logout"
             />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
+                android:title="@string/share"/>
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
+                android:title="@string/send"/>
         </menu>
     </item>
 

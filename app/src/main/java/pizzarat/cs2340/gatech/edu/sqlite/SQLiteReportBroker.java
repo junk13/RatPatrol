@@ -204,8 +204,6 @@ public class SQLiteReportBroker extends AppCompatActivity {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
         while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
             String str = cursor.getString(0);
             itemIds.add(str);
         }

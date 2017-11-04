@@ -245,7 +245,6 @@ public class SQLiteReportBroker extends AppCompatActivity {
         mcursor.moveToFirst();
         int maxKey = mcursor.getInt(0);
         Log.d("hidden",""+maxKey);
-        Log.d("hidden","meow");
         return maxKey;
     }
 

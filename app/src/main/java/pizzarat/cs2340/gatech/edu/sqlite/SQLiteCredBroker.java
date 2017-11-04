@@ -47,24 +47,25 @@ public class SQLiteCredBroker extends AppCompatActivity {
         CredentialDb cred = new CredentialDb(c);
         SQLiteDatabase sr = cred.getReadableDatabase();
 
-
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 CredentialDb.getCredHashCol() + " DESC";
 
         return sr.query(
-                CredentialDb.getTableName(),            // The table to query
-                null,                                   // The columns to return
-                null,                                   // The columns for the WHERE clause
-                null,                                   // The values for the WHERE clause
-                null,                                   // don't group the rows
-                null,                                   // don't filter by row groups
-                sortOrder                               // The sort order
+                CredentialDb.getTableName(),        // The table to query
+                null,                       // The columns to return
+                null,                       // The columns for the WHERE clause
+                null,                    // The values for the WHERE clause
+                null,                       // don't group the rows
+                null,                        // don't filter by row groups
+                sortOrder                          // The sort order
         );
 
     }
 
     /**
+     * Determines if the specified user in the database.
+     *
      * @param user : String for username
      * @param pass : String for password
      * @return true if user and pass are in database in same ID
@@ -72,7 +73,6 @@ public class SQLiteCredBroker extends AppCompatActivity {
     public boolean credMatch(String user, String pass, Context c) {
         CredentialStructure cs = fetchCredentialStructureByUser(user, c);
         if (cs == null) {
-            System.out.println("444444444444");
             return false;
 
         }
@@ -82,6 +82,8 @@ public class SQLiteCredBroker extends AppCompatActivity {
     }
 
     /**
+     * Determines if the user has admin privileges
+     *
      * @param userStr username to check
      * @param c app context
      * @return true if user is admin, else false
@@ -90,25 +92,34 @@ public class SQLiteCredBroker extends AppCompatActivity {
         return fetchCredentialStructureByUser(userStr, c).getAdmin();
     }
 
-    //returns map of users(key) and credentials(value)
+    /**
+     * Returns a list of all the users in the database
+     *
+     * @param cursor the specified sql cursor
+     * @return a list of all the credentials in the database
+     */
     private ArrayList<CredentialStructure> credArrayList(Cursor cursor) {
-        //ArrayList to return
+        // ArrayList to return
         ArrayList<CredentialStructure> aList = new ArrayList<CredentialStructure>();
         cursor.moveToPosition(-1);
-        //cycle through cursor and add columns to ArrayList
+        // Cycle through cursor and add columns to ArrayList
         while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+            boolean b = cursor.getString(3).equals("admin");
             aList.add(new CredentialStructure(
                     cursor.getString(0),    //id
                     cursor.getString(1),    //Username
                     cursor.getString(2),    //Password
-                    b                       //isAdmin
+                    b                                  //isAdmin
                     ));
         }
         return aList;
     }
 
-    //return database in string
+    /**
+     * @param c
+     * @return
+     * @throws Exception
+     */
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);

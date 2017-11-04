@@ -364,7 +364,7 @@ public class ReportGraphActivity extends AppCompatActivity
      * Gets year labels
      */
     public ArrayList<String> getYearLabels() {
-        final ArrayList xLabel = new ArrayList<String>();
+        final ArrayList<String> xLabel = new ArrayList<String>();
         String startDate = "2010/01/01";
         String endDate = "2017/01/01";
         if (StaticHolder.dateRange != null)
@@ -383,7 +383,7 @@ public class ReportGraphActivity extends AppCompatActivity
      * Gets month labels
      */
     public ArrayList<String> getMonthLabels() {
-        final ArrayList xLabel = new ArrayList<String>();
+        final ArrayList<String> xLabel = new ArrayList<String>();
         xLabel.add("Jan");
         xLabel.add("Feb");
         xLabel.add("Mar");
@@ -403,11 +403,11 @@ public class ReportGraphActivity extends AppCompatActivity
      * Gets day labels
      */
     public ArrayList<String> getDayLabels() {
-        final ArrayList xLabel = new ArrayList<String>();
+        final ArrayList<String> xLabel = new ArrayList<String>();
         int numOfDays = 31;
         for (int i = 0; i < numOfDays; i++)
         {
-            xLabel.add(i);
+            xLabel.add(""+i);
         }
         return xLabel;
     }

@@ -20,6 +20,7 @@
         android:focusableInTouchMode="false"
         android:inputType="none"
         android:linksClickable="false"
+        android:labelFor="@+id/keyTextView"
         android:text="@string/key_prompt"/>
 
     <EditText
@@ -34,6 +35,7 @@
         android:focusableInTouchMode="false"
         android:inputType="none|date"
         android:linksClickable="false"
+        android:labelFor="@+id/dateTextView"
         android:text="@string/date_prompt"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"/>
@@ -50,6 +52,7 @@
         android:focusableInTouchMode="false"
         android:inputType="none"
         android:linksClickable="false"
+        android:labelFor="@+id/timeTextView"
         android:text="@string/time_prompt"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="40dp"/>
@@ -68,6 +71,7 @@
         android:inputType="none"
         android:linksClickable="false"
         android:singleLine="false"
+        android:labelFor="@+id/addressTextView"
         android:text="@string/address_prompt"
         android:textAlignment="viewStart"
         tools:layout_editor_absoluteX="29dp"
@@ -85,6 +89,7 @@
         android:focusableInTouchMode="false"
         android:inputType="none"
         android:linksClickable="false"
+        android:labelFor="@+id/cityTextView"
         android:text="@string/city_prompt"/>
 
     <EditText
@@ -99,6 +104,7 @@
         android:focusableInTouchMode="false"
         android:inputType="none"
         android:linksClickable="false"
+        android:labelFor="@+id/zipcodeTextView"
         android:text="@string/zipcode_prompt"/>
 
     <EditText
@@ -114,6 +120,7 @@
         android:inputType="none"
         android:linksClickable="false"
         android:singleLine="false"
+        android:labelFor="@+id/buildingTypeTextView"
         android:text="@string/building_type_prompt"/>
 
     <EditText
@@ -128,6 +135,7 @@
         android:focusableInTouchMode="false"
         android:inputType="none"
         android:linksClickable="false"
+        android:labelFor="@+id/boroughTextView"
         android:text="@string/borough_prompt"/>
 
     <EditText
@@ -143,6 +151,7 @@
         android:inputType="none"
         android:linksClickable="false"
         android:maxLength="20"
+        android:labelFor="@+id/latitudeTextView"
         android:text="@string/latitude_prompt"/>
 
     <EditText
@@ -158,6 +167,7 @@
         android:inputType="none"
         android:linksClickable="false"
         android:maxLength="20"
+        android:labelFor="@+id/longitudeTextView"
         android:text="@string/longitude_prompt"/>
 
 </RelativeLayout>

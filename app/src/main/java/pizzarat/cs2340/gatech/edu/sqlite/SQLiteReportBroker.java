@@ -227,6 +227,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         Cursor mcursor = readableDb.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
+        mcursor.close();
         return !(icount > 0);
     }
 
@@ -246,6 +247,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         int maxKey = mcursor.getInt(0);
         Log.d("hidden",""+maxKey);
         Log.d("hidden","meow");
+        mcursor.close();
         return maxKey;
     }
 
@@ -261,6 +263,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         Cursor mcursor = readableDb.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
+        mcursor.close();
         return (icount >= 12219);
     }
 
@@ -323,6 +326,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         int minDate = mcursor.getInt(1);
         Log.d("hidden",""+minDate + " | " + maxDate);
         Log.d("hidden","meow");
+        mcursor.close();
         return new int[] {minDate, maxDate};
     }
 }

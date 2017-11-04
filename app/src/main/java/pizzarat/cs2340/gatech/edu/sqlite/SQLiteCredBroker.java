@@ -112,31 +112,31 @@ public class SQLiteCredBroker extends AppCompatActivity {
 
     //return database in string
     public String getDbContent(Context c) throws  Exception {
-        List<String> itemIds = new ArrayList<String>();
-        Cursor cursor = getCursor(c);
-        while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(0);
-            itemIds.add(str);
-        }
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(1);
-            itemIds.add(str);
-        }
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(2);
-            itemIds.add(str);
-        }
-        cursor.close();
-        return itemIds.toString();
-
+//        List<String> itemIds = new ArrayList<String>();
+//        Cursor cursor = getCursor(c);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(0);
+//            itemIds.add(str);
+//        }
+//        cursor.moveToPosition(-1);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(1);
+//            itemIds.add(str);
+//        }
+//        cursor.moveToPosition(-1);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(2);
+//            itemIds.add(str);
+//        }
+//        cursor.close();
+//        return itemIds.toString();
+        return "This method has been removed for security purposes.";
     }
 
     /**

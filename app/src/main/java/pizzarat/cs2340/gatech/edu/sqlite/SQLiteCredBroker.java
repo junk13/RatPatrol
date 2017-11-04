@@ -18,20 +18,19 @@ import pizzarat.cs2340.gatech.edu.structure.CredentialStructure;
  * A custom broker in SQL to work with our credential database.
  */
 public class SQLiteCredBroker extends AppCompatActivity {
-    //takes in credentials from Db TODO: duplicate exception logging
     public long writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
-        //throw DuplicateUserDbException if username is already used
+        // Throw DuplicateUserDbException if username is already used
         if (containsDuplicateUser(username, context))
             throw new DuplicateUserDbException();
         // Gets the report repository in write mode
         SQLiteDatabase db = cred.getWritableDatabase();
         ContentValues values = new ContentValues();
-        //in email column, place email
+        // In email column, place email
         values.put(CredentialDb.getCredEmailCol(), username);
-        //in password column, place password TODO: make password messageDigest hashed SHA256
+        // In password column, place password
         values.put(CredentialDb.getCredHashCol(), password);
-        //in permissions column, set user type
+        // In permissions column, set user type
         String perm = isAdmin ? "admin" : "user";
         values.put(CredentialDb.getPermCol(), perm);
 
@@ -40,7 +39,8 @@ public class SQLiteCredBroker extends AppCompatActivity {
     }
 
     /**
-     * getter for SQLite cursor
+     * Getter for SQLite cursor
+     * @param c context of the app
      * @return cursor for which to read database info from
      */
      private Cursor getCursor(Context c) {

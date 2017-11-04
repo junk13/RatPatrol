@@ -5,10 +5,10 @@ package pizzarat.cs2340.gatech.edu.structure;
  */
 
 public class CredentialStructure {
-    private String id;                      // User number
-    private String user;                    // User's username
-    private String pass;                    // User's password
-    private Boolean isAdmin;                // Admin privileges
+    private final String id;                      // User number
+    private final String user;                    // User's username
+    private final String pass;                    // User's password
+    private final Boolean isAdmin;                // Admin privileges
 
     CredentialStructure(String user) {
         this(null, user, null, null);

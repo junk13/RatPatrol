@@ -23,7 +23,7 @@ public class GraphUtilities {
      * @return          An array of size 12, where each value represents
      *                  the number of reports within the repective month.
      */
-    static public int[] organizeByMonth(List<ReportStructure> reports){
+    public static int[] organizeByMonth(List<ReportStructure> reports) {
         int[] months = new int[12];
         for (ReportStructure report: reports) {
             String date = report.getDate();
@@ -42,7 +42,7 @@ public class GraphUtilities {
      * @param reports   Reports to organize
      * @return          an array of reports per year.
      */
-    static public int[] organizeByYear(Context c, List<ReportStructure> reports){
+    public static int[] organizeByYear(Context c, List<ReportStructure> reports) {
         SQLiteReportBroker reportBroker = new SQLiteReportBroker();
         //int[] extremeDates = reportBroker.findExtremeDates(c); //{earliestYear, latestYear}
         //int yearSpan = extremeDates[1] - extremeDates[0];
@@ -79,7 +79,7 @@ public class GraphUtilities {
      * @param month     Month to organize within.
      * @return          array of rat reports per day.
      */
-    static public int[] organizeByDay(List<ReportStructure> reports,int month) {
+    public static int[] organizeByDay(List<ReportStructure> reports, int month) {
         String form;
         int[] days;
         //31 days   1,3,5,7,8,10,12

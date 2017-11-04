@@ -18,9 +18,9 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  * in the Recycler View. This is necessary to switch to the details view.
  */
 class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-    private ArchiveActivity archiveActivity;
+    private final ArchiveActivity archiveActivity;
+    private final Context context;
     private List<ReportStructure> listData = new ArrayList<>();
-    private Context context;
 
     public RecyclerAdapter(ArchiveActivity archiveActivity, List<ReportStructure> listData, Context context) {
         this.archiveActivity = archiveActivity;

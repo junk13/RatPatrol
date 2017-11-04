@@ -37,8 +37,8 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  */
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private final SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private BackgroundDataTask bdTask = null;
-    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private boolean csvLoaded = false;
 
     @Override
@@ -306,6 +306,7 @@ public class NavigationActivity extends AppCompatActivity
             return true;
         }
 
+        @Override
         protected void onPostExecute(final Boolean success) {
             bdTask = null;
             //showProgress(false);

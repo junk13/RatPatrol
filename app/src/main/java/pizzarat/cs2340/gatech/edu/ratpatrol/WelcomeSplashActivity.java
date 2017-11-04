@@ -16,7 +16,7 @@ public class WelcomeSplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_splash);
 
-        // Start a thread to end the splash screen after a while
+        // Start a thread to end the splash screen after a whilemn
         Thread welcomeStartUp = new Thread() {
             @Override
             public void run() {

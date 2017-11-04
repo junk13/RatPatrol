@@ -19,9 +19,9 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 
 /**
- * Created by Evie Brown
+ * @author Evie Brown
+ * A custom broker in SQL to work with our rat sighting reports in our database.
  */
-
 public class SQLiteReportBroker extends AppCompatActivity {
     /**
      * Writes rat reports to the database

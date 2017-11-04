@@ -149,7 +149,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         String to = StaticHolder.dateRange.getTo();
         if (from == null || from.isEmpty())
         {
-            from = "2014/00/00";
+            from = "2014/01/01";
         }
         if (to == null || to.isEmpty())
         {

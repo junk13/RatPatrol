@@ -116,30 +116,27 @@ public class SQLiteCredBroker extends AppCompatActivity {
     }
 
     /**
-     * @param c
-     * @return
+     * Returns a string representation of all the information within the
+     * credential database.
+     *
+     * @param c the specified context
+     * @return a description of database's information
      * @throws Exception
      */
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
         while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
             String str = cursor.getString(0);
             itemIds.add(str);
         }
         cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
             String str = cursor.getString(1);
             itemIds.add(str);
         }
         cursor.moveToPosition(-1);
         while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
             String str = cursor.getString(2);
             itemIds.add(str);
         }
@@ -149,10 +146,11 @@ public class SQLiteCredBroker extends AppCompatActivity {
     }
 
     /**
+     *  Returns the information about specified user
+     *
      *  @return CredentialStructure containing a matching username
      *  @param userStr : the username to look for
      */
-
     private CredentialStructure fetchCredentialStructureByUser(String userStr, Context c) {
         ArrayList<CredentialStructure> aList = credArrayList(getCursor(c));
         for (int i = 0; i < aList.size(); i++) {
@@ -167,11 +165,12 @@ public class SQLiteCredBroker extends AppCompatActivity {
     }
 
     /**
+     * Determines if another user in the database contains the same user name
+     *
      * @param str : String to look for in the Cred database
      * @return true if duplicate user found, else false
      */
     private boolean containsDuplicateUser(String str, Context c) {
         return fetchCredentialStructureByUser(str, c) != null;
     }
-
 }

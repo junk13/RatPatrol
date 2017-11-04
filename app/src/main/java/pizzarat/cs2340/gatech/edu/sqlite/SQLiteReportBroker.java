@@ -264,18 +264,6 @@ public class SQLiteReportBroker extends AppCompatActivity {
         return (icount >= 12219);
     }
 
-    //TODO: Move to utility class
-
-    /**
-     * Converts dd/MM/yyyy to yyyy/MM/dd
-     * @param s date in dd/MM/yyyy format
-     * @return reformatted date
-     */
-    private String getDate(String s) {
-        String[] date = s.split("/");
-        return date[2] + "/" + date[0] + "/" + date[1];
-    }
-
     /**
      * Populates the specified list with rat sighting reports with data from
      * the cursor.

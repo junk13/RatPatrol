@@ -14,9 +14,9 @@ import pizzarat.cs2340.gatech.edu.structure.CredentialStructure;
 
 
 /**
- * @author Evie Brown.
+ * @author Evie Brown
+ * A custom broker in SQL to work with our credential database.
  */
-
 public class SQLiteCredBroker extends AppCompatActivity {
     //takes in credentials from Db TODO: duplicate exception logging
     public long writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {

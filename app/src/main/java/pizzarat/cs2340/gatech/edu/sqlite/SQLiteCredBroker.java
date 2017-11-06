@@ -18,7 +18,7 @@ import pizzarat.cs2340.gatech.edu.structure.CredentialStructure;
  * A custom broker in SQL to work with our credential database.
  */
 public class SQLiteCredBroker extends AppCompatActivity {
-    public long writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
+    public void writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
         // Throw DuplicateUserDbException if username is already used
         if (containsDuplicateUser(username, context))
@@ -35,7 +35,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
         values.put(CredentialDb.getPermCol(), perm);
 
         // Insert the new row, returning the primary key value of the new row
-        return db.insert(CredentialDb.getTableName(), null, values);
+        db.insert(CredentialDb.getTableName(), null, values);
     }
 
     /**
@@ -81,16 +81,18 @@ public class SQLiteCredBroker extends AppCompatActivity {
         return cs.getPass().equals(pass);
     }
 
-    /**
-     * Determines if the user has admin privileges
-     *
-     * @param userStr username to check
-     * @param c app context
-     * @return true if user is admin, else false
-     */
-    public boolean isUserAdmin(String userStr, Context c) {
-        return fetchCredentialStructureByUser(userStr, c).getAdmin();
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Determines if the user has admin privileges
+//     *
+//     * @param userStr username to check
+//     * @param c app context
+//     * @return true if user is admin, else false
+//     */
+//    public boolean isUserAdmin(String userStr, Context c) {
+//        return fetchCredentialStructureByUser(userStr, c).getAdmin();
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     /**
      * Returns a list of all the users in the database
@@ -123,7 +125,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
      * @return a description of database's information
      * @throws Exception
      */
-    public String getDbContent(Context c) throws  Exception {
+    public String getDbContent(Context c) {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
         while(cursor.moveToNext()) {

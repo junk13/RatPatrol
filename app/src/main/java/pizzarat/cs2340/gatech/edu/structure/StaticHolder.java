@@ -1,7 +1,5 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
-import java.util.ArrayList;
-
 /**
  * Created by Luka on 10/9/2017.
  */
@@ -12,13 +10,15 @@ import java.util.ArrayList;
  */
 public class StaticHolder {
     public static ReportStructure report;
-    public static ArrayList<ReportStructure> userReports = new ArrayList<>();
+    // --Commented out by Inspection (11/6/2017 1:51 AM):public static ArrayList<ReportStructure> userReports = new ArrayList<>();
 
     //stores the date range set by the filter. used in map for filtering markers.
     public static DateRangeStruct dateRange;
 
-    public static void add(ReportStructure report) {
-        userReports.add(report);
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    public static void add(ReportStructure report) {
+//        userReports.add(report);
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
 }

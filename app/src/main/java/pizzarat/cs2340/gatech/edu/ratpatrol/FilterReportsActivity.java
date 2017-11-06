@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,10 +32,10 @@ public class FilterReportsActivity extends AppCompatActivity
     private TextView afterDateTextView;
     private Button filterButton;
     private Button cancelFilterButton;
-    private View calendar;
-    private DatePicker datePicker;
-    private TextView dateView;
-    private int year, month, day;
+    // --Commented out by Inspection (11/6/2017 1:49 AM):private View calendar;
+    // --Commented out by Inspection (11/6/2017 1:49 AM):private DatePicker datePicker;
+    // --Commented out by Inspection (11/6/2017 1:49 AM):private TextView dateView;
+    // --Commented out by Inspection (11/6/2017 1:49 AM):private int year, // --Commented out by Inspection (11/6/2017 1:49 AM):month, // --Commented out by Inspection (11/6/2017 1:49 AM):day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +157,7 @@ public class FilterReportsActivity extends AppCompatActivity
     /**
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
-    public void switchBackToWelcomeActivity() {
+    private void switchBackToWelcomeActivity() {
         Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
@@ -166,7 +165,7 @@ public class FilterReportsActivity extends AppCompatActivity
     /**
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
-    public void switchToArchiveActivity() {
+    private void switchToArchiveActivity() {
         Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
@@ -174,7 +173,7 @@ public class FilterReportsActivity extends AppCompatActivity
     /**
      * Switches to the CreateReportActivity.
      */
-    public void switchToCreateReportActivity() {
+    private void switchToCreateReportActivity() {
         Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
@@ -182,30 +181,32 @@ public class FilterReportsActivity extends AppCompatActivity
     /**
      * Switches to the MapActivity.
      */
-    public void switchToMapActivity() {
+    private void switchToMapActivity() {
         Intent switchToMapActivity = new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
 
-    /**
-     * Switches to the FilterReportsActivity.
-     */
-    public void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
-        this.startActivity(switchToFilterReportsActivity);
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Switches to the FilterReportsActivity.
+//     */
+//    public void switchToFilterReportsScreen() {
+//        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+//        this.startActivity(switchToFilterReportsActivity);
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     /**
      * Closes the Navigation Screen thus "logging out" the user
      */
-    public void logout() {
+    private void logout() {
         switchBackToWelcomeActivity();
     }
 
     /**
      * Switches to the ReportGraphActivity.
      */
-    public void switchToReportGraphScreen() {
+    private void switchToReportGraphScreen() {
         Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
         Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
@@ -218,7 +219,7 @@ public class FilterReportsActivity extends AppCompatActivity
      *
      * @param widget the name of widget clicked
      */
-    public void shareOrSendReport(String widget) {
+    private void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         String shareBody = "Your body here";

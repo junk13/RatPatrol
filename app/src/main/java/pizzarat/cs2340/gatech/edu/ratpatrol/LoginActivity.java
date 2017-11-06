@@ -30,16 +30,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
 
@@ -172,36 +164,40 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    /**
-     * Gets a Map structure of all the stored users.
-     * @return a Map of all the users in the database.
-     * @throws FileNotFoundException if credentials.txt not found
-     * TODO: delete (not storing creds in text file)
-     */
-    public Map<String, String> getCredentials() throws FileNotFoundException {
-        Map<String, String> creds = new HashMap<String, String>();
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Gets a Map structure of all the stored users.
+//     * @return a Map of all the users in the database.
+//     * @throws FileNotFoundException if credentials.txt not found
+//     * TODO: delete (not storing creds in text file)
+//     */
+//    public Map<String, String> getCredentials() throws FileNotFoundException {
+//        Map<String, String> creds = new HashMap<String, String>();
+//
+//        Scanner sc = new Scanner(new File("raw/credentials.txt"));
+//        while (sc.hasNextLine()) {
+//            String[] line = sc.nextLine().split(":");
+//            creds.put(line[0], line[1]);
+//        }
+//        sc.close();
+//        return creds;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
-        Scanner sc = new Scanner(new File("raw/credentials.txt"));
-        while (sc.hasNextLine()) {
-            String[] line = sc.nextLine().split(":");
-            creds.put(line[0], line[1]);
-        }
-        sc.close();
-        return creds;
-    }
-
-    /**
-     * Adds the specified user to the database.
-     * @param username the user's username
-     * @param password the user's password
-     * @throws IOException if error writing to credentials.txt
-     * TODO: delete (not storing creds in text file)
-     */
-    public void addCredentials(String username, String password) throws IOException {
-        BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));
-        bf.write("/n" + username + ":" + password);
-        bf.close();
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Adds the specified user to the database.
+//     * @param username the user's username
+//     * @param password the user's password
+//     * @throws IOException if error writing to credentials.txt
+//     * TODO: delete (not storing creds in text file)
+//     */
+//    public void addCredentials(String username, String password) throws IOException {
+//        BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));
+//        bf.write("/n" + username + ":" + password);
+//        bf.close();
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
 
     /**
@@ -364,7 +360,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         };
 
         int ADDRESS = 0;
-        int IS_PRIMARY = 1;
+        // --Commented out by Inspection (11/6/2017 1:49 AM):int IS_PRIMARY = 1;
     }
 
     /**

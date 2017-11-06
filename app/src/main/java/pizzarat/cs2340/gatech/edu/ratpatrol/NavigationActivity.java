@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.ratpatrol.archive.ArchiveActivity;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
@@ -139,7 +138,7 @@ public class NavigationActivity extends AppCompatActivity
     /**
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
-    public void switchBackToWelcomeActivity() {
+    private void switchBackToWelcomeActivity() {
         Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
@@ -147,7 +146,7 @@ public class NavigationActivity extends AppCompatActivity
     /**
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
-    public void switchToArchiveActivity() {
+    private void switchToArchiveActivity() {
         Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
@@ -155,7 +154,7 @@ public class NavigationActivity extends AppCompatActivity
     /**
      * Switches to the CreateReportActivity.
      */
-    public void switchToCreateReportActivity() {
+    private void switchToCreateReportActivity() {
         Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
@@ -163,7 +162,7 @@ public class NavigationActivity extends AppCompatActivity
     /**
      * Switches to the MapActivity.
      */
-    public void switchToMapActivity() {
+    private void switchToMapActivity() {
         Intent switchToMapActivity = new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
@@ -171,7 +170,7 @@ public class NavigationActivity extends AppCompatActivity
     /**
      * Switches to the FilterReportsActivity.
      */
-    public void switchToFilterReportsScreen() {
+    private void switchToFilterReportsScreen() {
         Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
@@ -179,14 +178,14 @@ public class NavigationActivity extends AppCompatActivity
     /**
      * Closes the Navigation Screen thus "logging out" the user
      */
-    public void logout() {
+    private void logout() {
         switchBackToWelcomeActivity();
     }
 
     /**
      * Switches to the ReportGraphActivity.
      */
-    public void switchToReportGraphScreen() {
+    private void switchToReportGraphScreen() {
         Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
         Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
@@ -199,7 +198,7 @@ public class NavigationActivity extends AppCompatActivity
      *
      * @param widget the name of widget clicked
      */
-    public void shareOrSendReport(String widget) {
+    private void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         String shareBody = "Your body here";
@@ -214,7 +213,6 @@ public class NavigationActivity extends AppCompatActivity
      * Read in offline rat report from csv
      */
     private void readRatData() {
-        String csvFile = "raw/ratsightings.csv";
         InputStream inputStream;
         BufferedReader br = null;
         String line = "";
@@ -267,8 +265,6 @@ public class NavigationActivity extends AppCompatActivity
         } catch (FileNotFoundException e) {
             Log.d("hidden", "FILE NOT FOUND");
             e.printStackTrace();
-        } catch (DuplicateReportDbException e) {
-            Log.d("hidden", e.getLocalizedMessage());
         } catch (IOException e) {
             Log.d("hidden", "IOEXCEPTION");
             e.printStackTrace();

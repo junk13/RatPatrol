@@ -10,9 +10,11 @@ public class CredentialStructure {
     private final String pass;                    // User's password
     private final Boolean isAdmin;                // Admin privileges
 
-    CredentialStructure(String user) {
-        this(null, user, null, null);
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    CredentialStructure(String user) {
+//        this(null, user, null, null);
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     public CredentialStructure(String id, String user, String pass, Boolean isAdmin) {
         this.id = id;
@@ -26,7 +28,7 @@ public class CredentialStructure {
      *
      * @return the user
      */
-    public String getId() {
+    private String getId() {
         return id;
     }
 
@@ -49,13 +51,15 @@ public class CredentialStructure {
         return pass;
     }
 
-    /**
-     * Returns a value determining if the user has admin privileges
-     * @return true if the user has admin privileges
-     */
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
+// --Commented out by Inspection START (11/6/2017 1:51 AM):
+//    /**
+//     * Returns a value determining if the user has admin privileges
+//     * @return true if the user has admin privileges
+//     */
+//    public Boolean getAdmin() {
+//        return isAdmin;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:51 AM)
 
     /**
      * Determines if two users are equal. Returns true if two users have the
@@ -67,9 +71,11 @@ public class CredentialStructure {
     }
 
 
-    public boolean sameUser(CredentialStructure userTester) {
-        return (userTester.getId().equals(user));
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    public boolean sameUser(CredentialStructure userTester) {
+//        return (userTester.getId().equals(user));
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     /**
      * Returns a String representation of the this CredentialStructure

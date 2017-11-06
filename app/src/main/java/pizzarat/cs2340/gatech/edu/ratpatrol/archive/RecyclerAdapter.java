@@ -19,7 +19,7 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  */
 class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private final ArchiveActivity archiveActivity;
-    private final Context context;
+    // --Commented out by Inspection (11/6/2017 1:49 AM):private final Context context;
     private List<ReportStructure> listData = new ArrayList<>();
 
     public RecyclerAdapter(ArchiveActivity archiveActivity, List<ReportStructure> listData, Context context) {

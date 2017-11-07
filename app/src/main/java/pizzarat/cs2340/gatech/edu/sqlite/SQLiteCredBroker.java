@@ -78,8 +78,6 @@ public class SQLiteCredBroker extends AppCompatActivity {
             return false;
 
         }
-        System.out.println(cs.getPass());
-        System.out.println(pass);
         return cs.getPass().equals(pass);
     }
 

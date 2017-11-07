@@ -57,11 +57,13 @@ public class ArchiveActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView)
+                findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Archive recycler view creation
@@ -71,7 +73,8 @@ public class ArchiveActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                posts = reportBroker.getReportsWithSubstring(query, getBaseContext());
+                posts = reportBroker.getReportsWithSubstring(query,
+                        getBaseContext());
                 initRecycler();
                 return false;
             }
@@ -88,7 +91,9 @@ public class ArchiveActivity extends AppCompatActivity
             public boolean onQueryTextChange(String newText) {
                 if (newText.length() <= 2)
                     return true;
-                ArrayList<ReportStructure> temp = reportBroker.getReportsWithSubstring(newText, getBaseContext());
+                ArrayList<ReportStructure> temp =
+                        reportBroker.getReportsWithSubstring(newText,
+                                getBaseContext());
                 if (newText.length() > 2 && posts == null)
                     return false;
                 if (newText.length() > 2) {
@@ -168,7 +173,8 @@ public class ArchiveActivity extends AppCompatActivity
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
     private void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
@@ -176,7 +182,8 @@ public class ArchiveActivity extends AppCompatActivity
      * Switches to the CreateReportActivity.
      */
     private void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+        Intent switchToCreateReportActivity =
+                new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
@@ -192,7 +199,8 @@ public class ArchiveActivity extends AppCompatActivity
      * Switches to the FilterReportsActivity.
      */
     private void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+        Intent switchToFilterReportsActivity =
+                new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
@@ -207,7 +215,8 @@ public class ArchiveActivity extends AppCompatActivity
      * Switches to the ReportGraphActivity.
      */
     private void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
         Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
                 + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
@@ -263,7 +272,8 @@ public class ArchiveActivity extends AppCompatActivity
      * @param report the specific report to display in detail.
      */
     public void switchToReportDetails(int report) {
-        Intent switchToDetailedReports = new Intent(this, DetailedReportViewActivity.class);
+        Intent switchToDetailedReports =
+                new Intent(this, DetailedReportViewActivity.class);
         StaticHolder.report = posts.get(report);
         this.startActivity(switchToDetailedReports);
     }

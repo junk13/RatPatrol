@@ -55,15 +55,18 @@ public class CreateReportActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Actual report creation code
-        String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
+        String maxKey =
+                Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
         key = (TextView) findViewById(R.id.createKeyView);
 
         // Generate and set the unique key
@@ -169,7 +172,8 @@ public class CreateReportActivity extends AppCompatActivity
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
     private void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
@@ -177,25 +181,19 @@ public class CreateReportActivity extends AppCompatActivity
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
     private void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+        Intent switchToArchiveActivity =
+                new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
-// --Commented out by Inspection START (11/6/2017 1:49 AM):
-//    /**
-//     * Switches to the CreateReportActivity.
-//     */
-//    public void switchToCreateReportActivity() {
-//        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
-//        this.startActivity(switchToCreateReportActivity);
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
+
 
     /**
      * Switches to the MapActivity.
      */
     private void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+        Intent switchToMapActivity =
+                new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
 
@@ -218,10 +216,12 @@ public class CreateReportActivity extends AppCompatActivity
      * Switches to the ReportGraphActivity.
      */
     private void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the "
+                        + "filter button on the Navigation Screen.",
+                Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -251,9 +251,11 @@ public class CreateReportActivity extends AppCompatActivity
         Geocoder geocoder = new Geocoder(getBaseContext());
         List<Address> addresses = null;
         try {
-            addresses = geocoder.getFromLocationName(buildingType.getText().toString(), 1);
+            addresses = geocoder.getFromLocationName(
+                    buildingType.getText().toString(), 1);
             if (!Verification.isValidZip(zipcode.getText().toString())) {
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode" + "\n"
+                Toast toast = Toast.makeText(this.getApplicationContext(),
+                        "Invalid ZipCode" + "\n"
                         + "Required Format: xxxxx", Toast.LENGTH_SHORT);
                 toast.show();
             } else if (!Verification.isValidTime(time.getText().toString())) {

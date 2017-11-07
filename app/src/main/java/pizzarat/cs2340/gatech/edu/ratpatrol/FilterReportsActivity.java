@@ -30,12 +30,6 @@ public class FilterReportsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView beforeDateTextView;
     private TextView afterDateTextView;
-    private Button filterButton;
-    private Button cancelFilterButton;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private View calendar;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private DatePicker datePicker;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private TextView dateView;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private int year, // --Commented out by Inspection (11/6/2017 1:49 AM):month, // --Commented out by Inspection (11/6/2017 1:49 AM):day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +50,14 @@ public class FilterReportsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        year = 2017;
-        month = 10;
-        day = 10;
-
         beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
         afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
-        filterButton = (Button) findViewById(R.id.filterReportsButton);
-        cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
+        Button filterButton = (Button) findViewById(R.id.filterReportsButton);
+        Button cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO grab text from TextView and filter reports
                 try {
                     String beforeDate = (beforeDateTextView.getText().toString());
                     String afterDate = (afterDateTextView.getText().toString());

@@ -5,7 +5,7 @@ package pizzarat.cs2340.gatech.edu.sqlite;
  * @author Evie Brown.
  */
 
-class RatSightingDbContract {
+final class RatSightingDbContract {
 
 
     //helpful php

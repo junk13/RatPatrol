@@ -30,8 +30,6 @@ public class FilterReportsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView beforeDateTextView;
     private TextView afterDateTextView;
-    private Button filterButton;
-    private Button cancelFilterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +55,8 @@ public class FilterReportsActivity extends AppCompatActivity
 
         beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
         afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
-        filterButton = (Button) findViewById(R.id.filterReportsButton);
-        cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
+        Button filterButton = (Button) findViewById(R.id.filterReportsButton);
+        Button cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override

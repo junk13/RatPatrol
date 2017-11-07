@@ -39,7 +39,6 @@ public class ArchiveActivity extends AppCompatActivity
     private ArrayList<ReportStructure> posts = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
-    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +68,7 @@ public class ArchiveActivity extends AppCompatActivity
         // Archive recycler view creation
         posts = reportBroker.reportArrayList(getBaseContext());
         initRecycler();
-        searchView = (SearchView) findViewById(R.id.searchView);
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

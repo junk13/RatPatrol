@@ -19,7 +19,8 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * @author Evie Brown
- *         A custom broker in SQL to work with our rat sighting reports in our database.
+ *         A custom broker in SQL to work with our rat sighting reports in our
+ *         database.
  */
 public class SQLiteReportBroker extends AppCompatActivity {
     final int CSV_SIZE = 12219;
@@ -40,18 +41,28 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
         //in X column, set X
         values.put(RatSightingDb.getReportTableKeyCol(), rReport.getKey());
-        values.put(RatSightingDb.getReportTableLocationCol(), rReport.getBuildingType());
-        values.put(RatSightingDb.getReportTableDateCol(), rReport.getDate());
-        values.put(RatSightingDb.getReportTableTimeCol(), rReport.getTime());
-        values.put(RatSightingDb.getReportTableAddressCol(), rReport.getAddress());
-        values.put(RatSightingDb.getReportTableZipcodeCol(), rReport.getZipCode());
-        values.put(RatSightingDb.getReportTableCityCol(), rReport.getCity());
-        values.put(RatSightingDb.getReportTableBoroughCol(), rReport.getBorough());
-        values.put(RatSightingDb.getReportTableLatitudeCol(), rReport.getLatitude());
-        values.put(RatSightingDb.getReportTableLongitudeCol(), rReport.getLongitude());
+        values.put(RatSightingDb.getReportTableLocationCol(),
+                rReport.getBuildingType());
+        values.put(RatSightingDb.getReportTableDateCol(),
+                rReport.getDate());
+        values.put(RatSightingDb.getReportTableTimeCol(),
+                rReport.getTime());
+        values.put(RatSightingDb.getReportTableAddressCol(),
+                rReport.getAddress());
+        values.put(RatSightingDb.getReportTableZipcodeCol(),
+                rReport.getZipCode());
+        values.put(RatSightingDb.getReportTableCityCol(),
+                rReport.getCity());
+        values.put(RatSightingDb.getReportTableBoroughCol(),
+                rReport.getBorough());
+        values.put(RatSightingDb.getReportTableLatitudeCol(),
+                rReport.getLatitude());
+        values.put(RatSightingDb.getReportTableLongitudeCol(),
+                rReport.getLongitude());
 
         // Insert the new row, returning the primary key value of the new row
-        writableDb.insert(RatSightingDb.getTableName(), null, values);
+        writableDb.insert(RatSightingDb.getTableName(),
+                null, values);
 
         ratDb.close();
 
@@ -73,13 +84,13 @@ public class SQLiteReportBroker extends AppCompatActivity {
                 RatSightingDb.getReportTableKeyCol() + " DESC";
 
         return readableDb.query(
-                RatSightingDb.getTableName(),            // The table to query
-                null,                                   // The columns to return
-                null,                                   // The columns for the WHERE clause
-                null,                                   // The values for the WHERE clause
-                null,                                   // don't group the rows
-                null,                                   // don't filter by row groups
-                sortOrder                               // The sort order
+                RatSightingDb.getTableName(),  // The table to query
+                null,                  // The columns to return
+                null,                // The columns for the WHERE clause
+                null,              // The values for the WHERE clause
+                null,                 // don't group the rows
+                null,                  // don't filter by row groups
+                sortOrder                    // The sort order
         );
 
     }
@@ -93,7 +104,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
      * @param c                   context from which the function is called
      * @return cursor for which to read database info from
      */
-    private Cursor getDateConstrainedCursor(String formattedBeforeDate, String formattedAfterDate, Context c) {
+    private Cursor getDateConstrainedCursor(String formattedBeforeDate,
+                                            String formattedAfterDate,
+                                            Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
 
@@ -103,13 +116,20 @@ public class SQLiteReportBroker extends AppCompatActivity {
                 RatSightingDb.getReportTableKeyCol() + " DESC";
 
         return readableDb.query(
-                RatSightingDb.getTableName(),            // The table to query
-                null,                                   // The columns to return
-                "date BETWEEN ? AND ?",                                   // The columns for the WHERE clause
-                new String[]{formattedBeforeDate, formattedAfterDate},                                   // The values for the WHERE clause
-                null,                                   // don't group the rows
-                null,                                   // don't filter by row groups
-                sortOrder                               // The sort order
+                // The table to query
+                RatSightingDb.getTableName(),
+                // The columns to return
+                null,
+                // The columns for the WHERE clause
+                "date BETWEEN ? AND ?",
+                // The values for the WHERE clause
+                new String[]{formattedBeforeDate, formattedAfterDate},
+                // don't group the rows
+                null,
+                // don't filter by row groups
+                null,
+                // The sort order
+                sortOrder
         );
 
     }
@@ -132,13 +152,15 @@ public class SQLiteReportBroker extends AppCompatActivity {
                 RatSightingDb.getReportTableKeyCol() + " DESC";
 
         return readableDb.query(
-                RatSightingDb.getTableName(),            // The table to query
-                null,                                   // The columns to return
-                RatSightingDb.getReportTableAddressCol() + " LIKE '%" + keystring + "%'",                                   // The columns for the WHERE clause
-                null,                                   // The values for the WHERE clause
-                null,                                   // don't group the rows
-                null,                                   // don't filter by row groups
-                sortOrder                               // The sort order
+                RatSightingDb.getTableName(),       // The table to query
+                null,                       // The columns to return
+                RatSightingDb.getReportTableAddressCol() +
+                        " LIKE '%" + keystring + "%'",
+                // The columns for the WHERE clause
+                null,            // The values for the WHERE clause
+                null,               // don't group the rows
+                null,                // don't filter by row groups
+                sortOrder                  // The sort order
         );
 
     }
@@ -149,7 +171,8 @@ public class SQLiteReportBroker extends AppCompatActivity {
      * @param context context from which function is called
      * @return rat reports that fit the constraints
      */
-    public ArrayList<ReportStructure> getDateConstrainedReports(Context context) {
+    public ArrayList<ReportStructure> getDateConstrainedReports(
+            Context context) {
         if (StaticHolder.dateRange == null) {
             return reportArrayList(context);
         }
@@ -178,7 +201,8 @@ public class SQLiteReportBroker extends AppCompatActivity {
      * @param context   context from which function is called
      * @return rat reports that fit the constraints
      */
-    public ArrayList<ReportStructure> getReportsWithSubstring(String keystring, Context context) {
+    public ArrayList<ReportStructure> getReportsWithSubstring(String keystring,
+                                                              Context context) {
 
         Cursor cursor = getSubstringReportsCursor(keystring, context);
         //ArrayList to return
@@ -202,44 +226,6 @@ public class SQLiteReportBroker extends AppCompatActivity {
         return aList;
     }
 
-
-// --Commented out by Inspection START (11/6/2017 1:49 AM):
-//    /**
-//     * Gets stringified database contents
-//     * @param c context from which function is called
-//     * @return string of database contents
-//     */
-//    public String getDbContent(Context c) throws  Exception {
-//        List<String> itemIds = new ArrayList<String>();
-//        Cursor cursor = getCursor(c);
-//        while(cursor.moveToNext()) {
-//            String str = cursor.getString(0);
-//            itemIds.add(str);
-//        }
-//
-//        cursor.close();
-//        return itemIds.toString();
-//
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
-
-// --Commented out by Inspection START (11/6/2017 1:49 AM):
-//    /**
-//     * Checks if database is empty
-//     * @param c context from which function is called
-//     * @return true if empty
-//     */
-//    public boolean isEmpty(Context c) {
-//        RatSightingDb rDb = new RatSightingDb(c);
-//        SQLiteDatabase readableDb = rDb.getReadableDatabase();
-//        String count = "SELECT count(*) FROM " + RatSightingDb.getTableName();
-//        Cursor mcursor = readableDb.rawQuery(count, null);
-//        mcursor.moveToFirst();
-//        int icount = mcursor.getInt(0);
-//        return !(icount > 0);
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
-
     /**
      * Finds the highest unique key for a rat sighting report. Used to generate
      * the unique key when the user decides to create a new report
@@ -250,7 +236,8 @@ public class SQLiteReportBroker extends AppCompatActivity {
     public int getMaxKey(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String query = "SELECT MAX(" + RatSightingDb.getReportTableKeyCol() + ") FROM " + RatSightingDb.getTableName();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableKeyCol()
+                + ") FROM " + RatSightingDb.getTableName();
         Cursor mcursor = readableDb.rawQuery(query, null);
         mcursor.moveToFirst();
         return mcursor.getInt(0);
@@ -301,25 +288,4 @@ public class SQLiteReportBroker extends AppCompatActivity {
         Log.d("hidden", "aList.size() = " + list.size());
     }
 
-
-// --Commented out by Inspection START (11/6/2017 1:49 AM):
-//    /**
-//     * Finds the max and min dates
-//     *
-//     * @param c the specified context
-//     * @return the max and min dates
-//     */
-//    public int[] findExtremeDates(Context c) {
-//        RatSightingDb rDb = new RatSightingDb(c);
-//        SQLiteDatabase readableDb = rDb.getReadableDatabase();
-//        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + "), MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM " + RatSightingDb.getTableName();
-//        Cursor mcursor = readableDb.rawQuery(query, null);
-//        mcursor.moveToFirst();
-//        int maxDate = mcursor.getInt(0);
-//        int minDate = mcursor.getInt(1);
-//        Log.d("hidden",""+minDate + " | " + maxDate);
-//        Log.d("hidden","meow");
-//        return new int[] {minDate, maxDate};
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 }

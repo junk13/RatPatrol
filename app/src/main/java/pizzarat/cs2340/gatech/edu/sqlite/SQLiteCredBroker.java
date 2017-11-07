@@ -29,7 +29,9 @@ public class SQLiteCredBroker extends AppCompatActivity {
      * @throws DuplicateUserDbException when trying to save another user with
      * the same username
      */
-    public void writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
+    public void writeToCredDb(String username, String password,
+                              boolean isAdmin, Context context)
+            throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
         // Throw DuplicateUserDbException if username is already used
         if (containsDuplicateUser(username, context))
@@ -164,7 +166,8 @@ public class SQLiteCredBroker extends AppCompatActivity {
      * @param userStr : the username to look for
      * @return CredentialStructure containing a matching username
      */
-    private CredentialStructure fetchCredentialStructureByUser(String userStr, Context c) {
+    private CredentialStructure fetchCredentialStructureByUser(String userStr,
+                                                               Context c) {
         ArrayList<CredentialStructure> aList = credArrayList(getCursor(c));
         for (int i = 0; i < aList.size(); i++) {
             System.out.println(aList.get(i));

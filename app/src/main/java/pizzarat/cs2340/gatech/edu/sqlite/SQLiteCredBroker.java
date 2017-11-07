@@ -115,7 +115,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
      */
     private ArrayList<CredentialStructure> credArrayList(Cursor cursor) {
         // ArrayList to return
-        ArrayList<CredentialStructure> aList = new ArrayList<CredentialStructure>();
+        ArrayList<CredentialStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
         // Cycle through cursor and add columns to ArrayList
         while (cursor.moveToNext()) {
@@ -138,7 +138,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
      * @return a description of database's information
      */
     public String getDbContent(Context c) {
-        List<String> itemIds = new ArrayList<String>();
+        List<String> itemIds = new ArrayList<>();
         Cursor cursor = getCursor(c);
         while (cursor.moveToNext()) {
             String str = cursor.getString(0);

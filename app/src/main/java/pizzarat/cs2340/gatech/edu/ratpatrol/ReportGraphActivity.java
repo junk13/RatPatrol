@@ -40,10 +40,10 @@ public class ReportGraphActivity extends AppCompatActivity
         implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener,
         NavigationView.OnNavigationItemSelectedListener {
 
+    final int MAX_ENTRIES = 60;
     private final SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private BarChart mChart;
     private ArrayList<ReportStructure> reports;
-    final int MAX_ENTRIES = 60;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class ReportGraphActivity extends AppCompatActivity
         //int span = getSpan();
         reports = reportBroker.getDateConstrainedReports(getBaseContext());
         final ArrayList<String> xLabel;
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        ArrayList<BarEntry> yVals1 = new ArrayList<>();
 
 
         getMonthData(yVals1);
@@ -310,7 +310,7 @@ public class ReportGraphActivity extends AppCompatActivity
 //
 //            set1.setColors(ColorTemplate.MATERIAL_COLORS);
 //
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
 
             BarData data = new BarData(dataSets);

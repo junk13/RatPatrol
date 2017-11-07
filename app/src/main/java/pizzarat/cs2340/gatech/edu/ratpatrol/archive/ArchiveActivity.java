@@ -76,11 +76,13 @@ public class ArchiveActivity extends AppCompatActivity
                 return false;
             }
 
+
             /**
-             * is invoked when test is typed in the searcher
-             *
-             * @param newText
-             * @return
+             * Recognizes if the user has typed some text to search through the
+             * rat report archive. The inputted text must be of length 3 or
+             * greater.
+             * @param newText user's desired text filter
+             * @return true if some text was entered
              */
             @Override
             public boolean onQueryTextChange(String newText) {

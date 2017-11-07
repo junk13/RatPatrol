@@ -26,7 +26,8 @@ public class SQLiteCredBroker extends AppCompatActivity {
      * @param password the password of the credential
      * @param isAdmin  whether or not the credential has admin privileges
      * @param context  the current date
-     * @throws DuplicateUserDbException
+     * @throws DuplicateUserDbException when trying to save another user with
+     * the same username
      */
     public void writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
@@ -79,6 +80,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
      *
      * @param user : String for username
      * @param pass : String for password
+     *      @param c : the phone data
      * @return true if user and pass are in database in same ID
      */
     public boolean credMatch(String user, String pass, Context c) {
@@ -134,7 +136,6 @@ public class SQLiteCredBroker extends AppCompatActivity {
      *
      * @param c the specified context
      * @return a description of database's information
-     * @throws Exception when unable to obtain database contents
      */
     public String getDbContent(Context c) {
         List<String> itemIds = new ArrayList<String>();

@@ -6,16 +6,16 @@ package pizzarat.cs2340.gatech.edu.structure;
  * a rat sighting report.
  */
 public class ReportStructure {
-    private String key;                    // Unique key assigned to each report
-    private String buildingType;               // Building type of the sighting
-    private String date;                   // May need to change later
-    private String time;                   // May need to change later
-    private String address;                // The address of the sighting
-    private String zipCode;                // The zip code of the rat report
-    private String city;                   // The city of rat report
-    private String borough;                // The borough of the rat sighting;
-    private String latitude;               // The latitude of the sighting
-    private String longitude;              // The longitude of the sighting
+    private final String key;                    // Unique key assigned to each report
+    private final String buildingType;               // Building type of the sighting
+    private final String date;                   // May need to change later
+    private final String time;                   // May need to change later
+    private final String address;                // The address of the sighting
+    private final String zipCode;                // The zip code of the rat report
+    private final String city;                   // The city of rat report
+    private final String borough;                // The borough of the rat sighting;
+    private final String latitude;               // The latitude of the sighting
+    private final String longitude;              // The longitude of the sighting
     /**
      * Creates the most specific rat sighting report by specifying all fields.
      * @param key the unique key assigned to each report
@@ -52,13 +52,15 @@ public class ReportStructure {
         return key;
     }
 
-    /**
-     * Sets the specified key for this rat sighting.
-     * @param key
-     */
-    public void setKey(String key) {
-        this.key = key;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the specified key for this rat sighting.
+//     * @param key
+//     */
+//    public void setKey(String key) {
+//        this.key = key;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Returns the latitude and longitude of the rat sighting.
@@ -68,13 +70,15 @@ public class ReportStructure {
         return buildingType;
     }
 
-    /**
-     * Sets the latitude and longitude of this rat sighting.
-     * @param buildingType the latitude and longitude of the sighting
-     */
-    public void setBuildingType(String buildingType) {
-        this.buildingType = buildingType;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the latitude and longitude of this rat sighting.
+//     * @param buildingType the latitude and longitude of the sighting
+//     */
+//    public void setBuildingType(String buildingType) {
+//        this.buildingType = buildingType;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Returns the date of the rat sighting report.
@@ -84,13 +88,15 @@ public class ReportStructure {
         return date;
     }
 
-    /**
-     * Sets the date of this rat sighting report.
-     * @param date the specified date of the rat sighting
-     */
-    public void setDate(String date) {
-        this.date = date;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the date of this rat sighting report.
+//     * @param date the specified date of the rat sighting
+//     */
+//    public void setDate(String date) {
+//        this.date = date;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Gets the time of this rat sighting report.
@@ -100,13 +106,15 @@ public class ReportStructure {
         return time;
     }
 
-    /**
-     * Sets the time of this rat report.
-     * @param time the specified time of the report
-     */
-    public void setTime(String time) {
-        this.time = time;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the time of this rat report.
+//     * @param time the specified time of the report
+//     */
+//    public void setTime(String time) {
+//        this.time = time;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Gets the address of this rat sighting report.
@@ -116,13 +124,15 @@ public class ReportStructure {
         return address;
     }
 
-    /**
-     * Sets the address of this rat report to the specified address.
-     * @param address the specified address
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the address of this rat report to the specified address.
+//     * @param address the specified address
+//     */
+//    public void setAddress(String address) {
+//        this.address = address;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Gets the zip code of this rat report.
@@ -132,13 +142,15 @@ public class ReportStructure {
         return zipCode;
     }
 
-    /**
-     * Sets the zip code of the rat report to the specified zip code.
-     * @param zipCode the specified zip code
-     */
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the zip code of the rat report to the specified zip code.
+//     * @param zipCode the specified zip code
+//     */
+//    public void setZipCode(String zipCode) {
+//        this.zipCode = zipCode;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Gets the city of the buildingType of the rat report.
@@ -148,13 +160,15 @@ public class ReportStructure {
         return city;
     }
 
-    /**
-     * Sets the city of the rat report to the specified city
-     * @param city the specified city
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the city of the rat report to the specified city
+//     * @param city the specified city
+//     */
+//    public void setCity(String city) {
+//        this.city = city;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Gets the borough of the rat report
@@ -164,13 +178,15 @@ public class ReportStructure {
         return borough;
     }
 
-    /**
-     * Sets the borough of the rat report to the specified borough
-     * @param borough the specified borough
-     */
-    public void setBorough(String borough) {
-        this.borough = borough;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the borough of the rat report to the specified borough
+//     * @param borough the specified borough
+//     */
+//    public void setBorough(String borough) {
+//        this.borough = borough;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
 
     /**
@@ -184,14 +200,16 @@ public class ReportStructure {
     }
 
 
-    /**
-     * Sets the latitude of the rat report to the specified latitude
-     * @param latitude the specified latitude
-     */
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the latitude of the rat report to the specified latitude
+//     * @param latitude the specified latitude
+//     */
+//
+//    public void setLatitude(String latitude) {
+//        this.latitude = latitude;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
 
     /**
@@ -204,15 +222,17 @@ public class ReportStructure {
     }
 
 
-    /**
-     * Sets the longitude of the rat report to the specified latitude
-     * @param longitude the specified latitude
-     */
-
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
+// --Commented out by Inspection START (11/6/2017 1:48 AM):
+//    /**
+//     * Sets the longitude of the rat report to the specified latitude
+//     * @param longitude the specified latitude
+//     */
+//
+//
+//    public void setLongitude(String longitude) {
+//        this.longitude = longitude;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
 
     /**

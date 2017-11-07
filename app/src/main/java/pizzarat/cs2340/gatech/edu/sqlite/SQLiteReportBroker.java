@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
 import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
@@ -29,11 +28,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
      * @param context context from which function is called
      * @return primary key value of new row
      */
-    public long writeToReportDb(ReportStructure rReport, Context context) throws DuplicateReportDbException {
+    public void writeToReportDb(ReportStructure rReport, Context context) {
         RatSightingDb ratDb = new RatSightingDb(context);
-        //throw DuplicateReportDbException if report already exists
-//        if (containsDuplicateReport(username, context))
-//            throw new DuplicateReportDbException();
+
         // Gets the data repository in write mode
         SQLiteDatabase writableDb = ratDb.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -52,14 +49,14 @@ public class SQLiteReportBroker extends AppCompatActivity {
         values.put(RatSightingDb.getReportTableLongitudeCol(), rReport.getLongitude());
 
         // Insert the new row, returning the primary key value of the new row
-        long id = writableDb.insert(RatSightingDb.getTableName(), null, values);
+        writableDb.insert(RatSightingDb.getTableName(), null, values);
 
         ratDb.close();
 
-        return id;
     }
     /**
      * getter for SQLite cursor Report database
+     * @param c context from which the function is called
      * @return cursor for which to read database info from
      */
     private Cursor getCursor(Context c) {
@@ -86,6 +83,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * getter for SQLite cursor Report database
+     * @param formattedBeforeDate from date constraint
+     * @param formattedAfterDate to date constraint
+     * @param c context from which the function is called
      * @return cursor for which to read database info from
      */
     private Cursor getDateConstrainedCursor(String formattedBeforeDate, String formattedAfterDate, Context c) {
@@ -112,6 +112,8 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * getter for SQLite substring search cursor Report database
+     * @param keystring substring to search for
+     * @param c context from which the function is called
      * @return cursor for which to read database info from
      */
     private Cursor getSubstringReportsCursor(String keystring, Context c) {
@@ -195,41 +197,42 @@ public class SQLiteReportBroker extends AppCompatActivity {
     }
 
 
-    /**
-     * Gets stringified database contents
-     * @param c context from which function is called
-     * @return string of database contents
-     */
-    public String getDbContent(Context c) throws  Exception {
-        List<String> itemIds = new ArrayList<String>();
-        Cursor cursor = getCursor(c);
-        while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(0);
-            itemIds.add(str);
-        }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Gets stringified database contents
+//     * @param c context from which function is called
+//     * @return string of database contents
+//     */
+//    public String getDbContent(Context c) throws  Exception {
+//        List<String> itemIds = new ArrayList<String>();
+//        Cursor cursor = getCursor(c);
+//        while(cursor.moveToNext()) {
+//            String str = cursor.getString(0);
+//            itemIds.add(str);
+//        }
+//
+//        cursor.close();
+//        return itemIds.toString();
+//
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
-        cursor.close();
-        return itemIds.toString();
-
-    }
-
-    /**
-     * Checks if database is empty
-     * @param c context from which function is called
-     * @return true if empty
-     */
-    public boolean isEmpty(Context c) {
-        RatSightingDb rDb = new RatSightingDb(c);
-        SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String count = "SELECT count(*) FROM " + RatSightingDb.getTableName();
-        Cursor mcursor = readableDb.rawQuery(count, null);
-        mcursor.moveToFirst();
-        int icount = mcursor.getInt(0);
-        mcursor.close();
-        return !(icount > 0);
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Checks if database is empty
+//     * @param c context from which function is called
+//     * @return true if empty
+//     */
+//    public boolean isEmpty(Context c) {
+//        RatSightingDb rDb = new RatSightingDb(c);
+//        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+//        String count = "SELECT count(*) FROM " + RatSightingDb.getTableName();
+//        Cursor mcursor = readableDb.rawQuery(count, null);
+//        mcursor.moveToFirst();
+//        int icount = mcursor.getInt(0);
+//        return !(icount > 0);
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     /**
      * Finds the highest unique key for a rat sighting report. Used to generate
@@ -244,11 +247,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         String query = "SELECT MAX(" + RatSightingDb.getReportTableKeyCol() + ") FROM " + RatSightingDb.getTableName();
         Cursor mcursor = readableDb.rawQuery(query, null);
         mcursor.moveToFirst();
-        int maxKey = mcursor.getInt(0);
-        Log.d("hidden",""+maxKey);
-        Log.d("hidden","meow");
-        mcursor.close();
-        return maxKey;
+        return mcursor.getInt(0);
     }
 
     /**
@@ -263,20 +262,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         Cursor mcursor = readableDb.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
-        mcursor.close();
         return (icount >= 12219);
-    }
-
-    //TODO: Move to utility class
-
-    /**
-     * Converts dd/MM/yyyy to yyyy/MM/dd
-     * @param s date in dd/MM/yyyy format
-     * @return reformatted date
-     */
-    private String getDate(String s) {
-        String[] date = s.split("/");
-        return date[2] + "/" + date[0] + "/" + date[1];
     }
 
     /**
@@ -290,16 +276,16 @@ public class SQLiteReportBroker extends AppCompatActivity {
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             list.add(new ReportStructure(
-                    cursor.getInt(0) + "",  // key
-                    cursor.getString(1),    // building type
-                    cursor.getString(2),    // date
-                    cursor.getString(3),    // time
-                    cursor.getString(4),    // address
-                    cursor.getString(5),    // zipcode
-                    cursor.getString(6),    // city
-                    cursor.getString(7),    // borough
-                    cursor.getString(8),    // latitude
-                    cursor.getString(9)     // longitude
+                    cursor.getInt(0) + "",     // key
+                    cursor.getString(1),            // building type
+                    cursor.getString(2),            // date
+                    cursor.getString(3),            // time
+                    cursor.getString(4),            // address
+                    cursor.getString(5),            // zipcode
+                    cursor.getString(6),            // city
+                    cursor.getString(7),            // borough
+                    cursor.getString(8),            // latitude
+                    cursor.getString(9)             // longitude
 
             ));
         }
@@ -309,24 +295,24 @@ public class SQLiteReportBroker extends AppCompatActivity {
     }
 
 
-
-    /**
-     * Finds the max and min dates
-     *
-     * @param c the specified context
-     * @return the max and min dates
-     */
-    public int[] findExtremeDates(Context c) {
-        RatSightingDb rDb = new RatSightingDb(c);
-        SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + "), MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM " + RatSightingDb.getTableName();
-        Cursor mcursor = readableDb.rawQuery(query, null);
-        mcursor.moveToFirst();
-        int maxDate = mcursor.getInt(0);
-        int minDate = mcursor.getInt(1);
-        Log.d("hidden",""+minDate + " | " + maxDate);
-        Log.d("hidden","meow");
-        mcursor.close();
-        return new int[] {minDate, maxDate};
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Finds the max and min dates
+//     *
+//     * @param c the specified context
+//     * @return the max and min dates
+//     */
+//    public int[] findExtremeDates(Context c) {
+//        RatSightingDb rDb = new RatSightingDb(c);
+//        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+//        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + "), MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM " + RatSightingDb.getTableName();
+//        Cursor mcursor = readableDb.rawQuery(query, null);
+//        mcursor.moveToFirst();
+//        int maxDate = mcursor.getInt(0);
+//        int minDate = mcursor.getInt(1);
+//        Log.d("hidden",""+minDate + " | " + maxDate);
+//        Log.d("hidden","meow");
+//        return new int[] {minDate, maxDate};
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 }

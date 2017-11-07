@@ -78,7 +78,7 @@ public class FilterReportsActivity extends AppCompatActivity
             }
         });
 
-        // Filter parameter is discarded and screen switches to the Selection Screen
+        // Filter parameter is discarded and screen switches to the Nav screen
         cancelFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

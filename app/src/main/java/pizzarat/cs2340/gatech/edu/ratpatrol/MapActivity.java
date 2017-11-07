@@ -24,7 +24,8 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * sighting report to generate a Google Maps of those reports that fix their
  * specified fields.
  */
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity
+        implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -32,27 +33,22 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        // Obtain the SupportMapFragment and get notified when the map
+        // is ready to be used.
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         SQLiteReportBroker report = new SQLiteReportBroker();
-        //create array list from reports within the static date range in StaticHelper.
-        ArrayList<ReportStructure> reportArray = report.getDateConstrainedReports(getBaseContext());
+        //create array list from reports within the static date range
+        // in StaticHelper.
+        ArrayList<ReportStructure> reportArray =
+                report.getDateConstrainedReports(getBaseContext());
         populateFromFilter(reportArray);
 
     }
@@ -74,15 +70,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 Log.d("hidden",e.getLocalizedMessage());
             }
             LatLng coordinates = new LatLng(latitude, longitude);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(coordinates)
-                    .title("Key: " + report.getKey()).snippet(report.mapToString()));
+            Marker marker =
+                    mMap.addMarker(new MarkerOptions().position(coordinates)
+                            .title("Key: " + report.getKey())
+                            .snippet(report.mapToString()));
 
-            // Sets the listener of each rat report to display its details when clicked
-            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            // Sets the listener of each rat report to display its details
+            // when clicked
+            mMap.setOnMarkerClickListener(
+                    new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     StaticHolder.report = report;
-                    Intent switchToDetailedReport = new Intent(MapActivity.this,
+                    Intent switchToDetailedReport =
+                            new Intent(MapActivity.this,
                             DetailedReportViewActivity.class);
                     MapActivity.this.startActivity(switchToDetailedReport);
                     return true;

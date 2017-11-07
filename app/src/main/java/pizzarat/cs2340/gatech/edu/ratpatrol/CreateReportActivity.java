@@ -41,8 +41,6 @@ public class CreateReportActivity extends AppCompatActivity
     private TextView zipcode;
     private TextView buildingType;
 
-    // TODO grab data, create report, save to DB, generate unique key
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +76,6 @@ public class CreateReportActivity extends AppCompatActivity
         Date curDate = new Date();
         SimpleDateFormat militaryTimeFormat = new SimpleDateFormat("kk:mm");
 
-        //Todo: UtilityClass.militaryTimeFormat.format(curDate)
         String currentDateTimeString = militaryTimeFormat.format(curDate);
         time.setText(currentDateTimeString); //set current time as default text
 

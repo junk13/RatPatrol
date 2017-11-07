@@ -3,8 +3,8 @@ package pizzarat.cs2340.gatech.edu.structure;
 /**
  * @author Luka Derado
  *
- *         A utility class created to verify dates of rat reports to be efficiently
- *         parsed through in filters.
+ *         A utility class created to verify dates of rat reports to be
+ *         efficiently parsed through in filters.
  */
 
 public class Verification {

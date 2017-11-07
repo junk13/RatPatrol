@@ -133,7 +133,6 @@ public class LoginActivity extends AppCompatActivity
 
     /**
      * Requests contacts permission startup.
-     * @return TODO
      */
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -236,7 +235,6 @@ public class LoginActivity extends AppCompatActivity
      * @return true if the username is valid
      */
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
@@ -246,7 +244,6 @@ public class LoginActivity extends AppCompatActivity
      * @return true if the password is valid
      */
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return !(password.contains("\"") || password.contains(":"))
                 && !password.isEmpty();
     }
@@ -364,7 +361,6 @@ public class LoginActivity extends AppCompatActivity
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             return broker.credMatch(mEmail, mPassword, getBaseContext());
         }
 

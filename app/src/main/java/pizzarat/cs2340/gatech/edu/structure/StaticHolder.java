@@ -1,10 +1,8 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
 /**
- * Created by Luka on 10/9/2017.
- */
-
-/**
+ * @Author Luka Derado
+ *
  * Utility class to hold the current report for use in the
  * DetailedReportActivity and an array of all the reports in the database.
  */

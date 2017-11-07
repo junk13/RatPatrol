@@ -16,6 +16,15 @@ public class CredentialStructure {
 //    }
 // --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
+    /**
+     * Creates an object representing the user's credentials to be stored in
+     * the SQL database
+     *
+     * @param id      a designated user id to reference users in the database
+     * @param user    the user's username
+     * @param pass    the user's password
+     * @param isAdmin a parameter representing if the user has admin privileges
+     */
     public CredentialStructure(String id, String user, String pass, Boolean isAdmin) {
         this.id = id;
         this.user = user;

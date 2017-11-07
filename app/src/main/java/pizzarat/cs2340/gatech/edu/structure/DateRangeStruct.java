@@ -8,11 +8,23 @@ public class DateRangeStruct {
     private final String from;
     private final String to;
 
+    /**
+     * Creates a date structure to help filter rat reports in the rat map and
+     * rat graphs activity
+     *
+     * @param from the start date of the filter
+     * @param to   the end date of the filter
+     */
     public DateRangeStruct(String from, String to) {
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Returns the the starting date of the date filter
+     *
+     * @return the starting date of the date filter
+     */
     public String getFrom() {
         return from;
     }
@@ -23,6 +35,10 @@ public class DateRangeStruct {
 //    }
 // --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
+    /**
+     * Returns the end date of the date filter
+     * @return the end date of the date filter
+     */
     public String getTo() {
         return to;
     }

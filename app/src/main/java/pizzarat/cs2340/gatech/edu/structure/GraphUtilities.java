@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 /**
- * @Auhtor Luka Derado
+ * @author Luka Derado
  */
 
 public class GraphUtilities {

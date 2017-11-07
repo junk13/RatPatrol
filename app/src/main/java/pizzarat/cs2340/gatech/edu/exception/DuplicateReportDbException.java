@@ -1,7 +1,7 @@
 package pizzarat.cs2340.gatech.edu.exception;
 
 /**
- * Created by evieb on 10/4/2017.
+ * @Author: Evie Brown
  */
 
 public class DuplicateReportDbException extends Exception {

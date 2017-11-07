@@ -20,6 +20,11 @@ public class DateRangeStruct {
         this.to = to;
     }
 
+    /**
+     * Returns the the starting date of the date filter
+     *
+     * @return the starting date of the date filter
+     */
     public String getFrom() {
         return from;
     }
@@ -30,6 +35,10 @@ public class DateRangeStruct {
 //    }
 // --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
+    /**
+     * Returns the end date of the date filter
+     * @return the end date of the date filter
+     */
     public String getTo() {
         return to;
     }

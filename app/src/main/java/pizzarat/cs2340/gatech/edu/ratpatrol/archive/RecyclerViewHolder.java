@@ -12,14 +12,16 @@ import pizzarat.cs2340.gatech.edu.ratpatrol.R;
  * <p>
  * Custom class created for RecyclerView to show the all the rat reports.
  */
-class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+class RecyclerViewHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener, View.OnLongClickListener {
     public final TextView reportDescription;
 
     private ItemClickListener itemClickListener;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
-        reportDescription = (TextView) itemView.findViewById(R.id.reportDescription);
+        reportDescription =
+                (TextView) itemView.findViewById(R.id.reportDescription);
 
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);

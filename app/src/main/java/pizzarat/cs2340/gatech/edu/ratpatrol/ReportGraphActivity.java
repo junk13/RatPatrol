@@ -37,7 +37,8 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  * the user's desired filter.
  */
 public class ReportGraphActivity extends AppCompatActivity
-        implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener,
+        implements SeekBar.OnSeekBarChangeListener,
+        OnChartValueSelectedListener,
         NavigationView.OnNavigationItemSelectedListener {
 
     final int MAX_ENTRIES = 60;
@@ -57,11 +58,13 @@ public class ReportGraphActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         mChart = (BarChart) findViewById(R.id.ratChart);
@@ -196,7 +199,8 @@ public class ReportGraphActivity extends AppCompatActivity
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
     private void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
@@ -204,7 +208,8 @@ public class ReportGraphActivity extends AppCompatActivity
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
     private void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+        Intent switchToArchiveActivity =
+                new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
@@ -212,7 +217,8 @@ public class ReportGraphActivity extends AppCompatActivity
      * Switches to the CreateReportActivity.
      */
     private void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+        Intent switchToCreateReportActivity =
+                new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
@@ -220,7 +226,8 @@ public class ReportGraphActivity extends AppCompatActivity
      * Switches to the MapActivity.
      */
     private void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+        Intent switchToMapActivity =
+                new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
 
@@ -228,7 +235,8 @@ public class ReportGraphActivity extends AppCompatActivity
      * Switches to the FilterReportsActivity.
      */
     public void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+        Intent switchToFilterReportsActivity =
+                new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
@@ -238,18 +246,6 @@ public class ReportGraphActivity extends AppCompatActivity
     private void logout() {
         switchBackToWelcomeActivity();
     }
-
-// --Commented out by Inspection START (11/6/2017 1:48 AM):
-//    /**
-//     * Switches to the ReportGraphActivity.
-//     */
-//    public void switchToReportGraphScreen() {
-//        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
-//        startActivity(switchToReportGraphScreenActivity);
-//        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-//                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Opens a bunch of apps at the bottom of the screen allowing the user to
@@ -268,30 +264,11 @@ public class ReportGraphActivity extends AppCompatActivity
 
     }
 
-// --Commented out by Inspection START (11/6/2017 1:48 AM):
-//    /**
-//     * Gets span of time between filter dates
-//     * @return span of time
-//     */
-//    private int getSpan()
-//    {
-//
-//        reports = reportBroker.getDateConstrainedReports(getBaseContext());
-//        int span = 31536000;
-//        if (StaticHolder.dateRange != null)
-//            span = StaticHolder.dateRange.getDateSpan();
-//        return span;
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
-
     /**
      * Sets bar chart data
      * @param yVals y values of bar chart
      */
     private void setData(ArrayList<BarEntry> yVals) {
-
-
-
 
         reports = reportBroker.getDateConstrainedReports(getBaseContext());
 
@@ -321,23 +298,6 @@ public class ReportGraphActivity extends AppCompatActivity
         }
     }
 
-// --Commented out by Inspection START (11/6/2017 1:48 AM):
-//    /**
-//     * Sets y values to number of reports in year
-//     * @param yVals y values of bar chart
-//     */
-//    public void getYearData(ArrayList<BarEntry> yVals) {
-//        Log.d("hidden", "graphing by year");
-//        //graph by year
-//        int[] years = GraphUtilities.organizeByYear(getBaseContext(), reports);
-//        for (int j = 0; j < years.length; j++) {
-//            Log.d("hidden","years["+j+"] = " + years[j]);
-//            //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
-//            yVals.add(new BarEntry(j, years[j], getResources().getDrawable(R.drawable.graphmarker)));
-//        }
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
-
     /**
      * Sets y values to number of reports in month
      * @param yVals y values of bar chart
@@ -346,46 +306,12 @@ public class ReportGraphActivity extends AppCompatActivity
         //graph by month
         int[] months = GraphUtilities.organizeByMonth(reports);
         for (int j = 0; j < months.length; j++) {
-            //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
-            yVals.add(new BarEntry(j, months[j], getResources().getDrawable(R.drawable.graphmarker)));
+            //yVals1.add(new BarEntry(j, j, getResources().
+            // getDrawable(R.drawable.graphmarker)));
+            yVals.add(new BarEntry(j, months[j],
+                    getResources().getDrawable(R.drawable.graphmarker)));
         }
     }
-
-// --Commented out by Inspection START (11/6/2017 1:48 AM):
-//    /**
-//     * Sets y values to number of reports in day
-//     * @param yVals y values of bar chart
-//     */
-//    public void getDayData(ArrayList<BarEntry> yVals) {
-//        //graph by day
-//        int[] days = GraphUtilities.organizeByMonth(reports);
-//        for (int j = 0; j < days.length; j++) {
-//            //yVals1.add(new BarEntry(j, j, getResources().getDrawable(R.drawable.graphmarker)));
-//            yVals.add(new BarEntry(j, days[j], getResources().getDrawable(R.drawable.graphmarker)));
-//        }
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
-
-// --Commented out by Inspection START (11/6/2017 1:48 AM):
-//    /**
-//     * Gets year labels
-//     */
-//    public ArrayList<String> getYearLabels() {
-//        final ArrayList xLabel = new ArrayList<String>();
-//        String startDate = "2010/01/01";
-//        String endDate = "2017/01/01";
-//        if (StaticHolder.dateRange != null)
-//        {
-//            startDate = StaticHolder.dateRange.getFrom();
-//            endDate = StaticHolder.dateRange.getTo();
-//        }
-//        for (int i = Integer.parseInt(startDate.substring(0,4)); i < Integer.parseInt(endDate.substring(0,4)); i++)
-//        {
-//            xLabel.add(""+i);
-//        }
-//        return xLabel;
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     /**
      * Gets month labels
@@ -406,21 +332,6 @@ public class ReportGraphActivity extends AppCompatActivity
         xLabel.add("Dec");
         return xLabel;
     }
-
-// --Commented out by Inspection START (11/6/2017 1:48 AM):
-//    /**
-//     * Gets day labels
-//     */
-//    public ArrayList<String> getDayLabels() {
-//        final ArrayList xLabel = new ArrayList<String>();
-//        int numOfDays = 31;
-//        for (int i = 0; i < numOfDays; i++)
-//        {
-//            xLabel.add(i);
-//        }
-//        return xLabel;
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:48 AM)
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

@@ -19,20 +19,20 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  */
 class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private final ArchiveActivity archiveActivity;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private final Context context;
     private List<ReportStructure> listData = new ArrayList<>();
-    Context context;
 
-    public RecyclerAdapter(ArchiveActivity archiveActivity, List<ReportStructure> listData, Context context) {
+    public RecyclerAdapter(ArchiveActivity archiveActivity,
+                           List<ReportStructure> listData, Context context) {
         this.archiveActivity = archiveActivity;
         this.listData = listData;
-        // this.context = context;
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent,
+                                                 int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.rat_report_item, parent, false);
+        View itemView = inflater.inflate(R.layout.rat_report_item, parent,
+                false);
 
         return new RecyclerViewHolder(itemView);
     }

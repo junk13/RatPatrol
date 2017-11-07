@@ -52,7 +52,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                CredentialDb.getCredHashCol() + " DESC";
+                CredentialDb.getID() + " DESC";
 
         return sr.query(
                 CredentialDb.getTableName(),            // The table to query

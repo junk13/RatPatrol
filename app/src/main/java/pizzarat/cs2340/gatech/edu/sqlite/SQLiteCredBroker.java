@@ -74,7 +74,6 @@ public class SQLiteCredBroker extends AppCompatActivity {
     public boolean credMatch(String user, String pass, Context c) {
         CredentialStructure cs = fetchCredentialStructureByUser(user, c);
         if (cs == null) {
-            System.out.println("444444444444");
             return false;
 
         }

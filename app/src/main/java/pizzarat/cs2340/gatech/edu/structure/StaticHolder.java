@@ -1,10 +1,10 @@
 package pizzarat.cs2340.gatech.edu.structure;
 
 /**
- * @Author Luka Derado
+ * @author Luka Derado
  *
- * Utility class to hold the current report for use in the
- * DetailedReportActivity and an array of all the reports in the database.
+ *         Utility class to hold the current report for use in the
+ *         DetailedReportActivity and an array of all the reports in the database.
  */
 public class StaticHolder {
     public static ReportStructure report;

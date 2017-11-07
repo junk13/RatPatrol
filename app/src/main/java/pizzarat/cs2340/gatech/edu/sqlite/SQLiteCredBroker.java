@@ -15,9 +15,19 @@ import pizzarat.cs2340.gatech.edu.structure.CredentialStructure;
 
 /**
  * @author Evie Brown
- * A custom broker in SQL to work with our credential database.
+ *         A custom broker in SQL to work with our credential database.
  */
 public class SQLiteCredBroker extends AppCompatActivity {
+
+    /**
+     * Writes the specific CredentialStructure into the SQL database
+     *
+     * @param username the username of credential
+     * @param password the password of the credential
+     * @param isAdmin  whether or not the credential has admin privileges
+     * @param context  the current date
+     * @throws DuplicateUserDbException
+     */
     public void writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
         // Throw DuplicateUserDbException if username is already used
@@ -40,10 +50,11 @@ public class SQLiteCredBroker extends AppCompatActivity {
 
     /**
      * Getter for SQLite cursor
+     *
      * @param c context of the app
      * @return cursor for which to read database info from
      */
-     private Cursor getCursor(Context c) {
+    private Cursor getCursor(Context c) {
         CredentialDb cred = new CredentialDb(c);
         SQLiteDatabase sr = cred.getReadableDatabase();
 
@@ -105,14 +116,14 @@ public class SQLiteCredBroker extends AppCompatActivity {
         ArrayList<CredentialStructure> aList = new ArrayList<CredentialStructure>();
         cursor.moveToPosition(-1);
         // Cycle through cursor and add columns to ArrayList
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             boolean b = cursor.getString(3).equals("admin");
             aList.add(new CredentialStructure(
                     cursor.getString(0),    //id
                     cursor.getString(1),    //Username
                     cursor.getString(2),    //Password
                     b                                  //isAdmin
-                    ));
+            ));
         }
         return aList;
     }
@@ -123,41 +134,40 @@ public class SQLiteCredBroker extends AppCompatActivity {
      *
      * @param c the specified context
      * @return a description of database's information
-     * @throws Exception
+     * @throws Exception when unable to obtain database contents
      */
     public String getDbContent(Context c) {
         List<String> itemIds = new ArrayList<String>();
         Cursor cursor = getCursor(c);
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             String str = cursor.getString(0);
             itemIds.add(str);
         }
         cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             String str = cursor.getString(1);
             itemIds.add(str);
         }
         cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             String str = cursor.getString(2);
             itemIds.add(str);
         }
         cursor.close();
         return itemIds.toString();
-
     }
 
     /**
-     *  Returns the information about specified user
+     * Returns the information about specified user
      *
-     *  @return CredentialStructure containing a matching username
-     *  @param userStr : the username to look for
+     * @param userStr : the username to look for
+     * @return CredentialStructure containing a matching username
      */
     private CredentialStructure fetchCredentialStructureByUser(String userStr, Context c) {
         ArrayList<CredentialStructure> aList = credArrayList(getCursor(c));
         for (int i = 0; i < aList.size(); i++) {
             System.out.println(aList.get(i));
-            if (aList.get(i).getUser().equals(userStr)){
+            if (aList.get(i).getUser().equals(userStr)) {
                 return aList.get(i);
             }
 

@@ -2,8 +2,8 @@ package pizzarat.cs2340.gatech.edu.structure;
 
 /**
  * @author Harrison Banh
- * This class is a container or holder for all the information related to making
- * a rat sighting report.
+ *         This class is a container or holder for all the information related to making
+ *         a rat sighting report.
  */
 public class ReportStructure {
     private final String key;                    // Unique key assigned to each report
@@ -16,19 +16,21 @@ public class ReportStructure {
     private final String borough;                // The borough of the rat sighting;
     private final String latitude;               // The latitude of the sighting
     private final String longitude;              // The longitude of the sighting
+
     /**
      * Creates the most specific rat sighting report by specifying all fields.
-     * @param key the unique key assigned to each report
+     *
+     * @param key          the unique key assigned to each report
      * @param buildingType the latitude and longitude of the sighting
-     * @param date the date of the sighting
-     * @param time the time of the sighting
-     * @param address the address of the sighting
-     * @param zipCode the zip code portion of the address of the sighting
-     * @param city the city portion of the address of the sighting
-     * @param borough the borough in New York where the sighting occurred
+     * @param date         the date of the sighting
+     * @param time         the time of the sighting
+     * @param address      the address of the sighting
+     * @param zipCode      the zip code portion of the address of the sighting
+     * @param city         the city portion of the address of the sighting
+     * @param borough      the borough where the sighting occurred
+     * @param latitude     the latitude of the rat sighting
+     * @param longitude    the longitude of the rat sighting
      */
-
-    // TODO fix constructor for lat and long
     public ReportStructure(String key, String buildingType, String date, String time,
                            String address, String zipCode, String city,
                            String borough, String latitude, String longitude) {
@@ -46,6 +48,7 @@ public class ReportStructure {
 
     /**
      * Returns unique key of the rat sighting.
+     *
      * @return the unique key of the sighting
      */
     public String getKey() {
@@ -64,6 +67,7 @@ public class ReportStructure {
 
     /**
      * Returns the latitude and longitude of the rat sighting.
+     *
      * @return the latitude and longitude of the rat sighting
      */
     public String getBuildingType() {
@@ -82,6 +86,7 @@ public class ReportStructure {
 
     /**
      * Returns the date of the rat sighting report.
+     *
      * @return the date of the rat sighting
      */
     public String getDate() {
@@ -100,6 +105,7 @@ public class ReportStructure {
 
     /**
      * Gets the time of this rat sighting report.
+     *
      * @return the time of the rat report
      */
     public String getTime() {
@@ -118,6 +124,7 @@ public class ReportStructure {
 
     /**
      * Gets the address of this rat sighting report.
+     *
      * @return the address of this rat report
      */
     public String getAddress() {
@@ -136,6 +143,7 @@ public class ReportStructure {
 
     /**
      * Gets the zip code of this rat report.
+     *
      * @return the zip code of the rat report
      */
     public String getZipCode() {
@@ -154,6 +162,7 @@ public class ReportStructure {
 
     /**
      * Gets the city of the buildingType of the rat report.
+     *
      * @return the city of the rat report
      */
     public String getCity() {
@@ -172,6 +181,7 @@ public class ReportStructure {
 
     /**
      * Gets the borough of the rat report
+     *
      * @return the borough of the rat report
      */
     public String getBorough() {
@@ -191,6 +201,7 @@ public class ReportStructure {
 
     /**
      * Returns the latitude of this rat sighting
+     *
      * @return the latitude of the sighting
      */
 
@@ -214,6 +225,7 @@ public class ReportStructure {
 
     /**
      * Returns the longitude of this rat sighting
+     *
      * @return the longitude of the sighting
      */
 
@@ -238,6 +250,7 @@ public class ReportStructure {
     /**
      * Returns a mini description of the rat report to be used to display
      * information when the marker of this report is clicked in the Google Map.
+     *
      * @return a mini description of this report
      */
     public String mapToString() {

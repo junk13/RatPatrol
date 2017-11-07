@@ -29,7 +29,7 @@ class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClick
     /**
      * Sets the listener for each report item in the Recycler View.
      *
-     * @param itemClickListener
+     * @param itemClickListener the specified listener for each report item
      */
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;

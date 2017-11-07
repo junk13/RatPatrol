@@ -19,15 +19,16 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * @author Evie Brown
- * A custom broker in SQL to work with our rat sighting reports in our database.
+ *         A custom broker in SQL to work with our rat sighting reports in our database.
  */
 public class SQLiteReportBroker extends AppCompatActivity {
     final int CSV_SIZE = 12219;
+
     /**
      * Writes rat reports to the database
+     *
      * @param rReport report to be saved
      * @param context context from which function is called
-     * @return primary key value of new row
      */
     public void writeToReportDb(ReportStructure rReport, Context context) {
         RatSightingDb ratDb = new RatSightingDb(context);
@@ -55,8 +56,10 @@ public class SQLiteReportBroker extends AppCompatActivity {
         ratDb.close();
 
     }
+
     /**
      * getter for SQLite cursor Report database
+     *
      * @param c context from which the function is called
      * @return cursor for which to read database info from
      */
@@ -84,9 +87,10 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * getter for SQLite cursor Report database
+     *
      * @param formattedBeforeDate from date constraint
-     * @param formattedAfterDate to date constraint
-     * @param c context from which the function is called
+     * @param formattedAfterDate  to date constraint
+     * @param c                   context from which the function is called
      * @return cursor for which to read database info from
      */
     private Cursor getDateConstrainedCursor(String formattedBeforeDate, String formattedAfterDate, Context c) {
@@ -102,7 +106,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
                 RatSightingDb.getTableName(),            // The table to query
                 null,                                   // The columns to return
                 "date BETWEEN ? AND ?",                                   // The columns for the WHERE clause
-                new String[] {formattedBeforeDate, formattedAfterDate},                                   // The values for the WHERE clause
+                new String[]{formattedBeforeDate, formattedAfterDate},                                   // The values for the WHERE clause
                 null,                                   // don't group the rows
                 null,                                   // don't filter by row groups
                 sortOrder                               // The sort order
@@ -113,8 +117,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * getter for SQLite substring search cursor Report database
+     *
      * @param keystring substring to search for
-     * @param c context from which the function is called
+     * @param c         context from which the function is called
      * @return cursor for which to read database info from
      */
     private Cursor getSubstringReportsCursor(String keystring, Context c) {
@@ -140,22 +145,20 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * Gets rat reports created between dates
+     *
      * @param context context from which function is called
      * @return rat reports that fit the constraints
      */
     public ArrayList<ReportStructure> getDateConstrainedReports(Context context) {
-        if (StaticHolder.dateRange == null)
-        {
+        if (StaticHolder.dateRange == null) {
             return reportArrayList(context);
         }
         String from = StaticHolder.dateRange.getFrom();
         String to = StaticHolder.dateRange.getTo();
-        if (from == null || from.isEmpty())
-        {
+        if (from == null || from.isEmpty()) {
             from = "2014/00/00";
         }
-        if (to == null || to.isEmpty())
-        {
+        if (to == null || to.isEmpty()) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
             to = dateFormat.format(date);
@@ -170,8 +173,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * Gets rat reports that contain a substring
+     *
      * @param keystring desired substring
-     * @param context context from which function is called
+     * @param context   context from which function is called
      * @return rat reports that fit the constraints
      */
     public ArrayList<ReportStructure> getReportsWithSubstring(String keystring, Context context) {
@@ -186,6 +190,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * Gets all rat reports
+     *
      * @param context context from which function is called
      * @return all rat reports
      */
@@ -253,6 +258,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
 
     /**
      * Checks if CSV data completely imported
+     *
      * @param c context from which function is called
      * @return true if data imported
      */

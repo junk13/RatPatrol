@@ -33,5 +33,6 @@
         android:clipChildren="false"
         android:clipToPadding="true"
         android:paddingTop="0dp"
-        android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+        android:scrollbars="vertical"/>
+
 </RelativeLayout>

@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"></LinearLayout>
+        tools:layout_constraintTop_creator="1"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"

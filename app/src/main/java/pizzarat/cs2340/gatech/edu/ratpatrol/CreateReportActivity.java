@@ -201,7 +201,8 @@ public class CreateReportActivity extends AppCompatActivity
      * Switches to the FilterReportsActivity.
      */
     private void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+        Intent switchToFilterReportsActivity =
+                new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
@@ -281,7 +282,8 @@ public class CreateReportActivity extends AppCompatActivity
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have City", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
-                String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
+                String maxKey = Integer.toString(
+                        reportBroker.getMaxKey(getBaseContext()) + 1);
                 reportBroker.writeToReportDb(
                         new ReportStructure(
                                 maxKey,

@@ -19,8 +19,8 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * @author Harrison Banh
- *         Represents the detailed view of one of the archived rat reports in New York
- *         City.
+ *         Represents the detailed view of one of the archived rat reports in
+ *         New York City.
  */
 public class DetailedReportViewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,11 +37,13 @@ public class DetailedReportViewActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Initializing widgets
@@ -52,11 +54,13 @@ public class DetailedReportViewActivity extends AppCompatActivity
         TextView city = (TextView) findViewById(R.id.cityTextView);
         TextView zipcode = (TextView) findViewById(R.id.zipcodeTextView);
         TextView borough = (TextView) findViewById(R.id.boroughTextView);
-        TextView buildingType = (TextView) findViewById(R.id.buildingTypeTextView);
+        TextView buildingType = (
+                TextView) findViewById(R.id.buildingTypeTextView);
         TextView latitude = (TextView) findViewById(R.id.latitudeTextView);
         TextView longitude = (TextView) findViewById(R.id.longitudeTextView);
 
-        // Grabbing the specified report and filling the widgets with its information
+        // Grabbing the specified report and filling the widgets with
+        // its information
         ReportStructure report = StaticHolder.report;
 
         // Set key
@@ -64,11 +68,13 @@ public class DetailedReportViewActivity extends AppCompatActivity
         key.setText(keyText);
 
         // Set date
-        String dateText = getString(R.string.date_prompt) + " " + report.getDate();
+        String dateText = getString(R.string.date_prompt) + " "
+                + report.getDate();
         date.setText(dateText);
 
         // Set time
-        String timeText = getString(R.string.time_prompt) + " " + report.getTime();
+        String timeText = getString(R.string.time_prompt) + " "
+                + report.getTime();
         time.setText(timeText);
 
         // Set address
@@ -88,7 +94,8 @@ public class DetailedReportViewActivity extends AppCompatActivity
         borough.setText(boroughText);
 
         // Set building type
-        String buildingTypeText = getString(R.string.building_type_prompt) + " " + report.getBuildingType();
+        String buildingTypeText = getString(R.string.building_type_prompt) + " "
+                + report.getBuildingType();
         buildingType.setText(buildingTypeText);
 
         // Set latitude
@@ -165,7 +172,8 @@ public class DetailedReportViewActivity extends AppCompatActivity
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
     private void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
@@ -173,7 +181,8 @@ public class DetailedReportViewActivity extends AppCompatActivity
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
     private void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+        Intent switchToArchiveActivity =
+                new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
@@ -181,7 +190,8 @@ public class DetailedReportViewActivity extends AppCompatActivity
      * Switches to the CreateReportActivity.
      */
     private void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+        Intent switchToCreateReportActivity =
+                new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
@@ -189,7 +199,8 @@ public class DetailedReportViewActivity extends AppCompatActivity
      * Switches to the MapActivity.
      */
     private void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+        Intent switchToMapActivity =
+                new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
 
@@ -197,7 +208,8 @@ public class DetailedReportViewActivity extends AppCompatActivity
      * Switches to the FilterReportsActivity.
      */
     private void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+        Intent switchToFilterReportsActivity =
+                new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
@@ -212,10 +224,12 @@ public class DetailedReportViewActivity extends AppCompatActivity
      * Switches to the ReportGraphActivity.
      */
     private void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the " +
+                        "filter button on the Navigation Screen.",
+                Toast.LENGTH_LONG).show();
     }
 
     /**

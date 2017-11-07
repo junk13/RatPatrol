@@ -25,7 +25,8 @@ public class CredentialStructure {
      * @param pass    the user's password
      * @param isAdmin a parameter representing if the user has admin privileges
      */
-    public CredentialStructure(String id, String user, String pass, Boolean isAdmin) {
+    public CredentialStructure(String id, String user, String pass,
+                               Boolean isAdmin) {
         this.id = id;
         this.user = user;
         this.pass = pass;

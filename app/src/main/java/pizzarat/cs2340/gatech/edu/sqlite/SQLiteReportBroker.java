@@ -22,6 +22,7 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  * A custom broker in SQL to work with our rat sighting reports in our database.
  */
 public class SQLiteReportBroker extends AppCompatActivity {
+    final int CSV_SIZE = 12219;
     /**
      * Writes rat reports to the database
      * @param rReport report to be saved
@@ -262,7 +263,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         Cursor mcursor = readableDb.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
-        return (icount >= 12219);
+        return (icount >= CSV_SIZE);
     }
 
     /**

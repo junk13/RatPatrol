@@ -21,6 +21,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private final ArchiveActivity archiveActivity;
     // --Commented out by Inspection (11/6/2017 1:49 AM):private final Context context;
     private List<ReportStructure> listData = new ArrayList<>();
+    Context context;
 
     public RecyclerAdapter(ArchiveActivity archiveActivity, List<ReportStructure> listData, Context context) {
         this.archiveActivity = archiveActivity;

@@ -43,6 +43,7 @@ public class ReportGraphActivity extends AppCompatActivity
     private final SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private BarChart mChart;
     private ArrayList<ReportStructure> reports;
+    final int MAX_ENTRIES = 60;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class ReportGraphActivity extends AppCompatActivity
 
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
-        mChart.setMaxVisibleValueCount(60);
+        mChart.setMaxVisibleValueCount(MAX_ENTRIES);
 
         // scaling can now only be done on x- and y-axis separately
         mChart.setPinchZoom(false);

@@ -62,7 +62,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
      *
      * @param reports : a list of all reports to add to the map
      */
-    //TODO: use appropriate values latlong.
     private void populateFromFilter(ArrayList<ReportStructure> reports) {
         for (final ReportStructure report : reports) {
             Double latitude = 0.;
@@ -74,8 +73,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             {
                 Log.d("hidden",e.getLocalizedMessage());
             }
-            LatLng coords = new LatLng(latitude, longitude);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(coords)
+            LatLng coordinates = new LatLng(latitude, longitude);
+            Marker marker = mMap.addMarker(new MarkerOptions().position(coordinates)
                     .title("Key: " + report.getKey()).snippet(report.mapToString()));
 
             // Sets the listener of each rat report to display its details when clicked

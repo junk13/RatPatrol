@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 /**
- * Created by Luka on 10/29/2017.
+ * @Auhtor Luka Derado
  */
 
 public class GraphUtilities {
@@ -15,7 +15,7 @@ public class GraphUtilities {
      *
      * @param reports   All the reports one wants to compile into a int[]
      * @return          An array of size 12, where each value represents
-     *                  the number of reports within the repective month.
+     *                  the number of reports within the respective month.
      */
     public static int[] organizeByMonth(List<ReportStructure> reports) {
         int[] months = new int[12];

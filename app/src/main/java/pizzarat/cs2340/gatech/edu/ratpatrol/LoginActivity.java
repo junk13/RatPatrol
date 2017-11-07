@@ -169,7 +169,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //     * Gets a Map structure of all the stored users.
 //     * @return a Map of all the users in the database.
 //     * @throws FileNotFoundException if credentials.txt not found
-//     * TODO: delete (not storing creds in text file)
 //     */
 //    public Map<String, String> getCredentials() throws FileNotFoundException {
 //        Map<String, String> creds = new HashMap<String, String>();
@@ -190,7 +189,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //     * @param username the user's username
 //     * @param password the user's password
 //     * @throws IOException if error writing to credentials.txt
-//     * TODO: delete (not storing creds in text file)
 //     */
 //    public void addCredentials(String username, String password) throws IOException {
 //        BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));

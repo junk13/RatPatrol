@@ -158,7 +158,6 @@ public class SQLiteCredBroker extends AppCompatActivity {
         for (int i = 0; i < aList.size(); i++) {
             System.out.println(aList.get(i));
             if (aList.get(i).getUser().equals(userStr)){
-                System.out.println("66666666666666666");
                 return aList.get(i);
             }
 

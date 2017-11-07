@@ -19,8 +19,8 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
 
 /**
  * @author Harrison Banh
- *         Represents the detailed view of one of the archived rat reports in New York
- *         City.
+ *         Represents the detailed view of one of the archived rat reports in
+ *         New York City.
  */
 public class DetailedReportViewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,14 +37,14 @@ public class DetailedReportViewActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        Intent data = this.getIntent();
 
         // Initializing widgets
         TextView key = (TextView) findViewById(R.id.keyTextView);
@@ -54,11 +54,13 @@ public class DetailedReportViewActivity extends AppCompatActivity
         TextView city = (TextView) findViewById(R.id.cityTextView);
         TextView zipcode = (TextView) findViewById(R.id.zipcodeTextView);
         TextView borough = (TextView) findViewById(R.id.boroughTextView);
-        TextView buildingType = (TextView) findViewById(R.id.buildingTypeTextView);
+        TextView buildingType = (
+                TextView) findViewById(R.id.buildingTypeTextView);
         TextView latitude = (TextView) findViewById(R.id.latitudeTextView);
         TextView longitude = (TextView) findViewById(R.id.longitudeTextView);
 
-        // Grabbing the specified report and filling the widgets with its information
+        // Grabbing the specified report and filling the widgets with
+        // its information
         ReportStructure report = StaticHolder.report;
 
         // Set key
@@ -66,39 +68,48 @@ public class DetailedReportViewActivity extends AppCompatActivity
         key.setText(keyText);
 
         // Set date
-        String dateText = getString(R.string.date_prompt) + " " + report.getDate();
+        String dateText = getString(R.string.date_prompt) + " "
+                + report.getDate();
         date.setText(dateText);
 
         // Set time
-        String timeText = getString(R.string.time_prompt) + " " + report.getTime();
+        String timeText = getString(R.string.time_prompt) + " "
+                + report.getTime();
         time.setText(timeText);
 
         // Set address
-        String addressText = getString(R.string.address_prompt) + " " + report.getAddress();
+        String addressText = getString(R.string.address_prompt) + " "
+                + report.getAddress();
         address.setText(addressText);
 
         // Set city
-        String cityText = getString(R.string.city_prompt) + " " + report.getCity();
+        String cityText = getString(R.string.city_prompt) + " "
+                + report.getCity();
         city.setText(cityText);
 
         // Set zipcode
-        String zipcodeText = getString(R.string.zipcode_prompt) + " " + report.getZipCode();
+        String zipcodeText = getString(R.string.zipcode_prompt) + " "
+                + report.getZipCode();
         zipcode.setText(zipcodeText);
 
         // Set borough
-        String boroughText = getString(R.string.borough_prompt) + " " + report.getBorough();
+        String boroughText = getString(R.string.borough_prompt) + " "
+                + report.getBorough();
         borough.setText(boroughText);
 
         // Set building type
-        String buildingTypeText = getString(R.string.building_type_prompt) + " " + report.getBuildingType();
+        String buildingTypeText = getString(R.string.building_type_prompt) + " "
+                + report.getBuildingType();
         buildingType.setText(buildingTypeText);
 
         // Set latitude
-        String latitudeText = getString(R.string.latitude_prompt) + " " + report.getLatitude();
+        String latitudeText = getString(R.string.latitude_prompt) + " "
+                + report.getLatitude();
         latitude.setText(latitudeText);
 
         // Set longitude
-        String longitudeText = getString(R.string.longitude_prompt) + " " + report.getLongitude();
+        String longitudeText = getString(R.string.longitude_prompt) + " "
+                + report.getLongitude();
         longitude.setText(longitudeText);
     }
 
@@ -166,58 +177,65 @@ public class DetailedReportViewActivity extends AppCompatActivity
     /**
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
-    public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+    private void switchBackToWelcomeActivity() {
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
     /**
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
-    public void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+    private void switchToArchiveActivity() {
+        Intent switchToArchiveActivity =
+                new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
     /**
      * Switches to the CreateReportActivity.
      */
-    public void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+    private void switchToCreateReportActivity() {
+        Intent switchToCreateReportActivity =
+                new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
     /**
      * Switches to the MapActivity.
      */
-    public void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+    private void switchToMapActivity() {
+        Intent switchToMapActivity =
+                new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
 
     /**
      * Switches to the FilterReportsActivity.
      */
-    public void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+    private void switchToFilterReportsScreen() {
+        Intent switchToFilterReportsActivity =
+                new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
     /**
      * Closes the Navigation Screen thus "logging out" the user
      */
-    public void logout() {
+    private void logout() {
         switchBackToWelcomeActivity();
     }
 
     /**
      * Switches to the ReportGraphActivity.
      */
-    public void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+    private void switchToReportGraphScreen() {
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the " +
+                        "filter button on the Navigation Screen.",
+                Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -226,7 +244,7 @@ public class DetailedReportViewActivity extends AppCompatActivity
      *
      * @param widget the name of widget clicked
      */
-    public void shareOrSendReport(String widget) {
+    private void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         String shareBody = "Your body here";

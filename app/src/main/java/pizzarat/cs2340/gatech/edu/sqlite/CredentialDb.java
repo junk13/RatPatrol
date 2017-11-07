@@ -11,9 +11,9 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 class CredentialDb extends SQLiteOpenHelper {
 
-    static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 1;
     //name of database file
-    static final String DATABASE_NAME = "Cred.db";
+    private static final String DATABASE_NAME = "Cred.db";
 
     CredentialDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,13 +35,17 @@ class CredentialDb extends SQLiteOpenHelper {
         return CredentialDbContract.ContractEntry.TABLE_NAME;
     }
 
-    static String getID() {
-        return CredentialDbContract.ContractEntry._ID;
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    static String getID() {
+//        return CredentialDbContract.ContractEntry._ID;
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
-    static void purgeCredDb(SQLiteDatabase db) {
-        db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    static void purgeCredDb(SQLiteDatabase db) {
+//        db.execSQL(CredentialDbContract.SQL_DELETE_ENTRIES);
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     @Override
     public void onCreate(SQLiteDatabase db) {

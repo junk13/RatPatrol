@@ -18,20 +18,21 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  * in the Recycler View. This is necessary to switch to the details view.
  */
 class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-    private ArchiveActivity archiveActivity;
+    private final ArchiveActivity archiveActivity;
     private List<ReportStructure> listData = new ArrayList<>();
-    private Context context;
 
-    public RecyclerAdapter(ArchiveActivity archiveActivity, List<ReportStructure> listData, Context context) {
+    public RecyclerAdapter(ArchiveActivity archiveActivity,
+                           List<ReportStructure> listData, Context context) {
         this.archiveActivity = archiveActivity;
         this.listData = listData;
-        this.context = context;
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent,
+                                                 int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.rat_report_item, parent, false);
+        View itemView = inflater.inflate(R.layout.rat_report_item, parent,
+                false);
 
         return new RecyclerViewHolder(itemView);
     }

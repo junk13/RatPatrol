@@ -5,7 +5,7 @@ package pizzarat.cs2340.gatech.edu.sqlite;
  * @author Evie Brown.
  */
 
-class RatSightingDbContract {
+final class RatSightingDbContract {
 
 
     //helpful php
@@ -28,8 +28,9 @@ class RatSightingDbContract {
     }
 
     /**
-     * package-private {@link ContractEntry} defines Strings for use in Credential management
-     * implement android.provider.BaseColumns for _id compatibility (i.e. cursor)
+     * package-private {@link ContractEntry} defines Strings for use in
+     * Credential management implement android.provider.BaseColumns for
+     * _id compatibility (i.e. cursor)
      */
     static class ContractEntry {
         //fields for database info

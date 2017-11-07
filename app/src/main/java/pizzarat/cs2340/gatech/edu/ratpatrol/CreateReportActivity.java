@@ -32,7 +32,7 @@ import pizzarat.cs2340.gatech.edu.structure.Verification;
  */
 public class CreateReportActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    private final SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private TextView key;
     private TextView date;
     private TextView time;
@@ -40,8 +40,6 @@ public class CreateReportActivity extends AppCompatActivity
     private TextView city;
     private TextView zipcode;
     private TextView buildingType;
-
-    // TODO grab data, create report, save to DB, generate unique key
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +53,18 @@ public class CreateReportActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Actual report creation code
-        String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
+        String maxKey =
+                Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
         key = (TextView) findViewById(R.id.createKeyView);
 
         // Generate and set the unique key
@@ -75,7 +76,6 @@ public class CreateReportActivity extends AppCompatActivity
         Date curDate = new Date();
         SimpleDateFormat militaryTimeFormat = new SimpleDateFormat("kk:mm");
 
-        //Todo: UtilityClass.militaryTimeFormat.format(curDate)
         String currentDateTimeString = militaryTimeFormat.format(curDate);
         time.setText(currentDateTimeString); //set current time as default text
 
@@ -159,7 +159,7 @@ public class CreateReportActivity extends AppCompatActivity
     /**
      * Switches back to the selection screen after submission/cancellation.
      */
-    public void switchToNavigationScreenActivity() {
+    private void switchToNavigationScreenActivity() {
         Intent navScreen = new Intent(this, NavigationActivity.class);
         this.startActivity(navScreen);
     }
@@ -168,58 +168,60 @@ public class CreateReportActivity extends AppCompatActivity
     /**
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
-    public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+    private void switchBackToWelcomeActivity() {
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
     /**
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
-    public void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+    private void switchToArchiveActivity() {
+        Intent switchToArchiveActivity =
+                new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
-    /**
-     * Switches to the CreateReportActivity.
-     */
-    public void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
-        this.startActivity(switchToCreateReportActivity);
-    }
+
 
     /**
      * Switches to the MapActivity.
      */
-    public void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+    private void switchToMapActivity() {
+        Intent switchToMapActivity =
+                new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
 
     /**
      * Switches to the FilterReportsActivity.
      */
-    public void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+    private void switchToFilterReportsScreen() {
+        Intent switchToFilterReportsActivity =
+                new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
     /**
      * Closes the Navigation Screen thus "logging out" the user
      */
-    public void logout() {
+    private void logout() {
         switchBackToWelcomeActivity();
     }
 
     /**
      * Switches to the ReportGraphActivity.
      */
-    public void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+    private void switchToReportGraphScreen() {
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast message = Toast.makeText(getBaseContext(),
+                "To filter/edit graph, use the "
+                        + "filter button on the Navigation Screen.",
+                Toast.LENGTH_LONG);
+        message.show();
     }
 
     /**
@@ -228,7 +230,7 @@ public class CreateReportActivity extends AppCompatActivity
      *
      * @param widget the name of widget clicked
      */
-    public void shareOrSendReport(String widget) {
+    private void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         String shareBody = "Your body here";
@@ -249,9 +251,11 @@ public class CreateReportActivity extends AppCompatActivity
         Geocoder geocoder = new Geocoder(getBaseContext());
         List<Address> addresses = null;
         try {
-            addresses = geocoder.getFromLocationName(buildingType.getText().toString(), 1);
+            addresses = geocoder.getFromLocationName(
+                    buildingType.getText().toString(), 1);
             if (!Verification.isValidZip(zipcode.getText().toString())) {
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid ZipCode" + "\n"
+                Toast toast = Toast.makeText(this.getApplicationContext(),
+                        "Invalid ZipCode" + "\n"
                         + "Required Format: xxxxx", Toast.LENGTH_SHORT);
                 toast.show();
             } else if (!Verification.isValidTime(time.getText().toString())) {
@@ -277,7 +281,8 @@ public class CreateReportActivity extends AppCompatActivity
                 Toast toast = Toast.makeText(this.getApplicationContext(), "Must have City", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
-                String maxKey = Integer.toString(reportBroker.getMaxKey(getBaseContext()) + 1);
+                String maxKey = Integer.toString(
+                        reportBroker.getMaxKey(getBaseContext()) + 1);
                 reportBroker.writeToReportDb(
                         new ReportStructure(
                                 maxKey,

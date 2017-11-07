@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +30,6 @@ public class FilterReportsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView beforeDateTextView;
     private TextView afterDateTextView;
-    private Button filterButton;
-    private Button cancelFilterButton;
-    private View calendar;
-    private DatePicker datePicker;
-    private TextView dateView;
-    private int year, month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,31 +43,32 @@ public class FilterReportsActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        year = 2017;
-        month = 10;
-        day = 10;
 
         beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
         afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
-        filterButton = (Button) findViewById(R.id.filterReportsButton);
-        cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
+        Button filterButton = (Button) findViewById(R.id.filterReportsButton);
+        Button cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO grab text from TextView and filter reports
                 try {
-                    String beforeDate = (beforeDateTextView.getText().toString());
+                    String beforeDate =
+                            (beforeDateTextView.getText().toString());
                     String afterDate = (afterDateTextView.getText().toString());
                     Log.d("hidden", beforeDate + " | " + afterDate);
-                    StaticHolder.dateRange = new DateRangeStruct(getDate(beforeDate), getDate(afterDate));
+                    StaticHolder.dateRange =
+                            new DateRangeStruct(getDate(beforeDate),
+                                    getDate(afterDate));
                 } catch (Exception e) {
                     Log.d("hidden", e.getLocalizedMessage());
                 }
@@ -82,7 +76,7 @@ public class FilterReportsActivity extends AppCompatActivity
             }
         });
 
-        // Filter parameter is discarded and screen switches to the Selection Screen
+        // Filter parameter is discarded and screen switches to the Nav screen
         cancelFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,58 +152,56 @@ public class FilterReportsActivity extends AppCompatActivity
     /**
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
-    public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+    private void switchBackToWelcomeActivity() {
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
     /**
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
-    public void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+    private void switchToArchiveActivity() {
+        Intent switchToArchiveActivity =
+                new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
     /**
      * Switches to the CreateReportActivity.
      */
-    public void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+    private void switchToCreateReportActivity() {
+        Intent switchToCreateReportActivity =
+                new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
     /**
      * Switches to the MapActivity.
      */
-    public void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+    private void switchToMapActivity() {
+        Intent switchToMapActivity =
+                new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
-    }
-
-    /**
-     * Switches to the FilterReportsActivity.
-     */
-    public void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
-        this.startActivity(switchToFilterReportsActivity);
     }
 
     /**
      * Closes the Navigation Screen thus "logging out" the user
      */
-    public void logout() {
+    private void logout() {
         switchBackToWelcomeActivity();
     }
 
     /**
      * Switches to the ReportGraphActivity.
      */
-    public void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+    private void switchToReportGraphScreen() {
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the " +
+                        "filter button on the Navigation Screen.",
+                Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -218,7 +210,7 @@ public class FilterReportsActivity extends AppCompatActivity
      *
      * @param widget the name of widget clicked
      */
-    public void shareOrSendReport(String widget) {
+    private void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         String shareBody = "Your body here";
@@ -239,7 +231,8 @@ public class FilterReportsActivity extends AppCompatActivity
      * benn pushed.
      */
     private void switchBackToNavigationScreenActivity() {
-        Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);
+        Intent switchToNavigationScreen =
+                new Intent(this, NavigationActivity.class);
         this.startActivity(switchToNavigationScreen);
     }
 

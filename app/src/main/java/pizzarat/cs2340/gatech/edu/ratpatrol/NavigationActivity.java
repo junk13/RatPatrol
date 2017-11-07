@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import pizzarat.cs2340.gatech.edu.exception.DuplicateReportDbException;
 import pizzarat.cs2340.gatech.edu.ratpatrol.archive.ArchiveActivity;
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteReportBroker;
 import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
@@ -37,8 +36,8 @@ import pizzarat.cs2340.gatech.edu.structure.ReportStructure;
  */
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private final SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private BackgroundDataTask bdTask = null;
-    private SQLiteReportBroker reportBroker = new SQLiteReportBroker();
     private boolean csvLoaded = false;
 
     @Override
@@ -51,11 +50,13 @@ public class NavigationActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         Log.d("hidden",""+reportBroker.getMaxKey(getBaseContext()));
@@ -128,7 +129,9 @@ public class NavigationActivity extends AppCompatActivity
             }
         }
         else {
-            Toast.makeText(getBaseContext(), "Waiting for CSV data to load in!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(),
+                    "Waiting for CSV data to load in!",
+                    Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -139,58 +142,65 @@ public class NavigationActivity extends AppCompatActivity
     /**
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
-    public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+    private void switchBackToWelcomeActivity() {
+        Intent switchToWelcomeActivity = new Intent(this,
+                WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
     /**
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
-    public void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+    private void switchToArchiveActivity() {
+        Intent switchToArchiveActivity = new Intent(this,
+                ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
     /**
      * Switches to the CreateReportActivity.
      */
-    public void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+    private void switchToCreateReportActivity() {
+        Intent switchToCreateReportActivity = new Intent(this,
+                CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
     /**
      * Switches to the MapActivity.
      */
-    public void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+    private void switchToMapActivity() {
+        Intent switchToMapActivity = new Intent(this,
+                MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
 
     /**
      * Switches to the FilterReportsActivity.
      */
-    public void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+    private void switchToFilterReportsScreen() {
+        Intent switchToFilterReportsActivity = new Intent(this,
+                FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
     /**
      * Closes the Navigation Screen thus "logging out" the user
      */
-    public void logout() {
+    private void logout() {
         switchBackToWelcomeActivity();
     }
 
     /**
      * Switches to the ReportGraphActivity.
      */
-    public void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+    private void switchToReportGraphScreen() {
+        Intent switchToReportGraphScreenActivity = new Intent(this,
+                ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the "
+                        + "filter button on the Navigation Screen.",
+                Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -199,7 +209,7 @@ public class NavigationActivity extends AppCompatActivity
      *
      * @param widget the name of widget clicked
      */
-    public void shareOrSendReport(String widget) {
+    private void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         String shareBody = "Your body here";
@@ -214,7 +224,6 @@ public class NavigationActivity extends AppCompatActivity
      * Read in offline rat report from csv
      */
     private void readRatData() {
-        String csvFile = "raw/ratsightings.csv";
         InputStream inputStream;
         BufferedReader br = null;
         String line = "";
@@ -250,16 +259,21 @@ public class NavigationActivity extends AppCompatActivity
                 }
                 if (latitude.isEmpty() || longitude.isEmpty()) {
                     try {
-                        addresses = geocoder.getFromLocationName(address + " " + zip + " " + city + " " + borough, 1);
-                        latitude = Double.toString(addresses.get(0).getLatitude());
-                        longitude = Double.toString(addresses.get(0).getLongitude());
+                        addresses = geocoder.getFromLocationName(
+                                address + " " + zip + " " + city +
+                                        " " + borough, 1);
+                        latitude = Double.toString(addresses.get(0)
+                                .getLatitude());
+                        longitude = Double.toString(addresses.get(0)
+                                .getLongitude());
                     } catch (Exception e) {
                         Log.d("hidden", "caught location error");
                     }
 
                 }
-                ReportStructure rsr = new ReportStructure(key, buildingType, date,
-                        time, address, zip, city, borough, latitude, longitude);
+                ReportStructure rsr = new ReportStructure(key, buildingType,
+                        date, time, address, zip, city, borough, latitude,
+                        longitude);
 
                 reportBroker.writeToReportDb(rsr, this.getApplicationContext());
             }
@@ -267,8 +281,6 @@ public class NavigationActivity extends AppCompatActivity
         } catch (FileNotFoundException e) {
             Log.d("hidden", "FILE NOT FOUND");
             e.printStackTrace();
-        } catch (DuplicateReportDbException e) {
-            Log.d("hidden", e.getLocalizedMessage());
         } catch (IOException e) {
             Log.d("hidden", "IOEXCEPTION");
             e.printStackTrace();
@@ -290,7 +302,8 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     private String getTime(String dateAndTime) {
-        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ") + 1).split(":| ");
+        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ") + 1)
+                .split(":| ");
         if (time[3].equals("PM")) {
             time[0] = "" + (Integer.parseInt(time[0]) + 12);
         }
@@ -306,16 +319,20 @@ public class NavigationActivity extends AppCompatActivity
             return true;
         }
 
+        @Override
         protected void onPostExecute(final Boolean success) {
             bdTask = null;
             //showProgress(false);
 
             if (success) {
                 Log.d("hidden", "hi");
-                Toast.makeText(getBaseContext(), "You can now view and create rat reports", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You can now view and " +
+                        "create rat reports", Toast.LENGTH_SHORT).show();
                 csvLoaded = true;
             } else {
-                Toast.makeText(getBaseContext(), "There was an error loading in the rat report!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "There was an error " +
+                                "loading in the rat report!",
+                        Toast.LENGTH_SHORT).show();
             }
         }
 

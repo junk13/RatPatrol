@@ -30,16 +30,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 import pizzarat.cs2340.gatech.edu.sqlite.SQLiteCredBroker;
 
@@ -48,7 +40,8 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity
+        implements LoaderCallbacks<Cursor> {
 
     // Id to identity READ_CONTACTS permission request.
     private static final int REQUEST_READ_CONTACTS = 0;
@@ -78,9 +71,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mPasswordView.setOnEditorActionListener(
+                new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+            public boolean onEditorAction(TextView textView, int id,
+                                          KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
                     return true;
@@ -89,7 +84,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton =
+                (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +97,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent switchToRegisterScreen = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent switchToRegisterScreen =
+                        new Intent(LoginActivity.this,
+                                RegisterActivity.class);
                 LoginActivity.this.startActivity(switchToRegisterScreen);
             }
         });
@@ -135,26 +133,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     /**
      * Requests contacts permission startup.
-     * @return TODO
      */
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        if (checkSelfPermission(READ_CONTACTS) ==
+                PackageManager.PERMISSION_GRANTED) {
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mEmailView, R.string.permission_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+                            requestPermissions(new String[]{READ_CONTACTS},
+                                    REQUEST_READ_CONTACTS);
                         }
                     });
         } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+            requestPermissions(new String[]{READ_CONTACTS},
+                    REQUEST_READ_CONTACTS);
         }
         return false;
     }
@@ -163,46 +164,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Callback received when a permissions request has been completed.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 1 && grantResults[0]
+                    == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();
             }
         }
     }
-
-    /**
-     * Gets a Map structure of all the stored users.
-     * @return a Map of all the users in the database.
-     * @throws FileNotFoundException if credentials.txt not found
-     * TODO: delete (not storing creds in text file)
-     */
-    public Map<String, String> getCredentials() throws FileNotFoundException {
-        Map<String, String> creds = new HashMap<String, String>();
-
-        Scanner sc = new Scanner(new File("raw/credentials.txt"));
-        while (sc.hasNextLine()) {
-            String[] line = sc.nextLine().split(":");
-            creds.put(line[0], line[1]);
-        }
-        sc.close();
-        return creds;
-    }
-
-    /**
-     * Adds the specified user to the database.
-     * @param username the user's username
-     * @param password the user's password
-     * @throws IOException if error writing to credentials.txt
-     * TODO: delete (not storing creds in text file)
-     */
-    public void addCredentials(String username, String password) throws IOException {
-        BufferedWriter bf = new BufferedWriter(new FileWriter("raw/credentials.txt"));
-        bf.write("/n" + username + ":" + password);
-        bf.close();
-    }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -227,7 +198,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            Toast.makeText(getBaseContext(), "Invalid password" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Invalid password",
+                    Toast.LENGTH_SHORT).show();
             focusView = mPasswordView;
             cancel = true;
         }
@@ -238,7 +210,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            Toast.makeText(getBaseContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Invalid email address",
+                    Toast.LENGTH_SHORT).show();
             focusView = mEmailView;
             cancel = true;
         }
@@ -262,7 +235,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * @return true if the username is valid
      */
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
@@ -272,7 +244,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * @return true if the password is valid
      */
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return !(password.contains("\"") || password.contains(":"))
                 && !password.isEmpty();
     }
@@ -285,15 +256,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) { //Innocuous enough
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(
+                    android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    mLoginFormView.setVisibility(show ? View.GONE
+                            : View.VISIBLE);
                 }
             });
 
@@ -302,7 +275,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                    mProgressView.setVisibility(show ? View.VISIBLE
+                            : View.GONE);
                 }
             });
         } else {
@@ -318,11 +292,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return new CursorLoader(this,
                 // Retrieve report rows for the device user's 'profile' contact.
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
+                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY),
+                ProfileQuery.PROJECTION,
 
                 // Select only email addresses.
                 ContactsContract.Contacts.Data.MIMETYPE +
-                        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
+                        " = ?", new String[]{
+                ContactsContract.CommonDataKinds.Email
                 .CONTENT_ITEM_TYPE},
 
                 // Show primary email addresses first. Note that there won't be
@@ -348,10 +324,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        //Create adapter to tell the AutoCompleteTextView what to show in
+        // its dropdown list.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
+                        android.R.layout.simple_dropdown_item_1line,
+                        emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
     }
@@ -364,14 +342,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         };
 
         int ADDRESS = 0;
-        int IS_PRIMARY = 1;
+        // --Commented out by Inspection (11/6/2017 1:49 AM):int IS_PRIMARY = 1;
     }
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    private class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+     private class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;
@@ -383,13 +361,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             return broker.credMatch(mEmail, mPassword, getBaseContext());
         }
 
 
         /**
-         * Moves to main page if successful login, else gives user an error message
+         * Moves to main page if successful login, else gives user an error
+         * message
          * @param success if login successful
          */
         @Override
@@ -399,10 +377,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 // Switch to the selection screen activity
-                Intent switchToNavigationScreen = new Intent(LoginActivity.this, NavigationActivity.class);
+                Intent switchToNavigationScreen =
+                        new Intent(LoginActivity.this,
+                                NavigationActivity.class);
                 LoginActivity.this.startActivity(switchToNavigationScreen);
             } else {
-                Toast.makeText(getBaseContext(), "Invalid password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Invalid password",
+                        Toast.LENGTH_SHORT).show();
             }
         }
 

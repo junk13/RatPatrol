@@ -30,7 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Switches to the RegisterActivty.
+     * Switches to the RegisterActivity.
      * @param v the widget that triggers the switch.
      */
     public void register(View v){

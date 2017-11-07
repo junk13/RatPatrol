@@ -217,9 +217,11 @@ public class CreateReportActivity extends AppCompatActivity
         Intent switchToReportGraphScreenActivity =
                 new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the "
+        Toast message = Toast.makeText(getBaseContext(),
+                "To filter/edit graph, use the "
                         + "filter button on the Navigation Screen.",
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_LONG);
+        message.show();
     }
 
     /**

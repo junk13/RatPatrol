@@ -32,10 +32,6 @@ public class FilterReportsActivity extends AppCompatActivity
     private TextView afterDateTextView;
     private Button filterButton;
     private Button cancelFilterButton;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private View calendar;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private DatePicker datePicker;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private TextView dateView;
-    // --Commented out by Inspection (11/6/2017 1:49 AM):private int year, // --Commented out by Inspection (11/6/2017 1:49 AM):month, // --Commented out by Inspection (11/6/2017 1:49 AM):day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +45,13 @@ public class FilterReportsActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =
+                (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -65,12 +63,14 @@ public class FilterReportsActivity extends AppCompatActivity
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO grab text from TextView and filter reports
                 try {
-                    String beforeDate = (beforeDateTextView.getText().toString());
+                    String beforeDate =
+                            (beforeDateTextView.getText().toString());
                     String afterDate = (afterDateTextView.getText().toString());
                     Log.d("hidden", beforeDate + " | " + afterDate);
-                    StaticHolder.dateRange = new DateRangeStruct(getDate(beforeDate), getDate(afterDate));
+                    StaticHolder.dateRange =
+                            new DateRangeStruct(getDate(beforeDate),
+                                    getDate(afterDate));
                 } catch (Exception e) {
                     Log.d("hidden", e.getLocalizedMessage());
                 }
@@ -155,7 +155,8 @@ public class FilterReportsActivity extends AppCompatActivity
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
     private void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
@@ -163,7 +164,8 @@ public class FilterReportsActivity extends AppCompatActivity
      * Switches to the ArchiveActivity from the Navigation Screen.
      */
     private void switchToArchiveActivity() {
-        Intent switchToArchiveActivity = new Intent(this, ArchiveActivity.class);
+        Intent switchToArchiveActivity =
+                new Intent(this, ArchiveActivity.class);
         this.startActivity(switchToArchiveActivity);
     }
 
@@ -171,7 +173,8 @@ public class FilterReportsActivity extends AppCompatActivity
      * Switches to the CreateReportActivity.
      */
     private void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+        Intent switchToCreateReportActivity =
+                new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
@@ -179,19 +182,10 @@ public class FilterReportsActivity extends AppCompatActivity
      * Switches to the MapActivity.
      */
     private void switchToMapActivity() {
-        Intent switchToMapActivity = new Intent(this, MapActivity.class);
+        Intent switchToMapActivity =
+                new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
-
-// --Commented out by Inspection START (11/6/2017 1:49 AM):
-//    /**
-//     * Switches to the FilterReportsActivity.
-//     */
-//    public void switchToFilterReportsScreen() {
-//        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
-//        this.startActivity(switchToFilterReportsActivity);
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     /**
      * Closes the Navigation Screen thus "logging out" the user
@@ -204,10 +198,12 @@ public class FilterReportsActivity extends AppCompatActivity
      * Switches to the ReportGraphActivity.
      */
     private void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "To filter/edit graph, use the " +
+                        "filter button on the Navigation Screen.",
+                Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -237,7 +233,8 @@ public class FilterReportsActivity extends AppCompatActivity
      * benn pushed.
      */
     private void switchBackToNavigationScreenActivity() {
-        Intent switchToNavigationScreen = new Intent(this, NavigationActivity.class);
+        Intent switchToNavigationScreen =
+                new Intent(this, NavigationActivity.class);
         this.startActivity(switchToNavigationScreen);
     }
 

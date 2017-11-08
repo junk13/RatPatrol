@@ -36,9 +36,9 @@ class CredentialDb extends SQLiteOpenHelper {
     }
 
 // --Commented out by Inspection START (11/6/2017 1:49 AM):
-//    static String getID() {
-//        return CredentialDbContract.ContractEntry._ID;
-//    }
+    static String getID() {
+        return CredentialDbContract.ContractEntry._ID;
+    }
 // --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
 // --Commented out by Inspection START (11/6/2017 1:49 AM):

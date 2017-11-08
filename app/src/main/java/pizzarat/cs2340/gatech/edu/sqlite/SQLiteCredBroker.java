@@ -50,7 +50,6 @@ public class SQLiteCredBroker extends AppCompatActivity {
         // Insert the new row, returning the primary key value of the new row
         long value = db.insert(CredentialDb.getTableName(), null, values);
         db.close();
-        return value;
     }
 
     /**

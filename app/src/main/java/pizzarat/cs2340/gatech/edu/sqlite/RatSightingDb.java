@@ -26,8 +26,8 @@ class RatSightingDb extends SQLiteOpenHelper {
         return RatSightingDbContract.ContractEntry.REPORT_TABLE_KEY;
     }
 
-    static String getReportTableLocationCol() {
-        return RatSightingDbContract.ContractEntry.REPORT_TABLE_LOCATION;
+    static String getReportTableBuildingCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_BUILDING;
     }
 
     static String getReportTableDateCol() {

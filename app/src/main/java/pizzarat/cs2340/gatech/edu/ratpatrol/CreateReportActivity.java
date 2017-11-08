@@ -301,7 +301,6 @@ public class CreateReportActivity extends AppCompatActivity
                 switchToNavigationScreenActivity();
             }
         } catch (Exception e) {
-            Log.d("Cunt", "kill me now");
             key.setError("An unknown error occurred.");
         }
     }

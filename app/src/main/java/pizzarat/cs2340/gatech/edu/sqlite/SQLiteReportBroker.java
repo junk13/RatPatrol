@@ -33,14 +33,15 @@ public class SQLiteReportBroker extends AppCompatActivity {
      */
     public void writeToReportDb(ReportStructure rReport, Context context) {
         RatSightingDb ratDb = new RatSightingDb(context);
-
+      
         // Gets the data repository in write mode
         SQLiteDatabase writableDb = ratDb.getWritableDatabase();
         ContentValues values = new ContentValues();
 
 
         //in X column, set X
-        values.put(RatSightingDb.getReportTableKeyCol(), rReport.getKey());
+        values.put(RatSightingDb.getReportTableKeyCol(),
+                rReport.getKey());
         values.put(RatSightingDb.getReportTableLocationCol(),
                 rReport.getBuildingType());
         values.put(RatSightingDb.getReportTableDateCol(),
@@ -178,8 +179,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
         }
         String from = StaticHolder.dateRange.getFrom();
         String to = StaticHolder.dateRange.getTo();
-        if (from == null || from.isEmpty()) {
-            from = "2014/00/00";
+        if (from == null || from.isEmpty())
+        {
+            from = "2014/01/01";
         }
         if (to == null || to.isEmpty()) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -227,6 +229,39 @@ public class SQLiteReportBroker extends AppCompatActivity {
     }
 
     /**
+     * Gets stringified database contents
+     * @param c context from which function is called
+     * @return string of database contents
+     */
+    public String getDbContent(Context c) throws  Exception {
+        List<String> itemIds = new ArrayList<String>();
+        Cursor cursor = getCursor(c);
+        while(cursor.moveToNext()) {
+            String str = cursor.getString(0);
+            itemIds.add(str);
+        }
+
+        cursor.close();
+        return itemIds.toString();
+
+    }
+
+    /**
+     * Checks if database is empty
+     * @param c context from which function is called
+     * @return true if empty
+     */
+    public boolean isEmpty(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + RatSightingDb.getTableName();
+        Cursor mcursor = readableDb.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        return !(icount > 0);
+    }
+
+    /**
      * Finds the highest unique key for a rat sighting report. Used to generate
      * the unique key when the user decides to create a new report
      *
@@ -270,7 +305,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             list.add(new ReportStructure(
-                    cursor.getInt(0) + "",     // key
+                    cursor.getInt(0) + "",          // key
                     cursor.getString(1),            // building type
                     cursor.getString(2),            // date
                     cursor.getString(3),            // time
@@ -288,4 +323,21 @@ public class SQLiteReportBroker extends AppCompatActivity {
         Log.d("hidden", "aList.size() = " + list.size());
     }
 
+   /**
+     * Finds the max and min dates
+     *
+     * @param c the specified context
+     * @return the max and min dates
+     */
+    public int[] findExtremeDates(Context c) {
+        RatSightingDb rDb = new RatSightingDb(c);
+        SQLiteDatabase readableDb = rDb.getReadableDatabase();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + "), MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM " + RatSightingDb.getTableName();
+        Cursor mcursor = readableDb.rawQuery(query, null);
+        mcursor.moveToFirst();
+        int maxDate = mcursor.getInt(0);
+        int minDate = mcursor.getInt(1);
+        Log.d("hidden",""+minDate + " | " + maxDate);
+        return new int[] {minDate, maxDate};
+    }
 }

@@ -48,7 +48,9 @@ public class SQLiteCredBroker extends AppCompatActivity {
         values.put(CredentialDb.getPermCol(), perm);
 
         // Insert the new row, returning the primary key value of the new row
-        db.insert(CredentialDb.getTableName(), null, values);
+        long value = db.insert(CredentialDb.getTableName(), null, values);
+        db.close();
+        return value;
     }
 
     /**
@@ -63,7 +65,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                CredentialDb.getCredHashCol() + " DESC";
+                CredentialDb.getID() + " DESC";
 
         return sr.query(
                 CredentialDb.getTableName(),        // The table to query
@@ -130,32 +132,33 @@ public class SQLiteCredBroker extends AppCompatActivity {
         return aList;
     }
 
-    /**
-     * Returns a string representation of all the information within the
-     * credential database.
-     *
-     * @param c the specified context
-     * @return a description of database's information
-     */
-    public String getDbContent(Context c) {
-        List<String> itemIds = new ArrayList<>();
-        Cursor cursor = getCursor(c);
-        while (cursor.moveToNext()) {
-            String str = cursor.getString(0);
-            itemIds.add(str);
-        }
-        cursor.moveToPosition(-1);
-        while (cursor.moveToNext()) {
-            String str = cursor.getString(1);
-            itemIds.add(str);
-        }
-        cursor.moveToPosition(-1);
-        while (cursor.moveToNext()) {
-            String str = cursor.getString(2);
-            itemIds.add(str);
-        }
-        cursor.close();
-        return itemIds.toString();
+    //return database in string
+    public String getDbContent(Context c) throws  Exception {
+//        List<String> itemIds = new ArrayList<String>();
+//        Cursor cursor = getCursor(c);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(0);
+//            itemIds.add(str);
+//        }
+//        cursor.moveToPosition(-1);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(1);
+//            itemIds.add(str);
+//        }
+//        cursor.moveToPosition(-1);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(2);
+//            itemIds.add(str);
+//        }
+//        cursor.close();
+//        return itemIds.toString();
+        return "This method has been removed for security purposes.";
     }
 
     /**

@@ -229,9 +229,10 @@ public class SQLiteReportBroker extends AppCompatActivity {
     }
 
     /**
-     * Gets stringified database contents
+     * Gets a string version database contents
      * @param c context from which function is called
      * @return string of database contents
+     * @throws Exception when able to retrieve contents
      */
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<>();

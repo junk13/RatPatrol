@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 import pizzarat.cs2340.gatech.edu.structure.CredentialStructure;

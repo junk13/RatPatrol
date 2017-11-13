@@ -333,9 +333,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
     public int[] findExtremeDates(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + ")," +
-                " MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM "
-                + RatSightingDb.getTableName();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol()
+                + ")," + " MIN(" + RatSightingDb.getReportTableDateCol()
+                + ") FROM " + RatSightingDb.getTableName();
         Cursor mcursor = readableDb.rawQuery(query, null);
         mcursor.moveToFirst();
         int maxDate = mcursor.getInt(0);

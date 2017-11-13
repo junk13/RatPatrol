@@ -234,7 +234,7 @@ public class SQLiteReportBroker extends AppCompatActivity {
      * @return string of database contents
      */
     public String getDbContent(Context c) throws  Exception {
-        List<String> itemIds = new ArrayList<String>();
+        List<String> itemIds = new ArrayList<>();
         Cursor cursor = getCursor(c);
         while(cursor.moveToNext()) {
             String str = cursor.getString(0);

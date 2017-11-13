@@ -260,25 +260,30 @@ public class CreateReportActivity extends AppCompatActivity
                 toast.show();
             } else if (!Verification.isValidTime(time.getText().toString())) {
                 Log.d("isvalid", time.getText().toString());
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Time" + "\n"
+                Toast toast = Toast.makeText(this.getApplicationContext(),
+                        "Invalid Time" + "\n"
                         + "Required Format: hh:mm", Toast.LENGTH_SHORT);
                 toast.show();
             } else if (!Verification.isValidDate(date.getText().toString())) {
                 Log.d("isvalid", date.getText().toString());
-                Toast toast = Toast.makeText(this.getApplicationContext(), "Invalid Date" + "\n"
+                Toast toast = Toast.makeText(this.getApplicationContext(),
+                        "Invalid Date" + "\n"
                         + "Required Format: mm/dd/year", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if (!Verification.isValidGeneric(address.getText().toString())) { //ADDRESS
+            } else if (!Verification.isValidGeneric(
+                    address.getText().toString())) { //ADDRESS
                 Log.d("isvalid", address.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(),
                         "Must have Address", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if (!Verification.isValidGeneric(buildingType.getText().toString())) { //LOCATION
+            } else if (!Verification.isValidGeneric(
+                    buildingType.getText().toString())) { //LOCATION
                 Log.d("isvalid", buildingType.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(),
                         "Must have location", Toast.LENGTH_SHORT);
                 toast.show();
-            } else if (!Verification.isValidGeneric(city.getText().toString())) { //CITY
+            } else if (!Verification.isValidGeneric(
+                    city.getText().toString())) { //CITY
                 Log.d("isvalid", city.getText().toString());
                 Toast toast = Toast.makeText(this.getApplicationContext(),
                         "Must have City", Toast.LENGTH_SHORT);

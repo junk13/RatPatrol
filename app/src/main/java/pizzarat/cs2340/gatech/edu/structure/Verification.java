@@ -108,6 +108,6 @@ public class Verification {
      * @return true if not empty
      */
     public static boolean isValidGeneric(String str) {
-        return !str.equals("");
+        return !str.isEmpty();
     }
 }

@@ -100,20 +100,20 @@ public class ReportGraphActivity extends AppCompatActivity
         getMonthData(yVals1);
         xLabel = getMonthLabels();
 
-//TODO: not delete this
-//        if (span >= 31536000) //bigger than year
-//        {
-//            getYearData(yVals1);
-//            xLabel = getYearLabels();
-//
-//        } else if (span >= 2678400) //bigger than month
-//        {
-//            getMonthData(yVals1);
-//            xLabel = getMonthLabels();
-//        } else {
-//            getDayData(yVals1);
-//            xLabel = getDayLabels();
-//        }
+        /* Do not delete this
+        if (span >= 31536000) //bigger than year
+        {
+            getYearData(yVals1);
+            xLabel = getYearLabels();
+
+        } else if (span >= 2678400) //bigger than month
+        {
+            getMonthData(yVals1);
+            xLabel = getMonthLabels();
+        } else {
+            getDayData(yVals1);
+            xLabel = getDayLabels();
+        }*/
 
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xLabel));
 

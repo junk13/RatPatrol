@@ -91,9 +91,9 @@ public class SQLiteCredBroker extends AppCompatActivity {
         CredentialStructure cs = fetchCredentialStructureByUser(user, c);
         if (cs == null) {
             return false;
-
         }
-        return cs.getPass().equals(pass);
+        String csPass = cs.getPass();
+        return csPass.equals(pass);
     }
 
 // --Commented out by Inspection START (11/6/2017 1:49 AM):

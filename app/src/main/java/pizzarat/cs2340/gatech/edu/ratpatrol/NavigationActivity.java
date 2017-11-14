@@ -226,7 +226,7 @@ public class NavigationActivity extends AppCompatActivity
     private void readRatData() {
         InputStream inputStream;
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
         Log.d("hidden", "in function...");
         try {

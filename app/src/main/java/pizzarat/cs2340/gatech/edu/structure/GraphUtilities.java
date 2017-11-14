@@ -33,6 +33,11 @@ public class GraphUtilities {
         return months;
     }
 
+    /**
+     * Gets CSV time and converts to military time
+     * @param dateAndTime CSV string containing date and time
+     * @return military time
+     */
     public String getTime(String dateAndTime) {
         String[] time = dateAndTime.substring(dateAndTime.indexOf(" ") + 1)
                 .split(":| ");

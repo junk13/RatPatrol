@@ -35,11 +35,10 @@ import pizzarat.cs2340.gatech.edu.structure.StaticHolder;
  */
 public class ArchiveActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public SQLiteReportBroker reportBroker = new SQLiteReportBroker();
-    ArrayList<ReportStructure> posts = new ArrayList<>();
+    private final SQLiteReportBroker reportBroker = new SQLiteReportBroker();
+    private ArrayList<ReportStructure> posts = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
-    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,42 +56,54 @@ public class ArchiveActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView)
+                findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Archive recycler view creation
         posts = reportBroker.reportArrayList(getBaseContext());
         initRecycler();
-        searchView = (SearchView) findViewById(R.id.searchView);
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                posts = reportBroker.getReportsWithSubstring(query, getBaseContext());
+                posts = reportBroker.getReportsWithSubstring(query,
+                        getBaseContext());
                 initRecycler();
                 return false;
             }
 
+
             /**
-             * is invoked when test is typed in the searcher
-             *
-             * @param newText
-             * @return
+             * Recognizes if the user has typed some text to search through the
+             * rat report archive. The inputted text must be of length 3 or
+             * greater.
+             * @param newText user's desired text filter
+             * @return true if some text was entered
              */
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.length() <= 2)
+                if (newText.length() <= 2) {
                     return true;
-                ArrayList<ReportStructure> temp = reportBroker.getReportsWithSubstring(newText, getBaseContext());
-                if (newText.length() > 2 && posts == null)
+                }
+
+                ArrayList<ReportStructure> temp =
+                        reportBroker.getReportsWithSubstring(newText,
+                                getBaseContext());
+                if (newText.length() > 2 && posts == null) {
+
                     return false;
+                }
                 if (newText.length() > 2) {
                     posts = temp;
                     initRecycler();
                 }
+
                 return true;
             }
         });
@@ -165,23 +176,25 @@ public class ArchiveActivity extends AppCompatActivity
     /**
      * Switches to the WelcomeActivity from the Navigation Screen.
      */
-    public void switchBackToWelcomeActivity() {
-        Intent switchToWelcomeActivity = new Intent(this, WelcomeActivity.class);
+    private void switchBackToWelcomeActivity() {
+        Intent switchToWelcomeActivity =
+                new Intent(this, WelcomeActivity.class);
         this.startActivity(switchToWelcomeActivity);
     }
 
     /**
      * Switches to the CreateReportActivity.
      */
-    public void switchToCreateReportActivity() {
-        Intent switchToCreateReportActivity = new Intent(this, CreateReportActivity.class);
+    private void switchToCreateReportActivity() {
+        Intent switchToCreateReportActivity =
+                new Intent(this, CreateReportActivity.class);
         this.startActivity(switchToCreateReportActivity);
     }
 
     /**
      * Switches to the MapActivity.
      */
-    public void switchToMapActivity() {
+    private void switchToMapActivity() {
         Intent switchToMapActivity = new Intent(this, MapActivity.class);
         this.startActivity(switchToMapActivity);
     }
@@ -189,26 +202,30 @@ public class ArchiveActivity extends AppCompatActivity
     /**
      * Switches to the FilterReportsActivity.
      */
-    public void switchToFilterReportsScreen() {
-        Intent switchToFilterReportsActivity = new Intent(this, FilterReportsActivity.class);
+    private void switchToFilterReportsScreen() {
+        Intent switchToFilterReportsActivity =
+                new Intent(this, FilterReportsActivity.class);
         this.startActivity(switchToFilterReportsActivity);
     }
 
     /**
      * Closes the Navigation Screen thus "logging out" the user
      */
-    public void logout() {
+    private void logout() {
         switchBackToWelcomeActivity();
     }
 
     /**
      * Switches to the ReportGraphActivity.
      */
-    public void switchToReportGraphScreen() {
-        Intent switchToReportGraphScreenActivity = new Intent(this, ReportGraphActivity.class);
+    private void switchToReportGraphScreen() {
+        Intent switchToReportGraphScreenActivity =
+                new Intent(this, ReportGraphActivity.class);
         startActivity(switchToReportGraphScreenActivity);
-        Toast.makeText(getBaseContext(), "To filter/edit graph, use the filter "
-                + "button on the Navigation Screen.", Toast.LENGTH_LONG).show();
+        Toast message = Toast.makeText(getBaseContext(),
+                "To filter/edit graph, use the filter "
+                        + "button on the Navigation Screen.", Toast.LENGTH_LONG);
+        message.show();
     }
 
     /**
@@ -217,7 +234,7 @@ public class ArchiveActivity extends AppCompatActivity
      *
      * @param widget the name of widget clicked
      */
-    public void shareOrSendReport(String widget) {
+    private void shareOrSendReport(String widget) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         String shareBody = "Your body here";
@@ -246,8 +263,9 @@ public class ArchiveActivity extends AppCompatActivity
     private void setupList() {
         Log.d("hidden", "setupList()");
         try {
-            if (posts == null)
+            if (posts == null) {
                 posts = reportBroker.reportArrayList(getBaseContext());
+            }
         } catch (Exception e) {
             Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }
@@ -261,7 +279,8 @@ public class ArchiveActivity extends AppCompatActivity
      * @param report the specific report to display in detail.
      */
     public void switchToReportDetails(int report) {
-        Intent switchToDetailedReports = new Intent(this, DetailedReportViewActivity.class);
+        Intent switchToDetailedReports =
+                new Intent(this, DetailedReportViewActivity.class);
         StaticHolder.report = posts.get(report);
         this.startActivity(switchToDetailedReports);
     }

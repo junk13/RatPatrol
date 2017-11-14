@@ -38,7 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Attempts to register new user, if successful, add to the SQL database.
-     * If unsuccessful, clear fields and return some error to appear in a widget.
+     * If unsuccessful, clear fields and return some error to appear in a
+     * widget.
      * @param v view object
      */
     public void register(View v){
@@ -51,16 +52,19 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 broker.writeToCredDb(user, pass, adm, getApplicationContext());
 
-                Intent startNewActivity = new Intent(this, LoginActivity.class);
+                Intent startNewActivity = new Intent(this,
+                        LoginActivity.class);
                 startActivity(startNewActivity);
             } catch (Exception e){
-                Toast.makeText(getBaseContext(), "Email is already taken", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Email is already taken",
+                        Toast.LENGTH_SHORT).show();
             }
 
         } else {
             ((EditText)userName).setText("", TextView.BufferType.EDITABLE);
             ((EditText)password).setText("", TextView.BufferType.EDITABLE);
-            Toast.makeText(getBaseContext(), "Invalid email and/or invalid password",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Invalid email and/or"
+                    + " invalid password", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -73,7 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private boolean isValid(String userName, String password){
         //Make sure the String does not contain : or /, and that it isn't null.
-        return !(userName.contains(":") || userName.contains("/") || userName.length() == 0)
+        return !(userName.contains(":") || userName.contains("/")
+                || userName.isEmpty())
                 && userName.contains("@")
                 && !password.isEmpty();
     }

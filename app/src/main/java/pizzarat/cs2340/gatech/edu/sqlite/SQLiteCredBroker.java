@@ -7,147 +7,177 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pizzarat.cs2340.gatech.edu.exception.DuplicateUserDbException;
 import pizzarat.cs2340.gatech.edu.structure.CredentialStructure;
 
 
 /**
- * @author Evie Brown.
+ * @author Evie Brown
+ *         A custom broker in SQL to work with our credential database.
  */
-
 public class SQLiteCredBroker extends AppCompatActivity {
-    //takes in credentials from Db TODO: duplicate exception logging
-    public long writeToCredDb(String username, String password, boolean isAdmin, Context context) throws DuplicateUserDbException {
+
+    /**
+     * Writes the specific CredentialStructure into the SQL database
+     *
+     * @param username the username of credential
+     * @param password the password of the credential
+     * @param isAdmin  whether or not the credential has admin privileges
+     * @param context  the current date
+     * @throws DuplicateUserDbException when trying to save another user with
+     * the same username
+     */
+    public void writeToCredDb(String username, String password,
+                              boolean isAdmin, Context context)
+            throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
-        //throw DuplicateUserDbException if username is already used
-        if (containsDuplicateUser(username, context))
+        // Throw DuplicateUserDbException if username is already used
+        if (containsDuplicateUser(username, context)) {
             throw new DuplicateUserDbException();
+        }
+
         // Gets the report repository in write mode
         SQLiteDatabase db = cred.getWritableDatabase();
         ContentValues values = new ContentValues();
-        //in email column, place email
+        // In email column, place email
         values.put(CredentialDb.getCredEmailCol(), username);
-        //in password column, place password TODO: make password messageDigest hashed SHA256
+        // In password column, place password
         values.put(CredentialDb.getCredHashCol(), password);
-        //in permissions column, set user type
+        // In permissions column, set user type
         String perm = isAdmin ? "admin" : "user";
         values.put(CredentialDb.getPermCol(), perm);
 
         // Insert the new row, returning the primary key value of the new row
-        return db.insert(CredentialDb.getTableName(), null, values);
+        long value = db.insert(CredentialDb.getTableName(), null, values);
+        db.close();
     }
 
     /**
-     * getter for SQLite cursor
+     * Getter for SQLite cursor
+     *
+     * @param c context of the app
      * @return cursor for which to read database info from
      */
-     private Cursor getCursor(Context c) {
+    private Cursor getCursor(Context c) {
         CredentialDb cred = new CredentialDb(c);
         SQLiteDatabase sr = cred.getReadableDatabase();
 
-
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                CredentialDb.getCredHashCol() + " DESC";
+                CredentialDb.getID() + " DESC";
 
         return sr.query(
-                CredentialDb.getTableName(),            // The table to query
-                null,                                   // The columns to return
-                null,                                   // The columns for the WHERE clause
-                null,                                   // The values for the WHERE clause
-                null,                                   // don't group the rows
-                null,                                   // don't filter by row groups
-                sortOrder                               // The sort order
+                CredentialDb.getTableName(),        // The table to query
+                null,                       // The columns to return
+                null,                       // The columns for the WHERE clause
+                null,                    // The values for the WHERE clause
+                null,                       // don't group the rows
+                null,                        // don't filter by row groups
+                sortOrder                          // The sort order
         );
 
     }
 
     /**
+     * Determines if the specified user in the database.
+     *
      * @param user : String for username
      * @param pass : String for password
+     *      @param c : the phone data
      * @return true if user and pass are in database in same ID
      */
     public boolean credMatch(String user, String pass, Context c) {
         CredentialStructure cs = fetchCredentialStructureByUser(user, c);
         if (cs == null) {
-            System.out.println("444444444444");
             return false;
-
         }
-        System.out.println(cs.getPass());
-        System.out.println(pass);
-        return cs.getPass().equals(pass);
+        String csPass = cs.getPass();
+        return csPass.equals(pass);
     }
+
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    /**
+//     * Determines if the user has admin privileges
+//     *
+//     * @param userStr username to check
+//     * @param c app context
+//     * @return true if user is admin, else false
+//     */
+//    public boolean isUserAdmin(String userStr, Context c) {
+//        return fetchCredentialStructureByUser(userStr, c).getAdmin();
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     /**
-     * @param userStr username to check
-     * @param c app context
-     * @return true if user is admin, else false
+     * Returns a list of all the users in the database
+     *
+     * @param cursor the specified sql cursor
+     * @return a list of all the credentials in the database
      */
-    public boolean isUserAdmin(String userStr, Context c) {
-        return fetchCredentialStructureByUser(userStr, c).getAdmin();
-    }
-
-    //returns map of users(key) and credentials(value)
     private ArrayList<CredentialStructure> credArrayList(Cursor cursor) {
-        //ArrayList to return
-        ArrayList<CredentialStructure> aList = new ArrayList<CredentialStructure>();
+        // ArrayList to return
+        ArrayList<CredentialStructure> aList = new ArrayList<>();
         cursor.moveToPosition(-1);
-        //cycle through cursor and add columns to ArrayList
-        while(cursor.moveToNext()) {
-            boolean b = cursor.getString(3).equals("admin"); //TODO: .equals?
+        // Cycle through cursor and add columns to ArrayList
+        while (cursor.moveToNext()) {
+            boolean b = "admin".equals(cursor.getString(3));
             aList.add(new CredentialStructure(
                     cursor.getString(0),    //id
                     cursor.getString(1),    //Username
                     cursor.getString(2),    //Password
-                    b                       //isAdmin
-                    ));
+                    b                                  //isAdmin
+            ));
         }
         return aList;
     }
 
-    //return database in string
+    /**
+     * Returns the database's contents in a String format.
+     *
+     * @param c the specified context
+     * @return a string version of the database's information
+     * @throws Exception when unable to retrieve data
+     */
     public String getDbContent(Context c) throws  Exception {
-        List<String> itemIds = new ArrayList<String>();
-        Cursor cursor = getCursor(c);
-        while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(0);
-            itemIds.add(str);
-        }
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(1);
-            itemIds.add(str);
-        }
-        cursor.moveToPosition(-1);
-        while(cursor.moveToNext()) {
-            //long itemId = cursor.getLong(
-            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
-            String str = cursor.getString(2);
-            itemIds.add(str);
-        }
-        cursor.close();
-        return itemIds.toString();
-
+//        List<String> itemIds = new ArrayList<String>();
+//        Cursor cursor = getCursor(c);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(0);
+//            itemIds.add(str);
+//        }
+//        cursor.moveToPosition(-1);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(1);
+//            itemIds.add(str);
+//        }
+//        cursor.moveToPosition(-1);
+//        while(cursor.moveToNext()) {
+//            //long itemId = cursor.getLong(
+//            //        cursor.getColumnIndexOrThrow(CredentialDb.getID()));
+//            String str = cursor.getString(2);
+//            itemIds.add(str);
+//        }
+//        cursor.close();
+//        return itemIds.toString();
+        return "This method has been removed for security purposes.";
     }
 
     /**
-     *  @return CredentialStructure containing a matching username
-     *  @param userStr : the username to look for
+     * Returns the information about specified user
+     *
+     * @param userStr : the username to look for
+     * @return CredentialStructure containing a matching username
      */
-
-    private CredentialStructure fetchCredentialStructureByUser(String userStr, Context c) {
+    private CredentialStructure fetchCredentialStructureByUser(String userStr,
+                                                               Context c) {
         ArrayList<CredentialStructure> aList = credArrayList(getCursor(c));
         for (int i = 0; i < aList.size(); i++) {
-            System.out.println(aList.get(i));
-            if (aList.get(i).getUser().equals(userStr)){
-                System.out.println("66666666666666666");
+            if (aList.get(i).getUser().equals(userStr)) {
                 return aList.get(i);
             }
 
@@ -156,11 +186,12 @@ public class SQLiteCredBroker extends AppCompatActivity {
     }
 
     /**
+     * Determines if another user in the database contains the same user name
+     *
      * @param str : String to look for in the Cred database
      * @return true if duplicate user found, else false
      */
     private boolean containsDuplicateUser(String str, Context c) {
         return fetchCredentialStructureByUser(str, c) != null;
     }
-
 }

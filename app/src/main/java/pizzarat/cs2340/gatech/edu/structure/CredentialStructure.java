@@ -5,16 +5,28 @@ package pizzarat.cs2340.gatech.edu.structure;
  */
 
 public class CredentialStructure {
-    private String id;                      // User number
-    private String user;                    // User's username
-    private String pass;                    // User's password
-    private Boolean isAdmin;                // Admin privileges
+    private final String id;                      // User number
+    private final String user;                    // User's username
+    private final String pass;                    // User's password
+    private final Boolean isAdmin;                // Admin privileges
 
-    CredentialStructure(String user) {
-        this(null, user, null, null);
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    CredentialStructure(String user) {
+//        this(null, user, null, null);
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
-    public CredentialStructure(String id, String user, String pass, Boolean isAdmin) {
+    /**
+     * Creates an object representing the user's credentials to be stored in
+     * the SQL database
+     *
+     * @param id      a designated user id to reference users in the database
+     * @param user    the user's username
+     * @param pass    the user's password
+     * @param isAdmin a parameter representing if the user has admin privileges
+     */
+    public CredentialStructure(String id, String user, String pass,
+                               Boolean isAdmin) {
         this.id = id;
         this.user = user;
         this.pass = pass;
@@ -26,7 +38,7 @@ public class CredentialStructure {
      *
      * @return the user
      */
-    public String getId() {
+    private String getId() {
         return id;
     }
 
@@ -43,18 +55,11 @@ public class CredentialStructure {
      * @return the user's password
      */
     public String getPass() {
-        if (pass == null)
+        if (pass == null) {
             return "";
-        System.out.println("777777777777777");
-        return pass;
-    }
+        }
 
-    /**
-     * Returns a value determining if the user has admin privileges
-     * @return true if the user has admin privileges
-     */
-    public Boolean getAdmin() {
-        return isAdmin;
+        return pass;
     }
 
     /**
@@ -67,9 +72,11 @@ public class CredentialStructure {
     }
 
 
-    public boolean sameUser(CredentialStructure userTester) {
-        return (userTester.getId().equals(user));
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    public boolean sameUser(CredentialStructure userTester) {
+//        return (userTester.getId().equals(user));
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     /**
      * Returns a String representation of the this CredentialStructure

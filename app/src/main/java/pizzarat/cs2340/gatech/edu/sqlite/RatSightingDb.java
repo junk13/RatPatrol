@@ -10,9 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 class RatSightingDb extends SQLiteOpenHelper {
 
-    static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 1;
     //name of database file
-    static final String DATABASE_NAME = "rat.db";
+    private static final String DATABASE_NAME = "rat.db";
 
     RatSightingDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,8 +26,8 @@ class RatSightingDb extends SQLiteOpenHelper {
         return RatSightingDbContract.ContractEntry.REPORT_TABLE_KEY;
     }
 
-    static String getReportTableLocationCol() {
-        return RatSightingDbContract.ContractEntry.REPORT_TABLE_LOCATION;
+    static String getReportTableBuildingCol() {
+        return RatSightingDbContract.ContractEntry.REPORT_TABLE_BUILDING;
     }
 
     static String getReportTableDateCol() {
@@ -62,9 +62,11 @@ class RatSightingDb extends SQLiteOpenHelper {
         return RatSightingDbContract.ContractEntry.REPORT_TABLE_LON;
     }
 
-    static void purgeCredDb(SQLiteDatabase db) {
-        db.execSQL(RatSightingDbContract.SQL_DELETE_ENTRIES);
-    }
+// --Commented out by Inspection START (11/6/2017 1:49 AM):
+//    static void purgeCredDb(SQLiteDatabase db) {
+//        db.execSQL(RatSightingDbContract.SQL_DELETE_ENTRIES);
+//    }
+// --Commented out by Inspection STOP (11/6/2017 1:49 AM)
 
     @Override
     public void onCreate(SQLiteDatabase db) {

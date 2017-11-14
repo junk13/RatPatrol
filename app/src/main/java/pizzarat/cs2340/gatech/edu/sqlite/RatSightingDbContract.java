@@ -5,14 +5,14 @@ package pizzarat.cs2340.gatech.edu.sqlite;
  * @author Evie Brown.
  */
 
-class RatSightingDbContract {
+final class RatSightingDbContract {
 
 
     //helpful php
     static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + ContractEntry.TABLE_NAME + " (" +
                     ContractEntry.REPORT_TABLE_KEY + " INTEGER PRIMARY KEY," +
-                    ContractEntry.REPORT_TABLE_LOCATION + " TEXT," +
+                    ContractEntry.REPORT_TABLE_BUILDING + " TEXT," +
                     ContractEntry.REPORT_TABLE_DATE + " TEXT," +
                     ContractEntry.REPORT_TABLE_TIME + " TEXT," +
                     ContractEntry.REPORT_TABLE_ADDRESS + " TEXT," +
@@ -28,14 +28,15 @@ class RatSightingDbContract {
     }
 
     /**
-     * package-private {@link ContractEntry} defines Strings for use in Credential management
-     * implement android.provider.BaseColumns for _id compatibility (i.e. cursor)
+     * package-private {@link ContractEntry} defines Strings for use in
+     * Credential management implement android.provider.BaseColumns for
+     * _id compatibility (i.e. cursor)
      */
     static class ContractEntry {
         //fields for database info
         static final String TABLE_NAME = "Reports";
         static final String REPORT_TABLE_KEY = "key";
-        static final String REPORT_TABLE_LOCATION = "location";
+        static final String REPORT_TABLE_BUILDING = "building";
         static final String REPORT_TABLE_DATE = "date";
         static final String REPORT_TABLE_TIME = "time";
         static final String REPORT_TABLE_ADDRESS = "address";

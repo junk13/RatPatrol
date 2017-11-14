@@ -121,7 +121,7 @@ public class SQLiteCredBroker extends AppCompatActivity {
         cursor.moveToPosition(-1);
         // Cycle through cursor and add columns to ArrayList
         while (cursor.moveToNext()) {
-            boolean b = cursor.getString(3).equals("admin");
+            boolean b = "admin".equals(cursor.getString(3));
             aList.add(new CredentialStructure(
                     cursor.getString(0),    //id
                     cursor.getString(1),    //Username

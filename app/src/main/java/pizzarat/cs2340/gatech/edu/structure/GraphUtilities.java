@@ -36,10 +36,9 @@ public class GraphUtilities {
     public String getTime(String dateAndTime) {
         String[] time = dateAndTime.substring(dateAndTime.indexOf(" ") + 1)
                 .split(":| ");
-        if (time[2].equals("PM")) {
+        if ("PM".equals(time[2])) {
             time[0] = "" + (Integer.parseInt(time[0]) + 12);
-        }
-        else if (time[0].equals("12")) {
+        } else if ("12".equals(time[0])) {
             time[0] = "0";
         }
         return time[0] + ":" + time[1];

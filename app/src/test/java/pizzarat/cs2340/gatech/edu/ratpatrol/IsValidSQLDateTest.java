@@ -1,18 +1,18 @@
 package pizzarat.cs2340.gatech.edu.ratpatrol;
 
-import org.junit.*;
+import org.junit.Test;
 
 import pizzarat.cs2340.gatech.edu.structure.Verification;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 /**
  * Created by Luka on 11/13/2017.
  */
 
 public class IsValidSQLDateTest {
 
-    private String test;
     public static final int TIMEOUT = 300;
+    private String test;
 
     @Test(timeout = TIMEOUT)
     public void testEmpty(){
@@ -58,7 +58,8 @@ public class IsValidSQLDateTest {
 
     @Test(timeout = TIMEOUT)
     public void testBadFormatBadYearLong(){
-        test = "0100110101100101011011010110010101110011/09/21";
+        test = "01001101 01100101 01101101 01100101 01110011/09/21";
+
         assertEquals(Verification.isValidSQLDate((test)),false);
     }
 

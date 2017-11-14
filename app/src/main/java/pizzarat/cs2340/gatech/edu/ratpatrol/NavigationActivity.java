@@ -304,7 +304,7 @@ public class NavigationActivity extends AppCompatActivity
     private String getTime(String dateAndTime) {
         String[] time = dateAndTime.substring(dateAndTime.indexOf(" ") + 1)
                 .split(":| ");
-        if (time[3].equals("PM")) {
+        if ("PM".equals(time[3])) {
             time[0] = "" + (Integer.parseInt(time[0]) + 12);
         }
         return time[0] + ":" + time[1] + ":" + time[2];

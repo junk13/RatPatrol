@@ -45,20 +45,20 @@ public class Verification {
         if (str.matches(form)) {
             String strMonth = str.substring(5, 7);
             //31 days   1,3,5,7,8,10,12
-            if (strMonth.equals("01") ||
-                    strMonth.equals("03") ||
-                    strMonth.equals("05") ||
-                    strMonth.equals("07") ||
-                    strMonth.equals("08") ||
-                    strMonth.equals("10") ||
-                    strMonth.equals("12")) {
+            if ("01".equals(strMonth) ||
+                    "03".equals(strMonth) ||
+                    "05".equals(strMonth) ||
+                    "07".equals(strMonth) ||
+                    "08".equals(strMonth) ||
+                    "10".equals(strMonth) ||
+                    "12".equals(strMonth)) {
                 return str.matches(form);
             }
             //30 days   4,6,9,11
-            else if (strMonth.equals("04") ||
-                    strMonth.equals("06") ||
-                    strMonth.equals("09") ||
-                    strMonth.equals("11")) {
+            else if ("04".equals(strMonth) ||
+                    "06".equals(strMonth) ||
+                    "09".equals(strMonth) ||
+                    "11".equals(strMonth)) {
                 form = "([1-2][0-9][0-9][0-9][/](([0][1-9])|([1][0-2]))[/](([0][1-9])|([1-2][0-9])|([3][0])))";
                 return str.matches(form);
             }

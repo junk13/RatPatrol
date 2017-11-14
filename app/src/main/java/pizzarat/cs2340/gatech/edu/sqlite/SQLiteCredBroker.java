@@ -33,8 +33,10 @@ public class SQLiteCredBroker extends AppCompatActivity {
             throws DuplicateUserDbException {
         final CredentialDb cred = new CredentialDb(context);
         // Throw DuplicateUserDbException if username is already used
-        if (containsDuplicateUser(username, context))
+        if (containsDuplicateUser(username, context)) {
             throw new DuplicateUserDbException();
+        }
+
         // Gets the report repository in write mode
         SQLiteDatabase db = cred.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -175,7 +177,6 @@ public class SQLiteCredBroker extends AppCompatActivity {
                                                                Context c) {
         ArrayList<CredentialStructure> aList = credArrayList(getCursor(c));
         for (int i = 0; i < aList.size(); i++) {
-            System.out.println(aList.get(i));
             if (aList.get(i).getUser().equals(userStr)) {
                 return aList.get(i);
             }

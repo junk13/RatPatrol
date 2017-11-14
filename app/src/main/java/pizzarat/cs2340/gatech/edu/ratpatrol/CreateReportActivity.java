@@ -68,7 +68,8 @@ public class CreateReportActivity extends AppCompatActivity
         key = (TextView) findViewById(R.id.createKeyView);
 
         // Generate and set the unique key
-        key.setText("Key: " + maxKey);
+        String keyText = "Key " + maxKey;
+        key.setText(keyText);
 
         date = (TextView) findViewById(R.id.createDateView);
         time = (TextView) findViewById(R.id.createTimeView);

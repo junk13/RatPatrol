@@ -55,20 +55,22 @@ public class CredentialStructure {
      * @return the user's password
      */
     public String getPass() {
-        if (pass == null)
+        if (pass == null) {
             return "";
+        }
+
         return pass;
     }
 
-// --Commented out by Inspection START (11/6/2017 1:51 AM):
-//    /**
-//     * Returns a value determining if the user has admin privileges
-//     * @return true if the user has admin privileges
-//     */
-//    public Boolean getAdmin() {
-//        return isAdmin;
-//    }
-// --Commented out by Inspection STOP (11/6/2017 1:51 AM)
+/* --Commented out by Inspection START (11/6/2017 1:51 AM):
+    *//**
+     * Returns a value determining if the user has admin privileges
+     * @return true if the user has admin privileges
+     *//*
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+ --Commented out by Inspection STOP (11/6/2017 1:51 AM)*/
 
     /**
      * Determines if two users are equal. Returns true if two users have the

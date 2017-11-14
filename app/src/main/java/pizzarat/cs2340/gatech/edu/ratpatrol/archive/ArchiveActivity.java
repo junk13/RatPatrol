@@ -88,17 +88,22 @@ public class ArchiveActivity extends AppCompatActivity
              */
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.length() <= 2)
+                if (newText.length() <= 2) {
                     return true;
+                }
+
                 ArrayList<ReportStructure> temp =
                         reportBroker.getReportsWithSubstring(newText,
                                 getBaseContext());
-                if (newText.length() > 2 && posts == null)
+                if (newText.length() > 2 && posts == null) {
+
                     return false;
+                }
                 if (newText.length() > 2) {
                     posts = temp;
                     initRecycler();
                 }
+
                 return true;
             }
         });
@@ -258,8 +263,9 @@ public class ArchiveActivity extends AppCompatActivity
     private void setupList() {
         Log.d("hidden", "setupList()");
         try {
-            if (posts == null)
+            if (posts == null) {
                 posts = reportBroker.reportArrayList(getBaseContext());
+            }
         } catch (Exception e) {
             Log.d("hidden", "ERR MSG: " + e.getLocalizedMessage());
         }

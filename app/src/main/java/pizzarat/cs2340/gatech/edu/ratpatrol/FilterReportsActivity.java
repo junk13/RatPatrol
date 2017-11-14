@@ -56,7 +56,8 @@ public class FilterReportsActivity extends AppCompatActivity
         beforeDateTextView = (TextView) findViewById(R.id.beforeDateTextView);
         afterDateTextView = (TextView) findViewById(R.id.afterDateTextView);
         Button filterButton = (Button) findViewById(R.id.filterReportsButton);
-        Button cancelFilterButton = (Button) findViewById(R.id.cancelFilterButton);
+        Button cancelFilterButton =
+                (Button) findViewById(R.id.cancelFilterButton);
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override

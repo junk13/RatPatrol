@@ -22,8 +22,8 @@ public class WelcomeSplashActivity extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    Intent welcome =
-                            new Intent(getApplicationContext(), WelcomeActivity.class);
+                    Intent welcome = new Intent(getApplicationContext(),
+                            WelcomeActivity.class);
                     startActivity(welcome);
                     finish();
                 } catch (InterruptedException e) {

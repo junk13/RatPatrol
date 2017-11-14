@@ -229,9 +229,10 @@ public class SQLiteReportBroker extends AppCompatActivity {
     }
 
     /**
-     * Gets stringified database contents
+     * Gets a string version database contents
      * @param c context from which function is called
      * @return string of database contents
+     * @throws Exception when able to retrieve contents
      */
     public String getDbContent(Context c) throws  Exception {
         List<String> itemIds = new ArrayList<>();
@@ -332,9 +333,9 @@ public class SQLiteReportBroker extends AppCompatActivity {
     public int[] findExtremeDates(Context c) {
         RatSightingDb rDb = new RatSightingDb(c);
         SQLiteDatabase readableDb = rDb.getReadableDatabase();
-        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol() + ")," +
-                " MIN(" + RatSightingDb.getReportTableDateCol() + ") FROM "
-                + RatSightingDb.getTableName();
+        String query = "SELECT MAX(" + RatSightingDb.getReportTableDateCol()
+                + ")," + " MIN(" + RatSightingDb.getReportTableDateCol()
+                + ") FROM " + RatSightingDb.getTableName();
         Cursor mcursor = readableDb.rawQuery(query, null);
         mcursor.moveToFirst();
         int maxDate = mcursor.getInt(0);

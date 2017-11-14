@@ -130,7 +130,13 @@ public class SQLiteCredBroker extends AppCompatActivity {
         return aList;
     }
 
-    //return database in string
+    /**
+     * Returns the database's contents in a String format.
+     *
+     * @param c the specified context
+     * @return a string version of the database's information
+     * @throws Exception when unable to retrieve data
+     */
     public String getDbContent(Context c) throws  Exception {
 //        List<String> itemIds = new ArrayList<String>();
 //        Cursor cursor = getCursor(c);

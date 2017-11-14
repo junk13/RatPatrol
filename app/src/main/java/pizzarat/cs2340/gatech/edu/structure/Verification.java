@@ -40,8 +40,8 @@ public class Verification {
      * @return true if the date is valid.
      */
     public static boolean isValidSQLDate(String str) {
-        String form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))" +
-                "[/](([0-2][0-9])|([3][0-1])))";
+        String form = "([1-2][0-9][0-9][0-9][/](([0][1-9])|([1][0-2]))" +
+                "[/](([0][1-9])|([1-2][0-9])|([3][0-1])))";
         if (str.matches(form)) {
             String strMonth = str.substring(5, 7);
             //31 days   1,3,5,7,8,10,12
@@ -59,12 +59,12 @@ public class Verification {
                     strMonth.equals("06") ||
                     strMonth.equals("09") ||
                     strMonth.equals("11")) {
-                form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/](([0-2][0-9])|([3][0])))";
+                form = "([1-2][0-9][0-9][0-9][/](([0][1-9])|([1][0-2]))[/](([0][1-9])|([1-2][0-9])|([3][0])))";
                 return str.matches(form);
             }
             //29 days   2
             else {
-                form = "([1-2][0-9][0-9][0-9][/](([0][0-9])|([1][0-2]))[/]([0-2][0-9]))";
+                form = "([1-2][0-9][0-9][0-9][/](([0][1-9])|([1][0-2]))[/]([0][1-9])|([1-2][0-9]))";
                 return str.matches(form);
             }
 

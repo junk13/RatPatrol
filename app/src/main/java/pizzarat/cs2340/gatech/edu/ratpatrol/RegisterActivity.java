@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isValid(String userName, String password){
         //Make sure the String does not contain : or /, and that it isn't null.
         return !(userName.contains(":") || userName.contains("/")
-                || userName.length() == 0)
+                || userName.isEmpty())
                 && userName.contains("@")
                 && !password.isEmpty();
     }

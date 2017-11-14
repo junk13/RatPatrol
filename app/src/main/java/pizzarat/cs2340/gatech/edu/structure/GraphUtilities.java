@@ -32,4 +32,16 @@ public class GraphUtilities {
         }
         return months;
     }
+
+    public String getTime(String dateAndTime) {
+        String[] time = dateAndTime.substring(dateAndTime.indexOf(" ") + 1)
+                .split(":| ");
+        if (time[2].equals("PM")) {
+            time[0] = "" + (Integer.parseInt(time[0]) + 12);
+        }
+        else if (time[0].equals("12")) {
+            time[0] = "0";
+        }
+        return time[0] + ":" + time[1];
+    }
 }

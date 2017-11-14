@@ -317,7 +317,7 @@ public class ReportGraphActivity extends AppCompatActivity
      * Gets month labels
      */
     private ArrayList<String> getMonthLabels() {
-        final ArrayList xLabel = new ArrayList<String>();
+        final ArrayList<String> xLabel = new ArrayList<>();
         xLabel.add("Jan");
         xLabel.add("Feb");
         xLabel.add("Mar");
